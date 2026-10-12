@@ -1,0 +1,262 @@
+:root {
+  --bg: #fcfbf7;
+  --fg: #1a1c1e;
+  --muted: #6b6f74;
+  --rule: #e8e5de;
+  --hair: #f0ede6;
+  --panel: #f5f3ed;
+  --link: #1f5fbf;
+  --original: #1a7f4b;
+  --adapted: #2457a6;
+  --quoted: #a65e00;
+  --draft: #8a6d00;
+  --hold: #b3261e;
+  --serif: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --measure: 46rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #16171a;
+    --fg: #e8e5df;
+    --muted: #9ea2a8;
+    --rule: #2e3034;
+    --hair: #26282b;
+    --panel: #1d1f22;
+    --link: #8ab4f8;
+    --original: #5cc28e;
+    --adapted: #7fa8ea;
+    --quoted: #e0a050;
+    --draft: #d6b64a;
+    --hold: #f28b82;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #16171a;
+  --fg: #e8e5df;
+  --muted: #9ea2a8;
+  --rule: #2e3034;
+  --hair: #26282b;
+  --panel: #1d1f22;
+  --link: #8ab4f8;
+  --original: #5cc28e;
+  --adapted: #7fa8ea;
+  --quoted: #e0a050;
+  --draft: #d6b64a;
+  --hold: #f28b82;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 1.0625rem/1.72 var(--serif);
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px;
+    text-decoration-color: color-mix(in oklab, currentColor 35%, transparent); }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+::selection { background: color-mix(in oklab, var(--link) 18%, transparent); }
+main { max-width: var(--measure); margin: 0 auto; padding: 2rem 16px 5rem; }
+h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.22; letter-spacing: -0.012em; }
+h1 { font-size: 2.05rem; margin: 0.6rem 0 0.8rem; font-weight: 680; }
+h2 { font-size: 1.35rem; margin-top: 2.5rem; }
+.small-head { font-size: 1rem; margin-top: 1.5rem; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
+
+/* Private-preview banner (only on builds made with --preview) */
+.preview-note {
+  margin: 0; padding: 0.45rem 16px; text-align: center;
+  font: 0.8rem var(--sans); letter-spacing: 0.01em;
+  color: var(--quoted);
+  background: color-mix(in oklab, var(--quoted) 10%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--quoted) 22%, transparent);
+}
+
+/* Header and footer */
+.site-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem;
+  padding: 0.8rem 16px; border-bottom: 1px solid var(--hair); font-family: var(--sans); font-size: 0.92rem;
+}
+.site-name { font-weight: 650; color: var(--fg); text-decoration: none; }
+.site-head nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin-left: auto; align-items: center; }
+.site-head nav a { color: var(--muted); text-decoration: none; }
+.site-head nav a:hover { color: var(--fg); }
+.basket-count { background: var(--adapted); color: var(--bg); border-radius: 1rem; padding: 0 0.45rem; font-size: 0.8rem; }
+.theme-toggle { background: none; border: 1px solid var(--rule); color: var(--muted); border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.dev-flag { font: 600 0.7rem var(--sans); text-transform: uppercase; color: var(--draft); border: 1px solid var(--draft); border-radius: 3px; padding: 0 0.3rem; }
+.site-foot { max-width: var(--measure); margin: 0 auto; padding: 1rem 16px 3rem; border-top: 1px solid var(--rule); color: var(--muted); font: 0.875rem/1.5 var(--sans); }
+
+/* Badges */
+.badge {
+  display: inline-block; font: 600 0.66rem/1.6 var(--sans); letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 999px; padding: 0.05rem 0.5rem; vertical-align: 0.08em;
+  background: color-mix(in oklab, currentColor 11%, transparent);
+}
+.badge-original { color: var(--original); }
+.badge-adapted { color: var(--adapted); }
+.badge-quoted { color: var(--quoted); }
+.status { font: 600 0.66rem/1.6 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.05rem 0.5rem; border-radius: 999px; background: color-mix(in oklab, currentColor 11%, transparent); }
+.status-verified { color: var(--original); }
+.status-draft { color: var(--draft); }
+.status-needs-human { color: var(--hold); }
+.legend { list-style: none; padding: 0; font-size: 0.95rem; }
+.legend li { margin: 0.3rem 0; }
+
+/* Contents */
+.part h2 { border-bottom: 1px solid var(--rule); padding-bottom: 0.3rem; }
+.chapters { list-style: none; padding: 0; }
+.chapters li { margin: 0.8rem 0; }
+.chapters a { font-family: var(--sans); font-weight: 600; }
+.chapters p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
+.count { color: var(--muted); font: 0.8rem var(--sans); }
+#search { margin: 1.5rem 0; }
+
+/* Chapter page */
+.crumbs { font: 0.875rem var(--sans); color: var(--muted); }
+.chapter-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.button {
+  display: inline-block; font: 0.875rem var(--sans); padding: 0.4rem 0.85rem; border-radius: 6px;
+  border: 1px solid var(--rule); background: transparent; color: var(--fg); text-decoration: none; cursor: pointer;
+  transition: border-color .12s ease, background .12s ease;
+}
+.button:hover { border-color: var(--muted); background: var(--panel); }
+.button.primary { background: var(--adapted); border-color: var(--adapted); color: var(--bg); }
+.chapter-toc { border: 1px solid var(--hair); border-radius: 8px; padding: 0.7rem 1.1rem; font: 0.92rem var(--sans); margin: 1.5rem 0; }
+.chapter-toc ol, .chapter-toc ul { list-style: none; padding-left: 0; }
+.chapter-toc ul { padding-left: 1rem; }
+.chapter-toc li { margin: 0.22rem 0; }
+.chapter-toc a { color: var(--fg); text-decoration: none; }
+.chapter-toc a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.chapter-toc summary { cursor: pointer; font-weight: 600; color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.07em; }
+.chapter-toc ul { margin: 0.2rem 0 0.4rem; }
+.chapter-section > h2 { margin-top: 3rem; }
+
+/* Units */
+.unit { margin: 3rem 0 3.25rem; scroll-margin-top: 1rem; }
+.unit-head { display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; align-items: baseline; border-bottom: 1px solid var(--hair); padding-bottom: 0.55rem; }
+.unit-kind { grid-column: 1 / -1; margin: 0 0 0.1rem; font: 600 0.7rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.09em; }
+.unit-head h3 { margin: 0.1rem 0; font-size: 1.32rem; font-weight: 660; }
+.unit-head h3 a { color: inherit; text-decoration: none; }
+.unit-badges { margin: 0; }
+.basket-toggle { grid-column: 1 / -1; font: 0.85rem var(--sans); color: var(--muted); cursor: pointer; }
+.unit-summary { color: var(--muted); font-style: italic; }
+.unit-prereqs { font: 0.9rem var(--sans); color: var(--muted); }
+.xref-missing { color: var(--muted); border-bottom: 1px dotted var(--muted); }
+
+/* Blocks */
+.block { margin: 1.5rem 0; padding: 0.1rem 0 0.1rem 1.15rem; border-left: 2px solid var(--rule); }
+.block.prov-original { border-left-color: color-mix(in oklab, var(--original) 55%, transparent); }
+.block.prov-adapted { border-left-color: color-mix(in oklab, var(--adapted) 55%, transparent); }
+.block.prov-quoted { border-left-color: color-mix(in oklab, var(--quoted) 55%, transparent); font-style: italic; }
+.block-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.5rem; font-family: var(--sans); font-size: 0.95rem; }
+.block-label { font-weight: 650; }
+.block-title { color: var(--muted); }
+.block-src { flex-basis: 100%; font-size: 0.8rem; color: var(--muted); }
+.block-src a { color: inherit; }
+.block > :last-child { margin-bottom: 0.4rem; }
+blockquote.block { margin-left: 0; margin-right: 0; }
+.unit-sources { margin-top: 1rem; font: 0.85rem/1.5 var(--sans); color: var(--muted); }
+.unit-sources h4 { margin: 0; font-size: 0.85rem; }
+.unit-sources ul { margin: 0.2rem 0; padding-left: 1.2rem; }
+
+/* Bibliography, tables */
+.bibliography li { margin: 0.8rem 0; }
+.bibliography p { margin: 0; }
+.cited-by { font: 0.85rem var(--sans); color: var(--muted); }
+table { border-collapse: collapse; width: 100%; font: 0.9rem var(--sans); display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--rule); }
+
+/* Basket page */
+.basket-group h3 { font-size: 1rem; margin: 1.5rem 0 0.3rem; }
+.basket-list { list-style: none; padding: 0; margin: 0; }
+.basket-list li { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
+.basket-list li span { flex: 1; }
+.basket-list button { font: 0.8rem var(--sans); background: none; border: none; color: var(--hold); cursor: pointer; }
+.panel { background: var(--panel); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; font-family: var(--sans); font-size: 0.95rem; }
+.panel label { display: block; margin: 0.25rem 0; }
+.panel input[type='text'] { width: 100%; font: inherit; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg); color: var(--fg); }
+
+/* "To be added" */
+.tba-part { margin: 2.5rem 0; }
+.tba-part h2 { display: flex; align-items: baseline; gap: 0.6rem; border-bottom: 1px solid var(--hair); padding-bottom: 0.3rem; }
+/* A grid rather than CSS columns: short lists then fill one row instead of leaving an empty
+   second column, and a trailing badge stays on its item. */
+.tba-units { list-style: none; padding: 0; margin: 0.3rem 0 1.2rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: 0.1rem 2rem;
+  font: 0.92rem/1.7 var(--sans); color: var(--muted); }
+.tba-units li { padding-left: 0.9rem; position: relative; }
+.tba-units li::before { content: '·'; position: absolute; left: 0; color: var(--rule); }
+.tba-units .kind { margin-left: 0.4rem; }
+
+/* ---- Table of contents (home page) ---------------------------------------------------- */
+.toc-jump { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1.25rem 0; }
+.toc-jump a {
+  font: 0.82rem var(--sans); text-decoration: none; color: var(--muted);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.7rem; background: transparent;
+  transition: color .12s ease, border-color .12s ease;
+}
+.toc-jump a:hover { border-color: var(--link); color: var(--link); }
+
+.toc-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0 0.5rem; position: sticky; top: 0; background: var(--bg); padding: 0.5rem 0; z-index: 2; }
+#toc-filter { flex: 1 1 16rem; font: 0.95rem var(--sans); padding: 0.5rem 0.75rem; border: 1px solid var(--rule); border-radius: 8px; background: transparent; color: var(--fg); }
+.toc-filter-count { font: 0.8rem var(--sans); color: var(--muted); }
+
+.toc-part > h2 { display: flex; align-items: center; gap: 0.5rem; margin-top: 2rem; }
+.toc-check { display: inline-flex; align-items: center; cursor: pointer; }
+.toc-check input { width: 1.05rem; height: 1.05rem; accent-color: var(--adapted); cursor: pointer; margin: 0; }
+
+details.toc-chapter { border-left: 1px solid var(--rule); margin: 0.5rem 0 0.5rem 0.5rem; padding-left: 0.9rem; }
+details.toc-chapter > summary {
+  display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none;
+  font: 600 1rem var(--sans); padding: 0.25rem 0;
+}
+details.toc-chapter > summary::-webkit-details-marker { display: none; }
+.toc-chapter-title { flex: 1; }
+.toc-chapter-title::before { content: '▸'; color: var(--muted); margin-right: 0.4rem; font-size: 0.8em; }
+details[open] > summary .toc-chapter-title::before { content: '▾'; }
+.toc-open { font: 0.78rem var(--sans); color: var(--muted); text-decoration: none; }
+.toc-open:hover { color: var(--link); }
+.toc-chapter-summary { margin: 0 0 0.4rem 1.6rem; color: var(--muted); font: 0.88rem/1.45 var(--sans); }
+
+.toc-section-head { display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0 0.2rem 1.6rem; }
+.toc-section-head h4 { margin: 0; font: 600 0.84rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.toc-units { list-style: none; margin: 0 0 0.3rem; padding-left: 1.6rem; }
+.toc-unit { display: grid; grid-template-columns: auto 1fr auto; gap: 0.1rem 0.5rem; align-items: baseline; padding: 0.34rem 0.4rem 0.34rem 0; border-radius: 5px; border-bottom: 1px solid var(--hair); }
+.toc-unit:hover { background: color-mix(in oklab, var(--panel) 70%, transparent); }
+.toc-title { font: 0.95rem var(--sans); color: var(--fg); text-decoration: none; }
+.toc-title:hover { color: var(--link); text-decoration: underline; }
+.toc-tags { display: flex; gap: 0.3rem; align-items: baseline; }
+.toc-summary { grid-column: 2 / -1; margin: 0; color: var(--muted); font: 0.82rem/1.4 var(--sans); }
+.kind { font: 600 0.62rem/1.6 var(--sans); text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); border-radius: 999px; padding: 0.05rem 0.5rem; white-space: nowrap; background: color-mix(in oklab, currentColor 11%, transparent); }
+.kind-theorem { color: var(--adapted); }
+.kind-definition { color: var(--original); }
+.kind-method, .kind-table { color: var(--quoted); }
+.kind-advanced { color: var(--draft); }
+
+.toc-bar {
+  position: sticky; bottom: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+  margin-top: 1.5rem; padding: 0.7rem 1rem; border-radius: 10px;
+  background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
+  border: 1px solid var(--rule); font: 0.9rem var(--sans);
+  box-shadow: 0 1px 14px rgb(0 0 0 / 7%);
+}
+.toc-bar-count { flex: 1; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .toc-unit { grid-template-columns: auto 1fr; }
+  .toc-tags { grid-column: 2; }
+  .toc-summary { grid-column: 2; }
+  .toc-units, .toc-section-head { padding-left: 0.6rem; margin-left: 0.6rem; }
+}
+
+/* An explicit `display` beats the browser default for [hidden], so the filter needs this. */
+.toc-unit[hidden], .toc-section[hidden], .toc-part[hidden], details.toc-chapter[hidden], .toc-bar[hidden] { display: none; }

@@ -1,0 +1,64 @@
+{
+  "fixtures.bessel-inequality": {
+    "hash": "9c29241e81963c7b212efe05b6a8548f0641bd06c68503e5b2b3bce69ab8eeb2",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-09T12:45:51.745Z"
+    },
+    "verifiers": {},
+    "rounds": 0,
+    "hold": false
+  },
+  "fixtures.cauchy-schwarz": {
+    "hash": "761340bc6332c45dd5d18935fcdd67631715a868b9c48e4ae96cbbd56373ab13",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-09T12:51:24.443Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-09T12:52:31.409Z",
+        "report": "content/_fixtures/reports/fixtures.cauchy-schwarz/761340bc6332-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-09T12:52:40.789Z",
+        "report": "content/_fixtures/reports/fixtures.cauchy-schwarz/761340bc6332-B.md"
+      }
+    },
+    "rounds": 0,
+    "hold": false
+  },
+  "fixtures.geometric-series": {
+    "hash": "8fbd92b7630b0d99e05191ba08be4515b07f4172e2e6c566854b5e1dc1e5ea1d",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-09T12:45:51.746Z"
+    },
+    "verifiers": {},
+    "rounds": 0,
+    "hold": false
+  },
+  "fixtures.parseval-identity": {
+    "hash": "9c9d26997875eb50bc63cc58091887e0c0e3029de802ddd45aa193032243d525",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-09T13:08:24.782Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-09T13:10:32.884Z",
+        "report": "content/_fixtures/reports/fixtures.parseval-identity/9c9d26997875-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-09T13:10:48.967Z",
+        "report": "content/_fixtures/reports/fixtures.parseval-identity/9c9d26997875-B.md"
+      }
+    },
+    "rounds": 0,
+    "hold": false
+  }
+}

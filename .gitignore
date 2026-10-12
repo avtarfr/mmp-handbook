@@ -1,0 +1,19 @@
+# Source books and anything derived from them: local only, never committed or deployed
+resources/
+.cache/
+
+# Build output and dependencies
+node_modules/
+dist/
+.astro/
+tmp/
+
+.DS_Store
+
+# Python environment for verifier calculations
+.venv/
+
+# Ledger lock and temp files
+verification/*.lock/
+content/_fixtures/*.lock/
+*.tmp

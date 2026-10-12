@@ -1,0 +1,45 @@
+% Preamble for handbook PDFs (pdflatex, Computer Modern). Generated documents \input this file.
+\documentclass[11pt,a4paper]{report}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[margin=25mm]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+
+% Provenance colours, matching the website badges.
+\definecolor{hbOriginal}{HTML}{1A7F4B}
+\definecolor{hbAdapted}{HTML}{2457A6}
+\definecolor{hbQuoted}{HTML}{A65E00}
+
+\newcommand{\hbbadge}[1]{%
+  \fcolorbox{hb#1}{white}{\color{hb#1}\scriptsize\sffamily\MakeUppercase{#1}}}
+
+% \begin{hbblock}{name}{Label}{title}{Original|Adapted|Quoted}{source line}
+\newenvironment{hbblock}[5]{%
+  \begin{tcolorbox}[breakable, enhanced jigsaw, sharp corners, boxrule=0pt, leftrule=1.6pt,
+    colframe=hb#4, colback=white, parbox=false, left=7pt, right=0pt, top=1pt, bottom=1pt,
+    before skip=6pt, after skip=6pt]
+  \textbf{#2}\if\relax\detokenize{#3}\relax\else\ (#3)\fi\hfill\hbbadge{#4}%
+  \if\relax\detokenize{#5}\relax\else\par{\footnotesize\color{black!65}#5}\fi\par\smallskip
+}{\end{tcolorbox}}
+
+% Unit heading: title, anchor, contents entry and one line of metadata.
+\newcommand{\hbunit}[4]{% {id}{title}{meta}{badge}
+  \subsection*{#2\hfill\hbbadge{#4}}\label{unit:#1}%
+  \addcontentsline{toc}{subsection}{#2}%
+  {\small\color{black!65}#3}\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}}

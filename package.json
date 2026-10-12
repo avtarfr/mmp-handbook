@@ -1,0 +1,37 @@
+{
+  "name": "mmp-handbook",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "corpus": "node tools/corpus/extract.mjs && node tools/corpus/offsets.mjs",
+    "check": "node tools/check/index.mjs",
+    "pdf": "node tools/latex/build.mjs",
+    "site": "node tools/site/build.mjs && pagefind --site dist/site --silent",
+    "build": "npm run pdf -- --public && node tools/site/build.mjs --public && pagefind --site dist/site --silent",
+    "dev": "npm run pdf -- --fixtures && node tools/site/build.mjs --fixtures && pagefind --site dist/site --silent && node tools/site/serve.mjs",
+    "serve": "node tools/site/serve.mjs",
+    "ledger": "node tools/ledger.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "katex": "^0.19.0",
+    "mdast-util-to-string": "^4.0.0",
+    "pagedjs": "^0.4.3",
+    "rehype-katex": "^7.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-directive": "^4.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2",
+    "playwright": "^1.64.0"
+  }
+}

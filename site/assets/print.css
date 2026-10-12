@@ -1,0 +1,83 @@
+/* Print view, paginated by Paged.js. Light palette only: this is paper. */
+:root {
+  --fg: #1d1f21;
+  --muted: #5f6368;
+  --rule: #d9d6d0;
+  --original: #1a7f4b;
+  --adapted: #2457a6;
+  --quoted: #a65e00;
+  --serif: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 22mm 20mm 24mm;
+  @top-left { content: string(chapter); font: 8.5pt var(--sans); color: #5f6368; }
+  @bottom-center { content: counter(page); font: 9pt var(--sans); color: #5f6368; }
+}
+@page :first {
+  @top-left { content: none; }
+  @bottom-center { content: none; }
+}
+
+body { margin: 0; color: var(--fg); font: 10.5pt/1.5 var(--serif); background: #fff; }
+h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.25; break-after: avoid; }
+a { color: inherit; text-decoration: none; }
+.katex { font-size: 1.05em; }
+.katex-display { margin: 0.6em 0; }
+
+.cover { break-after: page; padding-top: 55mm; }
+.cover-kicker { font: 600 9pt var(--sans); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.cover-title { font-size: 26pt; margin: 0.2em 0 0.4em; }
+.cover-meta { color: var(--muted); font-family: var(--sans); font-size: 10pt; }
+.cover-legend { margin-top: 60mm; font-size: 9.5pt; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 4mm; }
+
+.toc { break-after: page; }
+.toc h2 { font-size: 16pt; }
+.toc ol { list-style: none; padding-left: 0; }
+.toc ol ol { padding-left: 1.2em; margin-bottom: 0.6em; }
+.toc-chapter > a { font-family: var(--sans); font-weight: 600; }
+.toc li { overflow: hidden; }
+.toc a::after { content: target-counter(attr(href), page); float: right; color: var(--muted); }
+
+.print-chapter, .references { break-before: page; }
+.chapter-title { font-size: 18pt; string-set: chapter content(text); margin-top: 0; }
+.section-title { font-size: 13pt; margin-top: 1.4em; border-bottom: 1px solid var(--rule); padding-bottom: 0.2em; }
+
+.unit { margin: 1.2em 0 1.6em; }
+.unit-head { break-after: avoid; }
+.unit-kind { margin: 0; font: 600 7.5pt var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.unit-head h3 { margin: 0.1em 0; font-size: 12.5pt; display: inline; }
+.unit-badges { display: inline; margin-left: 0.5em; }
+.unit-summary { color: var(--muted); font-style: italic; margin: 0.3em 0; }
+.unit-prereqs { font: 8.5pt var(--sans); color: var(--muted); margin: 0.2em 0; }
+
+.badge { display: inline-block; font: 600 6.5pt/1.5 var(--sans); letter-spacing: 0.04em; text-transform: uppercase; border: 0.6pt solid currentColor; border-radius: 2pt; padding: 0 0.3em; vertical-align: 0.15em; }
+.badge-original { color: var(--original); }
+.badge-adapted { color: var(--adapted); }
+.badge-quoted { color: var(--quoted); }
+
+.block { margin: 0.7em 0; padding: 0.05em 0 0.05em 0.8em; border-left: 1.6pt solid var(--rule); }
+.block.prov-original { border-left-color: var(--original); }
+.block.prov-adapted { border-left-color: var(--adapted); }
+.block.prov-quoted { border-left-color: var(--quoted); font-style: italic; }
+.block-head { break-after: avoid; }
+.block-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1em 0.4em; font-family: var(--sans); font-size: 9.5pt; }
+.block-label { font-weight: 650; }
+.block-title { color: var(--muted); }
+.block-src { flex-basis: 100%; font-size: 8pt; color: var(--muted); }
+.block p { margin: 0.35em 0; }
+blockquote.block { margin-left: 0; margin-right: 0; }
+.unit-sources { font: 8pt/1.4 var(--sans); color: var(--muted); margin-top: 0.6em; }
+.unit-sources h4 { display: inline; font-size: 8pt; margin: 0; }
+.unit-sources ul { display: inline; padding: 0; margin: 0; list-style: none; }
+.unit-sources li { display: inline; }
+.unit-sources li + li::before { content: '; '; }
+
+.references ol { padding-left: 1.4em; }
+.references li { margin: 0.5em 0; }
+
+/* Screen chrome around the paginated preview lives in print.js: Paged.js applies @media print rules
+   unconditionally, so it cannot be expressed here. */
+#print-status { font: 1rem var(--sans); padding: 2rem 16px; }

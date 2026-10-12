@@ -1,0 +1,21 @@
+# Test fixtures for the infrastructure. Never published; built only with --fixtures.
+parts:
+  - id: fixtures
+    title: Fixtures (test only)
+    chapters:
+      - id: series-and-fourier
+        title: Series and Fourier sums
+        summary: Small units used to exercise the build, checks, PDF export and verification gate.
+        sections:
+          - id: geometric
+            title: Geometric series
+            units: [fixtures.geometric-series]
+          - id: inner-products
+            title: Inner products
+            units: [fixtures.cauchy-schwarz]
+          - id: approximation
+            title: Approximation by continuous functions and trigonometric polynomials
+            units: [fixtures.continuous-approximation, fixtures.fejer-theorem]
+          - id: mean-square
+            title: Mean-square theory of Fourier series
+            units: [fixtures.bessel-inequality, fixtures.parseval-identity]

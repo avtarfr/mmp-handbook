@@ -1,0 +1,80 @@
+# Build the public site and publish it to GitHub Pages.
+#
+# This is publication: a Pages site on a free plan is served from a public repository and is
+# crawlable and indexable. It is not an unlisted share. For a restricted audience, use a host with
+# access control instead.
+#
+# Chapter PDFs are not built here. `npm run pdf` needs a LaTeX toolchain that this runner does not
+# install, so the site is built without them and degrades gracefully: the "Chapter PDF" buttons
+# simply do not appear, while the reader's own basket PDF still works, because that one is
+# assembled in the browser. To publish with chapter PDFs, run `npm run build` locally and deploy
+# dist/site by hand.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it: a half-published site is worse than a
+# slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # `npm test` deliberately does NOT run here. Both suites need things this runner does not
+      # have: tests/e2e.test.mjs shells out to the LaTeX build and drives Playwright, and
+      # tests/checks.test.mjs reads the extracted book text in .cache/, which is gitignored and
+      # never committed. Run the full suite locally before pushing. What is checkable without the
+      # books is the topic map, and the site build below fails by itself on a malformed unit.
+      - name: Validate the topic map
+        run: node tools/map.mjs validate
+
+      # A project site is served from https://<user>.github.io/<repo>/, so every absolute path the
+      # builder emits must carry that prefix. Getting this wrong is why a Pages site loads as
+      # unstyled HTML: the stylesheet 404s against the domain root.
+      - name: Build site
+        run: |
+          node tools/site/build.mjs --public --base "/${{ github.event.repository.name }}/"
+          ./node_modules/.bin/pagefind --site dist/site
+          touch dist/site/.nojekyll
+
+      # Published units only. If the gate has passed nothing, publishing an empty site would quietly
+      # replace a good one, so stop instead.
+      - name: Refuse to publish an empty build
+        run: |
+          count=$(find dist/site -name index.html | wc -l)
+          echo "pages built: $count"
+          test "$count" -gt 5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

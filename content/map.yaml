@@ -1,0 +1,887 @@
+# Topic map of the handbook: part -> chapter -> section -> units.
+#
+# This structure is our own and deliberately does not follow any one book's table of contents.
+# Each unit entry is a spec for its drafter:
+#   id        <part>.<slug>; the unit file is content/<part>/<id>.md
+#   title     unit title
+#   kind      overview | definition | theorem | method | example | application | table
+#   level     core (default) | advanced
+#   scope     what the unit must cover (and, implicitly, what it need not)
+#   prereqs   units it builds on
+#   keywords  phrases used to find candidate source pages (tools/map.mjs candidates)
+# Chapters are the batches in which units are drafted and verified.
+
+parts:
+  - id: found
+    title: Foundations of analysis
+    chapters:
+      - id: sequences-series
+        title: Sequences and series
+        summary: Convergence of sequences, series and series of functions, and the expansions built on them.
+        sections:
+          - id: convergence
+            title: Convergence of sequences and series
+            units:
+              - {id: found.limits-of-sequences, title: Limits of sequences and completeness, kind: definition, scope: "Limit of a sequence, Cauchy sequences, completeness of the real numbers, monotone convergence, limsup and liminf.", prereqs: [], keywords: [cauchy sequence, convergent sequence, monotone]}
+              - {id: found.series-convergence-tests, title: Convergence tests for series, kind: method, scope: "Partial sums; comparison, ratio, root, integral and alternating-series tests, with when each is decisive.", prereqs: [found.limits-of-sequences], keywords: [ratio test, comparison test, integral test]}
+              - {id: found.absolute-convergence, title: Absolute and conditional convergence, kind: theorem, scope: "Absolute convergence implies convergence; rearrangements of absolutely convergent series; Riemann's rearrangement theorem; Cauchy product.", prereqs: [found.series-convergence-tests], keywords: [absolute convergence, conditionally convergent, rearrangement]}
+          - id: function-series
+            title: Series of functions
+            units:
+              - {id: found.uniform-convergence, title: Uniform convergence, kind: theorem, scope: "Pointwise versus uniform convergence; the Weierstrass M-test; a uniform limit of continuous functions is continuous.", prereqs: [found.limits-of-sequences], keywords: [uniform convergence, weierstrass m test, uniformly convergent]}
+              - {id: found.termwise-operations, title: Integrating and differentiating series term by term, kind: theorem, scope: "Interchange of limit and integral under uniform convergence; termwise differentiation theorem; counterexamples when uniformity fails.", prereqs: [found.uniform-convergence], keywords: [term by term, termwise, uniformly convergent]}
+              - {id: found.power-series, title: Power series, kind: theorem, scope: "Radius of convergence (Cauchy-Hadamard), uniform convergence inside it, termwise differentiation and integration, Abel's theorem at the boundary.", prereqs: [found.termwise-operations, found.series-convergence-tests], keywords: [power series, radius of convergence, interval of convergence]}
+              - {id: found.taylor-theorem, title: Taylor's theorem, kind: theorem, scope: "Taylor polynomials with Lagrange and integral remainders; standard Maclaurin series and their ranges; a smooth function whose Taylor series does not represent it.", prereqs: [found.power-series], keywords: [taylor series, taylor's theorem, maclaurin]}
+      - id: multivariable
+        title: Calculus of several variables
+        summary: Differentiation, extrema and integration in several variables.
+        sections:
+          - id: differentiation
+            title: Differentiation and extrema
+            units:
+              - {id: found.partial-derivatives-chain-rule, title: Partial derivatives and the chain rule, kind: method, scope: "Partial derivatives, differentiability, total differential, Jacobian matrix, chain rule in matrix form, equality of mixed partials.", prereqs: [], keywords: [partial derivative, chain rule, total differential]}
+              - {id: found.taylor-several-variables, title: Taylor expansion and critical points in several variables, kind: theorem, scope: "Second-order Taylor expansion, the Hessian, classification of critical points by definiteness.", prereqs: [found.partial-derivatives-chain-rule, found.taylor-theorem], keywords: [stationary point, saddle point, hessian]}
+              - {id: found.implicit-inverse-function, title: Implicit and inverse function theorems, kind: theorem, scope: "Statements in n dimensions, Jacobian conditions, derivative formulas, local nature; examples.", prereqs: [found.partial-derivatives-chain-rule], keywords: [implicit function theorem, inverse function theorem, jacobian]}
+              - {id: found.lagrange-multipliers, title: Lagrange multipliers, kind: method, scope: "Constrained extrema with one or several equality constraints, geometric meaning, justification via the implicit function theorem.", prereqs: [found.implicit-inverse-function, found.taylor-several-variables], keywords: [lagrange multiplier, lagrange undetermined multiplier, constrained]}
+          - id: integration
+            title: Integration
+            units:
+              - {id: found.change-of-variables, title: Multiple integrals and change of variables, kind: method, scope: "Iterated integrals, the Jacobian determinant in a change of variables, polar, cylindrical and spherical coordinates.", prereqs: [found.partial-derivatives-chain-rule], keywords: [change of variables, jacobian, multiple integral]}
+              - {id: found.differentiation-under-integral, title: Differentiation under the integral sign, kind: theorem, scope: "Leibniz rule with variable limits; sufficient conditions; use to evaluate integrals.", prereqs: [found.uniform-convergence], keywords: [differentiation under the integral, leibniz, integral sign]}
+              - {id: found.gaussian-integrals, title: Gaussian integrals, kind: method, scope: "The Gaussian integral, moments, completing the square, the multivariate Gaussian integral with a positive definite matrix.", prereqs: [found.change-of-variables], keywords: [gaussian integral, error integral]}
+      - id: sets-topology
+        title: Sets, topology and continuity
+        summary: The language of sets, open sets, continuity and compactness that the rest of the handbook assumes.
+        sections:
+          - id: sets
+            title: Sets and functions
+            units:
+              - {id: found.sets-cardinality, title: "Sets, functions and countability", kind: definition, scope: "Set operations, images and inverse images, injective/surjective/bijective maps, countable and uncountable sets, Cantor's diagonal argument, cardinality.", prereqs: [], keywords: [cardinality, countable, inverse image]}
+              - {id: found.zorn-lemma, title: Zorn's lemma and the axiom of choice, kind: theorem, level: advanced, scope: "Partial orders, chains, Zorn's lemma, equivalence with the axiom of choice (statement), typical uses such as existence of a basis or of a maximal ideal.", prereqs: [found.sets-cardinality], keywords: [zorn's lemma, axiom of choice, partially ordered]}
+          - id: topology
+            title: Topological spaces
+            units:
+              - {id: found.topological-spaces, title: Topological and metric spaces, kind: definition, scope: "Open and closed sets, neighbourhoods, interior, closure and boundary, the metric topology, subspace topology, Hausdorff spaces, bases.", prereqs: [found.sets-cardinality], keywords: [topological space, neighborhood, open set]}
+              - {id: found.continuity-homeomorphism, title: Continuity and homeomorphism, kind: definition, scope: "Continuity by preimages of open sets and its equivalence with the epsilon-delta definition on metric spaces; homeomorphisms; topological properties.", prereqs: [found.topological-spaces], keywords: [homeomorphism, continuous mapping, continuity]}
+              - {id: found.compactness, title: Compactness, kind: theorem, scope: "Open-cover compactness, sequential compactness, Heine-Borel and Bolzano-Weierstrass theorems, continuous images of compact sets, extreme value theorem.", prereqs: [found.continuity-homeomorphism], keywords: [compactness, heine-borel, bolzano weierstrass]}
+              - {id: found.connectedness-homotopy, title: Connectedness and simple connectivity, kind: definition, scope: "Connected and path-connected sets, components, homotopy of paths, simply connected domains and why they matter for potentials and contour integrals.", prereqs: [found.continuity-homeomorphism], keywords: [connected, homotopy, simply connected]}
+
+  - id: linalg
+    title: Linear algebra
+    chapters:
+      - id: vector-spaces
+        title: Vector spaces and linear maps
+        summary: Bases, matrices, determinants, linear systems and inner products.
+        sections:
+          - id: spaces
+            title: Spaces, maps and determinants
+            units:
+              - {id: linalg.vector-spaces-bases, title: Vector spaces and bases, kind: definition, scope: "Vector spaces over R and C, subspaces, linear independence, span, basis, dimension, function spaces as examples.", prereqs: [], keywords: [vector space, linear independence, basis]}
+              - {id: linalg.linear-maps-matrices, title: Linear maps and matrices, kind: definition, scope: "Linear maps, matrix of a map in a basis, composition and products, change of basis and similarity.", prereqs: [linalg.vector-spaces-bases], keywords: [linear operator, matrix representation, change of basis]}
+              - {id: linalg.determinants, title: Determinants, kind: theorem, scope: "Definition via permutations, properties, cofactor expansion, product rule, invertibility, volume interpretation.", prereqs: [linalg.linear-maps-matrices], keywords: [determinant, cofactor, laplace expansion]}
+              - {id: linalg.linear-systems, title: Linear systems and rank, kind: method, scope: "Gaussian elimination, rank, rank-nullity, solvability of Ax=b and the finite-dimensional Fredholm alternative.", prereqs: [linalg.linear-maps-matrices], keywords: [gaussian elimination, rank, simultaneous linear equations]}
+          - id: inner-products
+            title: Inner products and orthogonality
+            units:
+              - {id: linalg.inner-product-spaces, title: Inner products and norms, kind: definition, scope: "Real and complex inner products, induced norm, Cauchy-Schwarz and triangle inequalities, orthogonality.", prereqs: [linalg.vector-spaces-bases], keywords: [inner product, schwarz inequality, norm]}
+              - {id: linalg.gram-schmidt, title: Orthonormal bases and Gram-Schmidt, kind: method, scope: "Gram-Schmidt orthogonalization, orthonormal expansions, QR factorization.", prereqs: [linalg.inner-product-spaces], keywords: [gram-schmidt, orthonormal, orthogonalization]}
+              - {id: linalg.projections-least-squares, title: Orthogonal projection and least squares, kind: theorem, scope: "Orthogonal projection onto a subspace, best approximation, normal equations for least squares.", prereqs: [linalg.gram-schmidt, linalg.linear-systems], keywords: [least squares, projection, normal equations]}
+      - id: eigen
+        title: Eigenvalues and matrix decompositions
+        summary: Spectral theory of matrices and its uses.
+        sections:
+          - id: eigenvalues
+            title: Eigenvalues and diagonalization
+            units:
+              - {id: linalg.eigenvalues-eigenvectors, title: Eigenvalues and eigenvectors, kind: definition, scope: "Characteristic polynomial, eigenspaces, algebraic and geometric multiplicity, diagonalizability, trace and determinant as sum and product.", prereqs: [linalg.determinants], keywords: [eigenvalue, eigenvector, characteristic equation]}
+              - {id: linalg.hermitian-spectral-theorem, title: Spectral theorem for Hermitian matrices, kind: theorem, scope: "Hermitian (real symmetric) matrices have real eigenvalues and an orthonormal eigenbasis; unitary diagonalization.", prereqs: [linalg.eigenvalues-eigenvectors, linalg.gram-schmidt], keywords: [hermitian matrix, real symmetric matrix, diagonalization]}
+              - {id: linalg.unitary-orthogonal-matrices, title: Unitary and orthogonal matrices, kind: definition, scope: "Unitary and orthogonal matrices, preservation of inner products, rotations and reflections, eigenvalues on the unit circle.", prereqs: [linalg.inner-product-spaces, linalg.eigenvalues-eigenvectors], keywords: [unitary matrix, orthogonal matrix, rotation matrix]}
+              - {id: linalg.normal-matrices, title: Normal matrices and simultaneous diagonalization, kind: theorem, scope: "Normal matrices are unitarily diagonalizable; commuting Hermitian matrices share an eigenbasis.", prereqs: [linalg.hermitian-spectral-theorem], keywords: [normal matrix, commuting matrices, simultaneous]}
+              - {id: linalg.jordan-form, title: Jordan normal form, kind: theorem, level: advanced, scope: "Statement, generalized eigenvectors, use for matrix powers and exponentials of defective matrices.", prereqs: [linalg.eigenvalues-eigenvectors], keywords: [jordan normal form, jordan canonical form, generalized eigenvector]}
+          - id: decompositions
+            title: Quadratic forms, SVD and matrix functions
+            units:
+              - {id: linalg.quadratic-forms, title: Quadratic forms and the Rayleigh quotient, kind: method, scope: "Quadratic forms, definiteness, principal axes, Sylvester's criterion, Rayleigh quotient bounds on eigenvalues.", prereqs: [linalg.hermitian-spectral-theorem], keywords: [quadratic form, rayleigh quotient, positive definite]}
+              - {id: linalg.normal-modes, title: Generalized eigenproblems and normal modes, kind: application, scope: "Ax = lambda Bx with B positive definite; small oscillations of coupled systems and their normal modes.", prereqs: [linalg.quadratic-forms], keywords: [normal modes, normal coordinates, small oscillations]}
+              - {id: linalg.svd, title: Singular value decomposition, kind: theorem, scope: "Existence of the SVD, relation to eigenvalues of A*A, best low-rank approximation (Eckart-Young), pseudoinverse.", prereqs: [linalg.hermitian-spectral-theorem, linalg.projections-least-squares], keywords: [singular value decomposition, singular values, pseudoinverse]}
+              - {id: linalg.matrix-exponential, title: Functions of matrices and the matrix exponential, kind: method, scope: "Matrix power series, the exponential and its properties (including when exp(A+B) = exp(A)exp(B)), computing via diagonalization.", prereqs: [linalg.eigenvalues-eigenvectors, found.power-series], keywords: [matrix exponential, functions of matrices, exponential of a matrix]}
+              - {id: linalg.matrix-norms-conditioning, title: Matrix norms and condition numbers, kind: definition, scope: "Induced matrix norms, spectral norm, condition number and sensitivity of linear systems to perturbation.", prereqs: [linalg.svd], keywords: [matrix norm, condition number, ill-conditioned]}
+
+  - id: vcalc
+    title: Vector calculus
+    chapters:
+      - id: fields
+        title: Vector fields and their derivatives
+        summary: Vector algebra, gradient, divergence and curl.
+        sections:
+          - id: algebra-and-derivatives
+            title: Vector algebra and differential operators
+            units:
+              - {id: vcalc.vector-algebra, title: Vector algebra and index notation, kind: definition, scope: "Scalar, vector and triple products; Kronecker delta and Levi-Civita symbol; the epsilon-delta identity.", prereqs: [], keywords: [triple product, levi-civita, kronecker delta]}
+              - {id: vcalc.gradient, title: Gradient and directional derivative, kind: definition, scope: "Gradient, directional derivative, normal to level surfaces.", prereqs: [found.partial-derivatives-chain-rule, vcalc.vector-algebra], keywords: [gradient, directional derivative, level surface]}
+              - {id: vcalc.divergence-curl, title: "Divergence, curl and the Laplacian", kind: definition, scope: "Divergence and curl in Cartesian coordinates, their physical meaning, the Laplacian.", prereqs: [vcalc.gradient], keywords: [divergence, curl, laplacian]}
+              - {id: vcalc.vector-identities, title: Vector differential identities, kind: method, scope: "Product rules and second-derivative identities, proved with index notation.", prereqs: [vcalc.divergence-curl], keywords: [vector identities, curl of curl, divergence of curl]}
+      - id: integral-theorems
+        title: Integral theorems
+        summary: Line and surface integrals, Gauss, Stokes and Green, potentials.
+        sections:
+          - id: integrals
+            title: Integrals and the integral theorems
+            units:
+              - {id: vcalc.line-integrals, title: Line integrals and conservative fields, kind: theorem, scope: "Line integrals, path independence, conservative fields and potentials, the role of simple connectivity.", prereqs: [vcalc.gradient], keywords: [line integral, conservative field, path independence]}
+              - {id: vcalc.surface-integrals, title: Surface integrals and flux, kind: definition, scope: "Parametrized surfaces, surface element, orientation, flux integrals.", prereqs: [found.change-of-variables, vcalc.vector-algebra], keywords: [surface integral, flux, surface element]}
+              - {id: vcalc.divergence-theorem, title: The divergence theorem, kind: theorem, scope: "Gauss's theorem, a proof for simple regions, consequences, continuity equation.", prereqs: [vcalc.surface-integrals, vcalc.divergence-curl], keywords: [divergence theorem, gauss's theorem, gauss theorem]}
+              - {id: vcalc.stokes-theorem, title: Stokes' theorem and Green's theorem in the plane, kind: theorem, scope: "Green's theorem in the plane, Stokes' theorem, orientation conventions, circulation.", prereqs: [vcalc.surface-integrals, vcalc.line-integrals], keywords: [stokes' theorem, green's theorem, circulation]}
+              - {id: vcalc.green-identities, title: Green's identities, kind: theorem, scope: "Green's first and second identities and uniqueness arguments for Laplace's equation.", prereqs: [vcalc.divergence-theorem], keywords: [green's theorem, green's first, green's second]}
+          - id: potentials
+            title: Potentials
+            units:
+              - {id: vcalc.helmholtz-decomposition, title: Helmholtz decomposition and potentials, kind: theorem, scope: "Scalar and vector potentials; Helmholtz theorem for fields decaying at infinity; gauge freedom.", prereqs: [vcalc.divergence-theorem, vcalc.stokes-theorem], keywords: [helmholtz's theorem, vector potential, scalar potential]}
+              - {id: vcalc.dirac-delta-basics, title: The Dirac delta in calculations, kind: definition, scope: "Delta as a limit of peaked functions, sifting property, three-dimensional delta, Laplacian of 1/r.", prereqs: [vcalc.divergence-theorem], keywords: [dirac delta, delta function, sifting]}
+      - id: curvilinear
+        title: Curvilinear coordinates
+        summary: Differential operators in orthogonal coordinate systems.
+        sections:
+          - id: coordinates
+            title: Orthogonal curvilinear coordinates
+            units:
+              - {id: vcalc.curvilinear-coordinates, title: Orthogonal curvilinear coordinates, kind: method, scope: "Scale factors, unit vectors, line, area and volume elements; general formulas for grad, div, curl and Laplacian.", prereqs: [vcalc.divergence-curl, found.change-of-variables], keywords: [curvilinear coordinates, scale factors, orthogonal coordinates]}
+              - {id: vcalc.cylindrical-spherical, title: Cylindrical and spherical coordinates, kind: table, scope: "Explicit formulas for the differential operators in cylindrical and spherical polar coordinates, with derivations of the Laplacian.", prereqs: [vcalc.curvilinear-coordinates], keywords: [spherical polar coordinates, cylindrical coordinates, laplacian]}
+
+  - id: complex
+    title: Complex analysis
+    chapters:
+      - id: analytic-functions
+        title: Analytic functions and Cauchy's theorem
+        summary: Differentiability in the complex plane and contour integration.
+        sections:
+          - id: functions
+            title: Complex functions
+            units:
+              - {id: complex.elementary-functions, title: Complex numbers and elementary functions, kind: definition, scope: "Polar form, the exponential, logarithm, powers and trigonometric functions of a complex variable.", prereqs: [], keywords: [complex exponential, polar form, complex logarithm]}
+              - {id: complex.cauchy-riemann, title: Analyticity and the Cauchy-Riemann equations, kind: theorem, scope: "Complex differentiability, Cauchy-Riemann equations (necessity and sufficiency with continuous partials), harmonic conjugates.", prereqs: [complex.elementary-functions, found.partial-derivatives-chain-rule], keywords: [cauchy-riemann, analytic function, harmonic]}
+              - {id: complex.branch-points-cuts, title: Branch points and branch cuts, kind: definition, scope: "Multivalued functions, branches of log and powers, branch points, choosing cuts, sheets.", prereqs: [complex.elementary-functions], keywords: [branch point, branch cut, multivalued]}
+          - id: integration
+            title: Contour integration
+            units:
+              - {id: complex.contour-integrals, title: Contour integrals, kind: definition, scope: "Integrals along curves, parametrization, the ML estimate, fundamental theorem for analytic antiderivatives.", prereqs: [complex.elementary-functions], keywords: [contour integral, contour integration, ml]}
+              - {id: complex.cauchy-theorem, title: Cauchy's theorem, kind: theorem, scope: "Cauchy-Goursat theorem for simply connected domains, deformation of contours, multiply connected regions.", prereqs: [complex.contour-integrals, complex.cauchy-riemann], keywords: [cauchy's integral theorem, cauchy-goursat, simply connected]}
+              - {id: complex.cauchy-integral-formula, title: Cauchy's integral formula, kind: theorem, scope: "The integral formula and its derivatives; analytic functions are infinitely differentiable; Morera's theorem.", prereqs: [complex.cauchy-theorem], keywords: [cauchy's integral formula, morera]}
+              - {id: complex.liouville-maximum-modulus, title: Liouville's theorem and the maximum modulus principle, kind: theorem, scope: "Cauchy estimates, Liouville, fundamental theorem of algebra, maximum modulus principle.", prereqs: [complex.cauchy-integral-formula], keywords: [liouville's theorem, maximum modulus, fundamental theorem of algebra]}
+      - id: singularities-residues
+        title: Series, singularities and residues
+        summary: Taylor and Laurent series, classification of singularities and the residue calculus.
+        sections:
+          - id: series
+            title: Taylor and Laurent series
+            units:
+              - {id: complex.taylor-series, title: Taylor series of analytic functions, kind: theorem, scope: "Analytic functions have convergent Taylor series; radius equals distance to nearest singularity; zeros are isolated.", prereqs: [complex.cauchy-integral-formula, found.power-series], keywords: [taylor series, taylor expansion, radius of convergence]}
+              - {id: complex.laurent-series, title: Laurent series, kind: theorem, scope: "Laurent expansion in an annulus, uniqueness, computing coefficients in practice.", prereqs: [complex.taylor-series], keywords: [laurent series, laurent expansion, annulus]}
+              - {id: complex.singularities, title: Classification of isolated singularities, kind: definition, scope: "Removable singularities, poles, essential singularities (Casorati-Weierstrass), behaviour at infinity, meromorphic functions.", prereqs: [complex.laurent-series], keywords: [essential singularity, pole, removable singularity]}
+              - {id: complex.analytic-continuation, title: Analytic continuation, kind: theorem, scope: "Identity theorem, uniqueness of continuation, continuation along paths, the Gamma function as an example.", prereqs: [complex.taylor-series], keywords: [analytic continuation, identity theorem]}
+          - id: residues
+            title: The residue calculus
+            units:
+              - {id: complex.residue-theorem, title: The residue theorem, kind: theorem, scope: "Residue theorem; formulas for residues at simple and higher-order poles.", prereqs: [complex.singularities], keywords: [residue theorem, residues, calculus of residues]}
+              - {id: complex.trigonometric-integrals, title: Trigonometric integrals by residues, kind: method, scope: "Integrals over a period of rational functions of sine and cosine via the unit circle.", prereqs: [complex.residue-theorem], keywords: [trigonometric integrals, unit circle, residues]}
+              - {id: complex.infinite-integrals, title: Infinite real integrals and Jordan's lemma, kind: method, scope: "Rational integrands over the real line, Fourier-type integrals, Jordan's lemma, closing contours.", prereqs: [complex.residue-theorem], keywords: [jordan's lemma, infinite integral, semicircle]}
+              - {id: complex.branch-cut-integrals, title: Integrals around branch cuts, kind: method, scope: "Keyhole and dogbone contours for integrands with powers and logarithms.", prereqs: [complex.residue-theorem, complex.branch-points-cuts], keywords: [keyhole contour, branch cut, contour]}
+              - {id: complex.principal-value-integrals, title: Principal values and indented contours, kind: method, scope: "Cauchy principal value, indentation around poles on the contour, the Sokhotski-Plemelj formula.", prereqs: [complex.infinite-integrals], keywords: [principal value, indented contour, plemelj]}
+              - {id: complex.series-summation, title: Summing series with residues, kind: method, scope: "Summation of series using pi cot(pi z) and pi csc(pi z) kernels.", prereqs: [complex.residue-theorem], keywords: [summation of series, cot, residues]}
+              - {id: complex.argument-principle-rouche, title: Argument principle and Rouche's theorem, kind: theorem, scope: "Counting zeros and poles, Rouche's theorem, locating roots of polynomials.", prereqs: [complex.residue-theorem], keywords: [argument principle, rouche's theorem]}
+              - {id: complex.winding-number, title: The winding number, kind: definition, scope: "Index of a closed curve about a point, its integral formula, invariance under homotopy, the general (homology) form of Cauchy's theorem.", prereqs: [complex.contour-integrals, found.connectedness-homotopy], keywords: [winding number, index of a curve, homology]}
+      - id: further-complex
+        title: Mappings and applications
+        summary: Conformal maps, dispersion relations and pole expansions.
+        sections:
+          - id: applications
+            title: Conformal maps and applications
+            units:
+              - {id: complex.conformal-mappings, title: Conformal mappings, kind: method, scope: "Conformality, Mobius transformations, standard maps, solving two-dimensional Laplace problems by mapping.", prereqs: [complex.cauchy-riemann], keywords: [conformal mapping, bilinear transformation, mobius]}
+              - {id: complex.dispersion-relations, title: Dispersion relations, kind: application, scope: "Kramers-Kronig relations from causality and analyticity in the upper half-plane.", prereqs: [complex.principal-value-integrals], keywords: [dispersion relations, kramers-kronig]}
+              - {id: complex.pole-expansions-products, title: Pole expansions and infinite products, kind: theorem, level: advanced, scope: "Mittag-Leffler pole expansions (cot), Weierstrass products, the product for sin.", prereqs: [complex.residue-theorem], keywords: [mittag-leffler, infinite product, pole expansion]}
+              - {id: complex.riemann-surfaces, title: Riemann surfaces, kind: definition, level: advanced, scope: "The surface of a multivalued function, sheets and branch cuts glued, the surfaces of the square root and the logarithm, uniformization idea.", prereqs: [complex.branch-points-cuts, complex.analytic-continuation], keywords: [riemann surface, sheet, multivalued]}
+
+  - id: ode
+    title: Ordinary differential equations
+    chapters:
+      - id: first-order-theory
+        title: First-order equations and existence theory
+        summary: Elementary methods and the existence, uniqueness and stability of solutions.
+        sections:
+          - id: basics
+            title: Methods and existence
+            units:
+              - {id: ode.first-order-methods, title: Solving first-order equations, kind: method, scope: "Separable, exact and linear equations, integrating factors, Bernoulli and homogeneous equations.", prereqs: [], keywords: [integrating factor, exact equation, separable]}
+              - {id: ode.existence-uniqueness, title: Existence and uniqueness of solutions, kind: theorem, scope: "Picard-Lindelof theorem via successive approximations under a Lipschitz condition; nonuniqueness example without it.", prereqs: [found.uniform-convergence], keywords: [lipschitz condition, successive approximations, existence and uniqueness]}
+              - {id: ode.continuous-dependence, title: Dependence on initial data and Gronwall's inequality, kind: theorem, level: advanced, scope: "Gronwall's inequality, continuous dependence on initial conditions and parameters, maximal intervals of existence.", prereqs: [ode.existence-uniqueness], keywords: [gronwall, continuous dependence, initial conditions]}
+      - id: linear-equations
+        title: Linear equations
+        summary: Structure of solutions of linear ODEs and the standard solution methods.
+        sections:
+          - id: linear
+            title: Linear equations of order n
+            units:
+              - {id: ode.linear-ode-theory, title: Structure of linear equations and the Wronskian, kind: theorem, scope: "Solution space has dimension n, fundamental sets, the Wronskian and Abel's formula, superposition.", prereqs: [ode.existence-uniqueness, linalg.determinants], keywords: [wronskian, linearly independent solutions, fundamental set]}
+              - {id: ode.constant-coefficients, title: Constant-coefficient equations, kind: method, scope: "Characteristic equation, repeated and complex roots, undetermined coefficients, resonance.", prereqs: [ode.linear-ode-theory], keywords: [constant coefficients, auxiliary equation, characteristic equation]}
+              - {id: ode.variation-of-parameters, title: Variation of parameters, kind: method, scope: "Particular solutions from a fundamental set, second-order formula, general order.", prereqs: [ode.linear-ode-theory], keywords: [variation of parameters, particular integral]}
+              - {id: ode.reduction-of-order, title: Reduction of order, kind: method, scope: "Second solution from a known one, Abel's formula route.", prereqs: [ode.linear-ode-theory], keywords: [second solution, reduction of order]}
+              - {id: ode.euler-equation, title: Euler-Cauchy equations, kind: method, scope: "Equidimensional equations, power solutions, logarithmic cases.", prereqs: [ode.constant-coefficients], keywords: [euler equation, equidimensional, cauchy-euler]}
+              - {id: ode.harmonic-oscillator, title: The damped and driven harmonic oscillator, kind: application, scope: "Free, damped (under-, over- and critically damped) and driven oscillator; resonance, quality factor, phase lag, transient and steady state.", prereqs: [ode.constant-coefficients], keywords: [harmonic oscillator, resonance, damped]}
+          - id: series-solutions
+            title: Series solutions
+            units:
+              - {id: ode.ordinary-point-series, title: Power-series solutions at ordinary points, kind: method, scope: "Recurrences for coefficients, radius of convergence from the coefficients' singularities.", prereqs: [ode.linear-ode-theory, complex.taylor-series], keywords: [ordinary point, series solution, power series]}
+              - {id: ode.frobenius-method, title: The Frobenius method, kind: method, scope: "Regular singular points, indicial equation, the cases of roots differing by an integer, logarithmic solutions.", prereqs: [ode.ordinary-point-series], keywords: [frobenius, indicial equation, regular singular point]}
+              - {id: ode.singular-points-infinity, title: "Classifying singular points, including infinity", kind: definition, scope: "Regular and irregular singular points, the point at infinity, Fuchsian equations and the special functions they produce.", prereqs: [ode.frobenius-method], keywords: [irregular singular point, point at infinity, singular point]}
+      - id: systems
+        title: Linear systems
+        summary: First-order systems, matrix exponentials and transform methods.
+        sections:
+          - id: systems
+            title: Systems of linear equations
+            units:
+              - {id: ode.linear-systems, title: Linear systems and the matrix exponential, kind: method, scope: "x' = Ax, fundamental matrices, solution by matrix exponential and eigenvectors, complex eigenvalues.", prereqs: [linalg.matrix-exponential, ode.linear-ode-theory], keywords: [fundamental matrix, system of linear equations, matrix exponential]}
+              - {id: ode.nonhomogeneous-systems, title: Nonhomogeneous systems and Duhamel's principle, kind: method, scope: "Variation of constants for systems, Duhamel integral, forced linear systems.", prereqs: [ode.linear-systems], keywords: [nonhomogeneous, variation of constants, duhamel]}
+              - {id: ode.floquet-theory, title: Floquet theory, kind: theorem, level: advanced, scope: "Linear systems with periodic coefficients, monodromy matrix, Floquet multipliers, Mathieu-type stability.", prereqs: [ode.linear-systems], keywords: [floquet, periodic coefficients, monodromy]}
+              - {id: ode.laplace-transform-method, title: Solving initial-value problems with the Laplace transform, kind: method, scope: "Transforming linear constant-coefficient IVPs, partial fractions, discontinuous and impulsive forcing.", prereqs: [fourier.laplace-transform, ode.constant-coefficients], keywords: [laplace transform, initial value problem, step function]}
+      - id: boundary-value
+        title: Boundary-value problems
+        summary: Self-adjoint operators, Sturm-Liouville theory and eigenfunction expansions.
+        sections:
+          - id: sturm-liouville
+            title: Sturm-Liouville theory
+            units:
+              - {id: ode.self-adjoint-operators, title: Adjoint and self-adjoint differential operators, kind: definition, scope: "Formal adjoint, Lagrange's identity, boundary terms, self-adjoint form of second-order operators.", prereqs: [ode.linear-ode-theory, linalg.inner-product-spaces], keywords: [self-adjoint, adjoint operator, lagrange's identity]}
+              - {id: ode.sturm-liouville-theory, title: Sturm-Liouville eigenvalue problems, kind: theorem, scope: "Regular Sturm-Liouville problems: real eigenvalues, orthogonality with weight, simple eigenvalues, examples.", prereqs: [ode.self-adjoint-operators], keywords: [sturm-liouville, eigenfunctions, orthogonality]}
+              - {id: ode.eigenfunction-expansions, title: Eigenfunction expansions, kind: theorem, scope: "Completeness of Sturm-Liouville eigenfunctions (statement), expansion coefficients, convergence in mean square, solving forced problems.", prereqs: [ode.sturm-liouville-theory], keywords: [eigenfunction expansion, completeness, expansion in eigenfunctions]}
+              - {id: ode.sturm-comparison, title: Sturm comparison and oscillation theorems, kind: theorem, level: advanced, scope: "Sturm separation and comparison theorems, counting zeros of eigenfunctions.", prereqs: [ode.sturm-liouville-theory], keywords: [sturm comparison, oscillation theorem, separation theorem]}
+
+  - id: spec
+    title: Special functions
+    chapters:
+      - id: gamma-family
+        title: The Gamma function and related functions
+        summary: Gamma, Beta, digamma, zeta and error functions.
+        sections:
+          - id: gamma
+            title: Gamma and related functions
+            units:
+              - {id: spec.gamma-function, title: The Gamma function, kind: definition, scope: "Euler integral, functional equation, factorials, analytic continuation, reflection and duplication formulas.", prereqs: [found.differentiation-under-integral, complex.analytic-continuation], keywords: [gamma function, factorial function, reflection formula]}
+              - {id: spec.beta-function, title: The Beta function, kind: theorem, scope: "Beta integral, relation to Gamma, standard trigonometric integrals.", prereqs: [spec.gamma-function, found.change-of-variables], keywords: [beta function, beta integral]}
+              - {id: spec.digamma-polygamma, title: Digamma and polygamma functions, kind: definition, scope: "Logarithmic derivative of Gamma, series, values, use in summing series.", prereqs: [spec.gamma-function], keywords: [digamma, polygamma, psi function]}
+              - {id: spec.zeta-bernoulli, title: Riemann zeta function and Bernoulli numbers, kind: definition, scope: "Zeta for real argument greater than one, Bernoulli numbers, zeta at even integers.", prereqs: [asym.euler-maclaurin], keywords: [riemann zeta, bernoulli numbers, zeta function]}
+              - {id: spec.error-function, title: Error function and incomplete Gamma function, kind: definition, scope: "erf, erfc, incomplete Gamma functions, their series and large-argument behaviour.", prereqs: [spec.gamma-function, asym.asymptotic-series], keywords: [error function, incomplete gamma, erfc]}
+      - id: orthogonal-polynomials
+        title: Orthogonal polynomials
+        summary: Legendre, Hermite, Laguerre and Chebyshev polynomials and spherical harmonics.
+        sections:
+          - id: classical
+            title: Classical orthogonal polynomials
+            units:
+              - {id: spec.orthogonal-polynomials-general, title: General properties of orthogonal polynomials, kind: theorem, scope: "Weight functions, existence via Gram-Schmidt, three-term recurrence, real simple zeros, Rodrigues formulas.", prereqs: [linalg.gram-schmidt], keywords: [orthogonal polynomials, recurrence relation, rodrigues]}
+              - {id: spec.legendre-polynomials, title: Legendre polynomials, kind: definition, scope: "Legendre equation, Rodrigues formula, generating function, recurrences, orthogonality and normalization.", prereqs: [spec.orthogonal-polynomials-general, ode.frobenius-method], keywords: [legendre polynomials, generating function, legendre's equation]}
+              - {id: spec.associated-legendre, title: Associated Legendre functions, kind: definition, scope: "Associated Legendre equation, P_l^m, orthogonality, sign conventions (Condon-Shortley).", prereqs: [spec.legendre-polynomials], keywords: [associated legendre, condon-shortley]}
+              - {id: spec.spherical-harmonics, title: Spherical harmonics, kind: theorem, scope: "Definition, orthonormality, completeness (statement), addition theorem, Laplace series.", prereqs: [spec.associated-legendre], keywords: [spherical harmonics, addition theorem, laplace series]}
+              - {id: spec.hermite-polynomials, title: Hermite polynomials, kind: definition, scope: "Hermite equation, generating function, recurrences, orthogonality, physicists' versus probabilists' conventions, oscillator wavefunctions.", prereqs: [spec.orthogonal-polynomials-general], keywords: [hermite polynomials, hermite functions]}
+              - {id: spec.laguerre-polynomials, title: Laguerre polynomials, kind: definition, scope: "Laguerre and associated Laguerre polynomials, generating function, orthogonality, hydrogen radial functions.", prereqs: [spec.orthogonal-polynomials-general], keywords: [laguerre polynomials, associated laguerre]}
+              - {id: spec.chebyshev-polynomials, title: Chebyshev polynomials, kind: definition, scope: "Definitions via cosines, recurrence, orthogonality, minimax property, use in approximation.", prereqs: [spec.orthogonal-polynomials-general], keywords: [chebyshev polynomials]}
+              - {id: spec.legendre-second-kind, title: Legendre functions of the second kind, kind: definition, level: advanced, scope: "Q_n, their logarithmic singularities, Wronskian with P_n.", prereqs: [spec.legendre-polynomials], keywords: [second kind, q_n, legendre functions]}
+      - id: bessel
+        title: Bessel functions
+        summary: Bessel functions of all kinds and their properties.
+        sections:
+          - id: bessel
+            title: Bessel functions
+            units:
+              - {id: spec.bessel-first-kind, title: Bessel functions of the first kind, kind: definition, scope: "Bessel's equation, series for J_nu, generating function for integer order, recurrences.", prereqs: [ode.frobenius-method, spec.gamma-function], keywords: [bessel functions, bessel's equation, generating function]}
+              - {id: spec.bessel-second-kind-hankel, title: Neumann and Hankel functions, kind: definition, scope: "Y_nu, the Wronskian, Hankel functions as outgoing and incoming waves.", prereqs: [spec.bessel-first-kind], keywords: [neumann functions, hankel functions, second kind]}
+              - {id: spec.bessel-orthogonality, title: Orthogonality and Fourier-Bessel series, kind: theorem, scope: "Zeros of J_nu, orthogonality on an interval, normalization, Fourier-Bessel expansions.", prereqs: [spec.bessel-first-kind, ode.sturm-liouville-theory], keywords: [orthogonality, bessel series, zeros of bessel]}
+              - {id: spec.modified-bessel, title: Modified Bessel functions, kind: definition, scope: "I_nu and K_nu, modified Bessel equation, behaviour at zero and infinity.", prereqs: [spec.bessel-second-kind-hankel], keywords: [modified bessel functions]}
+              - {id: spec.spherical-bessel, title: Spherical Bessel functions, kind: definition, scope: "j_n, y_n, h_n, elementary closed forms, Rayleigh formulas, plane-wave expansion.", prereqs: [spec.bessel-second-kind-hankel, spec.legendre-polynomials], keywords: [spherical bessel functions, plane wave expansion]}
+              - {id: spec.bessel-asymptotics, title: Asymptotic forms of Bessel functions, kind: theorem, scope: "Small- and large-argument behaviour of J, Y, H, I and K.", prereqs: [spec.bessel-second-kind-hankel, asym.steepest-descent], keywords: [asymptotic forms, asymptotic expansion, bessel]}
+              - {id: spec.bessel-integral-representations, title: Integral representations of Bessel functions, kind: theorem, level: advanced, scope: "Bessel's integral, Schlafli-type representations and their uses.", prereqs: [spec.bessel-first-kind], keywords: [integral representation, bessel's integral]}
+      - id: further-special
+        title: Hypergeometric and other functions
+        summary: Hypergeometric functions, elliptic integrals and Airy functions.
+        sections:
+          - id: hypergeometric
+            title: Hypergeometric and related functions
+            units:
+              - {id: spec.hypergeometric, title: The hypergeometric function, kind: definition, scope: "Gauss series, hypergeometric equation, Gauss's summation formula, elementary and orthogonal-polynomial special cases.", prereqs: [ode.frobenius-method, spec.gamma-function], keywords: [hypergeometric function, hypergeometric equation]}
+              - {id: spec.confluent-hypergeometric, title: Confluent hypergeometric functions, kind: definition, scope: "Kummer's equation, M and U, relations to Hermite, Laguerre and Bessel functions.", prereqs: [spec.hypergeometric], keywords: [confluent hypergeometric, kummer]}
+              - {id: spec.elliptic-integrals, title: Elliptic integrals, kind: definition, scope: "Complete and incomplete integrals of the first and second kinds, series, the pendulum period.", prereqs: [found.power-series], keywords: [elliptic integral, complete elliptic, pendulum]}
+              - {id: spec.airy-functions, title: Airy functions, kind: definition, scope: "Airy's equation, Ai and Bi, relation to Bessel functions of order 1/3, asymptotics and turning points.", prereqs: [spec.bessel-first-kind], keywords: [airy function, airy's equation]}
+
+  - id: asym
+    title: Asymptotics and perturbation methods
+    chapters:
+      - id: asymptotic-expansions
+        title: Asymptotic expansions of integrals
+        summary: Asymptotic series and the standard methods for integrals.
+        sections:
+          - id: expansions
+            title: Asymptotic series and integrals
+            units:
+              - {id: asym.asymptotic-series, title: Asymptotic series, kind: definition, scope: "Order symbols, Poincare asymptotic expansions, divergent but useful series, optimal truncation, operations on expansions.", prereqs: [found.series-convergence-tests], keywords: [asymptotic series, asymptotic expansion, semiconvergent]}
+              - {id: asym.euler-maclaurin, title: Euler-Maclaurin summation, kind: theorem, scope: "Euler-Maclaurin formula with remainder, Bernoulli numbers and polynomials, applications to sums.", prereqs: [found.taylor-theorem], keywords: [euler-maclaurin, bernoulli numbers]}
+              - {id: asym.watson-lemma, title: Watson's lemma, kind: theorem, scope: "Asymptotics of Laplace-type integrals from the behaviour of the integrand near the endpoint.", prereqs: [asym.asymptotic-series, spec.gamma-function], keywords: [watson's lemma, laplace transform]}
+              - {id: asym.laplace-method, title: Laplace's method, kind: method, scope: "Leading-order asymptotics of integrals of exp(x f(t)) dominated by an interior maximum.", prereqs: [asym.watson-lemma, found.gaussian-integrals], keywords: [laplace's method, method of laplace]}
+              - {id: asym.stationary-phase, title: The method of stationary phase, kind: method, scope: "Oscillatory integrals, stationary points, leading contribution and endpoint contributions.", prereqs: [asym.laplace-method], keywords: [stationary phase]}
+              - {id: asym.steepest-descent, title: The method of steepest descents, kind: method, scope: "Saddle points, paths of steepest descent in the complex plane, leading-order formula.", prereqs: [asym.laplace-method, complex.cauchy-theorem], keywords: [steepest descent, saddle point method, saddle point]}
+              - {id: asym.stirling-formula, title: Stirling's formula, kind: example, scope: "Derivation of Stirling's series from the Gamma integral by Laplace's method, with first corrections.", prereqs: [asym.laplace-method, spec.gamma-function], keywords: [stirling's formula, stirling's series]}
+      - id: perturbation
+        title: Perturbation methods
+        summary: Regular and singular perturbation, boundary layers and WKB.
+        sections:
+          - id: perturbation
+            title: Perturbation theory
+            units:
+              - {id: asym.regular-perturbation, title: Regular perturbation expansions, kind: method, scope: "Expansions in a small parameter for roots of equations and solutions of ODEs; secular terms.", prereqs: [found.taylor-theorem], keywords: [perturbation, small parameter, perturbation expansion]}
+              - {id: asym.boundary-layers, title: Singular perturbations and boundary layers, kind: method, level: advanced, scope: "Inner and outer expansions, matching, a model boundary-layer problem.", prereqs: [asym.regular-perturbation], keywords: [boundary layer, singular perturbation, matched asymptotic]}
+              - {id: asym.wkb-approximation, title: The WKB approximation, kind: method, scope: "WKB ansatz for slowly varying coefficients, validity, connection formulas at a turning point (statement), quantization condition.", prereqs: [asym.asymptotic-series, ode.linear-ode-theory], keywords: [wkb, turning point, connection formula]}
+
+  - id: fourier
+    title: Fourier analysis and integral transforms
+    chapters:
+      - id: fourier-series
+        title: Fourier series
+        summary: Definition and convergence theory of Fourier series.
+        sections:
+          - id: series
+            title: Fourier series and their convergence
+            units:
+              - {id: fourier.fourier-series, title: Fourier series, kind: definition, scope: "Real and complex forms, arbitrary period, even and odd extensions, half-range series.", prereqs: [linalg.inner-product-spaces], keywords: [fourier series, fourier coefficients, half-range]}
+              - {id: fourier.dirichlet-convergence, title: Pointwise convergence of Fourier series, kind: theorem, scope: "Dirichlet kernel, convergence at points of differentiability, piecewise-smooth functions and jumps.", prereqs: [fourier.fourier-series], keywords: [dirichlet kernel, pointwise convergence, dirichlet conditions]}
+              - {id: fourier.gibbs-phenomenon, title: The Gibbs phenomenon, kind: example, scope: "Overshoot near a jump, its limiting size, why it persists.", prereqs: [fourier.dirichlet-convergence], keywords: [gibbs phenomenon, overshoot]}
+              - {id: fourier.fejer-theorem, title: Cesaro means and Fejer's theorem, kind: theorem, scope: "Fejer kernel as a good kernel, uniform convergence of Cesaro means for continuous functions, Weierstrass approximation.", prereqs: [fourier.dirichlet-convergence, found.uniform-convergence], keywords: [fejer kernel, cesaro, good kernels]}
+              - {id: fourier.parseval-mean-square, title: Mean-square convergence and Parseval's identity, kind: theorem, scope: "Bessel's inequality, best approximation, mean-square convergence and Parseval's identity, Riemann-Lebesgue lemma.", prereqs: [fourier.fejer-theorem, linalg.inner-product-spaces], keywords: [parseval's identity, mean-square convergence, bessel's inequality]}
+              - {id: fourier.smoothness-decay, title: Smoothness and decay of Fourier coefficients, kind: theorem, scope: "Termwise differentiation and integration of Fourier series, decay rates of coefficients versus smoothness.", prereqs: [fourier.dirichlet-convergence], keywords: [differentiation of fourier series, decay, smoothness]}
+      - id: transforms
+        title: Integral transforms
+        summary: Fourier, Laplace and related transforms and their discrete versions.
+        sections:
+          - id: fourier-transform
+            title: The Fourier transform
+            units:
+              - {id: fourier.fourier-transform, title: The Fourier transform, kind: definition, scope: "Definition and its competing conventions, basic transform pairs, shift, scaling and derivative rules.", prereqs: [fourier.fourier-series], keywords: [fourier transform, fourier integral]}
+              - {id: fourier.fourier-inversion, title: Fourier inversion, kind: theorem, scope: "Inversion theorem for rapidly decreasing functions, via the Gaussian.", prereqs: [fourier.fourier-transform, found.gaussian-integrals], keywords: [inversion formula, fourier inversion, schwartz]}
+              - {id: fourier.convolution-theorem, title: The convolution theorem, kind: theorem, scope: "Convolution, its transform, correlation, applications to linear systems.", prereqs: [fourier.fourier-transform], keywords: [convolution theorem, convolution]}
+              - {id: fourier.plancherel, title: Plancherel's theorem, kind: theorem, scope: "Preservation of the L2 norm and inner product, Parseval's relation for transforms.", prereqs: [fourier.fourier-inversion], keywords: [plancherel, parseval's relation]}
+              - {id: fourier.uncertainty-principle, title: The uncertainty principle, kind: theorem, scope: "Heisenberg inequality for a function and its transform, equality for Gaussians.", prereqs: [fourier.plancherel], keywords: [uncertainty principle, heisenberg]}
+              - {id: fourier.poisson-summation, title: Poisson summation formula, kind: theorem, scope: "Statement and proof for rapidly decreasing functions, theta-function example.", prereqs: [fourier.fourier-inversion], keywords: [poisson summation]}
+              - {id: fourier.fourier-transform-rn, title: Fourier transform in several dimensions, kind: method, scope: "Transforms in R^n, radial functions, the three-dimensional transform of 1/r and Yukawa-type functions.", prereqs: [fourier.fourier-inversion], keywords: [three dimensions, radial function, fourier transform]}
+          - id: other-transforms
+            title: Laplace and discrete transforms
+            units:
+              - {id: fourier.laplace-transform, title: The Laplace transform, kind: definition, scope: "Definition, region of convergence, standard pairs, derivative and shift rules, Bromwich inversion integral.", prereqs: [fourier.fourier-transform, complex.residue-theorem], keywords: [laplace transform, bromwich, inverse laplace]}
+              - {id: fourier.partial-fractions, title: Partial fractions for inverse transforms, kind: method, scope: "Decomposing rational functions: distinct, repeated and complex poles; cover-up rule; use to invert Laplace and z-transforms.", prereqs: [fourier.laplace-transform], keywords: [partial fractions, repeated roots, cover-up]}
+              - {id: fourier.hankel-mellin, title: Hankel and Mellin transforms, kind: definition, level: advanced, scope: "Definitions, inversion, relation to the Fourier transform, typical uses.", prereqs: [fourier.fourier-transform-rn, spec.bessel-first-kind], keywords: [hankel transform, mellin transform]}
+              - {id: fourier.dft-fft, title: The discrete Fourier transform and the FFT, kind: method, scope: "DFT and inverse, orthogonality, circular convolution, aliasing, the radix-2 FFT idea and cost.", prereqs: [fourier.fourier-series], keywords: [discrete fourier transform, fast fourier transform, fft]}
+              - {id: fourier.sampling-theorem, title: The sampling theorem, kind: theorem, scope: "Shannon sampling theorem for band-limited functions, Nyquist rate, aliasing.", prereqs: [fourier.poisson-summation], keywords: [sampling theorem, band-limited, nyquist]}
+      - id: distributions
+        title: Distributions
+        summary: Generalized functions and their Fourier transforms.
+        sections:
+          - id: distributions
+            title: Generalized functions
+            units:
+              - {id: fourier.distributions, title: Test functions and distributions, kind: definition, scope: "Test functions, distributions as continuous linear functionals, the delta, derivatives of distributions, distributional solutions.", prereqs: [vcalc.dirac-delta-basics], keywords: [distribution, test function, generalized function]}
+              - {id: fourier.tempered-distributions, title: Fourier transforms of distributions, kind: method, scope: "Tempered distributions, transforms of delta, constants, step function, principal value 1/x.", prereqs: [fourier.distributions, fourier.fourier-inversion], keywords: [tempered distributions, fourier transform of distributions]}
+              - {id: fourier.delta-identities, title: Delta-function identities, kind: table, scope: "delta(g(x)), scaling, derivatives, delta in curvilinear coordinates, representations as limits.", prereqs: [fourier.distributions], keywords: [delta function, dirac delta, representations]}
+              - {id: fourier.heaviside-step, title: The Heaviside step and related functions, kind: definition, scope: "Step function, sign, ramp and rectangle functions; the step as the integral of the delta; transforms of switched-on signals.", prereqs: [fourier.distributions], keywords: [heaviside function, step function, unit step]}
+
+  - id: pde
+    title: Partial differential equations
+    chapters:
+      - id: pde-foundations
+        title: Classification and first-order equations
+        summary: Types of PDE, well-posedness and characteristics.
+        sections:
+          - id: classification
+            title: Classification and characteristics
+            units:
+              - {id: pde.classification, title: Classification of second-order equations, kind: definition, scope: "Elliptic, parabolic and hyperbolic equations, characteristics, canonical forms, well-posed problems in Hadamard's sense.", prereqs: [found.partial-derivatives-chain-rule], keywords: [elliptic, hyperbolic, parabolic]}
+              - {id: pde.first-order-characteristics, title: First-order equations and characteristics, kind: method, scope: "Method of characteristics for linear and quasilinear first-order equations, transport equation.", prereqs: [ode.existence-uniqueness], keywords: [method of characteristics, characteristic curves, transport equation]}
+              - {id: pde.conservation-laws-shocks, title: Conservation laws and shocks, kind: method, level: advanced, scope: "Burgers' equation, breaking, weak solutions, Rankine-Hugoniot condition, entropy condition.", prereqs: [pde.first-order-characteristics], keywords: [burgers' equation, shock, rankine-hugoniot]}
+              - {id: pde.boundary-condition-types, title: Types of boundary and initial condition, kind: table, scope: "Dirichlet, Neumann, Robin, mixed, Cauchy and periodic conditions; which are well posed for elliptic, parabolic and hyperbolic equations, and why.", prereqs: [pde.classification], keywords: [dirichlet boundary condition, neumann boundary condition, cauchy boundary condition]}
+              - {id: pde.similarity-solutions, title: Similarity and self-similar solutions, kind: method, scope: "Scaling symmetries, similarity variables, reduction of a PDE to an ODE, the diffusion similarity solution and the Barenblatt solution.", prereqs: [pde.classification, pde.heat-kernel], keywords: [similarity solution, self-similar, scaling]}
+              - {id: pde.travelling-waves, title: Travelling-wave solutions, kind: method, scope: "The travelling-wave ansatz, the ODE it produces, wave speed selection, fronts in reaction-diffusion and solitary waves.", prereqs: [pde.first-order-characteristics, dyn.flows-on-the-line], keywords: [traveling wave, wave speed, front]}
+      - id: wave
+        title: The wave equation
+        summary: Solutions of the wave equation in one and three dimensions.
+        sections:
+          - id: wave
+            title: Waves
+            units:
+              - {id: pde.dalembert, title: The one-dimensional wave equation, kind: theorem, scope: "d'Alembert's formula, domains of dependence and influence, reflections at boundaries.", prereqs: [pde.classification], keywords: [d'alembert, wave equation, domain of dependence]}
+              - {id: pde.wave-energy, title: Energy and uniqueness for the wave equation, kind: theorem, scope: "Energy conservation and the uniqueness proof it gives.", prereqs: [pde.dalembert, vcalc.divergence-theorem], keywords: [energy, wave equation, uniqueness]}
+              - {id: pde.wave-three-dimensions, title: The wave equation in three dimensions, kind: theorem, scope: "Spherical means, Kirchhoff's formula, Huygens' principle, contrast with two dimensions.", prereqs: [pde.dalembert], keywords: [kirchhoff, spherical means, huygens]}
+              - {id: pde.vibrating-string-modes, title: Standing waves and normal modes, kind: method, scope: "Separation of variables for a string with fixed ends, modes and their superposition.", prereqs: [pde.dalembert, fourier.fourier-series], keywords: [vibrating string, separation of variables, standing waves]}
+      - id: diffusion
+        title: Diffusion
+        summary: The heat equation and diffusion processes.
+        sections:
+          - id: heat
+            title: The heat equation
+            units:
+              - {id: pde.heat-kernel, title: The heat kernel, kind: theorem, scope: "Fundamental solution on the line, solution of the initial-value problem, infinite propagation speed, smoothing.", prereqs: [fourier.convolution-theorem, found.gaussian-integrals], keywords: [heat equation, fundamental solution, diffusion equation]}
+              - {id: pde.heat-maximum-principle, title: Maximum principle for the heat equation, kind: theorem, scope: "Weak maximum principle and uniqueness and stability consequences.", prereqs: [pde.classification], keywords: [maximum principle, heat equation]}
+              - {id: pde.heat-bounded-domains, title: Diffusion in bounded domains, kind: method, scope: "Separation of variables with Dirichlet and Neumann conditions, decay of modes, inhomogeneous boundary data.", prereqs: [ode.eigenfunction-expansions, pde.heat-maximum-principle], keywords: [heat equation, separation of variables, neumann]}
+              - {id: pde.advection-diffusion, title: "Advection, diffusion and reaction", kind: application, scope: "Advection-diffusion equation, Peclet number, moving-frame solution, reaction-diffusion and travelling fronts.", prereqs: [pde.heat-kernel, pde.first-order-characteristics], keywords: [diffusion, convection, reaction-diffusion]}
+      - id: potential
+        title: Potential theory
+        summary: Laplace and Poisson equations and separation of variables.
+        sections:
+          - id: laplace
+            title: Laplace and Poisson equations
+            units:
+              - {id: pde.harmonic-functions, title: Harmonic functions, kind: theorem, scope: "Mean value property, maximum principle, uniqueness for the Dirichlet problem.", prereqs: [vcalc.green-identities], keywords: [harmonic function, mean value property, maximum principle]}
+              - {id: pde.laplace-fundamental-solution, title: Fundamental solution of Laplace's equation, kind: theorem, scope: "Fundamental solutions in two and three dimensions, Newtonian potential, solution of Poisson's equation in all space.", prereqs: [vcalc.dirac-delta-basics, vcalc.green-identities], keywords: [poisson's equation, fundamental solution, newtonian potential]}
+              - {id: pde.poisson-integral-formula, title: Poisson's integral formula, kind: theorem, scope: "Solution of the Dirichlet problem in a disk and a ball, smoothness of harmonic functions.", prereqs: [pde.harmonic-functions], keywords: [poisson integral, poisson kernel, dirichlet problem]}
+              - {id: pde.separation-of-variables, title: Separation of variables in standard coordinates, kind: method, scope: "Laplace and Helmholtz equations in Cartesian, cylindrical and spherical coordinates and the special functions they produce.", prereqs: [vcalc.cylindrical-spherical, spec.spherical-harmonics, spec.bessel-orthogonality], keywords: [separation of variables, laplace's equation, spherical coordinates]}
+              - {id: pde.multipole-expansion, title: Multipole expansions, kind: application, scope: "Expansion of the potential of a localized source in spherical harmonics, monopole, dipole and quadrupole moments.", prereqs: [spec.spherical-harmonics, pde.laplace-fundamental-solution], keywords: [multipole expansion, dipole, quadrupole]}
+              - {id: pde.helmholtz-equation, title: The Helmholtz equation, kind: method, scope: "Time-harmonic waves, plane and spherical waves, the Sommerfeld radiation condition.", prereqs: [pde.separation-of-variables, spec.spherical-bessel], keywords: [helmholtz equation, radiation condition, spherical waves]}
+              - {id: pde.schrodinger-equation, title: The Schrodinger equation, kind: application, scope: "Time-dependent and time-independent forms, separation into stationary states, the free particle, infinite well and harmonic oscillator, normalization and probability current.", prereqs: [pde.separation-of-variables, spec.hermite-polynomials], keywords: [schrodinger equation, stationary state, wave function]}
+              - {id: pde.klein-gordon-equation, title: The Klein-Gordon equation, kind: application, scope: "Relativistic wave equation, dispersion relation, plane-wave solutions, comparison with the wave and Schrodinger equations, the massless limit.", prereqs: [pde.dalembert, pde.helmholtz-equation], keywords: [klein-gordon equation, dispersion relation, relativistic]}
+      - id: modern-pde
+        title: Weak solutions
+        summary: The variational and Sobolev-space approach to PDE.
+        sections:
+          - id: weak
+            title: Weak formulations
+            units:
+              - {id: pde.weak-solutions-sobolev, title: Weak derivatives and Sobolev spaces, kind: definition, level: advanced, scope: "Weak derivatives, H^1 and H^1_0, weak formulation of the Poisson problem.", prereqs: [measure.lp-spaces, fourier.distributions], keywords: [sobolev space, weak derivative, weak solution]}
+              - {id: pde.lax-milgram, title: The Lax-Milgram theorem and the Dirichlet problem, kind: theorem, level: advanced, scope: "Lax-Milgram, existence and uniqueness of weak solutions of elliptic problems, Poincare inequality.", prereqs: [pde.weak-solutions-sobolev, funcan.riesz-representation], keywords: [lax-milgram, poincare inequality, coercive]}
+              - {id: pde.energy-estimates, title: Energy estimates and well-posedness, kind: theorem, level: advanced, scope: "Energy estimates for parabolic and hyperbolic problems and the well-posedness they give.", prereqs: [pde.wave-energy, pde.heat-maximum-principle], keywords: [energy estimates, well-posed]}
+              - {id: pde.operator-semigroups, title: Evolution equations and operator semigroups, kind: theorem, level: advanced, scope: "Strongly continuous semigroups, generators, the Hille-Yosida theorem (statement), the heat semigroup as the example.", prereqs: [funcan.unbounded-operators, pde.heat-kernel], keywords: [semigroup, generator, hille-yosida]}
+              - {id: pde.radon-transform, title: The Radon transform, kind: method, level: advanced, scope: "Integrals over hyperplanes, the projection-slice theorem, filtered back-projection, use in tomography and in solving the wave equation.", prereqs: [fourier.fourier-transform-rn], keywords: [radon transform, projection-slice, back-projection]}
+
+  - id: green
+    title: Green's functions and integral equations
+    chapters:
+      - id: green-ode
+        title: Green's functions for ordinary differential equations
+        summary: Construction and properties of Green's functions for boundary-value and initial-value problems.
+        sections:
+          - id: green-ode
+            title: Green's functions in one dimension
+            units:
+              - {id: green.green-function-bvp, title: Green's function for a boundary-value problem, kind: theorem, scope: "Construction for second-order BVPs, jump conditions, representation of the solution, symmetry for self-adjoint problems.", prereqs: [ode.self-adjoint-operators, vcalc.dirac-delta-basics], keywords: [green's function, jump condition, boundary value problem]}
+              - {id: green.fredholm-alternative, title: The Fredholm alternative and modified Green's functions, kind: theorem, scope: "Solvability conditions when the homogeneous problem has solutions, modified Green's functions.", prereqs: [green.green-function-bvp], keywords: [fredholm alternative, modified green's function, solvability condition]}
+              - {id: green.eigenfunction-expansion-green, title: Eigenfunction expansion of Green's functions, kind: theorem, scope: "Bilinear expansion in eigenfunctions, resolvent, poles at eigenvalues.", prereqs: [green.green-function-bvp, ode.eigenfunction-expansions], keywords: [eigenfunction expansion, bilinear, green's function]}
+              - {id: green.causal-green-functions, title: Causal Green's functions for initial-value problems, kind: method, scope: "Retarded Green's functions, the damped oscillator, response functions and causality.", prereqs: [green.green-function-bvp, fourier.convolution-theorem], keywords: [causal, retarded, impulse response]}
+      - id: green-pde
+        title: Green's functions for partial differential equations
+        summary: Green's functions for the Laplace, Helmholtz, wave and heat equations.
+        sections:
+          - id: green-pde
+            title: Green's functions in several dimensions
+            units:
+              - {id: green.laplace-green-functions, title: Green's functions for Laplace and Poisson problems, kind: theorem, scope: "Dirichlet and Neumann Green's functions, representation formula, symmetry.", prereqs: [pde.laplace-fundamental-solution], keywords: [green's function, dirichlet problem, poisson's equation]}
+              - {id: green.method-of-images, title: The method of images, kind: method, scope: "Green's functions for a half-space and a sphere by images; image charges.", prereqs: [green.laplace-green-functions], keywords: [method of images, image charge]}
+              - {id: green.helmholtz-green-functions, title: Green's functions for the Helmholtz equation, kind: method, scope: "Outgoing Green's functions in one, two and three dimensions by contour integration.", prereqs: [pde.helmholtz-equation, complex.infinite-integrals], keywords: [helmholtz equation, outgoing, green's function]}
+              - {id: green.wave-heat-green-functions, title: Green's functions for the wave and heat equations, kind: method, scope: "Retarded Green's function of the wave equation, heat kernel as a Green's function, Duhamel's principle.", prereqs: [green.helmholtz-green-functions, pde.heat-kernel], keywords: [retarded green's function, wave equation, heat equation]}
+              - {id: green.born-approximation, title: Scattering and the Born approximation, kind: application, level: advanced, scope: "Lippmann-Schwinger equation, Born series, scattering amplitude.", prereqs: [green.helmholtz-green-functions, green.neumann-series], keywords: [born approximation, scattering, lippmann-schwinger]}
+      - id: integral-equations
+        title: Integral equations
+        summary: Fredholm and Volterra equations and their solution.
+        sections:
+          - id: integral-equations
+            title: Linear integral equations
+            units:
+              - {id: green.integral-equations, title: Classification of integral equations, kind: definition, scope: "Fredholm and Volterra equations of the first and second kinds, kernels, conversion from ODEs.", prereqs: [], keywords: [integral equation, fredholm, volterra]}
+              - {id: green.neumann-series, title: Neumann series, kind: theorem, scope: "Iterative solution of second-kind equations, convergence for small kernels, resolvent kernel.", prereqs: [green.integral-equations, funcan.banach-fixed-point], keywords: [neumann series, resolvent kernel, iteration]}
+              - {id: green.separable-kernels, title: Separable kernels, kind: method, scope: "Reduction of equations with degenerate kernels to linear algebra, the Fredholm alternative.", prereqs: [green.integral-equations, linalg.linear-systems], keywords: [separable kernel, degenerate kernel]}
+              - {id: green.hilbert-schmidt, title: Hilbert-Schmidt theory, kind: theorem, scope: "Symmetric kernels, eigenfunction expansion of the kernel and of solutions.", prereqs: [funcan.compact-self-adjoint, green.integral-equations], keywords: [hilbert-schmidt, symmetric kernel]}
+              - {id: green.volterra-equations, title: Volterra equations, kind: theorem, scope: "Unique solvability of second-kind Volterra equations by iteration, Abel's equation.", prereqs: [green.neumann-series], keywords: [volterra equation, abel's equation]}
+
+  - id: var
+    title: Calculus of variations
+    chapters:
+      - id: variational-fundamentals
+        title: The Euler-Lagrange equation
+        summary: Functionals, their first variation and the equations extremals satisfy, with boundary conditions and constraints.
+        sections:
+          - id: euler-lagrange
+            title: Extremals of functionals
+            units:
+              - {id: var.functionals-first-variation, title: Functionals and the first variation, kind: definition, scope: "Functionals on function spaces, admissible variations, the first variation, the fundamental lemma of the calculus of variations.", prereqs: [found.taylor-theorem], keywords: [functional, first variation, fundamental lemma]}
+              - {id: var.euler-lagrange-equation, title: The Euler-Lagrange equation, kind: theorem, scope: "Derivation for fixed endpoints, smoothness assumptions, the geodesic in the plane as a first example.", prereqs: [var.functionals-first-variation], keywords: [euler-lagrange equation, euler's equation, euler equation]}
+              - {id: var.first-integrals-beltrami, title: First integrals and the Beltrami identity, kind: method, scope: "Reduced cases (no y, no x), the Beltrami identity, brachistochrone and minimal surface of revolution.", prereqs: [var.euler-lagrange-equation], keywords: [beltrami, brachistochrone, first integral]}
+              - {id: var.several-functions-higher-derivatives, title: Several functions and higher derivatives, kind: theorem, scope: "Systems of Euler-Lagrange equations for several dependent functions; equations for integrands with second derivatives.", prereqs: [var.euler-lagrange-equation], keywords: [several functions, higher derivatives, euler-poisson]}
+              - {id: var.several-independent-variables, title: Several independent variables, kind: theorem, scope: "Euler-Lagrange equations for multiple integrals, minimal surfaces, field equations from Lagrangian densities.", prereqs: [var.euler-lagrange-equation, vcalc.divergence-theorem], keywords: [several independent variables, multiple integrals, minimal surface]}
+          - id: boundary-conditions-constraints
+            title: Boundary conditions and constraints
+            units:
+              - {id: var.natural-boundary-conditions, title: Free endpoints and natural boundary conditions, kind: theorem, scope: "Variable endpoints, natural boundary conditions, transversality conditions.", prereqs: [var.euler-lagrange-equation], keywords: [natural boundary conditions, transversality, variable end point]}
+              - {id: var.isoperimetric-problems, title: Isoperimetric problems, kind: method, scope: "Integral constraints handled with a Lagrange multiplier, Dido's problem, the hanging chain.", prereqs: [var.euler-lagrange-equation, found.lagrange-multipliers], keywords: [isoperimetric, catenary, lagrange multiplier]}
+              - {id: var.holonomic-constraints, title: Pointwise constraints, kind: method, scope: "Constraints g(x, y, z) = 0 imposed at every point, geodesics on a surface.", prereqs: [var.several-functions-higher-derivatives, found.lagrange-multipliers], keywords: [holonomic, constraint, geodesics]}
+      - id: variational-mechanics
+        title: Variational principles in mechanics
+        summary: Hamilton's principle, symmetries and conservation laws, and the canonical formalism.
+        sections:
+          - id: hamilton
+            title: Hamilton's principle and its consequences
+            units:
+              - {id: var.hamilton-principle, title: Hamilton's principle, kind: application, scope: "Lagrangian mechanics from stationary action, generalized coordinates, examples.", prereqs: [var.several-functions-higher-derivatives], keywords: [hamilton's principle, lagrangian, least action]}
+              - {id: var.noether-theorem, title: Noether's theorem, kind: theorem, scope: "Invariance of the action under a one-parameter family of transformations and the conserved quantity it gives; energy, momentum, angular momentum.", prereqs: [var.hamilton-principle], keywords: [noether, conservation laws, invariance]}
+              - {id: var.canonical-equations, title: The canonical equations, kind: theorem, scope: "Legendre transformation, canonical momenta, Hamilton's equations, first integrals.", prereqs: [var.hamilton-principle], keywords: [canonical equations, legendre transformation, hamiltonian]}
+              - {id: var.hamilton-jacobi, title: The Hamilton-Jacobi equation, kind: theorem, level: advanced, scope: "The action as a function of endpoints, the Hamilton-Jacobi equation, Jacobi's theorem on complete integrals.", prereqs: [var.canonical-equations, pde.first-order-characteristics], keywords: [hamilton-jacobi, jacobi's theorem]}
+      - id: variational-methods
+        title: Sufficient conditions and direct methods
+        summary: Second variation and the variational treatment of eigenvalue problems.
+        sections:
+          - id: second-variation
+            title: The second variation
+            units:
+              - {id: var.second-variation-legendre, title: The second variation and Legendre's condition, kind: theorem, scope: "Second variation, Legendre's necessary condition for a minimum.", prereqs: [var.euler-lagrange-equation], keywords: [second variation, legendre condition]}
+              - {id: var.jacobi-conjugate-points, title: Conjugate points and Jacobi's condition, kind: theorem, level: advanced, scope: "Jacobi equation, conjugate points, sufficient conditions for a weak minimum.", prereqs: [var.second-variation-legendre, ode.sturm-liouville-theory], keywords: [conjugate point, jacobi equation, jacobi's condition]}
+          - id: direct-methods
+            title: Variational eigenvalue problems and direct methods
+            units:
+              - {id: var.variational-eigenvalues, title: Variational characterization of eigenvalues, kind: theorem, scope: "Sturm-Liouville eigenvalues as minima of the Rayleigh quotient, min-max characterization (statement).", prereqs: [var.isoperimetric-problems, ode.sturm-liouville-theory], keywords: [rayleigh quotient, eigenvalue problem, variational]}
+              - {id: var.rayleigh-ritz, title: The Rayleigh-Ritz method, kind: method, scope: "Trial functions, upper bounds on the lowest eigenvalue, Ritz matrices, convergence (statement).", prereqs: [var.variational-eigenvalues], keywords: [rayleigh-ritz, ritz method, trial function]}
+
+  - id: measure
+    title: Measure and integration
+    chapters:
+      - id: lebesgue
+        title: The Lebesgue integral
+        summary: Measures, the Lebesgue integral and its convergence theorems.
+        sections:
+          - id: measures
+            title: Measures and measurable functions
+            units:
+              - {id: measure.sigma-algebras-measures, title: Sigma-algebras and measures, kind: definition, scope: "Sigma-algebras, measures, continuity properties, null sets, Borel sets.", prereqs: [], keywords: [sigma-algebra, measure space, borel]}
+              - {id: measure.lebesgue-measure, title: Lebesgue measure, kind: theorem, scope: "Outer measure, Caratheodory's construction (outline), properties of Lebesgue measure, existence of non-measurable sets.", prereqs: [measure.sigma-algebras-measures], keywords: [lebesgue measure, outer measure, caratheodory]}
+              - {id: measure.measurable-functions, title: Measurable functions, kind: definition, scope: "Measurable functions, closure under limits, simple-function approximation.", prereqs: [measure.sigma-algebras-measures], keywords: [measurable function, simple function]}
+              - {id: measure.lebesgue-integral, title: The Lebesgue integral, kind: definition, scope: "Integral of simple, non-negative and integrable functions; comparison with the Riemann integral.", prereqs: [measure.measurable-functions, measure.lebesgue-measure], keywords: [lebesgue integral, integrable function, riemann integral]}
+          - id: convergence-theorems
+            title: Convergence theorems
+            units:
+              - {id: measure.monotone-convergence-fatou, title: Monotone convergence and Fatou's lemma, kind: theorem, scope: "Monotone convergence theorem, Fatou's lemma, termwise integration of non-negative series.", prereqs: [measure.lebesgue-integral], keywords: [monotone convergence, fatou's lemma]}
+              - {id: measure.dominated-convergence, title: Dominated convergence, kind: theorem, scope: "Dominated convergence theorem and its use for limits and differentiation under the integral.", prereqs: [measure.monotone-convergence-fatou], keywords: [dominated convergence]}
+              - {id: measure.fubini-tonelli, title: Fubini and Tonelli theorems, kind: theorem, scope: "Product measures (outline), Tonelli for non-negative functions, Fubini for integrable functions, a counterexample.", prereqs: [measure.dominated-convergence], keywords: [fubini, tonelli, product measure]}
+              - {id: measure.modes-of-convergence, title: Modes of convergence, kind: definition, scope: "Almost everywhere, in measure, in L^p; Egorov's theorem; relations and counterexamples.", prereqs: [measure.dominated-convergence], keywords: [convergence in measure, almost everywhere, egoroff]}
+          - id: lp
+            title: L^p spaces
+            units:
+              - {id: measure.lp-spaces, title: L^p spaces, kind: theorem, scope: "Holder and Minkowski inequalities, completeness (Riesz-Fischer), density of simple and continuous functions.", prereqs: [measure.dominated-convergence], keywords: [holder's inequality, minkowski's inequality, lp spaces]}
+              - {id: measure.radon-nikodym, title: The Radon-Nikodym theorem, kind: theorem, level: advanced, scope: "Absolute continuity, the Radon-Nikodym derivative, densities in probability.", prereqs: [measure.lp-spaces], keywords: [radon-nikodym, absolutely continuous]}
+
+  - id: funcan
+    title: Hilbert spaces and operators
+    chapters:
+      - id: spaces
+        title: Metric, normed and Hilbert spaces
+        summary: Completeness, fixed points and the geometry of Hilbert space.
+        sections:
+          - id: spaces
+            title: Spaces
+            units:
+              - {id: funcan.metric-spaces, title: Metric spaces and completeness, kind: definition, scope: "Metric spaces, convergence, Cauchy sequences, completeness, function spaces with sup and integral metrics.", prereqs: [found.limits-of-sequences], keywords: [metric space, complete metric space, cauchy sequence]}
+              - {id: funcan.banach-fixed-point, title: The contraction mapping theorem, kind: theorem, scope: "Banach fixed point theorem with error bounds, applications to equations and ODEs.", prereqs: [funcan.metric-spaces], keywords: [banach fixed point, contraction, fixed point theorem]}
+              - {id: funcan.normed-banach-spaces, title: Normed and Banach spaces, kind: definition, scope: "Norms, Banach spaces, examples (l^p, C[a,b]), equivalence of norms in finite dimensions.", prereqs: [funcan.metric-spaces, linalg.vector-spaces-bases], keywords: [normed space, banach space]}
+              - {id: funcan.hilbert-spaces, title: Hilbert spaces, kind: definition, scope: "Inner product spaces, completeness, l^2 and L^2, parallelogram law.", prereqs: [funcan.normed-banach-spaces, linalg.inner-product-spaces], keywords: [hilbert space, inner product space, parallelogram]}
+              - {id: funcan.projection-theorem, title: The projection theorem, kind: theorem, scope: "Closest point in a closed convex set, orthogonal complements, direct sum decomposition.", prereqs: [funcan.hilbert-spaces], keywords: [projection theorem, orthogonal complement]}
+              - {id: funcan.orthonormal-bases, title: Orthonormal bases in Hilbert space, kind: theorem, scope: "Bessel's inequality, Parseval's identity, criteria for completeness, separable spaces.", prereqs: [funcan.projection-theorem], keywords: [orthonormal basis, total orthonormal, parseval]}
+              - {id: funcan.riesz-representation, title: The Riesz representation theorem, kind: theorem, scope: "Bounded linear functionals on a Hilbert space are inner products; bra-ket interpretation.", prereqs: [funcan.projection-theorem], keywords: [riesz representation, linear functional]}
+              - {id: funcan.weak-convergence, title: Weak convergence, kind: definition, level: advanced, scope: "Weak and strong convergence, examples in l^2, boundedness of weakly convergent sequences.", prereqs: [funcan.riesz-representation], keywords: [weak convergence, strong convergence]}
+      - id: operators
+        title: Operators
+        summary: Bounded, compact and unbounded operators and their spectral theory.
+        sections:
+          - id: bounded
+            title: Bounded and compact operators
+            units:
+              - {id: funcan.bounded-operators, title: Bounded linear operators, kind: definition, scope: "Boundedness equals continuity, operator norm, examples including integral operators.", prereqs: [funcan.normed-banach-spaces], keywords: [bounded linear operator, operator norm]}
+              - {id: funcan.adjoint-operators, title: "Adjoints, self-adjoint and unitary operators", kind: definition, scope: "Hilbert adjoint, self-adjoint, unitary and projection operators, their elementary properties.", prereqs: [funcan.bounded-operators, funcan.riesz-representation], keywords: [hilbert-adjoint, self-adjoint operator, unitary operator]}
+              - {id: funcan.spectrum, title: Spectrum and resolvent, kind: definition, scope: "Resolvent set, point, continuous and residual spectrum, spectrum of self-adjoint operators is real.", prereqs: [funcan.adjoint-operators], keywords: [spectrum, resolvent, eigenvalue]}
+              - {id: funcan.compact-operators, title: Compact operators, kind: definition, scope: "Compact operators, limits of finite-rank operators, integral operators with square-integrable kernels.", prereqs: [funcan.bounded-operators], keywords: [compact operator, finite rank]}
+              - {id: funcan.compact-self-adjoint, title: Spectral theorem for compact self-adjoint operators, kind: theorem, scope: "Eigenvalues accumulate only at zero, eigenvector expansion, application to Sturm-Liouville problems.", prereqs: [funcan.compact-operators, funcan.adjoint-operators, funcan.orthonormal-bases], keywords: [compact self-adjoint, spectral theorem, hilbert-schmidt]}
+              - {id: funcan.uniform-boundedness-open-mapping, title: Uniform boundedness and open mapping theorems, kind: theorem, level: advanced, scope: "Statements, consequences (bounded inverse, closed graph), examples.", prereqs: [funcan.bounded-operators], keywords: [uniform boundedness, open mapping, closed graph]}
+              - {id: funcan.hahn-banach, title: The Hahn-Banach theorem, kind: theorem, level: advanced, scope: "Extension of functionals, dual spaces, separation consequences.", prereqs: [funcan.normed-banach-spaces], keywords: [hahn-banach, dual space]}
+          - id: unbounded
+            title: Unbounded operators and quantum mechanics
+            units:
+              - {id: funcan.unbounded-operators, title: Unbounded and closed operators, kind: definition, level: advanced, scope: "Domains, closed and closable operators, adjoint of a densely defined operator, d/dx and multiplication by x.", prereqs: [funcan.adjoint-operators], keywords: [unbounded operator, closed operator, densely defined]}
+              - {id: funcan.symmetric-self-adjoint, title: Symmetric versus self-adjoint operators, kind: theorem, level: advanced, scope: "Symmetric operators, self-adjointness criteria, deficiency indices, momentum on an interval and a half-line.", prereqs: [funcan.unbounded-operators], keywords: [symmetric operator, self-adjoint, deficiency indices]}
+              - {id: funcan.spectral-theorem-general, title: The spectral theorem, kind: theorem, level: advanced, scope: "Spectral theorem for self-adjoint operators in multiplication-operator and spectral-measure forms, functional calculus.", prereqs: [funcan.symmetric-self-adjoint, measure.lebesgue-integral], keywords: [spectral theorem, functional calculus, spectral measure]}
+              - {id: funcan.stone-theorem, title: Stone's theorem, kind: theorem, level: advanced, scope: "Strongly continuous unitary groups and self-adjoint generators; time evolution in quantum mechanics.", prereqs: [funcan.spectral-theorem-general], keywords: [stone's theorem, unitary group, generator]}
+              - {id: funcan.quantum-mechanics-framework, title: The mathematical framework of quantum mechanics, kind: application, scope: "States, observables as self-adjoint operators, measurement probabilities from the spectral theorem, commutators and uncertainty.", prereqs: [funcan.spectral-theorem-general], keywords: [quantum mechanics, observable, commutator]}
+
+  - id: prob
+    title: Probability and stochastic processes
+    chapters:
+      - id: probability-basics
+        title: Probability and random variables
+        summary: Probability spaces, distributions, expectations and transforms.
+        sections:
+          - id: foundations
+            title: Random variables
+            units:
+              - {id: prob.probability-spaces, title: Probability spaces, kind: definition, scope: "Axioms, conditional probability, Bayes' theorem, independence, total probability.", prereqs: [], keywords: [probability space, conditional probability, bayes]}
+              - {id: prob.random-variables, title: Random variables and distributions, kind: definition, scope: "Distribution functions, discrete and continuous random variables, the standard distributions.", prereqs: [prob.probability-spaces], keywords: [random variable, distribution function, density function]}
+              - {id: prob.expectation-variance, title: "Expectation, variance and covariance", kind: definition, scope: "Expectation, law of the unconscious statistician, variance, covariance, correlation.", prereqs: [prob.random-variables], keywords: [expectation, variance, covariance]}
+              - {id: prob.joint-distributions, title: Joint distributions and transformations, kind: method, scope: "Joint densities, marginals, independence, densities of functions of random variables, sums by convolution.", prereqs: [prob.expectation-variance, found.change-of-variables], keywords: [joint density, marginal, change of variables]}
+              - {id: prob.conditional-expectation, title: Conditional expectation, kind: definition, scope: "Conditional distributions and expectation, the tower property, best mean-square prediction.", prereqs: [prob.joint-distributions], keywords: [conditional expectation, conditional distribution]}
+              - {id: prob.multivariate-normal, title: The multivariate normal distribution, kind: definition, scope: "Density, covariance matrix, linear transformations, marginals and conditionals.", prereqs: [prob.joint-distributions, linalg.hermitian-spectral-theorem, found.gaussian-integrals], keywords: [multivariate normal, bivariate normal, covariance matrix]}
+          - id: transforms
+            title: Generating and characteristic functions
+            units:
+              - {id: prob.generating-functions, title: Generating functions, kind: method, scope: "Probability and moment generating functions, sums of independent variables, branching processes.", prereqs: [prob.expectation-variance], keywords: [generating function, moment generating, branching process]}
+              - {id: prob.characteristic-functions, title: Characteristic functions, kind: theorem, scope: "Definition, properties, inversion and continuity theorems (statements), moments.", prereqs: [prob.expectation-variance, fourier.fourier-inversion], keywords: [characteristic function, inversion theorem, continuity theorem]}
+      - id: limit-theorems
+        title: Limit theorems
+        summary: Inequalities, convergence of random variables, and the laws of large numbers and central limit theorem.
+        sections:
+          - id: limits
+            title: Limit theorems
+            units:
+              - {id: prob.probability-inequalities, title: "Markov, Chebyshev, Jensen and Chernoff inequalities", kind: theorem, scope: "Statements and proofs, tail bounds, typical uses.", prereqs: [prob.expectation-variance], keywords: [chebyshev's inequality, markov's inequality, jensen's inequality]}
+              - {id: prob.convergence-random-variables, title: Convergence of random variables, kind: definition, scope: "Almost sure, in probability, in mean, in distribution; implications; Borel-Cantelli lemmas.", prereqs: [prob.probability-inequalities], keywords: [convergence in probability, almost surely, borel-cantelli]}
+              - {id: prob.law-of-large-numbers, title: Laws of large numbers, kind: theorem, scope: "Weak law with proof, strong law (statement), interpretation.", prereqs: [prob.convergence-random-variables], keywords: [law of large numbers, weak law, strong law]}
+              - {id: prob.central-limit-theorem, title: The central limit theorem, kind: theorem, scope: "Proof via characteristic functions for i.i.d. finite variance, rate and failure examples.", prereqs: [prob.characteristic-functions, prob.convergence-random-variables], keywords: [central limit theorem]}
+              - {id: prob.large-deviations, title: Large deviations and Cramer's theorem, kind: theorem, level: advanced, scope: "Exponential tail bounds, rate function, Cramer's theorem (statement).", prereqs: [prob.probability-inequalities, prob.generating-functions], keywords: [large deviations, cramer, rate function]}
+      - id: processes
+        title: Stochastic processes
+        summary: Markov chains, Poisson processes, Brownian motion and stochastic differential equations.
+        sections:
+          - id: markov
+            title: Markov processes
+            units:
+              - {id: prob.markov-chains, title: Discrete-time Markov chains, kind: definition, scope: "Transition matrices, Chapman-Kolmogorov, classification of states, stationary distributions.", prereqs: [prob.conditional-expectation, linalg.eigenvalues-eigenvectors], keywords: [markov chain, transition matrix, stationary distribution]}
+              - {id: prob.markov-chain-convergence, title: Convergence of Markov chains, kind: theorem, scope: "Ergodic theorem for irreducible aperiodic chains, mixing, detailed balance.", prereqs: [prob.markov-chains], keywords: [ergodic, detailed balance, limiting distribution]}
+              - {id: prob.random-walks, title: Random walks, kind: theorem, scope: "Simple random walk, recurrence in one and two dimensions versus transience in three, gambler's ruin.", prereqs: [prob.markov-chains], keywords: [random walk, gambler's ruin, recurrence]}
+              - {id: prob.poisson-process, title: The Poisson process, kind: definition, scope: "Definitions, interarrival times, superposition and thinning.", prereqs: [prob.random-variables], keywords: [poisson process, interarrival]}
+              - {id: prob.continuous-time-markov-chains, title: Continuous-time Markov chains, kind: definition, scope: "Generators, Kolmogorov forward and backward equations, birth-death processes, master equations.", prereqs: [prob.markov-chains, prob.poisson-process, ode.linear-systems], keywords: [continuous-time markov, generator, birth-death]}
+          - id: stochastic-calculus
+            title: Diffusions and stochastic calculus
+            units:
+              - {id: prob.stationary-processes, title: Stationary processes and spectral densities, kind: theorem, scope: "Stationarity, autocovariance, spectral density, Wiener-Khinchin theorem.", prereqs: [prob.expectation-variance, fourier.fourier-transform], keywords: [stationary process, autocovariance, spectral density]}
+              - {id: prob.brownian-motion, title: Brownian motion, kind: definition, scope: "Wiener process, construction as a scaling limit of random walks, properties of paths.", prereqs: [prob.central-limit-theorem], keywords: [brownian motion, wiener process]}
+              - {id: prob.martingales, title: Martingales, kind: definition, scope: "Martingales, stopping times, optional stopping theorem, examples.", prereqs: [prob.conditional-expectation], keywords: [martingale, stopping time, optional stopping]}
+              - {id: prob.ito-calculus, title: The Ito integral and Ito's formula, kind: theorem, scope: "Ito integral for simple then adapted integrands (outline), Ito isometry, Ito's formula.", prereqs: [prob.brownian-motion, prob.martingales], keywords: [ito integral, ito's formula, stochastic integral]}
+              - {id: prob.stochastic-differential-equations, title: Stochastic differential equations, kind: method, scope: "SDEs, Ornstein-Uhlenbeck process, Langevin equation, Ito versus Stratonovich.", prereqs: [prob.ito-calculus], keywords: [stochastic differential equation, ornstein-uhlenbeck, langevin]}
+              - {id: prob.fokker-planck, title: The Fokker-Planck equation, kind: theorem, scope: "Forward and backward Kolmogorov equations for diffusions, stationary solutions.", prereqs: [prob.stochastic-differential-equations, pde.heat-kernel], keywords: [fokker-planck, forward equation, diffusion process]}
+
+  - id: stats
+    title: Statistics and data analysis
+    chapters:
+      - id: inference
+        title: Statistical inference
+        summary: Estimation, fitting and testing.
+        sections:
+          - id: estimation
+            title: Estimation and testing
+            units:
+              - {id: stats.sampling-distributions, title: Sampling distributions, kind: definition, scope: "Sample mean and variance, chi-squared, Student t and F distributions for normal samples.", prereqs: [prob.multivariate-normal], keywords: [sampling distribution, chi-squared distribution, student's t]}
+              - {id: stats.estimators, title: Estimators and their properties, kind: definition, scope: "Bias, consistency, efficiency, Fisher information, the Cramer-Rao bound.", prereqs: [stats.sampling-distributions], keywords: [estimator, unbiased, cramer-rao]}
+              - {id: stats.maximum-likelihood, title: Maximum likelihood, kind: method, scope: "Likelihood, maximum-likelihood estimators, asymptotic normality (statement), examples.", prereqs: [stats.estimators], keywords: [maximum likelihood, likelihood function]}
+              - {id: stats.least-squares-regression, title: Least-squares fitting, kind: method, scope: "Linear regression, Gauss-Markov theorem, parameter uncertainties, chi-squared fitting.", prereqs: [linalg.projections-least-squares, stats.estimators], keywords: [least squares, linear regression, gauss-markov]}
+              - {id: stats.error-propagation, title: Propagation of uncertainty, kind: method, scope: "Linearized propagation through functions, correlated errors, when linearization fails.", prereqs: [prob.expectation-variance, found.taylor-several-variables], keywords: [propagation of errors, error propagation, uncertainty]}
+              - {id: stats.confidence-intervals, title: Confidence intervals, kind: method, scope: "Confidence intervals for means and variances, interpretation.", prereqs: [stats.sampling-distributions], keywords: [confidence interval, confidence level]}
+              - {id: stats.hypothesis-testing, title: Hypothesis testing, kind: method, scope: "Tests, significance and power, p-values, chi-squared goodness of fit, likelihood-ratio tests.", prereqs: [stats.confidence-intervals], keywords: [hypothesis test, significance level, goodness of fit]}
+              - {id: stats.bayesian-inference, title: Bayesian inference, kind: method, scope: "Priors, posteriors, conjugate families, credible intervals, comparison with frequentist estimates.", prereqs: [prob.probability-spaces, stats.maximum-likelihood], keywords: [bayesian, prior, posterior]}
+      - id: data-analysis
+        title: Data analysis for the physical sciences
+        summary: Methods for analysing fields and time series.
+        sections:
+          - id: time-series
+            title: Fields and time series
+            units:
+              - {id: stats.eof-pca, title: Principal components and empirical orthogonal functions, kind: method, scope: "PCA of a data matrix via the SVD, EOFs of a space-time field, explained variance, truncation.", prereqs: [linalg.svd], keywords: [principal component, covariance matrix, singular value]}
+              - {id: stats.periodogram, title: The periodogram and spectral estimation, kind: method, scope: "Periodogram from the DFT, bias and variance, windowing and leakage, averaging (Welch).", prereqs: [fourier.dft-fft, prob.stationary-processes], keywords: [periodogram, spectral density, power spectrum]}
+              - {id: stats.linear-filters, title: Linear filters, kind: method, scope: "Convolution filters, transfer function, moving averages, low-pass and band-pass design ideas.", prereqs: [fourier.convolution-theorem], keywords: [filter, transfer function, moving average]}
+              - {id: stats.autoregressive-models, title: Autoregressive models and red noise, kind: method, scope: "AR(1) process, its autocorrelation and spectrum, red-noise null hypothesis, Yule-Walker equations.", prereqs: [prob.stationary-processes], keywords: [autoregressive, autocorrelation, red noise]}
+              - {id: stats.kalman-filter, title: The Kalman filter, kind: method, level: advanced, scope: "Linear Gaussian state-space models, prediction and update steps, derivation from the Gaussian conditional.", prereqs: [prob.multivariate-normal, stats.least-squares-regression], keywords: [kalman filter, state space]}
+              - {id: stats.data-assimilation, title: Optimal interpolation and variational data assimilation, kind: method, level: advanced, scope: "Best linear unbiased estimate, optimal interpolation, equivalence with 3D-Var cost function.", prereqs: [stats.kalman-filter], keywords: [optimal interpolation, best linear unbiased, data assimilation]}
+
+  - id: group
+    title: Groups and representations
+    chapters:
+      - id: groups
+        title: Groups
+        summary: Groups, subgroups, homomorphisms and group actions.
+        sections:
+          - id: basics
+            title: Basic group theory
+            units:
+              - {id: group.groups-subgroups, title: Groups and subgroups, kind: definition, scope: "Axioms, examples from symmetry, subgroups, order of an element, cyclic groups.", prereqs: [], keywords: [group, subgroup, cyclic group]}
+              - {id: group.cosets-lagrange, title: Cosets and Lagrange's theorem, kind: theorem, scope: "Cosets, index, Lagrange's theorem and corollaries.", prereqs: [group.groups-subgroups], keywords: [coset, lagrange's theorem, index]}
+              - {id: group.homomorphisms-quotients, title: Homomorphisms and quotient groups, kind: theorem, scope: "Homomorphisms, kernels, normal subgroups, quotient groups, first isomorphism theorem.", prereqs: [group.cosets-lagrange], keywords: [homomorphism, normal subgroup, quotient group]}
+              - {id: group.group-actions, title: Group actions, kind: theorem, scope: "Actions, orbits, stabilizers, orbit-stabilizer theorem, Burnside's counting lemma.", prereqs: [group.cosets-lagrange], keywords: [group action, orbit, stabilizer]}
+              - {id: group.conjugacy-classes, title: Conjugacy classes, kind: definition, scope: "Conjugation, classes, centre, class equation.", prereqs: [group.group-actions], keywords: [conjugacy class, class equation, centralizer]}
+              - {id: group.symmetric-group, title: The symmetric group, kind: definition, scope: "Permutations, cycle notation, transpositions, sign, alternating group.", prereqs: [group.groups-subgroups], keywords: [symmetric group, permutation, cycle]}
+              - {id: group.point-groups, title: Point groups and crystal symmetry, kind: application, level: advanced, scope: "Point groups in two and three dimensions, the crystallographic restriction.", prereqs: [group.conjugacy-classes], keywords: [point group, crystallographic, symmetry operations]}
+              - {id: group.rings-fields, title: Rings and fields, kind: definition, scope: "Rings, ideals, quotient rings, integral domains, fields, polynomial rings, the fields the handbook uses (Q, R, C, finite fields).", prereqs: [group.homomorphisms-quotients], keywords: [ring, ideal, field]}
+              - {id: group.quaternions, title: Quaternions, kind: definition, scope: "The quaternion algebra, conjugate and norm, unit quaternions as rotations of three-space, relation to SU(2) and to Pauli matrices.", prereqs: [group.groups-subgroups, linalg.linear-maps-matrices], keywords: [quaternion, unit quaternion, rotation]}
+      - id: representations
+        title: Representations of finite groups
+        summary: Representations, characters and their uses.
+        sections:
+          - id: finite
+            title: Representations and characters
+            units:
+              - {id: group.representations, title: Representations of groups, kind: definition, scope: "Representations, equivalence, reducibility, unitarity for finite groups, Maschke's theorem.", prereqs: [group.homomorphisms-quotients, linalg.unitary-orthogonal-matrices], keywords: [representation, irreducible representation, reducible]}
+              - {id: group.schur-lemma, title: Schur's lemma, kind: theorem, scope: "Both forms of Schur's lemma and consequences.", prereqs: [group.representations], keywords: [schur's lemma]}
+              - {id: group.orthogonality-characters, title: Orthogonality relations and characters, kind: theorem, scope: "Great orthogonality theorem, characters, decomposition of representations, regular representation.", prereqs: [group.schur-lemma, group.conjugacy-classes], keywords: [orthogonality theorem, character, irreducible]}
+              - {id: group.character-tables, title: Character tables, kind: method, scope: "Constructing and using character tables, decomposition examples.", prereqs: [group.orthogonality-characters], keywords: [character table]}
+              - {id: group.product-representations, title: Product representations and selection rules, kind: method, scope: "Tensor products of representations, Clebsch-Gordan series for finite groups, selection rules.", prereqs: [group.orthogonality-characters], keywords: [direct product, selection rules, product representation]}
+      - id: lie
+        title: Lie groups and angular momentum
+        summary: Continuous groups, rotations and the theory of angular momentum.
+        sections:
+          - id: lie
+            title: Lie groups and rotations
+            units:
+              - {id: group.lie-groups-algebras, title: Matrix Lie groups and Lie algebras, kind: definition, scope: "Matrix Lie groups, generators, the exponential map, Lie brackets, structure constants.", prereqs: [linalg.matrix-exponential, group.groups-subgroups], keywords: [lie group, lie algebra, generators]}
+              - {id: group.so3-su2, title: The rotation group and SU(2), kind: theorem, scope: "SO(3) and its generators, SU(2), the two-to-one homomorphism, spinors.", prereqs: [group.lie-groups-algebras], keywords: [rotation group, su(2), so(3)]}
+              - {id: group.angular-momentum, title: Angular momentum algebra, kind: theorem, scope: "Commutation relations, ladder operators, the spectrum j and m, matrix elements.", prereqs: [group.so3-su2], keywords: [angular momentum, ladder operators, commutation relations]}
+              - {id: group.clebsch-gordan, title: Addition of angular momenta, kind: method, scope: "Coupled and uncoupled bases, Clebsch-Gordan coefficients, their computation and symmetries.", prereqs: [group.angular-momentum, group.product-representations], keywords: [clebsch-gordan, coupling, addition of angular momentum]}
+              - {id: group.wigner-d-matrices, title: Rotation matrices of angular momentum, kind: definition, level: advanced, scope: "Wigner D-matrices, Euler angles, relation to spherical harmonics.", prereqs: [group.angular-momentum, spec.spherical-harmonics], keywords: [rotation matrix, euler angles, wigner]}
+              - {id: group.wigner-eckart, title: Spherical tensors and the Wigner-Eckart theorem, kind: theorem, level: advanced, scope: "Spherical tensor operators, the Wigner-Eckart theorem, reduced matrix elements.", prereqs: [group.clebsch-gordan], keywords: [wigner-eckart, spherical tensor, reduced matrix element]}
+              - {id: group.lorentz-group, title: The Lorentz group, kind: definition, level: advanced, scope: "Lorentz transformations, generators, boosts and rotations, relation to SL(2,C).", prereqs: [group.lie-groups-algebras], keywords: [lorentz group, lorentz transformation, boost]}
+              - {id: group.matrix-group-catalogue, title: The classical matrix groups, kind: table, scope: "GL(n), SL(n), O(n), SO(n), U(n), SU(n), Sp(2n): defining conditions, dimensions, compactness and connectedness, and their Lie algebras.", prereqs: [group.lie-groups-algebras], keywords: [general linear group, orthogonal group, special linear group]}
+              - {id: group.casimir-operators, title: Casimir operators, kind: definition, level: advanced, scope: "Operators commuting with all generators, the quadratic Casimir, labelling irreducible representations, J^2 for angular momentum.", prereqs: [group.angular-momentum], keywords: [casimir operator, invariant operator, quadratic casimir]}
+              - {id: group.clifford-algebras, title: Clifford algebras and spinors, kind: definition, level: advanced, scope: "Clifford algebra of a quadratic form, gamma matrices, Pauli and Dirac algebras, spinor representations, relation to quaternions.", prereqs: [group.quaternions, group.so3-su2], keywords: [clifford algebra, spinor, gamma matrices]}
+
+  - id: geom
+    title: Tensors, forms and geometry
+    chapters:
+      - id: tensors
+        title: Tensors
+        summary: Tensor algebra and calculus in general coordinates.
+        sections:
+          - id: tensors
+            title: Tensor algebra and calculus
+            units:
+              - {id: geom.tensors, title: Tensors and their transformation laws, kind: definition, scope: "Covariant and contravariant components, transformation laws, tensor products, contraction, quotient rule.", prereqs: [linalg.linear-maps-matrices, vcalc.vector-algebra], keywords: [tensor, contravariant, covariant]}
+              - {id: geom.metric-tensor, title: The metric tensor, kind: definition, scope: "Line element, raising and lowering indices, the metric in curvilinear coordinates.", prereqs: [geom.tensors], keywords: [metric tensor, line element, raising and lowering]}
+              - {id: geom.covariant-derivative, title: Christoffel symbols and the covariant derivative, kind: definition, scope: "Christoffel symbols from the metric, covariant derivative of tensors, parallel transport.", prereqs: [geom.metric-tensor], keywords: [christoffel symbols, covariant derivative, parallel transport]}
+              - {id: geom.tensor-operators-general-coordinates, title: Differential operators in general coordinates, kind: method, scope: "Divergence, Laplacian and curl in general coordinates via the metric determinant.", prereqs: [geom.covariant-derivative, vcalc.curvilinear-coordinates], keywords: [laplacian, general coordinates, divergence]}
+              - {id: geom.pseudotensors, title: Pseudotensors and the Levi-Civita tensor, kind: definition, scope: "Behaviour under reflections, axial vectors, the Levi-Civita tensor density.", prereqs: [geom.tensors], keywords: [pseudotensor, axial vector, levi-civita]}
+              - {id: geom.stress-strain, title: Stress and strain tensors, kind: application, scope: "Strain tensor, stress tensor, Hooke's law for isotropic media, principal axes.", prereqs: [geom.tensors, linalg.hermitian-spectral-theorem], keywords: [stress tensor, strain tensor, elasticity]}
+      - id: forms
+        title: Differential forms
+        summary: Exterior calculus and the general Stokes theorem.
+        sections:
+          - id: forms
+            title: Exterior calculus
+            units:
+              - {id: geom.differential-forms, title: Differential forms, kind: definition, scope: "Exterior algebra, wedge product, forms in R^n, pullbacks.", prereqs: [geom.tensors], keywords: [differential forms, wedge product, exterior algebra]}
+              - {id: geom.exterior-derivative, title: The exterior derivative, kind: definition, scope: "Exterior derivative, d squared equals zero, correspondence with grad, curl and div.", prereqs: [geom.differential-forms, vcalc.divergence-curl], keywords: [exterior derivative]}
+              - {id: geom.stokes-forms, title: Integration of forms and the general Stokes theorem, kind: theorem, scope: "Integrals of forms over oriented manifolds, the general Stokes theorem and its classical special cases.", prereqs: [geom.exterior-derivative, vcalc.stokes-theorem], keywords: [stokes' theorem, integration of forms]}
+              - {id: geom.hodge-star-maxwell, title: The Hodge star and Maxwell's equations, kind: application, scope: "Hodge star, codifferential, Maxwell's equations in the language of forms.", prereqs: [geom.exterior-derivative, geom.metric-tensor], keywords: [hodge, maxwell's equations, dual]}
+              - {id: geom.poincare-lemma, title: Closed and exact forms, kind: theorem, level: advanced, scope: "Poincare lemma on star-shaped domains, failure on punctured domains, de Rham cohomology idea.", prereqs: [geom.exterior-derivative], keywords: [poincare lemma, closed form, exact form]}
+      - id: curves-surfaces
+        title: Curves, surfaces and manifolds
+        summary: Differential geometry of curves and surfaces, and smooth manifolds.
+        sections:
+          - id: curves-surfaces
+            title: Curves and surfaces
+            units:
+              - {id: geom.frenet-serret, title: Curves and the Frenet-Serret formulas, kind: theorem, scope: "Arc length, curvature, torsion, Frenet frame and formulas, fundamental theorem for curves (statement).", prereqs: [found.partial-derivatives-chain-rule, vcalc.vector-algebra], keywords: [frenet, curvature, torsion]}
+              - {id: geom.first-fundamental-form, title: Regular surfaces and the first fundamental form, kind: definition, scope: "Regular surfaces, tangent planes, first fundamental form, lengths, angles and areas.", prereqs: [vcalc.surface-integrals], keywords: [first fundamental form, regular surface, tangent plane]}
+              - {id: geom.surface-curvature, title: The second fundamental form and curvature, kind: definition, scope: "Gauss map, second fundamental form, principal, Gaussian and mean curvature.", prereqs: [geom.first-fundamental-form], keywords: [gaussian curvature, second fundamental form, mean curvature]}
+              - {id: geom.theorema-egregium, title: Gauss's Theorema Egregium, kind: theorem, scope: "Gaussian curvature depends only on the first fundamental form; consequences for maps.", prereqs: [geom.surface-curvature, geom.covariant-derivative], keywords: [theorema egregium, gauss formula]}
+              - {id: geom.geodesics, title: Geodesics, kind: method, scope: "Geodesic equation from the metric, geodesics as extremals of length, examples on the sphere.", prereqs: [geom.covariant-derivative, var.euler-lagrange-equation], keywords: [geodesic, geodesic equation]}
+              - {id: geom.gauss-bonnet, title: The Gauss-Bonnet theorem, kind: theorem, level: advanced, scope: "Local and global Gauss-Bonnet, Euler characteristic.", prereqs: [geom.theorema-egregium, geom.geodesics], keywords: [gauss-bonnet, euler characteristic]}
+          - id: manifolds
+            title: Smooth manifolds
+            units:
+              - {id: geom.smooth-manifolds, title: Smooth manifolds, kind: definition, level: advanced, scope: "Charts, atlases, smooth maps, submanifolds via regular values.", prereqs: [found.implicit-inverse-function], keywords: [smooth manifold, chart, atlas]}
+              - {id: geom.tangent-vectors, title: Tangent vectors and vector fields, kind: definition, level: advanced, scope: "Tangent spaces as derivations, vector fields, flows, Lie brackets.", prereqs: [geom.smooth-manifolds], keywords: [tangent space, vector field, lie bracket]}
+              - {id: geom.riemann-curvature, title: The Riemann curvature tensor, kind: definition, level: advanced, scope: "Riemann tensor from commutators of covariant derivatives, symmetries, Ricci tensor and scalar, flatness.", prereqs: [geom.covariant-derivative], keywords: [riemann tensor, curvature tensor, ricci]}
+              - {id: geom.riemannian-metrics, title: Riemannian manifolds, kind: definition, level: advanced, scope: "Riemannian metric on a manifold, lengths and volumes, the Levi-Civita connection, geodesics and curvature in this language, pseudo-Riemannian signature.", prereqs: [geom.smooth-manifolds, geom.metric-tensor], keywords: [riemannian manifold, riemannian metric, levi-civita]}
+              - {id: geom.vector-bundles, title: Tangent and vector bundles, kind: definition, level: advanced, scope: "Tangent bundle, general vector bundles, sections, local trivializations, the cotangent bundle and tensor bundles.", prereqs: [geom.tangent-vectors], keywords: [vector bundle, tangent bundle, section]}
+              - {id: geom.pullbacks-pushforwards, title: "Pushforwards, pullbacks and immersions", kind: definition, level: advanced, scope: "Differential of a smooth map, pushforward of vectors, pullback of forms and metrics, immersions, submersions and embeddings.", prereqs: [geom.tangent-vectors, geom.differential-forms], keywords: [pullback, pushforward, immersion]}
+              - {id: geom.flows-integral-curves, title: Flows and integral curves, kind: theorem, level: advanced, scope: "Integral curves of a vector field, local flow and the fundamental theorem on flows, one-parameter groups, the Lie derivative along a flow.", prereqs: [geom.tangent-vectors, ode.existence-uniqueness], keywords: [integral curve, flow, lie derivative]}
+              - {id: geom.exponential-map, title: The exponential map, kind: definition, level: advanced, scope: "Exponential map of a Lie group from its algebra and of a Riemannian manifold from geodesics; normal coordinates; relation to the matrix exponential.", prereqs: [geom.flows-integral-curves, group.lie-groups-algebras], keywords: [exponential map, normal coordinates, one-parameter subgroup]}
+              - {id: geom.partition-of-unity, title: Partitions of unity, kind: theorem, level: advanced, scope: "Existence of smooth partitions of unity subordinate to an open cover, and their use to build global objects (metrics, integrals of forms) from local ones.", prereqs: [geom.smooth-manifolds, found.compactness], keywords: [partition of unity, subordinate, bump function]}
+              - {id: geom.symplectic-manifolds, title: Symplectic manifolds and Hamiltonian vector fields, kind: definition, level: advanced, scope: "Symplectic form, canonical form on a cotangent bundle, Hamiltonian vector fields, Poisson brackets, Liouville's theorem on phase-space volume.", prereqs: [geom.differential-forms, var.canonical-equations], keywords: [symplectic, hamiltonian vector field, poisson bracket]}
+              - {id: geom.killing-vectors, title: Killing vector fields and symmetries, kind: definition, level: advanced, scope: "Isometries of a metric, the Killing equation, conserved quantities along geodesics, examples on flat space and the sphere.", prereqs: [geom.riemannian-metrics, geom.flows-integral-curves], keywords: [killing vector, isometry, symmetry]}
+
+  - id: dyn
+    title: Dynamical systems
+    chapters:
+      - id: one-dimensional
+        title: One-dimensional flows
+        summary: Fixed points, stability and bifurcations on the line and the circle.
+        sections:
+          - id: flows-on-the-line
+            title: Flows on the line and circle
+            units:
+              - {id: dyn.flows-on-the-line, title: Flows on the line, kind: method, scope: "Phase line, fixed points, linear stability analysis, impossibility of oscillation in one dimension.", prereqs: [ode.existence-uniqueness], keywords: [fixed points, linear stability, flows on the line]}
+              - {id: dyn.one-dimensional-bifurcations, title: Bifurcations in one dimension, kind: theorem, scope: "Saddle-node, transcritical and pitchfork bifurcations, normal forms, imperfect bifurcations and hysteresis.", prereqs: [dyn.flows-on-the-line], keywords: [saddle-node, transcritical, pitchfork]}
+              - {id: dyn.flows-on-the-circle, title: Flows on the circle, kind: method, scope: "Uniform and nonuniform oscillators, bottleneck period, phase locking.", prereqs: [dyn.flows-on-the-line], keywords: [nonuniform oscillator, flows on the circle, phase locking]}
+      - id: planar
+        title: Planar systems
+        summary: Linear classification, nonlinear stability and oscillations in the plane.
+        sections:
+          - id: phase-plane
+            title: The phase plane
+            units:
+              - {id: dyn.linear-planar-classification, title: Classification of linear planar systems, kind: theorem, scope: "Trace-determinant classification of fixed points: nodes, saddles, spirals, centres, degenerate cases.", prereqs: [ode.linear-systems], keywords: [classification, saddle, stable node]}
+              - {id: dyn.linearization, title: Linearization and the Hartman-Grobman theorem, kind: theorem, scope: "Jacobian at a fixed point, hyperbolic fixed points, Hartman-Grobman (statement), when linearization fails.", prereqs: [dyn.linear-planar-classification], keywords: [linearization, hartman-grobman, hyperbolic]}
+              - {id: dyn.lyapunov-functions, title: Lyapunov functions, kind: theorem, scope: "Lyapunov stability and asymptotic stability theorems, constructing Lyapunov functions, LaSalle (statement).", prereqs: [dyn.linearization], keywords: [liapunov function, lyapunov function, stability]}
+              - {id: dyn.conservative-reversible, title: Conservative and reversible systems, kind: method, scope: "Energy as a conserved quantity, centres in conservative systems, reversibility, homoclinic orbits.", prereqs: [dyn.linearization], keywords: [conservative system, reversible, homoclinic]}
+              - {id: dyn.index-theory, title: Index theory, kind: theorem, level: advanced, scope: "Index of a closed curve and of fixed points, consequences for closed orbits.", prereqs: [dyn.linear-planar-classification], keywords: [index theory, index of a fixed point]}
+          - id: oscillations
+            title: Limit cycles and oscillations
+            units:
+              - {id: dyn.poincare-bendixson, title: Limit cycles and the Poincare-Bendixson theorem, kind: theorem, scope: "Limit cycles, ruling out closed orbits (gradient systems, Dulac), Poincare-Bendixson theorem and trapping regions.", prereqs: [dyn.linearization], keywords: [poincare-bendixson, limit cycle, dulac]}
+              - {id: dyn.hopf-bifurcation, title: The Hopf bifurcation, kind: theorem, scope: "Supercritical and subcritical Hopf bifurcations, statement, detecting them from eigenvalues.", prereqs: [dyn.poincare-bendixson, dyn.one-dimensional-bifurcations], keywords: [hopf bifurcation, supercritical, subcritical]}
+              - {id: dyn.relaxation-averaging, title: Relaxation oscillations and averaging, kind: method, scope: "Van der Pol oscillator, relaxation limit, two-timing and averaging for weakly nonlinear oscillators.", prereqs: [dyn.poincare-bendixson, asym.regular-perturbation], keywords: [van der pol, relaxation oscillation, two-timing]}
+              - {id: dyn.global-bifurcations, title: Global bifurcations of cycles, kind: definition, level: advanced, scope: "Saddle-node of cycles, infinite-period and homoclinic bifurcations, scaling of periods.", prereqs: [dyn.hopf-bifurcation], keywords: [global bifurcation, homoclinic bifurcation, infinite-period]}
+      - id: chaos
+        title: Chaos
+        summary: Sensitive dependence, maps, strange attractors and fractals.
+        sections:
+          - id: chaos
+            title: Chaotic dynamics
+            units:
+              - {id: dyn.lorenz-equations, title: The Lorenz equations, kind: application, scope: "Derivation context, symmetries, volume contraction, fixed points and their stability, the strange attractor.", prereqs: [dyn.lyapunov-functions], keywords: [lorenz equations, strange attractor]}
+              - {id: dyn.lyapunov-exponents, title: Lyapunov exponents and sensitive dependence, kind: definition, scope: "Separation of nearby trajectories, Lyapunov exponents, predictability horizon.", prereqs: [dyn.lorenz-equations], keywords: [liapunov exponent, lyapunov exponent, sensitive dependence]}
+              - {id: dyn.one-dimensional-maps, title: One-dimensional maps, kind: method, scope: "Fixed points and cycles of maps, cobweb diagrams, the logistic map.", prereqs: [dyn.flows-on-the-line], keywords: [logistic map, cobweb, one-dimensional maps]}
+              - {id: dyn.period-doubling, title: Period doubling and universality, kind: theorem, scope: "Period-doubling cascade, Feigenbaum constants, universality (statement), intermittency.", prereqs: [dyn.one-dimensional-maps], keywords: [period-doubling, feigenbaum, universality]}
+              - {id: dyn.poincare-maps, title: Poincare maps, kind: method, scope: "Poincare sections, stability of periodic orbits from the return map.", prereqs: [dyn.poincare-bendixson, dyn.one-dimensional-maps], keywords: [poincare map, poincare section, return map]}
+              - {id: dyn.fractals, title: Fractals and dimension, kind: definition, scope: "Cantor set, self-similarity, box and similarity dimensions, fractal attractors.", prereqs: [dyn.one-dimensional-maps], keywords: [fractal, box dimension, cantor set]}
+              - {id: dyn.henon-map, title: The Henon map and strange attractors, kind: example, level: advanced, scope: "Henon map, stretching and folding, structure of the attractor.", prereqs: [dyn.fractals], keywords: [henon map, stretching and folding]}
+
+  - id: num
+    title: Numerical methods
+    chapters:
+      - id: numerical-basics
+        title: Numerical analysis basics
+        summary: Errors, roots, interpolation, quadrature and linear algebra.
+        sections:
+          - id: basics
+            title: Basic numerical methods
+            units:
+              - {id: num.floating-point-errors, title: Floating-point arithmetic and error, kind: definition, scope: "Rounding, machine epsilon, cancellation, conditioning of problems versus stability of algorithms.", prereqs: [], keywords: [rounding error, machine precision, cancellation]}
+              - {id: num.root-finding, title: Root finding, kind: method, scope: "Bisection, Newton-Raphson, secant method, orders of convergence and failure modes.", prereqs: [found.taylor-theorem], keywords: [newton-raphson, bisection, secant method]}
+              - {id: num.interpolation, title: Polynomial and spline interpolation, kind: method, scope: "Lagrange and Newton forms, error formula, Runge's phenomenon, cubic splines.", prereqs: [found.taylor-theorem], keywords: [interpolation, lagrange interpolation, spline]}
+              - {id: num.quadrature, title: Numerical quadrature, kind: method, scope: "Trapezoidal and Simpson rules with error terms, Richardson extrapolation, Gaussian quadrature.", prereqs: [num.interpolation, spec.orthogonal-polynomials-general], keywords: [trapezium rule, simpson's rule, gaussian quadrature]}
+              - {id: num.linear-systems-numerics, title: Solving linear systems numerically, kind: method, scope: "LU with pivoting, cost, Jacobi and Gauss-Seidel iterations, conjugate gradients idea, conditioning.", prereqs: [linalg.linear-systems, linalg.matrix-norms-conditioning], keywords: [lu decomposition, gauss-seidel, iterative methods]}
+              - {id: num.eigenvalue-algorithms, title: Computing eigenvalues, kind: method, scope: "Power iteration, inverse iteration, the QR algorithm idea.", prereqs: [linalg.hermitian-spectral-theorem], keywords: [power method, eigenvalue, iteration]}
+      - id: numerical-de
+        title: Numerical solution of differential equations
+        summary: Integrators for ODEs and discretizations of PDEs.
+        sections:
+          - id: ode-numerics
+            title: Ordinary differential equations
+            units:
+              - {id: num.ode-integrators, title: Integrators for ODEs, kind: method, scope: "Euler, Runge-Kutta and multistep methods, local and global error, order.", prereqs: [ode.existence-uniqueness, found.taylor-theorem], keywords: [runge-kutta, euler's method, numerical integration]}
+              - {id: num.stiffness, title: Stability and stiff equations, kind: theorem, scope: "Absolute stability regions, stiffness, implicit methods, A-stability.", prereqs: [num.ode-integrators], keywords: [stiff, stability, implicit method]}
+              - {id: num.symplectic-integrators, title: Symplectic integrators, kind: method, level: advanced, scope: "Leapfrog/Verlet, symplecticity, long-time energy behaviour.", prereqs: [num.ode-integrators, var.canonical-equations], keywords: [leapfrog, verlet, symplectic]}
+          - id: pde-numerics
+            title: Partial differential equations
+            units:
+              - {id: num.finite-differences, title: Finite-difference approximations, kind: method, scope: "Difference quotients, truncation error, consistency, discretizing heat and wave equations.", prereqs: [found.taylor-theorem, pde.classification], keywords: [finite difference, truncation error, difference scheme]}
+              - {id: num.von-neumann-stability, title: "Stability, the CFL condition and von Neumann analysis", kind: theorem, scope: "Von Neumann stability analysis, CFL condition, Lax equivalence theorem (statement).", prereqs: [num.finite-differences, fourier.dft-fft], keywords: [von neumann, courant, stability]}
+              - {id: num.relaxation-methods, title: Relaxation methods for elliptic problems, kind: method, scope: "Discrete Poisson problem, Jacobi, Gauss-Seidel and SOR, convergence rates.", prereqs: [num.finite-differences, num.linear-systems-numerics], keywords: [relaxation, successive over-relaxation, poisson]}
+              - {id: num.spectral-methods, title: Spectral methods, kind: method, scope: "Fourier and Chebyshev collocation, spectral accuracy, aliasing.", prereqs: [fourier.dft-fft, spec.chebyshev-polynomials], keywords: [spectral method, collocation, chebyshev]}
+              - {id: num.finite-elements, title: The finite element method, kind: method, level: advanced, scope: "Galerkin method, hat functions, stiffness matrix, error estimate (statement).", prereqs: [pde.weak-solutions-sobolev], keywords: [finite element, galerkin, stiffness matrix]}
+              - {id: num.monte-carlo, title: Monte Carlo methods, kind: method, scope: "Monte Carlo integration, error scaling, importance sampling, Metropolis algorithm.", prereqs: [prob.law-of-large-numbers, prob.central-limit-theorem, prob.markov-chain-convergence], keywords: [monte carlo, importance sampling, metropolis]}

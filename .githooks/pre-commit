@@ -1,0 +1,8 @@
+#!/bin/sh
+# Refuse commits that stage source books or text extracted from them.
+bad=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^(resources/|\.cache/)|\.pdf$' | grep -vE '^public/pdf/')
+if [ -n "$bad" ]; then
+  echo "pre-commit: refusing to commit source material or extracted text:" >&2
+  echo "$bad" | sed 's/^/  /' >&2
+  exit 1
+fi

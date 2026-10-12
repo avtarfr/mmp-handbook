@@ -1,0 +1,261 @@
+# Every work the handbook may cite. Records describe the edition actually held in resources/.
+#   id          stable citation key used in unit frontmatter (`work:`) and `src=` attributes
+#   short       label shown inline, e.g. "Arfken et al. (2013)"
+#   file        PDF under resources/ (local only, never committed)
+#   text        text | ocr  (ocr = image scan, text comes from tesseract)
+#   page_offset printed page = pdf page - page_offset (main matter); filled by tools/corpus/offsets.mjs
+#   isbn        null where not yet confirmed from the copyright page or publisher
+
+- id: arfken-2013
+  short: Arfken, Weber & Harris (2013)
+  authors: [George B. Arfken, Hans J. Weber, Frank E. Harris]
+  title: "Mathematical Methods for Physicists: A Comprehensive Guide"
+  edition: 7th ed.
+  publisher: Academic Press (Elsevier)
+  place: Waltham, MA
+  year: 2013
+  isbn: 978-0-12-384654-9
+  file: arfken.pdf
+  text: text
+  role: spine
+
+- id: rhb-2006
+  short: Riley, Hobson & Bence (2006)
+  authors: [K. F. Riley, M. P. Hobson, S. J. Bence]
+  title: "Mathematical Methods for Physics and Engineering: A Comprehensive Guide"
+  edition: 3rd ed.
+  publisher: Cambridge University Press
+  place: Cambridge
+  year: 2006
+  isbn: 978-0-521-67971-8
+  file: bence.pdf
+  text: text
+  role: companion
+
+- id: hassani-2013
+  short: Hassani (2013)
+  authors: [Sadri Hassani]
+  title: "Mathematical Physics: A Modern Introduction to Its Foundations"
+  edition: 2nd ed.
+  publisher: Springer
+  place: Cham
+  year: 2013
+  isbn: 978-3-319-01194-3
+  file: hassani.pdf
+  text: text
+  role: companion
+
+- id: stakgold-holst-2011
+  short: Stakgold & Holst (2011)
+  authors: [Ivar Stakgold, Michael Holst]
+  title: Green's Functions and Boundary Value Problems
+  edition: 3rd ed.
+  publisher: Wiley
+  place: Hoboken, NJ
+  year: 2011
+  isbn: 978-0-470-60970-5
+  file: stakgold.pdf
+  text: text
+  role: proofs
+
+- id: ahlfors-1979
+  short: Ahlfors (1979)
+  authors: [Lars V. Ahlfors]
+  title: "Complex Analysis: An Introduction to the Theory of Analytic Functions of One Complex Variable"
+  edition: 3rd ed.
+  publisher: McGraw-Hill
+  place: New York
+  year: 1979
+  isbn: null
+  file: complex_anal.pdf
+  text: text
+  role: proofs
+
+- id: grimmett-stirzaker-2020
+  short: Grimmett & Stirzaker (2020)
+  authors: [Geoffrey R. Grimmett, David R. Stirzaker]
+  title: Probability and Random Processes
+  edition: 4th ed.
+  publisher: Oxford University Press
+  place: Oxford
+  year: 2020
+  isbn: 978-0-19-884759-5
+  file: probability.pdf
+  text: text
+  role: probability
+
+- id: kreyszig-1978
+  short: Kreyszig (1978)
+  authors: [Erwin Kreyszig]
+  title: Introductory Functional Analysis with Applications
+  edition: 1st ed.
+  publisher: Wiley
+  place: New York
+  year: 1978
+  isbn: null
+  file: func_anal.pdf
+  text: text
+  role: functional-analysis
+
+- id: reed-simon-1980
+  short: Reed & Simon (1980)
+  authors: [Michael Reed, Barry Simon]
+  title: "Methods of Modern Mathematical Physics, Vol. I: Functional Analysis"
+  edition: Revised and enlarged ed.
+  publisher: Academic Press
+  place: New York
+  year: 1980
+  isbn: 978-0-12-585050-6
+  file: func_anal_pick_2.pdf
+  text: ocr
+  role: functional-analysis
+  note: >-
+    The scan has no title or copyright page. The edition is inferred from the preface dated April 1980;
+    the ISBN is that of the revised and enlarged edition and is likewise inferred.
+
+- id: stein-shakarchi-2003
+  short: Stein & Shakarchi (2003)
+  authors: [Elias M. Stein, Rami Shakarchi]
+  title: "Fourier Analysis: An Introduction"
+  series: Princeton Lectures in Analysis, Vol. I
+  publisher: Princeton University Press
+  place: Princeton, NJ
+  year: 2003
+  isbn: 978-0-691-11384-5
+  file: fourier.pdf
+  text: text
+  role: fourier
+
+- id: folland-1999
+  short: Folland (1999)
+  authors: [Gerald B. Folland]
+  title: "Real Analysis: Modern Techniques and Their Applications"
+  edition: 2nd ed.
+  publisher: Wiley
+  place: New York
+  year: 1999
+  isbn: 978-0-471-31716-6
+  file: measure.pdf
+  text: text
+  role: measure
+
+- id: dummit-foote-2004
+  short: Dummit & Foote (2004)
+  authors: [David S. Dummit, Richard M. Foote]
+  title: Abstract Algebra
+  edition: 3rd ed.
+  publisher: Wiley
+  place: Hoboken, NJ
+  year: 2004
+  isbn: 978-0-471-43334-7
+  file: dummit.pdf
+  text: text
+  role: algebra
+  note: The text layer is a weak OCR; prose is usable, formulas are not.
+
+- id: docarmo-2016
+  short: do Carmo (2016)
+  authors: [Manfredo P. do Carmo]
+  title: Differential Geometry of Curves and Surfaces
+  edition: Revised and updated 2nd ed.
+  publisher: Dover
+  place: Mineola, NY
+  year: 2016
+  isbn: 978-0-486-80699-0
+  file: geom.pdf
+  text: text
+  role: geometry
+
+- id: lee-2013
+  short: Lee (2013)
+  authors: [John M. Lee]
+  title: Introduction to Smooth Manifolds
+  edition: 2nd ed.
+  series: Graduate Texts in Mathematics 218
+  publisher: Springer
+  place: New York
+  year: 2013
+  isbn: 978-1-4419-9981-8
+  file: lee_smooth_manifolds.pdf
+  text: text
+  role: geometry
+
+- id: coddington-1989
+  short: Coddington (1989)
+  authors: [Earl A. Coddington]
+  title: An Introduction to Ordinary Differential Equations
+  edition: Dover ed. (corrected republication of the 1961 Prentice-Hall ed.)
+  publisher: Dover
+  place: New York
+  year: 1989
+  isbn: 978-0-486-65942-8
+  file: ode.pdf
+  text: ocr
+  role: ode
+
+- id: strauss-2008
+  short: Strauss (2008)
+  authors: [Walter A. Strauss]
+  title: "Partial Differential Equations: An Introduction"
+  edition: 2nd ed.
+  publisher: Wiley
+  place: Hoboken, NJ
+  year: 2008
+  isbn: 978-0-470-05456-7
+  file: pde.pdf
+  text: text
+  role: pde
+
+- id: evans-2010
+  short: Evans (2010)
+  authors: [Lawrence C. Evans]
+  title: Partial Differential Equations
+  edition: 2nd ed.
+  series: Graduate Studies in Mathematics 19
+  publisher: American Mathematical Society
+  place: Providence, RI
+  year: 2010
+  isbn: 978-0-8218-4974-3
+  file: evans.pdf
+  text: text
+  role: pde
+
+- id: strogatz-1994
+  short: Strogatz (1994)
+  authors: [Steven H. Strogatz]
+  title: "Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering"
+  edition: 1st ed.
+  publisher: Perseus Books
+  place: Reading, MA
+  year: 1994
+  isbn: 0-201-54344-3
+  file: nld.pdf
+  text: ocr
+  role: dynamics
+
+- id: hirsch-smale-devaney-2013
+  short: Hirsch, Smale & Devaney (2013)
+  authors: [Morris W. Hirsch, Stephen Smale, Robert L. Devaney]
+  title: Differential Equations, Dynamical Systems, and an Introduction to Chaos
+  edition: 3rd ed.
+  publisher: Academic Press (Elsevier)
+  place: Waltham, MA
+  year: 2013
+  isbn: 978-0-12-382010-5
+  file: hirsch.pdf
+  text: text
+  role: dynamics
+
+- id: gelfand-fomin-1963
+  short: Gelfand & Fomin (1963)
+  authors: [I. M. Gelfand, S. V. Fomin]
+  title: Calculus of Variations
+  edition: Revised English ed., trans. and ed. R. A. Silverman
+  publisher: Prentice-Hall
+  place: Englewood Cliffs, NJ
+  year: 1963
+  isbn: null
+  file: variation.pdf
+  text: text
+  role: variations
+  note: Pre-ISBN printing. The Dover reprint (2000, ISBN 978-0-486-41448-5) has the same text.
