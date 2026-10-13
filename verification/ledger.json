@@ -3814,6 +3814,31 @@
     "rounds": 0,
     "hold": false
   },
+  "prob.brownian-motion": {
+    "hash": "0ce7356713b12069396ec4da4025c3ea06e701a33590ffc1f652fb8bfac3a0ab",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:12:02.663Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:21:55.997Z",
+        "report": "verification/reports/prob.brownian-motion/0ce7356713b1-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:21:57.878Z",
+        "report": "verification/reports/prob.brownian-motion/0ce7356713b1-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "prob.central-limit-theorem": {
     "hash": "4391abec4db3b7eb794ac376586f7ce0111614db7f1afe7c4f6eecc5ea37e927",
     "checks": {
@@ -3839,6 +3864,58 @@
     "rounds": 0,
     "hold": false
   },
+  "prob.characteristic-functions": {
+    "hash": "e503be35011c03fa33e60b4240b537632760235526c77bcd7fed831e40852118",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:17:44.401Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:32:13.601Z",
+        "report": "verification/reports/prob.characteristic-functions/e503be35011c-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.conditional-expectation": {
+    "hash": "a35a1cd88634295340b1a66900df49ca3a4e6b248571b544d671f8f836e59516",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:55:16.189Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:58:42.842Z",
+        "report": "verification/reports/prob.conditional-expectation/a35a1cd88634-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.continuous-time-markov-chains": {
+    "hash": "bd0d87c06dead1cb8eb0cd143afcfab6741c82e6293e03c72248b04c5c2fb4af",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T15:13:07.486Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
   "prob.convergence-random-variables": {
     "hash": "e8dc27505d8749c10428ffe9d80a605fe899fda1b65bdfad994eb63a876c2b14",
     "checks": {
@@ -3859,6 +3936,102 @@
     },
     "requires": [
       "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.expectation-variance": {
+    "hash": "05af44178236fb73d177481ce915c95cf6920dbaf21e5feb13d70374d3761407",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:51:33.449Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:03:32.196Z",
+        "report": "verification/reports/prob.expectation-variance/05af44178236-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.fokker-planck": {
+    "hash": "2278945e7d6fa9ee345aa8d2a07218fb54a57f6100618e09f0950dfc6d528988",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T15:13:07.486Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 2,
+    "hold": false
+  },
+  "prob.generating-functions": {
+    "hash": "22113ec2c9acda3acb855ec71f93a85a5d0fc280e11feed1ab82e26bc7e81ccc",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:17:44.404Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:26:45.009Z",
+        "report": "verification/reports/prob.generating-functions/22113ec2c9ac-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.ito-calculus": {
+    "hash": "7e1dfd3dff45bd3a67ff97377e708338e54bef44a7afa6629e9cdb54bd3e2658",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:52:29.555Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:55:52.597Z",
+        "report": "verification/reports/prob.ito-calculus/7e1dfd3dff45-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:02:54.774Z",
+        "report": "verification/reports/prob.ito-calculus/7e1dfd3dff45-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.joint-distributions": {
+    "hash": "b599d8aced8c0f368e573c0245170e320186266b9108824263378dc43535b0ed",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:51:33.450Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:04:25.193Z",
+        "report": "verification/reports/prob.joint-distributions/b599d8aced8c-B.md"
+      }
+    },
+    "requires": [
       "B"
     ],
     "rounds": 0,
@@ -3889,6 +4062,114 @@
     "rounds": 0,
     "hold": false
   },
+  "prob.markov-chain-convergence": {
+    "hash": "11014ba882b07abf9ad4110ca2ee2b279d7d562dd29442f65965444a61e4cc1e",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:50:52.536Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:59:18.992Z",
+        "report": "verification/reports/prob.markov-chain-convergence/11014ba882b0-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:59:20.582Z",
+        "report": "verification/reports/prob.markov-chain-convergence/11014ba882b0-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.markov-chains": {
+    "hash": "f9a749725847dfa8d07df8a0b189cb6b773ca36210a50d2db05212db163e2ccc",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:50:52.536Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:58:28.899Z",
+        "report": "verification/reports/prob.markov-chains/f9a749725847-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:58:37.223Z",
+        "report": "verification/reports/prob.markov-chains/f9a749725847-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.martingales": {
+    "hash": "94df74c88febea3340a939b05ebb368456391e139eea528f14c5ac4f2288317f",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:12:02.663Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:22:44.631Z",
+        "report": "verification/reports/prob.martingales/94df74c88feb-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:23:09.778Z",
+        "report": "verification/reports/prob.martingales/94df74c88feb-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.multivariate-normal": {
+    "hash": "f2699c1c049a593cc572f9ded2e19d66a7d76c60670c68d40af5948ba3150d78",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:17:44.404Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:22:17.792Z",
+        "report": "verification/reports/prob.multivariate-normal/f2699c1c049a-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.poisson-process": {
+    "hash": "806279616f0f3523a41b369eca5d39e69a7adced9fa8059994a4019faaf28329",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T15:13:07.486Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
   "prob.probability-inequalities": {
     "hash": "53cd9983dd5a8d71525389962c0e5ca2a2c57f9cfc19bd4350c986e61f7eeb41",
     "checks": {
@@ -3912,6 +4193,97 @@
       "B"
     ],
     "rounds": 0,
+    "hold": false
+  },
+  "prob.probability-spaces": {
+    "hash": "7305c99103a969950e0867a186eac174a21d76cb63023185bb4ca0bba6736625",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:51:33.450Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:01:53.221Z",
+        "report": "verification/reports/prob.probability-spaces/7305c99103a9-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.random-variables": {
+    "hash": "70e2947b0398cbd6df12ae165a7027604ace0217dcfcfe81e1a5eeb99ce1be88",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T12:51:33.450Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:02:39.456Z",
+        "report": "verification/reports/prob.random-variables/70e2947b0398-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.random-walks": {
+    "hash": "b6a180ecbc99db441ba74546ca8a381e9fbb1dd02b63dc568ccdec0779060cc5",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T13:20:33.306Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:27:32.635Z",
+        "report": "verification/reports/prob.random-walks/b6a180ecbc99-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T13:28:23.978Z",
+        "report": "verification/reports/prob.random-walks/b6a180ecbc99-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "prob.stationary-processes": {
+    "hash": "37b4e62cae480689f14a7eeb0b32b72f9f3e6656be56cc55a33eb881968e9862",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T15:13:07.486Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
+  "prob.stochastic-differential-equations": {
+    "hash": "1104612d6cdf020337146b920dc19fd7fd3ab2594d1a718c5fb39defdeccfeae",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T15:13:07.486Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 2,
     "hold": false
   },
   "spec.airy-functions": {
