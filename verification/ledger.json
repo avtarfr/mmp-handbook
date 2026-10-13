@@ -1503,12 +1503,23 @@
       "pass": true,
       "at": "2026-10-13T11:42:14.764Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:50:28.455Z",
+        "report": "verification/reports/fourier.hankel-mellin/f174a68cb5f8-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:50:29.628Z",
+        "report": "verification/reports/fourier.hankel-mellin/f174a68cb5f8-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "fourier.heaviside-step": {
@@ -1760,11 +1771,17 @@
       "pass": true,
       "at": "2026-10-13T11:45:17.699Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:53:27.802Z",
+        "report": "verification/reports/green.born-approximation/4642f83aaf2c-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "green.causal-green-functions": {
@@ -3266,28 +3283,28 @@
     "hold": false
   },
   "pde.energy-estimates": {
-    "hash": "92e450fdefaabb8811cc0c6aadc4ac743e19564f5af52d00e19b565be92c370d",
+    "hash": "27a9b17b464439e4ccbe6310641f2f7f2a8076f564ce5bf1e7ec61d87f6befd2",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:28:06.319Z"
+      "at": "2026-10-13T12:17:35.365Z"
     },
     "verifiers": {
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:38:41.408Z",
-        "report": "verification/reports/pde.energy-estimates/92e450fdefaa-A.md"
+        "verdict": "pass",
+        "at": "2026-10-13T12:23:43.709Z",
+        "report": "verification/reports/pde.energy-estimates/27a9b17b4644-A.md"
       },
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:43:15.223Z",
-        "report": "verification/reports/pde.energy-estimates/92e450fdefaa-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T12:25:00.610Z",
+        "report": "verification/reports/pde.energy-estimates/27a9b17b4644-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "pde.first-order-characteristics": {
@@ -3485,28 +3502,28 @@
     "hold": false
   },
   "pde.lax-milgram": {
-    "hash": "9f2a4f7f7e615f30358b394590ba8a58327dd53daa46788241ecc5437e9d9144",
+    "hash": "cb4580ec634c24e1dd91cec7f2b009d1bbcc1cf05114aba785fe6940b3010b5d",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:28:06.319Z"
+      "at": "2026-10-13T12:00:21.254Z"
     },
     "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:38:34.821Z",
-        "report": "verification/reports/pde.lax-milgram/9f2a4f7f7e61-A.md"
-      },
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:42:09.719Z",
-        "report": "verification/reports/pde.lax-milgram/9f2a4f7f7e61-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T12:10:54.262Z",
+        "report": "verification/reports/pde.lax-milgram/cb4580ec634c-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:11:13.866Z",
+        "report": "verification/reports/pde.lax-milgram/cb4580ec634c-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "pde.multipole-expansion": {
@@ -3595,6 +3612,11 @@
         "verdict": "pass",
         "at": "2026-10-13T11:41:12.173Z",
         "report": "verification/reports/pde.radon-transform/d69022676df2-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:49:08.527Z",
+        "report": "verification/reports/pde.radon-transform/d69022676df2-B.md"
       }
     },
     "requires": [
@@ -3768,28 +3790,28 @@
     "hold": false
   },
   "pde.weak-solutions-sobolev": {
-    "hash": "aba52613d78bbedbbe070de1e047a7be9a136daa41cfdab684ea780f705874e3",
+    "hash": "d3d879f169b4258c8d929d9b7910f2b9be5dc230256454223f953e7c3e6bb8a6",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:28:06.319Z"
+      "at": "2026-10-13T12:00:21.254Z"
     },
     "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:38:28.133Z",
-        "report": "verification/reports/pde.weak-solutions-sobolev/aba52613d78b-A.md"
-      },
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:41:14.407Z",
-        "report": "verification/reports/pde.weak-solutions-sobolev/aba52613d78b-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T12:09:39.127Z",
+        "report": "verification/reports/pde.weak-solutions-sobolev/d3d879f169b4-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:10:29.372Z",
+        "report": "verification/reports/pde.weak-solutions-sobolev/d3d879f169b4-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "prob.central-limit-theorem": {
@@ -3969,17 +3991,28 @@
     "hold": false
   },
   "spec.bessel-integral-representations": {
-    "hash": "688db9cd59e024034ce17f6e07091b87e9c8cecd0131986610571bcaab113337",
+    "hash": "2f0f611e0d4226943cb2e53cf41f79b1b4a0593274b53083aefe45ee79a43625",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:42:26.881Z"
+      "at": "2026-10-13T11:54:34.862Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:06:10.351Z",
+        "report": "verification/reports/spec.bessel-integral-representations/2f0f611e0d42-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T12:09:23.022Z",
+        "report": "verification/reports/spec.bessel-integral-representations/2f0f611e0d42-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.bessel-orthogonality": {
@@ -4230,22 +4263,22 @@
     "hold": false
   },
   "spec.legendre-second-kind": {
-    "hash": "43b94ce21263dbf1320360c0e9c5a4b1396ae57d0ebef42289b783c06ba2d6f6",
+    "hash": "42667e9b5f4acd1da17e8f07cd136090a49aa5900cd03575a023011f9dd0be3e",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:38:02.958Z"
+      "at": "2026-10-13T11:50:42.664Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T11:48:09.012Z",
-        "report": "verification/reports/spec.legendre-second-kind/43b94ce21263-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T11:59:37.175Z",
+        "report": "verification/reports/spec.legendre-second-kind/42667e9b5f4a-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "spec.modified-bessel": {

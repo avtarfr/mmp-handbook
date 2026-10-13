@@ -4,24 +4,24 @@ title: Energy estimates and well-posedness
 kind: theorem
 level: advanced
 summary: Proves the basic energy estimates for the forced heat and wave equations on a bounded domain, deduces uniqueness and continuous dependence on the data from them, and shows by the backward heat equation and Hadamard's Cauchy problem for Laplace's equation what the estimates exclude.
-prereqs: [pde.wave-energy, pde.heat-maximum-principle, measure.lp-spaces]
+prereqs: [pde.wave-energy, pde.heat-maximum-principle, measure.lp-spaces, vcalc.green-identities, pde.weak-solutions-sobolev, pde.lax-milgram]
 provenance: adapted
 sources:
   - work: evans-2010
-    loc: "§1.3.1, Well-posed problems, classical solutions: conditions (i)–(iii), pp. 6–7; §2.3.4a, Theorem 10 (Uniqueness) for the initial/boundary-value problem (40) and its proof by differentiating $e(t)=\\int_U w^2 dx$, p. 60; §2.3.4b, Theorem 11 (Backwards uniqueness) and the log-convexity proof, pp. 61–62"
-    pages: "6-7, 60-62"
-    role: the definition of a well-posed problem; the route of the energy proof of uniqueness for the heat equation; backward uniqueness, quoted here without proof
+    loc: "§1.3.1, Well-posed problems, classical solutions: conditions (i)–(iii), pp. 6–7; §2.3.4a, Theorem 10 (Uniqueness) for the initial/boundary-value problem (40) and its proof by differentiating $e(t)=\\int_U w^2 dx$, p. 60; §2.3.4b, Theorem 11 (Backwards uniqueness) and the log-convexity proof, pp. 61–62; §2.4.3a, the computation of $\\dot E(t)$ in the proof of Theorem 5 (Uniqueness) for the wave equation, p. 79"
+    pages: "6-7, 60-62, 79"
+    role: the definition of a well-posed problem; the route of the energy proof of uniqueness for the heat equation; backward uniqueness, quoted here without proof; the differentiation of the wave energy
   - work: strauss-2008
-    loc: "§1.5, Well-posed problems, the three properties and the discussion of why stability is demanded of a physical model, pp. 25–26; §2.3, the second proof of uniqueness for the diffusion equation by the energy method, the pointwise identity and Eq. (4), and the resulting $L^2$ stability Eq. (5), together with the contrast with the uniform-norm stability Eq. (6) given by the maximum principle, pp. 44–45; §3.4, Well-posedness for the forced wave equation on the line and the uniform-norm stability estimate Eq. (4), pp. 72–73"
-    pages: "25-26, 44-45, 72-73"
-    role: the definition of well-posedness; the energy-method proof of uniqueness and $L^2$ stability for the diffusion equation and the comparison with sup-norm stability; a source-dependent stability estimate for the wave equation in a different norm
+    loc: "§1.5, Well-posed problems, the three properties and the discussion of why stability is demanded of a physical model, pp. 25–26; §2.3, the second proof of uniqueness for the diffusion equation by the energy method, the pointwise identity and Eq. (4), and the resulting $L^2$ stability Eq. (5), together with the contrast with the uniform-norm stability Eq. (6) given by the maximum principle, pp. 44–45; §3.4, Well-posedness for the forced wave equation on the line and the uniform-norm stability estimate Eq. (4), pp. 72–73; §9.1, the pointwise energy identity Eq. (4) for the wave equation, p. 230 — Strauss integrates it over all of $\\mathbb{R}^3$ and discards the flux term by decay of the derivatives at infinity, not over a bounded domain"
+    pages: "25-26, 44-45, 72-73, 230"
+    role: the definition of well-posedness; the energy-method proof of uniqueness and $L^2$ stability for the diffusion equation and the comparison with sup-norm stability; a source-dependent stability estimate for the wave equation in a different norm; the pointwise energy identity for the wave equation (the bounded-domain integration of it is Evans's and ours, not Strauss's)
   - work: stakgold-holst-2011
     loc: "§1.2, Continuity with respect to the data, the estimates (1.2.14) and (1.2.15) for the two-point boundary-value problem, and the three questions — existence, uniqueness, continuous dependence — whose affirmative answer defines a well-posed problem, pp. 65–66"
     pages: "65-66"
     role: the three-part definition of well-posedness and the remark that ill-posed problems are nonetheless worth studying
   - work: hassani-2013
-    loc: "§21.1, the remark that the two-dimensional Laplace equation has no characteristic curves and yet does not give a well-posed Cauchy problem, and that continuity of the solution in the data is demanded on mathematical and physical grounds, p. 642; §21.6, Problem 21.4, which sets the Cauchy problem $u(0,y)=0$, $u_x(0,y)=\\epsilon\\sin ky$ for Laplace's equation and asks for the failure of continuous dependence, p. 661"
-    pages: "642, 661"
+    loc: "§21.1, the remark that the two-dimensional Laplace equation has no characteristic curves and yet does not give a well-posed Cauchy problem, and that continuity of the solution in the data is demanded on mathematical and physical grounds, p. 642; §21.6, Problem 21.4, which sets the Cauchy problem $u(0,y)=0$, $u_x(0,y)=\\epsilon\\sin ky$ for Laplace's equation and asks for the failure of continuous dependence, p. 662"
+    pages: "642, 662"
     role: the statement that the Cauchy problem for Laplace's equation is ill-posed, and the precise data for which we verify it below
 ---
 
@@ -72,7 +72,7 @@ $$
 N(t) \;\le\; e^{-k\lambda t}N(0) \;+\; \int_0^t e^{-k\lambda(t-s)}\|f(s)\|\,ds .
 $$
 
-**Consequences.** The problem is uniquely solvable: if two solutions have the same $\varphi$, the same $f$ and the same boundary values, their difference $w$ satisfies the hypotheses with zero data, so $N_w \equiv 0$ and $w \equiv 0$. This is Evans's Theorem 10 and Strauss's second proof of uniqueness. And it is stable in $L^2$: two solutions with sources $f_1,f_2$ and initial data $\varphi_1,\varphi_2$ obey
+**Consequences.** Solutions are unique (the estimates bound whatever solutions exist; they do not produce one): if two solutions have the same $\varphi$, the same $f$ and the same boundary values, their difference $w$ satisfies the hypotheses with zero data, so $N_w \equiv 0$ and $w \equiv 0$. This is Evans's Theorem 10 and Strauss's second proof of uniqueness. And it is stable in $L^2$: two solutions with sources $f_1,f_2$ and initial data $\varphi_1,\varphi_2$ obey
 
 $$
 \|u_1(\cdot,t) - u_2(\cdot,t)\|_{L^2} \;\le\; \|\varphi_1-\varphi_2\|_{L^2} + \int_0^t\|f_1(s)-f_2(s)\|_{L^2}\,ds ,
@@ -104,7 +104,7 @@ $$
 \int_\Omega u\,\Delta u\,dx = -\int_\Omega|\nabla u|^2dx + \oint_{\partial\Omega} u\,\frac{\partial u}{\partial n}\,dS ,
 $$
 
-and the boundary integral vanishes because $u = 0$ at every point of $\partial\Omega$. This proves (a). (This is the only place the boundary condition is used, and a Neumann condition $\partial u/\partial n = 0$ would do just as well.)
+and the boundary integral vanishes because $u = 0$ at every point of $\partial\Omega$. This proves (a). (A homogeneous Neumann condition $\partial u/\partial n = 0$ kills the same integral, so parts (a), (b) and (c) hold verbatim for it. Part (d) does not: the boundary condition is used a second time, in Step 5, and under Neumann data part (d) is false — see the remark below.)
 
 **Step 3 (the differential inequality).** Discard the dissipation term, which is $\le 0$, and apply the Cauchy–Schwarz inequality to the other:
 
@@ -122,7 +122,45 @@ Integrating from $0$ to $t$ and letting $\varepsilon \to 0$ (both $N_\varepsilon
 
 **Step 4 (dissipation).** With $f \equiv 0$, (a) reads $\frac{d}{dt}N^2 = -2k\int_\Omega|\nabla u|^2dx$. Both sides are continuous in $t$; integrate from $0$ to $T$ and rearrange to get (c). Since the integral on the left of (c) is non-negative, $N(T) \le N(0)$, and the same holds with $T$ replaced by any $t$.
 
-**Step 5 (the sharpened estimate).** Now keep the dissipation. For each fixed $t$ the function $u(\cdot,t)$ lies in $H^1_0(\Omega)$ — it is $C^1$ on $\overline\Omega$ and vanishes on $\partial\Omega$ — so the Poincaré hypothesis applies and $-2k\|\nabla u\|^2 \le -2k\lambda N^2$. Hence
+**Step 5 (the sharpened estimate).** Now keep the dissipation. Fix $t$ and write $w = u(\cdot,t)$, which is $C^1$ on $\overline\Omega$ and vanishes on $\partial\Omega$. The Poincaré hypothesis is a statement about $H^1_0(\Omega)$, which is by definition the closure of $C_c^\infty(\Omega)$ in the $H^1$ norm (:ref[weak derivatives and Sobolev spaces]{to=pde.weak-solutions-sobolev}), so before using it we must exhibit test functions converging to $w$. This takes three sub-steps: truncate, mollify, and let the truncation level go to zero.
+
+*(5a) Truncate.* For $\delta>0$ put $w_\delta = (w-\delta)^+ - (-w-\delta)^+$, which equals $w - \delta\operatorname{sgn}(w)$ where $|w|>\delta$ and $0$ where $|w|\le\delta$. It is Lipschitz, being a composition of $w$ with a piecewise linear function of slope $0$ or $1$, and almost everywhere
+
+$$
+\nabla w_\delta = \nabla w\,\mathbf{1}_{\{|w|>\delta\}} .
+$$
+
+Indeed, on each of the two open sets $\{w>\delta\}$ and $\{w<-\delta\}$ the two functions differ by a constant, on the open set $\{|w|<\delta\}$ the left side is $0$, and on $\{|w|=\delta\}$ both sides vanish almost everywhere, by the level-set argument of (5c) below applied to $\{w=\delta\}$ and $\{w=-\delta\}$. Moreover $w_\delta$ vanishes off $\{|w|\ge\delta\}$, which is a closed subset of the compact set $\overline\Omega$ on which $|w|>0$; since $w$ vanishes on $\partial\Omega$, that set misses the boundary, so it is a compact subset $K_\delta \subset \Omega$, and $w_\delta$ has compact support in $\Omega$.
+
+*(5b) Mollify.* Fix $\eta \in C_c^\infty(\mathbb{R}^n)$ with $\eta\ge0$, support in the unit ball and $\int\eta = 1$, and put $\eta_\sigma(x) = \sigma^{-n}\eta(x/\sigma)$. Extend $w_\delta$ by zero to $\mathbb{R}^n$. For $\sigma < \operatorname{dist}(K_\delta,\partial\Omega)$ the convolution $\eta_\sigma * w_\delta$ is smooth and supported in the closed $\sigma$-neighbourhood of $K_\delta$, so it lies in $C_c^\infty(\Omega)$. Differentiating under the integral sign and then moving the derivative onto $w_\delta$,
+
+$$
+\partial_i(\eta_\sigma * w_\delta)(x) = \int \partial_{x_i}\eta_\sigma(x-y)\,w_\delta(y)\,dy
+= -\int \partial_{y_i}\bigl[\eta_\sigma(x-y)\bigr] w_\delta(y)\,dy
+= \bigl(\eta_\sigma * \partial_i w_\delta\bigr)(x) ,
+$$
+
+the last equality being the definition of the weak derivative, applied to the test function $y\mapsto\eta_\sigma(x-y)$, which lies in $C_c^\infty(\Omega)$ by the choice of $\sigma$. Both $w_\delta$ and $\nabla w_\delta$ lie in $L^2(\mathbb{R}^n)$, being bounded with compact support, and mollification converges in $L^2$: by Minkowski's integral inequality,
+
+$$
+\|\eta_\sigma * h - h\|_{L^2} \le \int \eta(z)\,\|h(\cdot-\sigma z) - h\|_{L^2}\,dz ,
+$$
+
+and translation is continuous on $L^2$ — for a continuous $g$ of compact support because such a $g$ is uniformly continuous, and then for every $h \in L^2$ by the usual three-term estimate, splitting $h$ into such a $g$ plus a remainder of small $L^2$ norm, which is possible because $C_c$ is dense in $L^2$ (:ref[the $L^p$ spaces]{to=measure.lp-spaces}). Applying this to $h = w_\delta$ and to $h = \partial_i w_\delta$ gives $\eta_\sigma * w_\delta \to w_\delta$ in $H^1$, so $w_\delta \in H^1_0(\Omega)$.
+
+*(5c) Let $\delta\to0$.* The two halves of the $H^1$ norm must be estimated separately, because $w_\delta - w$ is *not* supported in $\{|w|\le\delta\}$: on $\{|w|>\delta\}$, where the truncation bites, it equals $-\delta\operatorname{sgn}(w)$. What is true is that $|w_\delta - w| \le \delta$ at every point — it is $|w|\le\delta$ on $\{|w|\le\delta\}$ and exactly $\delta$ elsewhere — so, $\Omega$ being bounded,
+
+$$
+\|w_\delta - w\|^2_{L^2} \;\le\; \delta^2|\Omega| \;\xrightarrow[\delta\to0]{}\; 0 ,
+$$
+
+while the gradients, by the formula of (5a), differ only on $\{|w|\le\delta\}$:
+
+$$
+\|\nabla w_\delta - \nabla w\|^2_{L^2} = \int_{\{|w|\le\delta\}}|\nabla w|^2\,dx \;\xrightarrow[\delta\to0]{}\; \int_{\{w=0\}}|\nabla w|^2\,dx
+$$
+
+by dominated convergence, the dominating function being $|\nabla w|^2 \in L^1(\Omega)$. That last integral is zero: at a point where $w$ vanishes with $\nabla w\neq0$ the implicit function theorem makes $\{w=0\}$ a $C^1$ hypersurface near it, and $\Omega$ is covered by countably many such neighbourhoods, so the points of $\{w=0\}$ with $\nabla w\neq0$ form a null set. Hence $w_\delta \to w$ in $H^1(\Omega)$, and $u(\cdot,t) = w$ lies in $H^1_0(\Omega)$, being a limit of its elements in a closed subspace. The Poincaré hypothesis therefore applies and $-2k\|\nabla u\|^2 \le -2k\lambda N^2$. Hence
 
 $$
 \frac{d}{dt}N^2 \le -2k\lambda N^2 + 2\|f(t)\|N ,
@@ -139,10 +177,11 @@ Let $\Omega\subset\mathbb{R}^n$ be a bounded open set with piecewise $C^1$ bound
 
 $$
 u_{tt} = c^2\Delta u + f \ \text{ in } \Omega\times(0,T), \qquad
-u = 0 \ \text{ on } \partial\Omega\times[0,T] ,
+u = 0 \ \text{ on } \partial\Omega\times[0,T], \qquad
+u(\cdot,0) = \varphi, \quad u_t(\cdot,0) = \psi ,
 $$
 
-with $f$ continuous on $\overline\Omega\times[0,T]$. Put
+with $f$ continuous on $\overline\Omega\times[0,T]$, so that the initial displacement $\varphi$ and the initial velocity $\psi$ are the two pieces of initial data. Put
 
 $$
 \mathcal{E}(t) = \int_\Omega\bigl(u_t^2 + c^2|\nabla u|^2\bigr)dx ,
@@ -169,7 +208,7 @@ Note which norms appear: the initial *velocity* in $L^2$, the initial *displacem
 Multiply by the velocity rather than by the solution, because for a second-order equation in time it is $u_t$, not $u$, that turns the principal part into a time derivative plus a divergence. The identity is the one already proved for the unforced equation; the source simply appears on the right as the power it delivers. Since power is at most force times speed, and speed is controlled by the energy itself, the growth of $\sqrt{\mathcal{E}}$ is at most $\|f\|$ — and nothing is dissipated, so there is no decaying factor to help, as there was for the heat equation.
 :::
 
-:::proof{provenance=adapted src="strauss-2008:§9.1, Eq. (4) and its integration, p. 230"}
+:::proof{provenance=adapted src="strauss-2008:§9.1, the pointwise identity Eq. (4), p. 230; evans-2010:§2.4.3a, the bounded-domain computation of $\\dot E$ in the proof of Thm 5, p. 79"}
 **Step 1 (the pointwise identity).** By the local energy identity of :ref[energy and uniqueness for the wave equation]{to=pde.wave-energy}, valid for any $C^2$ function,
 
 $$
@@ -178,7 +217,7 @@ $$
 
 The left-hand side is $f u_t$, by the equation.
 
-**Step 2 (integrate).** Integrate over $\Omega$. Differentiation under the integral sign is licensed as before, and the divergence theorem turns the last term into a boundary integral of $-c^2u_t\,\partial u/\partial n$. Since $u(\cdot,t) = 0$ on $\partial\Omega$ for every $t$, differentiating in $t$ at a fixed boundary point gives $u_t = 0$ there, so that integral vanishes. Hence
+**Step 2 (integrate).** Integrate over $\Omega$. Differentiation under the integral sign is licensed as before, and the divergence theorem turns the last term into a boundary integral of $-c^2u_t\,\partial u/\partial n$. Since $u(\cdot,t) = 0$ on $\partial\Omega$ for every $t$, differentiating in $t$ at a fixed boundary point gives $u_t = 0$ there, so that integral vanishes. This disposal of the flux is not Strauss's: he integrates his identity over all of $\mathbb{R}^3$ and drops the term because the derivatives of $u$ decay at infinity. On a bounded domain it is the Dirichlet condition that kills it, which is the route Evans takes on p. 79, and the route needed here. Hence
 
 $$
 \frac{1}{2}\frac{d\mathcal{E}}{dt} = \int_\Omega f\,u_t\,dx ,
@@ -197,7 +236,7 @@ $$
 
 :::remark[Where the hypotheses are used, and what fails without them]{provenance=original}
 - *The sign of $k$.* Everything above needs $k>0$; with $k<0$ the dissipation term changes sign and becomes growth. The **backward heat equation** is genuinely ill posed, not merely beyond the reach of this proof. On $\Omega=(0,\pi)$ with $k=1$, the data $g_m(x) = m^{-1}\sin mx$ prescribed at time $T$ are reached from $u_m(x,0) = m^{-1}e^{m^2T}\sin mx$. As $m\to\infty$, $\|g_m\|_{L^2} = m^{-1}\sqrt{\pi/2}\to0$ while $\|u_m(\cdot,0)\|_{L^2} = m^{-1}e^{m^2T}\sqrt{\pi/2}\to\infty$. With $T=1$ and $m=5$: data of norm $0.2507$, and a reconstructed initial state of norm $1.80\times10^{10}$. Clause 3 fails in any pair of norms in which the data tend to zero. Uniqueness, by contrast, does hold backwards: that is Evans's Theorem 11, proved by showing $\log\int w^2$ convex in $t$, and it illustrates that uniqueness and stability are genuinely different clauses.
-- *The boundary condition.* Step 2 of each proof needs the boundary term to vanish or to have the right sign. Dirichlet and Neumann conditions do it; so does a Robin condition $\partial u/\partial n + bu_t = 0$ with $b>0$, which makes the wave boundary term $-c^2b\oint u_t^2dS \le 0$ and turns the estimate into decay. With $b<0$ the wall feeds the system and the estimate is lost.
+- *The boundary condition.* Step 2 of each proof needs the boundary term to vanish or to have the right sign. Dirichlet and Neumann conditions do it; so does a Robin condition $\partial u/\partial n + bu_t = 0$ with $b>0$, which makes the wave boundary term $-c^2b\oint u_t^2dS \le 0$ and turns the estimate into decay. With $b<0$ the wall feeds the system and the estimate is lost. Dirichlet data are used a second time in Step 5 of the heat proof, where Poincaré's inequality needs $u(\cdot,t)\in H^1_0(\Omega)$, and there Neumann is not a substitute: the inequality fails on $H^1(\Omega)$ because constants have zero gradient, and so does part (d). Take $f\equiv0$ and $u\equiv1$, which satisfies the heat equation and $\partial u/\partial n = 0$; then $N(t) = |\Omega|^{1/2}$ for every $t$, contradicting $N(t)\le e^{-k\lambda t}N(0)$ for any $\lambda>0$. Parts (a), (b) and (c) are indifferent between the two conditions; part (d) is not.
 - *Ellipticity of the spatial operator.* Replace $\Delta$ by an operator that is not elliptic and the dissipation term is no longer sign-definite. The extreme case is Laplace's equation treated as an evolution in $x$: Hassani notes that the two-dimensional Laplace equation has no characteristic curves in the plane, so one might expect its Cauchy problem to be well posed, and that it is not (his Problem 21.4). Explicitly, the data $u(0,y)=0$, $u_x(0,y) = \epsilon\sin ky$ are met by
  $$
  u(x,y) = \frac{\epsilon}{k}\,\sinh(kx)\,\sin(ky),
@@ -245,7 +284,11 @@ $$
 
 - *The estimate* gives $\sqrt{\mathcal{E}(t)} \le 0 + t\sqrt{\pi/2}$. At $t=\pi$ the true value is $\sqrt{2\pi} = 2.5066283$ and the bound is $\pi\sqrt{\pi/2} = 3.9374025$, larger by a factor $\pi/2$.
 - *The contrast with A is the point.* $\mathcal{E}$ does not decay; it oscillates between $0$ and $2\pi$ forever, returning exactly to zero at $t = 2\pi, 4\pi,\dots$. There is no dissipation term to keep, so no exponential factor is available, and the bound on $\sqrt{\mathcal{E}}$ grows linearly in $t$ — which is sharp in general, as the resonant source $f = \sin t\,\sin x$ shows, for which $A = \tfrac12(\sin t - t\cos t)$ grows without bound.
-- *Where the slack is.* The bound uses $\|u_t\| \le \sqrt{\mathcal{E}}$, an equality only when $\nabla u = 0$, which here happens only at $t=0,2\pi,\dots$. Averaged over a period the kinetic and potential parts are equal, so $\|u_t\|$ is typically about $\sqrt{\mathcal{E}/2}$, and the factor $\pi/2$ above is of that order.
+- *Where the slack is.* The bound uses $\|u_t\| \le \sqrt{\mathcal{E}}$, an equality only when $\nabla u = 0$, which here happens only at $t=0,2\pi,\dots$. For this solution the loss is exactly computable. From $\|u_t(\cdot,t)\|^2 = \tfrac\pi2\sin^2t$ and $\mathcal{E}(t) = \pi(1-\cos t)$,
+ $$
+ \frac{\|u_t(\cdot,t)\|}{\sqrt{\mathcal{E}(t)}} = \sqrt{\frac{\sin^2 t}{2(1-\cos t)}} = \cos\frac t2 \qquad (0 \le t \le \pi) ,
+ $$
+ and the mean of that factor over $[0,\pi]$ is $\frac1\pi\int_0^\pi\cos(t/2)\,dt = 2/\pi$. The overshoot $\pi/2$ at $t=\pi$ is its reciprocal, as it must be: the estimate integrates $\|f(s)\|$ where the identity integrates $\|f(s)\|$ times this factor, and here $\|f(s)\|$ is constant. The two halves of $\mathcal{E}$ are *not* in balance, as they would be for a freely oscillating standing wave: the steady source holds the displacement off centre, and the averages over a period are $\pi/4$ for the kinetic part against $3\pi/4$ for the potential one. What is exactly $1/2$ on average is the squared ratio $\|u_t\|^2/\mathcal{E} = (1+\cos t)/2$; taking the square root before averaging is what produces $2/\pi$ instead.
 :::
 
 :::application{provenance=original}

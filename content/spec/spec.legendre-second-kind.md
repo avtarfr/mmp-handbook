@@ -38,7 +38,7 @@ H_{n}:=\sum_{m=1}^{n}\frac1m \quad (H_{0}=0),
 $$
 so that $L'(x)=(1-x^{2})^{-1}$.
 
-In (L) the origin is an ordinary point whose nearest singular neighbours are $x=\pm1$, so there are two solutions in powers of $x$, each with radius of convergence $1$. Substituting $y=\sum_{k\ge0}a_{k}x^{k}$ gives the two-step recurrence
+In (L) the origin is an ordinary point whose nearest singular neighbours are $x=\pm1$, so there are two solutions in powers of $x$, each with radius of convergence at least $1$ — exactly $1$ for general $\ell$, which is the case Riley, Hobson and Bence record. Substituting $y=\sum_{k\ge0}a_{k}x^{k}$ gives the two-step recurrence
 $$
 a_{k+2}=\frac{k(k+1)-\ell(\ell+1)}{(k+1)(k+2)}\,a_{k},
 $$
@@ -73,7 +73,7 @@ with $F$ the hypergeometric function of :ref[]{to=spec.hypergeometric}; at $\lam
 :::
 
 :::statement[Closed form, singularities and Wronskian]{provenance=adapted src="rhb-2006:§18.1.1, eqs. (18.5)–(18.8), pp. 579–580, and §18.1.2, eqs. (18.23)–(18.27), p. 586; arfken-2013:§15.6, eqs. (15.155)–(15.161), pp. 766–769, and §7.6, Exercise 7.6.9, p. 371"}
-Let $n\ge0$ be an integer and $-1<x<1$. Then:
+Let $n\ge0$ be an integer. Parts 1–6 concern the interval $-1<x<1$; part 7 steps outside it, to $x\in(1,\infty)$. Then:
 
 1. **Closed form.** There is a polynomial $R_{n}$ of degree exactly $n-1$ (with $R_{0}\equiv0$) such that
    $$
@@ -250,7 +250,7 @@ For $n\ge2$ the coefficient of $h^{n}$ reads $q_{n}'-2xq_{n-1}'+q_{n-2}'=q_{n-1}
 $$
 q_{n}(-x)=(-1)^{n}P_{n}(x)\bigl(-L(x)\bigr)-(-1)^{n-1}R_{n}(x)=(-1)^{n+1}q_{n}(x) .
 $$
-For even $n$ this makes $q_{n}$ odd, so $q_{n}(0)=0$. For odd $n$, setting $x=0$ in the three-term recurrence gives $q_{n+1}(0)=-\frac{n}{n+1}q_{n-1}(0)$, so from $q_{1}(0)=-1$,
+For even $n$ this makes $q_{n}$ odd, so $q_{n}(0)=0$. The odd indices are linked to one another by taking $n$ *even* in the three-term recurrence: with $n=2p$ and $x=0$ the middle term drops out and $(2p+1)\,q_{2p+1}(0)=-2p\,q_{2p-1}(0)$, so from $q_{1}(0)=-1$,
 $$
 q_{2p+1}(0)=(-1)^{p+1}\frac{2\cdot4\cdots(2p)}{3\cdot5\cdots(2p+1)}
 =(-1)^{p+1}\frac{(2p)!!}{(2p+1)!!},
@@ -310,9 +310,10 @@ the last equality being the definition of $\beta_{n}$ with $(n-1)/2=p$ and $(-1)
 different lower limit changes the answer by a constant multiple of $P_{n}$; what pins that multiple
 down is the parity, since $P_{n}$ and $Q_{n}$ have opposite parities and so no multiple of $P_{n}$
 can be added without destroying it. Also, $P_{n}$ has $n$ simple zeros inside $(-1,1)$, so the
-integrand of (R) is not locally integrable at them; the quotient $Q_{n}/P_{n}$ nevertheless has a
-finite limit at each, because the double pole of $P_{n}^{-2}$ integrates to a simple pole which the
-prefactor $P_{n}$ cancels. We have taken the generating-function route instead of (R) partly for
+integrand of (R) is not locally integrable at them; $Q_{n}$ itself nevertheless has a
+finite limit at each, because the double pole of $P_{n}^{-2}$ integrates to a simple pole in the
+quotient $Q_{n}/P_{n}$ — which is what (R) computes — and the prefactor $P_{n}$ cancels exactly
+that pole. It is the quotient, not $Q_{n}$, that blows up there. We have taken the generating-function route instead of (R) partly for
 this reason: it never divides by $P_{n}$ and so never meets either difficulty. Arfken, Weber and
 Harris state that (R) fixes the scale and the form of $Q_{n}$ without comment on either point.
 
@@ -329,7 +330,7 @@ Harris state that (R) fixes the scale and the form of $Q_{n}$ without comment on
    This is stable, and for the same reason as for $P_{n}$: on $(-1,1)$ the two solutions of the recurrence are of comparable size (both decay only like $n^{-1/2}$ with oscillating sign), so no step has to recover a small quantity from large ones. Near the ends, cancel the singularity by hand — compute $L$ and the polynomial $R_{n}$ separately and subtract — rather than letting $L$ and $P_{n}L$ both overflow.
 2. **On $(1,\infty)$: do not iterate upward.** There $P_{n}$ grows like $(x+\sqrt{x^{2}-1})^{n}$ while $Q_{n}$ decays like its reciprocal, so an upward sweep for $Q_{n}$ is contaminated by the dominant solution and loses everything. At $x=5$ in double precision the upward recurrence already gives $Q_{10}$ wrong by four orders of magnitude and $Q_{20}$ wrong by twenty-three. Instead either use the closed form of part 1 with $L$ replaced by $\tfrac12\ln\frac{x+1}{x-1}$, or run the recurrence *downward* from a high starting index with arbitrary seed values and rescale at the end using the known $Q_{0}$: downward iteration is stable exactly when the wanted solution is the decaying one.
 3. **To obtain the polynomial part $R_{n}$ in closed form:** use $R_{n}=\sum_{m=1}^{n}\frac1mP_{m-1}P_{n-m}$ directly, or iterate $R_{n+1}=\bigl[(2n+1)xR_{n}-nR_{n-1}\bigr]/(n+1)$ from $R_{0}=0$, $R_{1}=1$ — the same recurrence, since $P_{n}L$ satisfies it on its own. Check the result with $R_{n}(1)=H_{n}$, which catches almost every arithmetic slip.
-4. **To solve a boundary-value problem for (L) on $[a,b]\subset(-1,1)$:** write the general solution $c_{1}P_{n}+c_{2}Q_{n}$ and impose the two conditions. Because part 5 gives $pW=1$ exactly, no normalising determinant has to be computed: the solution of the two-by-two system can be written down directly, and the Green's function of :ref[]{to=green.green-function-bvp} is built from $P_{n},Q_{n}$ with denominator $1$.
+4. **To solve a boundary-value problem for (L) on $[a,b]\subset(-1,1)$:** write the general solution $c_{1}P_{n}+c_{2}Q_{n}$ and impose the two conditions. Because part 5 gives $pW=1$ exactly, no normalising determinant has to be computed: the solution of the two-by-two system can be written down directly, and and the Green's function of :ref[]{to=green.green-function-bvp} built from $u=aP_{n}+bQ_{n}$ and $v=cP_{n}+dQ_{n}$ carries the denominator $p\,W[u,v]=(ad-bc)\,p\,W[P_{n},Q_{n}]=ad-bc$, a number fixed once by the two boundary conditions rather than a determinant to be evaluated at every point.
 5. **For the associated equation** with $m\neq0$, use $Q_{n}^{m}=(1-x^{2})^{m/2}\mathrm{d}^{m}Q_{n}/\mathrm{d}x^{m}$, the second-kind counterpart of the construction in :ref[]{to=spec.associated-legendre}; these are again singular at $x=\pm1$ and again discarded on the full sphere.
 :::
 
@@ -399,7 +400,7 @@ The potential of a charged needle *is* the Legendre function of the second kind 
 
 **Green's functions.** Part 5 says $p\,W[P_{n},Q_{n}]=1$ identically, which is unusually convenient: the one-dimensional Green's function of :ref[]{to=green.green-function-bvp} for the Legendre operator on a sub-interval of $(-1,1)$ is
 $$
-G(x,s)=-\frac{u(x_{<})\,v(x_{>})}{p\,W[u,v]}
+G(x,s)=\frac{u(x_{<})\,v(x_{>})}{p\,W[u,v]}
 $$
 with $u,v$ the combinations of $P_{n},Q_{n}$ satisfying the left and right conditions; the prefactor $1/(pW)$ is a constant, by Step 1 of the Wronskian proof, so it can be computed once from the two combinations rather than at every evaluation. The same structure, with $P_{n}$ regular at the inner end and $Q_{n}$ decaying at the outer, is what makes $P_{n}(x_{<})Q_{n}(x_{>})$ the standard kernel in exterior and annular problems.
 :::

@@ -3,7 +3,7 @@ id: spec.bessel-integral-representations
 title: Integral representations of Bessel functions
 kind: theorem
 level: advanced
-summary: 'The loop integral $J_\nu(z) = (2\pi i)^{-1}\int_C e^{(z/2)(t-1/t)}t^{-\nu-1}dt$ over a contour wrapped round the cut on the negative axis reproduces $J_\nu$ at every order, collapses to Bessel''s integral $\tfrac1\pi\int_0^\pi\cos(n\theta - z\sin\theta)\,d\theta$ when $\nu$ is an integer, and splits along two halves of its contour into the Hankel functions.'
+summary: 'The loop integral $J_\nu(z) = (2\pi i)^{-1}\int_C e^{(z/2)(t-1/t)}t^{-\nu-1}dt$ over a contour wrapped round the cut on the negative axis reproduces $J_\nu$ at every order when $\operatorname{Re}z>0$, collapses to Bessel''s integral $\tfrac1\pi\int_0^\pi\cos(n\theta - z\sin\theta)\,d\theta$ when $\nu$ is an integer, and splits along two halves of its contour into the Hankel functions.'
 prereqs: [spec.bessel-first-kind, spec.bessel-second-kind-hankel, spec.gamma-function, complex.branch-points-cuts, complex.branch-cut-integrals, complex.cauchy-theorem, complex.analytic-continuation, found.termwise-operations, fourier.fourier-series, fourier.dirichlet-convergence]
 provenance: adapted
 sources:
@@ -184,7 +184,7 @@ Both integrals converge for $\operatorname{Re}z>0$, the second because $e^{-z\si
 :::
 
 :::statement[Splitting the contour: Hankel and Neumann functions]{provenance=adapted src="arfken-2013:§14.4, Eqs. (14.88)-(14.96) and Fig. 14.10, pp. 676-677; hassani-2013:§16.2, pp. 501-502" label="Corollary"}
-By Step 1 of the proof, *any* contour on which $P(z,t) = e^{(z/2)(t-1/t)}t^{-\nu}\bigl[\nu+\tfrac{z}{2}(t+1/t)\bigr]$ vanishes at both ends produces a solution of Bessel's equation. Besides $t = \infty e^{\pm i\pi}$, the point $t = 0$ approached along the **positive** real axis is such an end: there $|e^{(z/2)(t-1/t)}| = e^{-\operatorname{Re}z/2t\,+\,O(t)}$ vanishes faster than any power of $t$, so it beats both the $t^{-\nu}$ and the $z/2t$ inside $P$. So the Schläfli loop may be severed at the origin into
+By Step 1 of the proof, *any* contour on which $P(z,t) = e^{(z/2)(t-1/t)}t^{-\nu}\bigl[\nu+\tfrac{z}{2}(t+1/t)\bigr]$ vanishes at both ends produces a solution of Bessel's equation. Besides $t = \infty e^{\pm i\pi}$, the point $t = 0$ approached along the **positive** real axis is such an end: there $|e^{(z/2)(t-1/t)}| = e^{-\operatorname{Re}(z)/(2t)\,+\,O(t)}$ vanishes faster than any power of $t$, so it beats both the $t^{-\nu}$ and the $z/(2t)$ inside $P$. So the Schläfli loop may be severed at the origin into
 
 - $C_1$: from $t = 0^{+}$ through the upper half-plane out to $\infty e^{+i\pi}$, and
 - $C_2$: from $\infty e^{-i\pi}$ through the lower half-plane back to $t = 0^{+}$,
@@ -197,7 +197,7 @@ H^{(1)}_\nu(z) = \frac{1}{\pi i}\int_{C_1}e^{(z/2)(t-1/t)}t^{-\nu-1}\,dt ,
 H^{(2)}_\nu(z) = \frac{1}{\pi i}\int_{C_2}e^{(z/2)(t-1/t)}t^{-\nu-1}\,dt .
 $$
 
-Since $C_1$ and $C_2$ reassemble $C$ and the prefactor $1/\pi i$ is twice the $1/2\pi i$ of (S1), the two displayed integrals add to $J_\nu$, which matches $J_\nu = \tfrac12\bigl(H^{(1)}_\nu+H^{(2)}_\nu\bigr)$. That check pins down only the *sum* of the two halves, so it does not by itself establish the labelling; what completes it is a second computation, carried out in :cite[Arfken, Weber and Harris]{work=arfken-2013 loc="§14.4, Eqs. (14.94)-(14.96), p. 677"}, in which the substitution $t = e^{\pm i\pi}/s$ is applied to each half separately. It returns each half to its own contour and yields $H^{(1)}_\nu = e^{-i\nu\pi}H^{(1)}_{-\nu}$, $H^{(2)}_\nu = e^{i\nu\pi}H^{(2)}_{-\nu}$, hence a second linear combination giving $J_{-\nu}$; the two combinations together force the identification above and reproduce $Y_\nu = \tfrac{1}{2i}\bigl(H^{(1)}_\nu - H^{(2)}_\nu\bigr)$. The matching real form of $Y_\nu$ is then
+Since $C_1$ and $C_2$ reassemble $C$ while the prefactor $1/\pi i$ is twice the $1/2\pi i$ of (S1), the two displayed integrals add to $2J_\nu$; equivalently, half their sum is $J_\nu$, which is the identity $J_\nu = \tfrac12\bigl(H^{(1)}_\nu+H^{(2)}_\nu\bigr)$ of :cite[Arfken, Weber and Harris]{work=arfken-2013 loc="§14.4, Eq. (14.92), p. 677"}. That check pins down only the *sum* of the two halves, so it does not by itself establish the labelling; what completes it is a second computation, carried out in :cite[Arfken, Weber and Harris]{work=arfken-2013 loc="§14.4, Eqs. (14.94)-(14.96), p. 677"}, in which the substitution $t = e^{\pm i\pi}/s$ is applied to each half separately. It returns each half to its own contour and yields $H^{(1)}_\nu = e^{-i\nu\pi}H^{(1)}_{-\nu}$, $H^{(2)}_\nu = e^{i\nu\pi}H^{(2)}_{-\nu}$, hence a second linear combination giving $J_{-\nu}$; the two combinations together force the identification above and reproduce $Y_\nu = \tfrac{1}{2i}\bigl(H^{(1)}_\nu - H^{(2)}_\nu\bigr)$. The matching real form of $Y_\nu$ is then
 
 $$
 Y_\nu(z) = \frac{1}{\pi}\int_0^{\pi}\sin\bigl(z\sin\theta - \nu\theta\bigr)\,d\theta
@@ -242,7 +242,11 @@ $$
 \frac{z}{2}\bigl[J_{\nu-1}(z)+J_{\nu+1}(z)\bigr] = \frac{1}{2\pi i}\int_{C'}G'(w)\,dw \;+\; \nu\,\frac{1}{2\pi i}\int_{C'}G(w)\,dw .
 $$
 
-The first integral is the difference of $G$ at the two ends $w = \infty \pm i\pi$ of $C'$. There $\sinh w = -\sinh x$ with $x \to +\infty$, so $|G| = e^{-\sinh x\,\operatorname{Re}z\,-\,\operatorname{Re}(\nu) x} \to 0$ because $\operatorname{Re}z > 0$; the first integral is therefore zero. The second is $\nu J_\nu(z)$ by (S2). Dividing by $z/2$,
+The first integral is the difference of $G$ at the two ends $w = \infty \pm i\pi$ of $C'$. There $\sinh w = -\sinh x$ with $x \to +\infty$, while $e^{-\nu w} = e^{-\nu x}e^{\mp i\nu\pi}$ at $w = x \pm i\pi$, so
+$$
+|G| = e^{\pm\pi\operatorname{Im}\nu}\;e^{-\sinh x\,\operatorname{Re}z\,-\,\operatorname{Re}(\nu) x} \longrightarrow 0 ,
+$$
+because $\operatorname{Re}z > 0$ and the leading factor $e^{\pm\pi\operatorname{Im}\nu}$ is a constant, independent of $x$ (it is $1$ for real $\nu$). The first integral is therefore zero. The second is $\nu J_\nu(z)$ by (S2). Dividing by $z/2$,
 
 $$
 J_{\nu-1}(z) + J_{\nu+1}(z) = \frac{2\nu}{z}J_\nu(z) ,

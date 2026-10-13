@@ -4,12 +4,12 @@ title: The Lax-Milgram theorem and the Dirichlet problem
 kind: theorem
 level: advanced
 summary: Proves that a bounded coercive bilinear form on a Hilbert space represents every bounded linear functional exactly once, proves the Poincare inequality that makes the Dirichlet form coercive, and combines the two into existence, uniqueness and an a priori bound for weak solutions of second-order elliptic Dirichlet problems.
-prereqs: [pde.weak-solutions-sobolev, funcan.riesz-representation, funcan.banach-fixed-point]
+prereqs: [pde.weak-solutions-sobolev, funcan.hilbert-spaces, funcan.riesz-representation, funcan.banach-fixed-point]
 provenance: adapted
 sources:
   - work: stakgold-holst-2011
-    loc: "§8.5, Theorem 8.5.1 (Bounded Operator Theorem) and Theorem 8.5.2 (Lax–Milgram Theorem) with the three hypotheses (1)–(3) and the Banach fixed-point proof, pp. 551–552; §8.5, Exercise 8.5.4, p. 553, which sets the Dirichlet problem for $-\\nabla\\cdot(a\\nabla u)+bu=f$ as an application; §10.3, Theorem 10.3.6 (Poincaré Inequality), p. 705; §10.4, Assumption 10.4.1, Theorem 10.4.1 (Energy Estimate) with the coercivity constant $m=\\min\\{\\lambda/(2\\rho^2),\\lambda/2\\}$ and the a priori bound $\\|u\\|\\le L/m$, and Theorem 10.4.2 (Existence and Uniqueness), pp. 713–715"
-    pages: "551-553, 705, 713-715"
+    loc: "§8.5, Theorem 8.5.1 (Bounded Operator Theorem) and Theorem 8.5.2 (Lax–Milgram Theorem) with the three hypotheses (1)–(3) and the Banach fixed-point proof, pp. 551–552; §8.5, Exercise 8.5.4, p. 553, which sets the Dirichlet problem for $-\\nabla\\cdot(a\\nabla u)+bu=f$ as an application; §10.3, Theorem 10.3.5 (Trace Theorem), p. 704, for the sense in which their $u=0$ on $\\Gamma$ is meant, and Theorem 10.3.6 (Poincaré Inequality), p. 705; §10.4, Assumption 10.4.1, Theorem 10.4.1 (Energy Estimate) with the coercivity constant $m=\\min\\{\\lambda/(2\\rho^2),\\lambda/2\\}$ and the a priori bound $\\|u\\|\\le L/m$, and Theorem 10.4.2 (Existence and Uniqueness), pp. 713–715"
+    pages: "551-553, 704-705, 713-715"
     role: statement and proof route of the Lax–Milgram theorem; the statement of the Poincaré inequality; the coercivity and boundedness computation for the elliptic form, the constants, and the existence/uniqueness theorem for the Dirichlet problem
   - work: evans-2010
     loc: "§6.2.1, Theorem 1 (Lax–Milgram Theorem) with hypotheses (i)–(ii) and the Riesz-plus-closed-range proof, pp. 297–298, and the Remark on the symmetric case, p. 299; §6.2.2, Theorem 2 (Energy estimates) and Theorem 3 (First Existence Theorem), pp. 299–301; §5.6.1, Theorem 3 (Estimates for $W^{1,p}_0$), p. 264, the version of Poincaré's inequality for a bounded domain"
@@ -28,8 +28,8 @@ A linear $F : H \to \mathbb{R}$ is **bounded** if $|F(v)| \le L\|v\|$ for some $
 Boundedness is continuity: it says the form cannot grow faster than the product of the norms. Coercivity is the quantitative statement that $a(u,u)$ controls $\|u\|^2$ from below, so that the form is "uniformly positive definite" and not merely positive. Evans writes the two conditions with the constants $\alpha$ and $\beta$; Stakgold and Holst list the same three inequalities as (1)–(3) of their proof, writing them without modulus signs on the left.
 :::
 
-:::statement[Poincaré inequality]{provenance=adapted src="stakgold-holst-2011:§10.3, Thm 10.3.6, p. 705"}
-Let $\Omega \subseteq \mathbb{R}^n$ be a domain of **finite width**: $\Omega$ lies between two parallel hyperplanes. Let $\Gamma \subseteq \partial\Omega$ have non-zero $(n-1)$-dimensional measure, possibly $\Gamma = \partial\Omega$, and put $W^{1,p}_{0,\Gamma}(\Omega) = \{u \in W^{1,p}(\Omega) : u = 0 \text{ on } \Gamma\}$. Then for $1 \le p < \infty$ there is a constant $\rho = \rho(\Omega,p,\Gamma)$ with
+:::statement[Poincaré inequality]{provenance=adapted src="stakgold-holst-2011:§10.3, Thm 10.3.5, p. 704, and Thm 10.3.6, p. 705"}
+Let $\Omega \subseteq \mathbb{R}^n$ be a domain of **finite width**: $\Omega$ lies between two parallel hyperplanes. Let $\Gamma \subseteq \partial\Omega$ have non-zero $(n-1)$-dimensional measure, possibly $\Gamma = \partial\Omega$, and put $W^{1,p}_{0,\Gamma}(\Omega) = \{u \in W^{1,p}(\Omega) : u = 0 \text{ on } \Gamma\}$, where the boundary condition is read in the sense of traces: for a Lipschitz domain, Stakgold and Holst's Trace Theorem 10.3.5 (p. 704) supplies a bounded linear trace operator $T$, written $Tu = u|_\Gamma$, carrying $W^{1,p}(\Omega)$ into $W^{1-1/p,p}(\Gamma)$ with $\|Tu\|_{W^{1-1/p,p}(\Gamma)} \le C_{\mathrm{tr}}\|u\|_{W^{1,p}(\Omega)}$, and "$u=0$ on $\Gamma$" means $Tu=0$. It is not a pointwise statement; :ref[weak derivatives and Sobolev spaces]{to=pde.weak-solutions-sobolev} attaches no pointwise meaning to the boundary values of an $L^2$ function, and none is attached here. Then for $1 \le p < \infty$ there is a constant $\rho = \rho(\Omega,p,\Gamma)$ with
 
 $$
 \|u\|_{L^p(\Omega)} \;\le\; \rho\,|u|_{W^{1,p}(\Omega)}
@@ -38,7 +38,7 @@ $$
 
 where $|u|_{W^{1,p}} = \bigl(\sum_{|\alpha|=1}\|D^\alpha u\|^p_{L^p}\bigr)^{1/p}$ is the first-order seminorm. Stakgold and Holst refer the proof to Adams's monograph; this is the form of the inequality they use, and it is the one followed here.
 
-In particular the seminorm $|\cdot|_{W^{1,p}}$, which vanishes on constants and so is not a norm on $W^{1,p}(\Omega)$, *is* a norm on $W^{1,p}_{0,\Gamma}(\Omega)$, and is equivalent there to the full Sobolev norm. For $p=2$ and $\Gamma = \partial\Omega$: on $H^1_0(\Omega)$ the Dirichlet seminorm $|u|_{H^1} = \|\nabla u\|_{L^2}$ and the norm $\|u\|_{H^1}$ are equivalent.
+In particular the seminorm $|\cdot|_{W^{1,p}}$, which vanishes on constants and so is not a norm on $W^{1,p}(\Omega)$, *is* a norm on $W^{1,p}_{0,\Gamma}(\Omega)$, and is equivalent there to the full Sobolev norm. For $p=2$ and $\Gamma = \partial\Omega$: on $H^1_0(\Omega)$ the Dirichlet seminorm $|u|_{H^1} = \|\nabla u\|_{L^2}$ and the norm $\|u\|_{H^1}$ are equivalent. That is the only case used below, and for it the trace operator can be dispensed with altogether: the lemma that follows is stated and proved on $H^1_0(\Omega)$, which is defined as a closure of $C_c^\infty(\Omega)$ and so needs no boundary values at all.
 :::
 
 :::statement[The case needed here, with an explicit constant]{provenance=original label="Lemma"}
@@ -50,6 +50,10 @@ $$
 $$
 
 So the constant may be taken to be the width of the slab.
+:::
+
+:::idea{provenance=original}
+A function that vanishes at one wall of the slab is the integral of its own derivative along the short direction, so its size at a point is controlled by the derivative over a segment of length at most $d$. Cauchy–Schwarz converts that into a bound on $|u|^2$ by $d$ times the integral of $|\partial_1u|^2$ along the segment, and integrating over the slab costs one more factor of $d$. The result is proved for test functions, where the fundamental theorem of calculus is available, and then carried to all of $H^1_0$ by density.
 :::
 
 :::proof{provenance=original}
@@ -68,7 +72,7 @@ $$
 \;\le\; d\int_\beta^{\beta+d}|\partial_1\varphi(t,x')|^2\,dt .
 $$
 
-The right-hand side no longer depends on $x_1$. This is the only place the finite width is used, and it is used twice: once to bound $x_1 - \beta$ by $d$, and once in the next step.
+The right-hand side no longer depends on $x_1$. The finite width is used twice in all: here, to bound $x_1-\beta$ by $d$, and again in Step 3, where the $x_1$-integration runs over an interval of length $d$.
 
 **Step 3 (integrate).** Integrate in $x_1$ over the interval of length $d$, which multiplies the right-hand side by $d$, and then in $x'$ over $\mathbb{R}^{n-1}$:
 
@@ -113,7 +117,7 @@ The map $u \mapsto Au$ is linear, because $a$ is linear in its first slot and th
 
 **Step 2 (the functional is a vector).** By Riesz again there is $\Phi \in H$ with $F(v) = (\Phi,v)$ for all $v$, and $\|\Phi\| = \|F\| \le L$.
 
-**Step 3 ((V) is an equation).** Problem (V) now reads $(Au - \Phi, v) = 0$ for all $v \in H$. Choosing $v = Au - \Phi$ gives $\|Au - \Phi\|^2 = 0$; conversely $Au = \Phi$ clearly implies (V). So
+**Step 3 ((V) is an equation).** Problem (V) now reads $(Au - \Phi, v) = 0$ for all $v \in H$. Choosing $v = Au - \Phi$ gives $\|Au - \Phi\|^2 = 0$, hence $Au = \Phi$; conversely, if $Au = \Phi$ then $a(u,v) = (Au,v) = (\Phi,v) = F(v)$ for every $v$, which is (V). So
 
 $$
 \text{(V)} \iff Au = \Phi .
@@ -178,7 +182,7 @@ $$
 
 In particular the solution map $f \mapsto u$ is a bounded linear map $L^2(\Omega) \to H^1_0(\Omega)$, so the problem is well posed: a small change of the source produces a small change of the solution, in the energy norm.
 
-This is the pure Dirichlet case of Stakgold and Holst's Theorems 10.4.1 and 10.4.2, which treat a mixed Dirichlet–Neumann problem with inhomogeneous data: setting their Neumann portion $\Gamma_N$ of the boundary and their boundary data $g$ to nothing removes the trace constant $C_{\mathrm{tr}}$, the coefficient $c$ on $\Gamma_N$ and the lift $w$ from their constants, leaving $m$ as above, $M = n^2c_1 + c_2$ and $L = \|f\|_{L^2}$. Their Poincaré constant $\rho$ is written here as the width $d$, by the lemma above. The special case $a_{ij} = a\delta_{ij}$ with $a \ge 1$ and $b \ge 1$ on a smooth bounded plane domain is their Exercise 8.5.4.
+This is the pure Dirichlet case of Stakgold and Holst's Theorems 10.4.1 and 10.4.2, which treat a mixed Dirichlet–Neumann problem with inhomogeneous data: setting their Neumann portion $\Gamma_N$ of the boundary and their boundary data $g$ to nothing removes the trace constant $C_{\mathrm{tr}}$, the coefficient $c$ on $\Gamma_N$ and the lift $w$ from their constants, leaving $m$ as above, $M = n^2c_1 + c_2$ and $L = \|f\|_{L^2}$. Their Poincaré constant $\rho$ is written here as the width $d$, by the lemma above. Their data hypothesis is also weaker than ours: Assumption 10.4.1(5) asks only $f \in H^{-1}(\Omega)$, the dual of $H^1_0(\Omega)$, and their $L$ carries $\|f\|_{H^{-1}}$. Taking $f \in L^2(\Omega)$ is the special case in which the pairing is the integral $\int_\Omega fv$, and then $\|f\|_{H^{-1}} \le \|f\|_{L^2}$ by Cauchy–Schwarz, so $L = \|f\|_{L^2}$ is admissible, if not optimal. The special case $a_{ij} = a\delta_{ij}$ with $a \ge 1$ and $b \ge 1$ on a smooth bounded plane domain is their Exercise 8.5.4.
 :::
 
 :::idea{provenance=original}
@@ -256,11 +260,11 @@ the weak form of $-u'' = \sin x$, $u(0)=u(\pi)=0$.
  \qquad \|u\|_{H^1} = \sqrt\pi = 1.7724539 .
  $$
 
-3. *How good is the bound?* The guaranteed bound $24.7394$ overshoots the truth $1.7724539$ by a factor of $13.96$. Almost all of the loss is in the Poincaré constant: the lemma's $\rho = d = \pi$ is replaced, by the sharp value $\rho = 1$ for this interval (see the remark above), by $m = \min\{1/2, 1/2\} = 1/2$, and then
+3. *How good is the bound?* The guaranteed bound $24.7394$ overshoots the truth $1.7724539$ by a factor of $13.96$. Almost all of the loss is in the Poincaré constant. Put the sharp value $\rho = 1$ for this interval (see the remark above) in place of the lemma's $\rho = d = \pi$; the coercivity constant becomes $m = \min\{1/2,1/2\} = 1/2$ and the bound becomes
  $$
  \frac{L}{m} = 2\sqrt{\tfrac\pi2} = \sqrt{2\pi} = 2.5066283,
  $$
- which exceeds the true norm by exactly $\sqrt2$. The remaining factor $\sqrt2$ is the cost of splitting the seminorm in half in Step 4 of the proof: with the sharp constant, $a(u,u) = |u|^2_{H^1} = \tfrac12\|u\|^2_{H^1}$ for $u = \sin x$, so coercivity with $m=1/2$ is an equality here and cannot be improved.
+ which still exceeds the true norm by exactly $\sqrt2$. That residual factor is *not* the cost of splitting the seminorm in half in Step 4: with the sharp constant, $a(u,u) = |u|^2_{H^1} = \tfrac12\|u\|^2_{H^1}$ for $u = \sin x$, so coercivity with $m = 1/2$ is an equality here and the split gives away nothing. The whole $\sqrt2$ is given away in Step 3, which bounds $F$ by discarding the difference between the $L^2$ and $H^1$ norms of its argument: the true value is $F(u) = \int_0^\pi\sin^2x\,dx = \pi/2 = 1.5708$, while the bound used is $L\|u\|_{H^1} = \sqrt{\pi/2}\cdot\sqrt\pi = \pi/\sqrt2 = 2.2214$, and $2.2214/1.5708 = \sqrt2$ exactly.
 
 4. *A consistency check.* The a priori chain $m\|u\|^2_{H^1} \le a(u,u) = F(u) \le L\|u\|_{H^1}$ reads, with the sharp $m$,
  $$
@@ -268,7 +272,12 @@ the weak form of $-u'' = \sin x$, $u(0)=u(\pi)=0$.
  $$
  the first inequality being an equality, as just explained, and the last being Cauchy–Schwarz, strict because $f = \sin x$ and $u = \sin x$ are proportional in $L^2$ but $\|u\|_{L^2} < \|u\|_{H^1}$.
 
-5. *The contraction parameter.* With $m=1/2$ and $M=1$ the proof's iteration is guaranteed to converge for every $\sigma \in (0, 2m/M^2) = (0,1)$, with contraction factor at most $(1-\sigma+\sigma^2)^{1/2}$, smallest at $\sigma = \tfrac12$ where it equals $\sqrt3/2 = 0.8660$. The guarantee is pessimistic here. In the orthogonal basis $e_k = \sin kx$ one has $(e_k,e_j)_{H^1} = \delta_{kj}\tfrac\pi2(1+k^2)$ and $a(e_k,e_j) = \delta_{kj}\tfrac\pi2 k^2$, so the operator $A$ of Step 1 is multiplication by $k^2/(1+k^2)$; then $\|I-\sigma A\| = \max_{k\ge1}\bigl|1-\sigma k^2/(1+k^2)\bigr|$, which equals $3/4$ at $\sigma=\tfrac12$ and $1/2$ at $\sigma=1$. The true optimum sits at the edge of the range the general bound can certify.
+5. *The contraction parameter.* With $m=1/2$ and $M=1$ the proof's iteration is guaranteed to converge for every $\sigma \in (0, 2m/M^2) = (0,1)$, with contraction factor at most $(1-\sigma+\sigma^2)^{1/2}$, smallest at $\sigma = \tfrac12$ where it equals $\sqrt3/2 = 0.8660$. The guarantee is pessimistic here. In the orthogonal basis $e_k = \sin kx$ one has $(e_k,e_j)_{H^1} = \delta_{kj}\tfrac\pi2(1+k^2)$ and $a(e_k,e_j) = \delta_{kj}\tfrac\pi2 k^2$, so the operator $A$ of Step 1 is multiplication by the numbers $c_k = k^2/(1+k^2)$, which lie in $[\tfrac12,1)$ with least value $c_1 = \tfrac12$ and supremum $1$. Since $c \mapsto |1-\sigma c|$ is convex, its supremum over those numbers is reached at those two extremes:
+ $$
+ \|I-\sigma A\| = \sup_{k\ge1}\bigl|1-\sigma c_k\bigr| = \max\bigl\{\,\bigl|1-\tfrac\sigma2\bigr|,\ |1-\sigma|\,\bigr\}
+ \qquad (0<\sigma<2).
+ $$
+ This equals $3/4$ at $\sigma=\tfrac12$ (against the certified $0.8660$), $1/2$ at $\sigma=1$, and $0.4$ at $\sigma=1.2$; it is least where the two entries meet, at $\sigma = 4/3$, where it is $1/3$. So the true optimum lies strictly outside the certified range $(0,1)$, and it beats everything inside it: within that range the true factor decreases towards $1/2$ as $\sigma\uparrow1$ without reaching it, whereas $\sigma = 4/3$ gives $1/3$. The certified range is a safe region, not a search region.
 :::
 
 :::application{provenance=original}

@@ -4,17 +4,17 @@ title: Weak derivatives and Sobolev spaces
 kind: definition
 level: advanced
 summary: Defines the weak derivative of a locally integrable function, the Sobolev spaces $H^1$ and $H^1_0$ built from it, and the weak formulation of the Poisson problem, and shows that a smooth weak solution is a classical one.
-prereqs: [measure.lp-spaces, fourier.distributions, funcan.hilbert-spaces]
+prereqs: [measure.lp-spaces, fourier.distributions, funcan.hilbert-spaces, vcalc.green-identities]
 provenance: adapted
 sources:
   - work: evans-2010
-    loc: "§5.2.1, the definition of the $\\alpha$th weak partial derivative, Eq. (3), and the Lemma on its uniqueness, p. 242; §5.2.2, the definitions of $W^{k,p}(U)$, of its norm, of $H^k(U)=W^{k,2}(U)$ and of $W^{k,p}_0(U)$ as the closure of $C_c^\\infty(U)$, pp. 244–245; §5.2.2, Example 3 ($|x|^{-\\alpha}$ on the unit ball) and Example 4, pp. 245–246; §6.1.2, the motivation Eq. (7), the bilinear form Eq. (8) and the definition of a weak solution Eq. (9), pp. 295–296"
-    pages: "242, 244-246, 295-296"
-    role: definition of the weak derivative and its uniqueness; the Sobolev spaces $W^{k,p}$, $H^k$ and $H^1_0$; the derivation and definition of the weak formulation of the Dirichlet problem
+    loc: "§5.2.1, the definition of the $\\alpha$th weak partial derivative, Eq. (3), and the Lemma on its uniqueness, p. 242; §5.2.2, the definitions of $W^{k,p}(U)$, of its norm, of $H^k(U)=W^{k,2}(U)$ and of $W^{k,p}_0(U)$ as the closure of $C_c^\\infty(U)$, pp. 244–245; §5.2.2, Example 3 ($|x|^{-\\alpha}$ on the unit ball) and Example 4, pp. 245–246; §5.2.3, Theorem 2 (completeness of $W^{k,p}(U)$) and its proof, pp. 248–249; §6.1.2, the motivation Eq. (7), the bilinear form Eq. (8) and the definition of a weak solution Eq. (9), pp. 295–296, and ‘Other boundary conditions’, the reduction of inhomogeneous Dirichlet data by a lift, p. 297; §6.6, Problem 4, the weak formulation of the homogeneous Neumann problem on $H^1(U)$ and its compatibility condition, p. 344"
+    pages: "242, 244-246, 248-249, 295-297, 344"
+    role: definition of the weak derivative and its uniqueness; the Sobolev spaces $W^{k,p}$, $H^k$ and $H^1_0$; the route of the completeness proof; the derivation and definition of the weak formulation of the Dirichlet problem; the lift reducing inhomogeneous Dirichlet data; the weak Neumann problem
   - work: stakgold-holst-2011
-    loc: "§2.5, the distributional definition of a solution of $Lu=f$, Eq. (2.5.38), the definition of a weak solution below it, and the Theorem on p. 172 with its proof, that a classical solution is weak and that a sufficiently differentiable weak solution is classical; §2.6, $L^1_{loc}(\\Omega)$, the weak derivative Eq. (2.6.2) and the spaces $W^{m,p}(\\Omega)$, $H^m(\\Omega)=W^{m,2}(\\Omega)$, pp. 182–183"
-    pages: "171-172, 182-183"
-    role: the equivalence of weak and classical solutions and its proof route; a second formulation of the weak derivative and of the Sobolev classes, used here for comparison
+    loc: "§2.5, the distributional definition of a solution of $Lu=f$, Eq. (2.5.38), the definition of a weak solution below it, and the Theorem on p. 172 with its proof, that a classical solution is weak and that a sufficiently differentiable weak solution is classical; §2.6, $L^1_{loc}(\\Omega)$, the weak derivative Eq. (2.6.2) and the spaces $W^{m,p}(\\Omega)$, $H^m(\\Omega)=W^{m,2}(\\Omega)$, pp. 182–183; §10.4, the derivation of the weak form of the mixed problem (10.4.1)–(10.4.3), Eqs. (10.4.4)–(10.4.9), in which the Neumann data are substituted into the surviving surface integral, pp. 711–712"
+    pages: "171-172, 182-183, 711-712"
+    role: the equivalence of weak and classical solutions and its proof route; a second formulation of the weak derivative and of the Sobolev classes, used here for comparison; the treatment of natural (Neumann and Robin) boundary conditions in a weak formulation
 ---
 
 :::definition[Weak derivative]{provenance=adapted src="evans-2010:§5.2.1, Eq. (3), p. 242; stakgold-holst-2011:§2.6, Eq. (2.6.2), p. 183"}
@@ -119,7 +119,11 @@ Finally, $H^1_0(\Omega)$ is the closure of $C_c^\infty(\Omega)$ in the norm of $
 $(u,v)_{H^1}$ is an inner product on $H^1(\Omega)$, and $H^1(\Omega)$ is complete in the induced norm. Hence $H^1(\Omega)$ is a :ref[Hilbert space]{to=funcan.hilbert-spaces}, and so is the closed subspace $H^1_0(\Omega)$.
 :::
 
-:::proof{provenance=original}
+:::idea{provenance=original}
+Completeness is inherited from $L^2$, one derivative at a time. A Cauchy sequence in $H^1$ is Cauchy in $L^2$ in each of its $n+1$ slots, so each slot has a limit; the only thing to check is that the $n$ limits of the derivatives really are the derivatives of the limit, and that is read off by passing to the limit in the defining identity (W), whose two sides are continuous in the $L^2$ norm.
+:::
+
+:::proof{provenance=adapted src="evans-2010:§5.2.3, Thm 2 and its proof, pp. 248–249"}
 Bilinearity and symmetry are immediate, and $(u,u)_{H^1} = \|u\|_{L^2}^2 + \|\nabla u\|^2_{L^2} = 0$ forces $u = 0$ in $L^2$, so the form is an inner product.
 
 For completeness, let $(u_m)$ be Cauchy in $H^1(\Omega)$. Then $(u_m)$ and each $(\partial_i u_m)$ are Cauchy in $L^2(\Omega)$, because each of those norms is dominated by the $H^1$ norm. By the completeness of $L^2$ (the Riesz–Fischer theorem of :ref[$L^p$ spaces]{to=measure.lp-spaces}) there are $u, v_1,\dots,v_n \in L^2(\Omega)$ with $u_m \to u$ and $\partial_i u_m \to v_i$ in $L^2(\Omega)$.
@@ -136,7 +140,7 @@ $$
 \int_\Omega u\,\partial_i\varphi\,dx = -\int_\Omega v_i\,\varphi\,dx ,
 $$
 
-which is (W) for $\alpha = e_i$. So $\partial_i u = v_i \in L^2(\Omega)$, hence $u \in H^1(\Omega)$ and $\|u_m - u\|_{H^1} \to 0$.
+which is (W) for $\alpha = e_i$. So $\partial_i u = v_i \in L^2(\Omega)$, hence $u \in H^1(\Omega)$ and $\|u_m - u\|_{H^1} \to 0$. (This is the route of Evans's proof that $W^{k,p}$ is complete, specialised to $k=1$, $p=2$ and written out for the identification step.)
 
 A closed subspace of a complete space is complete, and $H^1_0(\Omega)$ is closed by construction, being a closure. $\square$
 :::
@@ -175,12 +179,14 @@ This is Evans's definition with $a^{ij} = \delta^{ij}$ and $b^i = c = 0$; the ge
 :::
 
 :::statement[Weak and classical solutions agree where both make sense]{provenance=adapted src="stakgold-holst-2011:§2.5, the Theorem on p. 172 and its proof; evans-2010:§6.1.2, the motivation preceding Eq. (7), p. 295"}
-Let $\Omega$ be open and bounded with $C^1$ boundary and let $f \in C(\Omega) \cap L^2(\Omega)$.
+Let $\Omega$ be open and bounded and let $f \in L^2(\Omega)$.
 
-1. If $u \in C^2(\Omega) \cap C(\overline\Omega) \cap H^1(\Omega)$ satisfies $-\Delta u = f$ at every point of $\Omega$ and $u = 0$ pointwise on $\partial\Omega$, and if moreover $u \in H^1_0(\Omega)$, then $u$ is a weak solution of (P).
-2. Conversely, if $u$ is a weak solution of (P) and $u \in C^2(\Omega)$, then $-\Delta u = f$ at every point of $\Omega$.
+1. If $u \in C^2(\Omega) \cap H^1_0(\Omega)$ satisfies $-\Delta u = f$ at every point of $\Omega$, then $u$ is a weak solution of (P).
+2. Conversely, if $f$ is in addition continuous on $\Omega$, and if $u$ is a weak solution of (P) with $u \in C^2(\Omega)$, then $-\Delta u = f$ at every point of $\Omega$.
 
-Stakgold and Holst prove both halves for a general linear operator $L$ of order $p$ with smooth coefficients and a continuous right-hand side: a classical solution is weak, and a weak solution with $p$ continuous derivatives is classical. The statement above is that theorem for $L = -\Delta$, with their hypothesis "$u$ has $p$ continuous derivatives" read as $u \in C^2(\Omega)$. The caveat in part 1 — that $u$ must be assumed to lie in $H^1_0(\Omega)$ and not merely to vanish on $\partial\Omega$ — is ours; the distributional formulation that Stakgold and Holst work with does not mention the space, whereas the formulation (P$'$) does.
+Only what the proof uses is assumed. Both halves are interior arguments that never approach $\partial\Omega$, so nothing is asked of the boundary and no pointwise boundary values appear: the boundary condition enters solely through the membership $u \in H^1_0(\Omega)$, which is how (P$'$) carries it. Continuity of $f$ is needed only in part 2, where a pointwise equation has to be recovered from an integral one.
+
+Stakgold and Holst prove both halves for a general linear operator $L$ of order $p$ with smooth coefficients and a continuous right-hand side: a classical solution is weak, and a weak solution with $p$ continuous derivatives is classical. The statement above is that theorem for $L = -\Delta$, with their hypothesis "$u$ has $p$ continuous derivatives" read as $u \in C^2(\Omega)$, and with the continuity of the right-hand side dropped from part 1, which does not use it; (P$'$) asks only $f \in L^2(\Omega)$. The caveat in part 1 — that $u$ must be assumed to lie in $H^1_0(\Omega)$, rather than merely to vanish on $\partial\Omega$ — is also ours; the distributional formulation that Stakgold and Holst work with does not mention the space, whereas the formulation (P$'$) does.
 :::
 
 :::idea{provenance=original}
@@ -214,9 +220,13 @@ the standard bump: it is smooth, supported in $\overline{B(x_0,r)}$, and strictl
 :::remark[Where the hypotheses are used, and what fails without them]{provenance=original}
 - *Local integrability of $v$ in (W).* Without it, the right-hand side of (W) need not be defined, and the definition would silently become the distributional one. Many ordinary functions have no weak derivative at all: the Heaviside step on $\Omega = (-1,1)$ satisfies $\int H\varphi' = -\varphi(0)$, so (W) would force $\int_{-1}^{1} v\varphi\,dx = \varphi(0)$ for every $\varphi$, which no locally integrable $v$ can do — take bumps shrinking to the origin with $\varphi(0)=1$ and $0\le\varphi\le1$, so that $\int v\varphi \to 0$ by dominated convergence while $\varphi(0)$ stays at $1$. Its *distributional* derivative exists and is $\delta$. So $H \notin W^{1,p}$ for any $p$, and the jump is exactly the obstruction.
 - *Compact support of the test functions.* This is what kills every boundary term in Step 3 of the first proof, and it is why (W) says nothing whatever about the behaviour of $u$ near $\partial\Omega$. The boundary condition must therefore be imposed separately, and $H^1_0(\Omega)$ is how it is done.
-- *$C^2$ regularity in Part 2 above.* Only with two classical derivatives may the integration by parts be run backwards. Drop it and the conclusion is false as stated: the function in the example below is a weak solution of Laplace's equation on a slit disc but is not twice differentiable at the tip of the slit, and on the whole disc it solves no pointwise equation at all. That a weak solution of (P) is in fact smooth when $f$ and $\partial\Omega$ are — elliptic regularity — is a separate theorem, and it is false for hyperbolic equations, which is the deeper reason the weak theory is worth having.
-- *Boundedness of $\Omega$.* Not used in this unit except to keep $L^2(\Omega) \subset L^1_{\mathrm{loc}}(\Omega)$ convenient, but it is essential in :ref[the Lax–Milgram theorem and the Dirichlet problem]{to=pde.lax-milgram}: the Poincaré inequality, and with it the coercivity of $a$, needs $\Omega$ to be confined in at least one direction. On $\Omega = \mathbb{R}^n$ the form $a$ is not coercive on $H^1$, and (P$'$) with $f=0$ has only the zero solution for a different reason.
-- *Weak derivatives are not local limits.* A function can lie in $H^1$ and still be unbounded on every open set, as Evans shows by superposing the singularities $|x - r_k|^{-\alpha}$ over a dense sequence $(r_k)$ (his Example 4, p. 246). Membership of a Sobolev space buys integrability of derivatives, not pointwise good behaviour.
+- *$C^2$ regularity in Part 2 above.* Only with two classical derivatives may the integration by parts be run backwards; without them the symbol $\Delta u(x)$ has no meaning and the conclusion cannot even be stated. The hypothesis is a genuine restriction and not a formality, because a weak solution need not have two derivatives. On $\Omega = (-1,1)$ take $f = \operatorname{sgn}$, which lies in $L^2(\Omega)$, and
+ $$
+ u(x) = \tfrac12\,x\bigl(1-|x|\bigr), \qquad u'(x) = \tfrac12\bigl(1-2|x|\bigr) .
+ $$
+ This $u$ is Lipschitz and vanishes at $\pm1$, so its truncations $(u-\delta)^+ - (-u-\delta)^+$ have compact support in $\Omega$ and converge to it in $H^1$, putting $u \in H^1_0(\Omega)$; and $u'' = -\operatorname{sgn}$ away from the origin. Integrating by parts separately on $(-1,0)$ and $(0,1)$ therefore gives $\int_{-1}^1 u'\varphi'\,dx = \int_{-1}^1 f\varphi\,dx$ for every $\varphi \in C_c^\infty(\Omega)$: the two boundary terms at the origin are $\pm\tfrac12\varphi(0)$ and cancel, because $u'$ is continuous there. By the density remark under (P$'$), $u$ is a weak solution of (P). But $u'$ has a corner at $0$, so $u''(0)$ does not exist and there is no pointwise equation at the origin. Such a witness must also have a discontinuous $f$: in one dimension a weak solution with $f$ continuous is automatically $C^2$, since then $u'$ has weak derivative $-f$ and so agrees almost everywhere with the $C^1$ function $x \mapsto c - \int_0^x f$. That a weak solution of (P) is in fact smooth when $f$ and $\partial\Omega$ are — elliptic regularity — is a separate theorem, and it is false for hyperbolic equations, which is the deeper reason the weak theory is worth having.
+- *Boundedness of $\Omega$.* None of the arguments above uses it; it stands in the weak formulation only because that is where it starts to matter. In particular it is not needed for the inclusion $L^2(\Omega)\subset L^1_{\mathrm{loc}}(\Omega)$, which holds for every open $\Omega$, by Cauchy–Schwarz on compactly contained sets, these having finite measure. Boundedness is essential in :ref[the Lax–Milgram theorem and the Dirichlet problem]{to=pde.lax-milgram}: the Poincaré inequality, and with it the coercivity of $a$, needs $\Omega$ to be confined in at least one direction. On $\Omega = \mathbb{R}^n$ the form $a$ is not coercive on $H^1$, and (P$'$) with $f=0$ has only the zero solution for a different reason.
+- *Weak derivatives are not local limits.* A function can lie in $H^1$ and still be unbounded on every open set, as Evans shows by superposing the singularities $2^{-k}|x - r_k|^{-\alpha}$ over a sequence $(r_k)$ dense in the unit ball (his Example 4, p. 246). His construction needs $0 < \alpha < (n-p)/p$, so for $p = 2$ it is available only in dimension $n \ge 3$. Membership of a Sobolev space buys integrability of derivatives, not pointwise good behaviour.
 :::
 
 :::method[Putting a boundary-value problem into weak form]{provenance=adapted src="evans-2010:§6.1.2, the motivation for the definition of a weak solution, p. 295"}
@@ -229,15 +239,17 @@ the standard bump: it is smooth, supported in $\overline{B(x_0,r)}$, and strictl
 7. **Inhomogeneous Dirichlet data** are reduced to homogeneous ones: find any $w \in H^1(\Omega)$ taking the prescribed boundary values and solve for $u - w \in H^1_0(\Omega)$, moving $-\Delta w$ to the right-hand side. Evans describes this reduction on p. 297.
 :::
 
-:::note[Natural boundary conditions]{provenance=adapted src="evans-2010:§6.1.2, Other boundary conditions, pp. 296–297"}
-Step 3 explains an asymmetry that often puzzles a first reader. For the Neumann problem $-\Delta u = f$ in $\Omega$, $\partial u/\partial n = g$ on $\partial\Omega$, the weak formulation is
+:::note[Natural boundary conditions]{provenance=adapted src="stakgold-holst-2011:§10.4, the weak form (10.4.4)–(10.4.9) of the mixed problem, pp. 711–712; evans-2010:§6.6, Problem 4, p. 344"}
+Step 3 explains an asymmetry that often puzzles a first reader. Stakgold and Holst carry it out for the mixed problem $-\nabla\cdot(a\nabla u) + bu = f$ with $u = g_D$ on $\Gamma_D$ and $(a\nabla u)\cdot\nu + cu = g_N$ on the complementary piece $\Gamma_N$. After the integration by parts the surface integral $\int_{\partial\Omega} v\,(a\nabla u)\cdot\nu\,dS$ survives; the competitors vanish on $\Gamma_D$, which deletes that part of it, and on the rest the boundary condition is *substituted*, sending $\int_{\Gamma_N} g_N v\,dS$ to the right-hand side and $\int_{\Gamma_N} c\,uv\,dS$ into the form. Nothing whatever is imposed on the competitors over $\Gamma_N$.
+
+For (P) with Dirichlet data replaced by Neumann data — $a \equiv 1$, $b = c = 0$, $\Gamma_D$ empty, $\partial u/\partial n = g$ on all of $\partial\Omega$ — this reads
 
 $$
 \int_\Omega \nabla u\cdot\nabla v\,dx = \int_\Omega fv\,dx + \oint_{\partial\Omega} g v\,dS
 \qquad \text{for all } v \in H^1(\Omega),
 $$
 
-with the *whole* of $H^1(\Omega)$ as the space and no condition imposed on the competitors at all: the boundary data have been absorbed into the right-hand side. This is the same phenomenon as the natural boundary conditions of the calculus of variations (:ref[natural boundary conditions]{to=var.natural-boundary-conditions}) — and it is the same calculation, since $a(u,v) = F(v)$ is the first variation of a quadratic functional.
+with the *whole* of $H^1(\Omega)$ as the space: the boundary data have been absorbed into the right-hand side. Evans poses the homogeneous case $g = 0$ of exactly this formulation, with the same test space $H^1(U)$, as his Problem 4 (p. 344). The price is visible in the display: taking $v \equiv 1$ gives the compatibility condition $\int_\Omega f\,dx + \oint_{\partial\Omega} g\,dS = 0$, necessary for a solution to exist; and a solution is never unique, since adding a constant to $u$ changes neither side of the display. The form is accordingly not coercive on $H^1(\Omega)$ — constants have zero Dirichlet energy — so the Neumann problem is not merely the Dirichlet problem with a larger space; it is the absence of an essential condition, not the surface term, that makes it harder. This absorption of the data is the same phenomenon as the natural boundary conditions of the calculus of variations (:ref[natural boundary conditions]{to=var.natural-boundary-conditions}) — and it is the same calculation, since $a(u,v) = F(v)$ is the first variation of a quadratic functional.
 :::
 
 :::example[A corner singularity: in $H^1$, not in $H^2$]{provenance=original}
