@@ -28,7 +28,7 @@ $$
 \hat f(\xi)=\int_{-\infty}^{\infty}f(x)\,\mathrm{e}^{-2\pi\mathrm{i}x\xi}\,\mathrm{d}x ,
 $$
 
-so that the inversion formula of :ref[]{to=fourier.fourier-inversion} carries no constant at all. This is Folland's convention and the one in which the sampling theorem is cleanest; the translation to the angular-frequency convention $\omega=2\pi\xi$ is given at the end of the statement.
+so that the inversion formula carries no constant at all. This is Folland's convention and the one in which the sampling theorem is cleanest, but it is **local to this unit** and is not the handbook's default: :ref[the Fourier transform]{to=fourier.fourier-transform} defines $\hat f(k)=\int f(x)e^{-ikx}\,dx$, whose inversion formula carries $\tfrac{1}{2\pi}$. The dictionary is $\xi\mapsto2\pi\xi$: the $\hat f(\xi)$ of this unit is the $\hat f(2\pi\xi)$ of that one. Read through that dictionary, the inversion formula of :ref[]{to=fourier.fourier-inversion} and Plancherel's identity of :ref[]{to=fourier.plancherel} lose their constants, which is what every step below uses. The translation to the angular-frequency convention $\omega=2\pi\xi$ is given at the end of the statement.
 
 The **normalised sinc** is
 
@@ -164,9 +164,9 @@ $$
 =\sum_{\lvert k\rvert\le K}f\!\left(\frac{k}{2a}\right)\operatorname{sinc}(2ax-k) ,
 $$
 
-relabelling $k\mapsto-k$, which is legitimate because the sum is symmetric and finite. Letting $K\to\infty$ gives part 2 with uniform convergence. For the $L^{2}$ convergence, Plancherel's theorem (:ref[]{to=fourier.plancherel}) gives $\lVert f-Tg_K\rVert_{L^{2}(\mathbb{R})}=\lVert g-g_K\rVert_{L^{2}[-a,a]}\to0$, since the transform of $Tg_K$ is $g_K$ extended by zero.
+relabelling $k\mapsto-k$, which is legitimate because the sum is symmetric and finite. Letting $K\to\infty$ gives part 2 with uniform convergence. For the $L^{2}$ convergence, Plancherel's theorem (:ref[]{to=fourier.plancherel}), in the convention local to this unit — where the transform is unitary, the $(2\pi)^{-1/2}$ of that unit having been absorbed by the dictionary — gives $\lVert f-Tg_K\rVert_{L^{2}(\mathbb{R})}=\lVert g-g_K\rVert_{L^{2}[-a,a]}\to0$, since the transform of $Tg_K$ is $g_K$ extended by zero.
 
-**Step 5: the orthonormal basis.** Step 3 with $c_k$ replaced by $\frac{1}{2a}\mathrm{e}^{-\pi\mathrm{i}k\xi/a}$ shows that the transform of $x\mapsto\operatorname{sinc}(2ax-k)$ is $\frac{1}{2a}\mathrm{e}^{-\pi\mathrm{i}k\xi/a}\chi_{[-a,a]}(\xi)$. These lie in $\mathcal{H}_a$, and by Plancherel
+**Step 5: the orthonormal basis.** Applying $T$ to the function $\frac{1}{2a}\mathrm{e}^{-\pi\mathrm{i}k\xi/a}$ and using Step 3's integral with $u=x-k/(2a)$ shows that the transform of $x\mapsto\operatorname{sinc}(2ax-k)$ is $\frac{1}{2a}\mathrm{e}^{-\pi\mathrm{i}k\xi/a}\chi_{[-a,a]}(\xi)$. These lie in $\mathcal{H}_a$, and by Plancherel
 
 $$
 (s_k,s_l)=2a\int_{-a}^{a}\frac{1}{4a^{2}}\,\mathrm{e}^{-\pi\mathrm{i}(k-l)\xi/a}\,\mathrm{d}\xi=\delta_{kl} ,
@@ -310,7 +310,7 @@ the same magnitude with the opposite sign — the reconstruction is not merely i
 |---|---|---|---|---|
 | partial sum at $x=\tfrac1{12}$ | $0.5471683$ | $0.5477579$ | $0.5477583$ | $0.5477583$ |
 
-against $\tilde g(\tfrac1{12})=0.5477583$ and $g(\tfrac1{12})=-0.5477583$. To record $g$ faithfully one must sample faster than $15$ per unit, or filter the content near frequency $7$ away before sampling.
+against $\tilde g(\tfrac1{12})=0.5477583$ and $g(\tfrac1{12})=-0.5477583$. To record $g$ faithfully one must sample at $15$ per unit or faster — the Nyquist rate itself suffices here, since $\hat g$ vanishes at the band edges $\pm7.5$ as well as beyond them, so part 2 applies with $a=7.5$ — or filter the content near frequency $7$ away before sampling. In practice one samples faster still, by the margin of step 3.
 :::
 
 :::application[Where the theorem is used]{provenance=original}

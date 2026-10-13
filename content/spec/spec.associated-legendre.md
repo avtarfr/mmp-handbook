@@ -277,7 +277,7 @@ At $m=0$ this is the Legendre value $2/(2l+1)$, as it must be. The $\theta$-form
 
 **Part 7, orthogonality in $m$.** Read (AL) the other way: for fixed $l$, the family $\{P_{l}^{m}\}_{m}$ consists of eigenfunctions of
 $$
-\frac{\mathrm{d}}{\mathrm{d}x}\Bigl[(1-x^{2})\frac{\mathrm{d}y}{\mathrm{d}x}\Bigr]+l(l+1)y=-m^{2}\,\frac{1}{1-x^{2}}\,y ,
+\frac{\mathrm{d}}{\mathrm{d}x}\Bigl[(1-x^{2})\frac{\mathrm{d}y}{\mathrm{d}x}\Bigr]+l(l+1)y=+m^{2}\,\frac{1}{1-x^{2}}\,y ,
 $$
 a Sturm-Liouville problem with $p=1-x^{2}$, $q=l(l+1)$, eigenvalue $-m^{2}$ and weight $\rho=(1-x^{2})^{-1}$; the natural interval is again $[-1,1]$ and the $P_{l}^{m}$ are regular there. Distinct eigenvalues force orthogonality with respect to *that* weight. Since the eigenvalue is $-m^{2}$, "distinct" means $\lvert m\rvert\neq\lvert k\rvert$, and that is the hypothesis under which Riley, Hobson and Bence state the vanishing, their eq. (18.39); $m=-k$ gives the same eigenvalue and the argument says nothing about it (part 4 does, and the integral is then nonzero).
 

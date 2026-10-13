@@ -84,7 +84,7 @@ $$
 f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\hat f(k)\, e^{ikx}\, dk ,
 $$
 
-the asymmetric convention with the whole $2\pi$ on the inversion. The cited books differ, and the transforms of $\delta$, $1$ and $H$ differ with them, so the convention must be checked before a formula is copied: Stakgold and Holst use $f^\wedge(u) = \int f(x)e^{+iux}\,dx$ with $1/2\pi$ on the inverse, so their $u$ is our $-k$; Reed and Simon use the symmetric $(2\pi)^{-n/2}\int e^{-i\lambda\cdot x}f(x)\,dx$; Folland uses $\int f(x)e^{-2\pi ix\xi}\,dx$, in which no factors of $2\pi$ ever appear. :ref[]{to=fourier.fourier-transform} tabulates the conversions. The translation rule is mechanical: a factor $2\pi$ appears for each $2\pi$ missing from the exponent, and a complex conjugation exchanges the sign conventions.
+the asymmetric convention with the whole $2\pi$ on the inversion. The cited books differ, and the transforms of $\delta$, $1$ and $H$ differ with them, so the convention must be checked before a formula is copied: Stakgold and Holst use $f^\wedge(u) = \int f(x)e^{+iux}\,dx$ with $1/2\pi$ on the inverse, so their $u$ is our $-k$; Reed and Simon use the symmetric $(2\pi)^{-n/2}\int e^{-i\lambda\cdot x}f(x)\,dx$; Folland uses $\int f(x)e^{-2\pi ix\xi}\,dx$, which carries no $2\pi$ prefactor on the transform or on its inversion; $2\pi$ still appears inside the formulas, as in his $(\partial^\alpha F)^\wedge = (2\pi i\xi)^\alpha\hat F$ and in $\hat H(\xi) = \tfrac12\delta(\xi) - \tfrac{i}{2\pi}\operatorname{pv}(1/\xi)$. :ref[]{to=fourier.fourier-transform} tabulates the conversions. Translating between them is a rescaling of the transform variable, $k = 2\pi\xi$, not a fixed factor, and how much it moves depends on the homogeneity of the answer: $2\pi\delta(k)$ becomes $\delta(\xi)$ and loses its $2\pi$, while $-i\pi\operatorname{sgn}k$ becomes $-i\pi\operatorname{sgn}\xi$ and loses none, so the two terms of $\hat H$ do not scale alike. A complex conjugation exchanges the sign conventions.
 :::
 
 :::definition[The Fourier transform of a tempered distribution]{provenance=adapted src="stakgold-holst-2011:§2.4, Eq. (2.4.30), p. 157; reed-simon-1980:§IX.1, the definition of $\hat T$ and its consistency with the transform on $\mathcal{S}$, p. 322; folland-1999:§9.2, p. 295"}
@@ -173,7 +173,7 @@ The shift and reflection rules come the same way from $\widehat{\varphi}(x-a)$ a
 :::
 
 :::method[Computing the transform of a tempered distribution]{provenance=adapted src="stakgold-holst-2011:§2.4, Examples 5–8, pp. 159–161"}
-Four routes, in increasing order of effort; Stakgold and Holst use the last three on the Heaviside function alone.
+Four routes, in increasing order of effort; Stakgold and Holst use routes 1, 3 and 4 on the Heaviside function alone.
 
 1. **Straight from the definition.** Compute $\langle F,\hat\varphi\rangle$ and recognise the answer as the action of a known distribution on $\varphi$. This is immediate for $\delta$, where $\langle\delta,\hat\varphi\rangle = \hat\varphi(0) = \int\varphi$.
 2. **From a known pair, by the operational rules.** If $F$ is a derivative, a translate, a reflection or a polynomial multiple of something whose transform is known, read the answer off rule (3) of the statement. This is how the transforms of $\delta^{(n)}$, $\delta(x-a)$ and $x^n$ are obtained from those of $\delta$ and $1$.

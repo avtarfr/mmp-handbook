@@ -4,7 +4,7 @@ title: Monotone convergence and Fatou's lemma
 kind: theorem
 level: core
 summary: For non-negative measurable integrands, an increasing pointwise limit may always be taken outside the integral, a non-negative series may always be integrated term by term, and for an arbitrary sequence the integral of the lower limit never exceeds the lower limit of the integrals.
-prereqs: [measure.lebesgue-integral]
+prereqs: [measure.sigma-algebras-measures, measure.measurable-functions, measure.lebesgue-integral]
 provenance: adapted
 sources:
   - work: folland-1999
@@ -154,9 +154,9 @@ $$
 
 :::method[Interchanging a limit or a sum with an integral, for non-negative integrands]{provenance=original}
 1. **Check the sign first.** If the integrand is non-negative, no integrability hypothesis of any kind is needed for an increasing limit or for a series: go straight to step 2 or 3. If it changes sign, these theorems do not apply; use :ref[dominated convergence]{to=measure.dominated-convergence}.
-2. **Increasing limit.** Verify $f_n \le f_{n+1}$ pointwise (a.e. is enough) and identify $f = \lim_n f_n$. Then $\int f = \lim_n \int f_n$. Both sides may be infinite, and this is often the cheapest way to *prove* an integral infinite.
+2. **Increasing limit.** Verify $f_n \le f_{n+1}$ pointwise and identify $f = \lim_n f_n$. Holding a.e. is enough, provided $f$ is separately known to be measurable: off the exceptional null set it is unconstrained, and on an incomplete space its measurability cannot be deduced. Then $\int f = \lim_n \int f_n$. Both sides may be infinite, and this is often the cheapest way to *prove* an integral infinite.
 3. **Series.** Write the integrand as $\sum_n f_n$ with every $f_n \ge 0$ — typically by expanding a geometric series $\frac{1}{1 - u} = \sum_{n \ge 0} u^{n}$ with $0 \le u < 1$, or $\frac{1}{e^{x} - 1} = \sum_{n \ge 1} e^{-nx}$ for $x > 0$. Integrate each term and add. No uniform convergence is required, and the interchange is valid even where the series diverges.
-4. **Only a bound wanted?** Use Fatou's lemma. To show $\int f \le C$ when $f = \lim_n f_n$ a.e. and each $\int f_n \le C$, no monotonicity is needed.
+4. **Only a bound wanted?** Use Fatou's lemma. To show $\int f \le C$ when $f = \lim_n f_n$ a.e. — with $f$ again assumed measurable, for the same reason — and each $\int f_n \le C$, no monotonicity is needed.
 5. **Check for escaping mass.** If the answer comes out smaller than expected, look for a sequence whose mass escapes to infinity or concentrates at a point: those are the two failure modes, and they are exactly the cases in which Fatou's inequality is strict.
 :::
 
@@ -190,10 +190,10 @@ using $u = (n+1)t$ and $\int_{0}^{\infty} u e^{-u} du = \Gamma(2) = 1$.
 **Step 4: add.** By the termwise theorem,
 
 $$
-I = \sum_{n \ge 0} \frac{1}{(n+1)^{2}} = \sum_{m \ge 1} \frac{1}{m^{2}} = \frac{\pi^{2}}{6} = 1.6449340668\ldots
+I = \sum_{n \ge 0} \frac{1}{(n+1)^{2}} = \sum_{m \ge 1} \frac{1}{m^{2}} = \zeta(2) = \frac{\pi^{2}}{6} = 1.6449340668\ldots
 $$
 
-**Step 5: check.** The partial sums $\sum_{m \le M} m^{-2}$ are $1.4636111$ at $M = 5$, $1.5961632$ at $M = 20$ and $1.6349839$ at $M = 100$, climbing towards $1.6449341$ from below as they must, the terms being positive. Numerical quadrature of the original integral gives $1.644934067$, agreeing to nine decimals.
+**Step 5: check.** The partial sums $\sum_{m \le M} m^{-2}$ are $1.4636111$ at $M = 5$, $1.5961632$ at $M = 20$ and $1.6349839$ at $M = 100$, climbing towards $1.6449341$ from below as they must, the terms being positive. For the Basel value $\zeta(2) = \pi^{2}/6$ see :ref[]{to=spec.zeta-bernoulli}. Numerical quadrature of the original integral gives $1.644934067$, agreeing to nine decimals.
 
 **Step 6: what monotone convergence adds.** The same computation read backwards shows the partial sums $S_N(x) = \sum_{n < N} x^{n}\ln(1/x)$ increase pointwise to the integrand, so $\int_{0}^{1} S_N \uparrow I$: the sequence of partial sums of the series is *itself* an increasing sequence of integrands, and that is all the termwise theorem is.
 :::
@@ -229,7 +229,19 @@ $$
 
 which makes $u$ a minimiser. Fatou's lemma is the tool for that inequality, and it is worth being exact about what it does and does not supply. Write $F_k(x) = F(x, u_k(x), \nabla u_k(x))$ and suppose $F \ge 0$. Fatou gives $\int_{\Omega} \liminf_k F_k \le \liminf_k \int_{\Omega} F_k = \liminf_k E(u_k)$ with no hypothesis beyond non-negativity. The left-hand side is $E(u)$ only when $\liminf_k F_k = F(x,u,\nabla u)$ almost everywhere — that is, when the *integrands* converge, which by the a.e. corollary above needs $\nabla u_k \to \nabla u$ a.e., not merely $u_k \to u$. Supplying that convergence is the hard part of the direct method, since compactness normally yields only weak convergence of the gradients.
 
-The gap is real, not pedantic. Take $\Omega = (0,1)$ and $E(u) = \int_{0}^{1} \bigl(u'(x)^{2} - 1\bigr)^{2}\,dx$ over the $u$ that are piecewise smooth with $u(0) = u(1) = 0$; the integrand is non-negative. Let $u_k$ be the sawtooth that is linear on each of the $2k$ intervals $\bigl(\tfrac{j-1}{2k}, \tfrac{j}{2k}\bigr)$, $j = 1, \dots, 2k$, with slope $+1$ for $j$ odd and $-1$ for $j$ even, starting from $u_k(0) = 0$; it rises to $1/(2k)$ at the odd endpoints $j/(2k)$ and returns to $0$ at the even ones, so in particular $u_k(0) = u_k(1) = 0$, and $\lVert u_k \rVert_{\infty} = 1/(2k) \to 0$, while $u_k'(x) = \pm 1$ off the finite set of corners. Then $E(u_k) = 0$ for every $k$, so $\inf E = 0$, while the uniform limit $u \equiv 0$ has $E(0) = \int_{0}^{1} 1 \, dx = 1$. The infimum is not attained, and Fatou's lemma is not violated: $F_k(x) = 0$ for a.e. $x$ and every $k$, so $\liminf_k F_k = 0$ a.e. and the lemma reads $0 \le 0$, saying nothing whatever about $E(0) = 1$. The derivatives $u_k'$ oscillate between $+1$ and $-1$ and converge at no point.
+The gap is real, not pedantic. Take $\Omega = (0,1)$ and the Bolza energy
+
+$$
+E(u) \;=\; \int_{0}^{1} \Bigl[ \bigl(u'(x)^{2} - 1\bigr)^{2} + u(x)^{2} \Bigr] dx
+$$
+
+over the $u$ that are continuous and piecewise smooth with $u(0) = u(1) = 0$; the integrand is non-negative, so $F \ge 0$ as required. Let $u_k$ be the sawtooth that is linear on each of the $2k$ intervals $\bigl(\tfrac{j-1}{2k}, \tfrac{j}{2k}\bigr)$, $j = 1, \dots, 2k$, with slope $+1$ for $j$ odd and $-1$ for $j$ even, starting from $u_k(0) = 0$; it rises to $1/(2k)$ at the odd endpoints $j/(2k)$ and returns to $0$ at the even ones, so in particular $u_k(0) = u_k(1) = 0$, and $\lVert u_k \rVert_{\infty} = 1/(2k) \to 0$, while $u_k'(x) = \pm 1$ off the finite set of corners. The first term of the energy therefore vanishes identically, and the second is the same integral on each of the $2k$ pieces:
+
+$$
+E(u_k) = \int_{0}^{1} u_k^{2}\,dx = 2k \int_{0}^{1/(2k)} t^{2}\,dt = \frac{1}{12k^{2}} \ \longrightarrow\ 0 ,
+$$
+
+so $(u_k)$ is a minimising sequence and $\inf E = 0$. That infimum is not attained: $E(u) = 0$ would force $u = 0$ almost everywhere *and* $u'(x)^{2} = 1$ at all but finitely many $x$, whereas a piecewise-smooth $u$ vanishing almost everywhere vanishes identically on each interval of smoothness, where its derivative is $0$ and the first term contributes $1$. So here the direct method fails at the first hurdle — no minimiser exists — and it fails for the reason Fatou's lemma cannot repair. The uniform limit of the minimising sequence is $u \equiv 0$, with $E(0) = \int_{0}^{1} 1 \, dx = 1 > \inf E$: the functional is not lower semicontinuous along $(u_k)$. Fatou's lemma is not violated, merely silent. Here $F_k(x) = \bigl(u_k'(x)^2 - 1\bigr)^2 + u_k(x)^2 = u_k(x)^{2} \le 1/(4k^{2})$ for a.e. $x$, so $\liminf_k F_k = 0$ a.e. and the lemma reads $0 \le 0$ — the left-hand side is *not* $E(0) = 1$, precisely because the integrands do not converge to $F(x,0,0) = 1$. The derivatives $u_k'$ oscillate between $+1$ and $-1$ and converge at no point.
 
 So Fatou's lemma delivers lower semicontinuity exactly when the integrands converge a.e.; it does not by itself turn the limit of a minimising sequence into a minimiser, and when the gradients only converge weakly a convexity hypothesis on $F$ in its last argument has to be supplied instead. That Fatou's lemma is the engine behind such lower semicontinuity arguments is the use :cite[Stakgold and Holst]{work=stakgold-holst-2011 loc="§0.7, p. 47"} highlight, and it is the reason variational energies in continuum mechanics are written as non-negative integrands wherever possible.
 

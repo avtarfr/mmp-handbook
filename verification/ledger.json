@@ -1623,23 +1623,12 @@
     "hold": false
   },
   "fourier.sampling-theorem": {
-    "hash": "608f97ff7b22460dd2bc825a13374894aa59c8329b125e809f5e36ea608c43ac",
+    "hash": "f108f423ec93f20d726923932c22d8094ea9b63829c85a734792483e62866522",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:31:33.079Z"
+      "at": "2026-10-13T11:02:45.251Z"
     },
-    "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:40:09.982Z",
-        "report": "verification/reports/fourier.sampling-theorem/608f97ff7b22-A.md"
-      },
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:40:18.473Z",
-        "report": "verification/reports/fourier.sampling-theorem/608f97ff7b22-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "A",
       "B"
@@ -1673,18 +1662,12 @@
     "hold": false
   },
   "fourier.tempered-distributions": {
-    "hash": "7bdb8e42fe4e3cc9e2674fe364092acf28f4ef0dd8470781e1ebe07e84809206",
+    "hash": "2695696c0e4e173a2afe9672e69f2b3e204e9f6839fcbf9e0c8cb766ac209f5e",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:11:25.402Z"
+      "at": "2026-10-13T11:02:45.251Z"
     },
-    "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:18:50.901Z",
-        "report": "verification/reports/fourier.tempered-distributions/7bdb8e42fe4e-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "B"
     ],
@@ -2611,17 +2594,28 @@
     "hold": false
   },
   "measure.monotone-convergence-fatou": {
-    "hash": "e90fd47d829d07a3c24b3ce8c2dbc4d391fd5efa5c4bd95db2525b06898dadce",
+    "hash": "a3505d5d9d93316155e860c933b56b44ae73407836f57c1bee3c5eda3524946b",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:54:06.326Z"
+      "at": "2026-10-13T11:08:31.970Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:12:09.806Z",
+        "report": "verification/reports/measure.monotone-convergence-fatou/a3505d5d9d93-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:13:36.965Z",
+        "report": "verification/reports/measure.monotone-convergence-fatou/a3505d5d9d93-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 3,
+    "rounds": 0,
     "hold": true
   },
   "measure.sigma-algebras-measures": {
@@ -3309,13 +3303,24 @@
       "pass": true,
       "at": "2026-10-13T10:54:06.326Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:00:26.336Z",
+        "report": "verification/reports/pde.klein-gordon-equation/b70367f61818-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:02:33.534Z",
+        "report": "verification/reports/pde.klein-gordon-equation/b70367f61818-A.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "pde.laplace-fundamental-solution": {
     "hash": "79c772e6fe593ce26fbae47557d5ffd0ce26eeaa39f2f91053f04d0b0a4659e8",
@@ -3418,28 +3423,17 @@
     "hold": false
   },
   "pde.separation-of-variables": {
-    "hash": "78e22a06f092131eb348b02ef7bdf5d7b3afe5f209672029f9e08d6b9d4ad9be",
+    "hash": "77552508e4325feb8d215f982865bb845a1eb329d21de6b12a794b3a3cbaee5a",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:52:25.918Z"
+      "at": "2026-10-13T11:09:27.200Z"
     },
-    "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:52:07.670Z",
-        "report": "verification/reports/pde.separation-of-variables/78e22a06f092-B.md"
-      },
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:54:32.099Z",
-        "report": "verification/reports/pde.separation-of-variables/78e22a06f092-A.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 5,
+    "rounds": 7,
     "hold": true
   },
   "pde.similarity-solutions": {
@@ -3675,22 +3669,16 @@
     "hold": false
   },
   "spec.associated-legendre": {
-    "hash": "ad9e40010e3c190b5a07f7d2de47b688e7fb6a61e98b8293556a2e451b9e8e3a",
+    "hash": "0cf00d82f89130f8c5f3a3f316bae8b29fe90287b613771c3b5686a074796020",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:51:27.574Z"
+      "at": "2026-10-13T11:12:29.601Z"
     },
-    "verifiers": {
-      "B": {
-        "verdict": "pass",
-        "at": "2026-10-13T10:50:23.528Z",
-        "report": "verification/reports/spec.associated-legendre/ad9e40010e3c-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "B"
     ],
-    "rounds": 0,
+    "rounds": 1,
     "hold": false
   },
   "spec.bessel-asymptotics": {
@@ -3751,17 +3739,17 @@
     "hold": false
   },
   "spec.bessel-second-kind-hankel": {
-    "hash": "0f08f3db96c2e67eededc2a483498c285619f2ae11f47b80d7f4a7669510ca9a",
+    "hash": "c3e8430e658a92c9fe9438c1f17fbfae25d1d33b8d125cb87fb3e27c16eae9fd",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:51:27.575Z"
+      "at": "2026-10-13T11:12:29.601Z"
     },
     "verifiers": {},
     "requires": [
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 1,
+    "hold": false
   },
   "spec.beta-function": {
     "hash": "d5c728901ea0b9e0d503ee2b1ebe45ced123d12aadf4a93b5f473a56547a6ecb",
@@ -3973,23 +3961,23 @@
     "hold": false
   },
   "spec.modified-bessel": {
-    "hash": "841e25a0c90cf0609758e30aebdafb053e1dc330b4ef7efe6f5e5caae630c453",
+    "hash": "a13a02ec8e62f2f2bdc41340891d5e9249f8a276017126715fe524fc1aa69be1",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:10:12.625Z"
+      "at": "2026-10-13T11:02:40.846Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:16:23.066Z",
-        "report": "verification/reports/spec.modified-bessel/841e25a0c90c-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T11:09:21.754Z",
+        "report": "verification/reports/spec.modified-bessel/a13a02ec8e62-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "spec.orthogonal-polynomials-general": {
     "hash": "9eaa7b5b1dc59ca9ba8448d4e33c8b77a33ff934c4ab95050be564ec6eb122e1",
