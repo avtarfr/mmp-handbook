@@ -4,7 +4,7 @@ title: The sampling theorem
 kind: theorem
 level: core
 summary: Proves that a function whose Fourier transform vanishes outside $[-a,a]$ is recovered exactly from its values at the points $k/2a$ by a sum of shifted sinc functions, identifies $2a$ as the Nyquist rate below which distinct frequencies become indistinguishable, and shows what the same series returns when the function is not band-limited.
-prereqs: [fourier.fourier-series, fourier.fourier-transform, fourier.fourier-inversion, fourier.plancherel, fourier.poisson-summation, found.differentiation-under-integral, complex.analytic-continuation, measure.lp-spaces]
+prereqs: [fourier.fourier-series, fourier.parseval-mean-square, fourier.fourier-transform, fourier.fourier-inversion, fourier.plancherel, fourier.poisson-summation, found.differentiation-under-integral, complex.analytic-continuation, measure.lp-spaces, funcan.orthonormal-bases]
 provenance: adapted
 sources:
   - work: stakgold-holst-2011
@@ -19,6 +19,10 @@ sources:
     loc: "§12.3, Exercise 6, p. 348: a continuous $f$ whose transform satisfies $F(k)=0$ for $\\lvert k\\rvert>\\pi$ is called band-limited and satisfies $f(x)=\\sum_n f(n)\\sin[\\pi(x-n)]/[\\pi(x-n)]$, with the hint that $f(n)$ is the $n$th Fourier coefficient of $F$ on $[-\\pi,\\pi]$, and the check on $F=\\chi_{(-\\pi,\\pi)}$"
     pages: "348"
     role: the statement in the normalisation where the samples fall at the integers, and confirmation that the intended proof is the Fourier-coefficient argument we give
+  - work: rhb-2006
+    loc: "§13.4, Exercise 13.4, p. 460: the unnormalised sinc, defined there as $\\sin x/x$, in the transform of a triangular pulse"
+    pages: "460"
+    role: a second book using the unnormalised sinc, named in the warning on conventions
 ---
 
 :::definition[Band-limited functions, bandwidth and the sinc]{provenance=adapted src="folland-1999:§8.3, Exercise 15, p. 255; stakgold-holst-2011:§2.4, p. 147"}
@@ -36,7 +40,7 @@ $$
 \operatorname{sinc}x=\frac{\sin \pi x}{\pi x}\quad(x\ne0),\qquad \operatorname{sinc}0=1 ,
 $$
 
-Folland's definition. It is continuous, even, equal to $1$ at $x=0$ and to $0$ at every other integer, and it is the transform pair of an interval: $\widehat{\chi_{[-a,a]}}(x)=2a\operatorname{sinc}2ax$. **Warning on conventions:** Stakgold and Holst, and Riley, Hobson and Bence, write $\operatorname{sinc}x=\sin x/x$ without the $\pi$, so their sampling formula reads $\operatorname{sinc}\Omega(x-x_k)$ where ours reads $\operatorname{sinc}(2ax-k)$. Every statement below uses the normalised one.
+Folland's definition. It is continuous, even, equal to $1$ at $x=0$ and to $0$ at every other integer, and it is the transform pair of an interval: $\widehat{\chi_{[-a,a]}}(x)=2a\operatorname{sinc}2ax$. **Warning on conventions:** Stakgold and Holst, and :cite[Riley, Hobson and Bence]{work=rhb-2006 loc="§13.4, Exercise 13.4, p. 460"}, write $\operatorname{sinc}x=\sin x/x$ without the $\pi$, so their sampling formula reads $\operatorname{sinc}\Omega(x-x_k)$ where ours reads $\operatorname{sinc}(2ax-k)$. Every statement below uses the normalised one.
 
 For $a>0$ let
 
@@ -91,7 +95,7 @@ In Stakgold and Holst's angular-frequency notation, part 2 is their Eq. (2.4.10a
 :::
 
 :::idea{provenance=original}
-The hypothesis is that $\hat f$ lives on a bounded interval. A function on a bounded interval has a Fourier series, so $\hat f$ has one — and the Fourier coefficients of $\hat f$ on $[-a,a]$ are, by the inversion formula read backwards, precisely the values of $f$ at the lattice points $k/2a$. So the samples are not an arbitrary list of numbers: they are a complete set of coefficients for $\hat f$, and therefore determine $\hat f$, and therefore determine $f$.
+The hypothesis is that $\hat f$ lives on a bounded interval. A function on a bounded interval has a Fourier series, so $\hat f$ has one — and the Fourier coefficients of $\hat f$ on $[-a,a]$ are, by the inversion formula read backwards, the values of $f$ at the lattice points $k/2a$ — up to the factor $1/(2a)$ and a reflection of the index, as Step 2 works out. So the samples are not an arbitrary list of numbers: they are a complete set of coefficients for $\hat f$, and therefore determine $\hat f$, and therefore determine $f$.
 
 To get the interpolation formula, transform the series back. Each exponential $\mathrm{e}^{-\pi\mathrm{i}k\xi/a}$, cut off to the band, inverts to a shifted sinc, because the transform of an interval is a sinc. That is the whole proof: a Fourier series in the frequency variable becomes a sinc series in the space variable.
 
@@ -107,7 +111,7 @@ $$
 \int_{-a}^{a}\lvert g\rvert \;\le\; \sqrt{2a}\,\lVert g\rVert_{2}<\infty ,
 $$
 
-so $g\in L^{1}(\mathbb{R})$ as well as $L^{2}$. Fourier inversion (:ref[]{to=fourier.fourier-inversion}) then gives, for almost every $x$,
+so $g\in L^{1}(\mathbb{R})$ as well as $L^{2}$. The inversion theorem of :ref[]{to=fourier.fourier-inversion} is *not* what justifies the next line: every version of it assumes $f\in L^{1}$, and a band-limited $f$ need not be integrable — $g=\chi_{[-1/2,1/2]}$ gives $f=\operatorname{sinc}$, which is not. The $L^{2}$ theory is in :ref[]{to=fourier.plancherel} instead, and it is enough. Its part 3 extends the transform to a unitary map of $L^{2}(\mathbb{R})$ onto itself, so the inverse map $\mathcal{F}^{-1}$ is defined on all of $L^{2}$ and $f=\mathcal{F}^{-1}g$, by the definition $g=\hat f$. On the overlap $L^{1}\cap L^{2}$ — where $g$ lies, by the display above — that extension is still given by the defining integral rather than by a limit in the mean, as the definition block of the same unit records; and in the convention local to this unit the inverse transform is the transform followed by a reflection, $(\mathcal{F}^{-1}g)(x)=(\mathcal{F}g)(-x)$, so the same is true of it. Hence, for almost every $x$,
 
 $$
 f(x)=\int_{-a}^{a}g(\xi)\,\mathrm{e}^{2\pi\mathrm{i}x\xi}\,\mathrm{d}\xi .
@@ -131,7 +135,7 @@ g(\xi)=\sum_{k\in\mathbb{Z}}c_k\,\mathrm{e}^{2\pi\mathrm{i}k\xi/(2a)}
 c_k=\frac{1}{2a}\int_{-a}^{a}g(\xi)\,\mathrm{e}^{-\pi\mathrm{i}k\xi/a}\,\mathrm{d}\xi ,
 $$
 
-the series converging in $L^{2}[-a,a]$ because $\{(2a)^{-1/2}\mathrm{e}^{\pi\mathrm{i}k\xi/a}\}$ is an orthonormal basis of that space. Compare the integral for $c_k$ with the inversion formula of Step 1 evaluated at $x=-k/(2a)$: the exponents match, since $2\pi\mathrm{i}x\xi=-\pi\mathrm{i}k\xi/a$ there. Hence
+the series converging in $L^{2}[-a,a]$ because the normalised exponentials $\{(2a)^{-1/2}\mathrm{e}^{\pi\mathrm{i}k\xi/a}\}$ are not merely orthonormal there but complete: that is the mean-square convergence of :ref[]{to=fourier.parseval-mean-square}, and it is the only fact about Fourier series this proof needs. Compare the integral for $c_k$ with the inversion formula of Step 1 evaluated at $x=-k/(2a)$: the exponents match, since $2\pi\mathrm{i}x\xi=-\pi\mathrm{i}k\xi/a$ there. Hence
 
 $$
 c_k=\frac{1}{2a}\,f\!\left(-\frac{k}{2a}\right) .
@@ -174,7 +178,7 @@ $$
 
 using Step 3's integral with $u=(l-k)/(2a)$, which is $2a\operatorname{sinc}(l-k)=2a\delta_{kl}$. They are complete in $\mathcal{H}_a$ because their transforms are, up to the constant $(2a)^{-1/2}$, the exponential basis of $L^{2}[-a,a]$, and the transform maps $\mathcal{H}_a$ onto $L^{2}[-a,a]$ unitarily. Since $\mathcal{H}_a$ is the preimage under the unitary transform of the closed subspace of $L^2$ of functions vanishing off $[-a,a]$, it is closed in $L^{2}(\mathbb{R})$, hence a Hilbert space.
 
-**Step 6: the energy identity.** Expanding $f$ in the basis, $f=\sum_k(f,s_k)s_k$; comparing with part 2, $(f,s_k)=f(k/2a)/\sqrt{2a}$. Parseval's identity in the basis then reads $\lVert f\rVert_{2}^{2}=\sum_k\lvert f(k/2a)\rvert^{2}/(2a)$, which is part 3.
+**Step 6: the energy identity.** Expanding $f$ in the orthonormal basis of Step 5 (:ref[]{to=funcan.orthonormal-bases}), $f=\sum_k(f,s_k)s_k$; comparing with part 2, $(f,s_k)=f(k/2a)/\sqrt{2a}$. Parseval's identity along that basis then reads $\lVert f\rVert_{2}^{2}=\sum_k\lvert f(k/2a)\rvert^{2}/(2a)$, which is part 3.
 
 **Step 7: aliasing.** Drop the band-limitation and assume instead the hypotheses of part 4. Since $f\in L^{1}$, $\hat f$ is continuous and bounded, so each term of $P(\xi)=\sum_{m}\hat f(\xi+2am)$, the periodisation of $\hat f$ with period $2a$, is continuous; by hypothesis the series converges uniformly on $[-a,a]$, so $P$ is continuous and bounded there and in particular lies in $L^{2}[-a,a]$. Uniform convergence also lets the series be integrated term by term against the bounded factor $\mathrm{e}^{-\pi\mathrm{i}k\xi/a}$, and the resulting strips reassemble into one integral over $\mathbb{R}$, absolutely convergent because $\hat f\in L^{1}(\mathbb{R})$:
 
@@ -199,7 +203,7 @@ the exponential being unchanged by the shift $\xi\mapsto\xi+2am$ because $\mathr
 :::method[Sampling and reconstructing a signal]{provenance=adapted src="stakgold-holst-2011:§2.4, pp. 147–148"}
 1. **Find the highest frequency** $\nu_{\max}$ present, in cycles per unit of $x$. If the signal is not band-limited — and no real signal is — choose the frequency above which its content is negligible for the purpose at hand.
 2. **Band-limit it physically, before sampling.** Pass the signal through a low-pass (anti-alias) filter with cut-off at $\nu_{\max}$. This step cannot be postponed: once the samples are taken, the out-of-band content has already been folded into the band and no processing can separate it from the genuine content there, by part 4.
-3. **Sample at a rate above $2\nu_{\max}$.** The Nyquist rate $2\nu_{\max}$ is the theoretical minimum; because no filter cuts off abruptly, practice uses $10$–$20\%$ more. The sample spacing is $h=1/(2\nu_{\max})$ at the Nyquist rate.
+3. **Sample at a rate at or above $2\nu_{\max}$.** The Nyquist rate $2\nu_{\max}$ is the theoretical minimum, and it is attained rather than merely approached — part 2 holds at the rate $2a$ itself; because no filter cuts off abruptly, practice uses $10$–$20\%$ more. The sample spacing is $h=1/(2\nu_{\max})$ at the Nyquist rate.
 4. **Reconstruct** with $f(x)=\sum_k f(kh)\operatorname{sinc}\bigl((x-kh)/h\bigr)$, which is part 2 written with $h=1/2a$. In software this is done by zero-padding the discrete transform and transforming back, which is the same sum computed with the FFT of :ref[]{to=fourier.dft-fft}; in hardware it is done by holding each sample and low-pass filtering, which approximates the sinc kernel.
 5. **Check the energy.** The identity of part 3, $h\sum_k\lvert f(kh)\rvert^{2}=\lVert f\rVert_{2}^{2}$, is a cheap test that the sampling rate and scaling are consistent.
 6. **If the rate is fixed and too low**, predict the alias rather than be surprised by it: content at $\nu$ is reported at the $\nu'$ with $\nu-\nu'$ an integer multiple of $1/h$ and $\lvert\nu'\rvert<1/(2h)$, and that $\nu'$ is unique. The strict inequality matters: if $\nu$ is an odd multiple of the Nyquist frequency $1/(2h)$ then both $\nu'=+1/(2h)$ and $\nu'=-1/(2h)$ satisfy the congruence, the two cannot be told apart by the samples, and the pair of frequencies is reported as one — the degenerate band-edge case of part 4, which part 6 of :ref[]{to=fourier.dft-fft} shows in its discrete form. Away from that edge the fold is unambiguous: a sinusoid just above the Nyquist frequency appears just below it, running backwards — the wagon-wheel effect.
@@ -310,7 +314,7 @@ the same magnitude with the opposite sign — the reconstruction is not merely i
 |---|---|---|---|---|
 | partial sum at $x=\tfrac1{12}$ | $0.5471683$ | $0.5477579$ | $0.5477583$ | $0.5477583$ |
 
-against $\tilde g(\tfrac1{12})=0.5477583$ and $g(\tfrac1{12})=-0.5477583$. To record $g$ faithfully one must sample at $15$ per unit or faster — the Nyquist rate itself suffices here, since $\hat g$ vanishes at the band edges $\pm7.5$ as well as beyond them, so part 2 applies with $a=7.5$ — or filter the content near frequency $7$ away before sampling. In practice one samples faster still, by the margin of step 3.
+against $\tilde g(\tfrac1{12})=0.5477583$ and $g(\tfrac1{12})=-0.5477583$. To recover $g$ *by the sinc series of part 2* one must sample at $15$ per unit or faster: $g\in\mathcal{H}_{7.5}$, so part 2 applies with $a=7.5$ and the Nyquist rate $15$ itself suffices. Fifteen is not, however, the slowest rate at which these samples contain $g$ at all. The calculation just made shows that at $6$ per unit the two copies of $\hat q$ fold into $[-3,3]$ without overlapping, so a listener who *knows* that the signal lives in $[6.5,7.5]\cup[-7.5,-6.5]$ can shift them back and recover $g$ exactly; that is bandpass sampling, and it needs a reconstruction built for the known band rather than the lowpass series of part 2, which has no way to tell $g$ from $\tilde g$. The alternative, when the band is not known in advance, is to filter the content near frequency $7$ away before sampling. In practice one samples faster still, by the margin of step 3.
 :::
 
 :::application[Where the theorem is used]{provenance=original}

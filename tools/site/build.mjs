@@ -34,7 +34,22 @@ const included = new Set(catalog.includedUnits.map((u) => u.rel));
 const fatal = catalog.errors.filter((x) => included.has(x.file));
 const ignorable = catalog.errors.filter((x) => !included.has(x.file));
 if (ignorable.length) console.error(`${ignorable.length} file(s) outside this build have errors (not published): ${[...new Set(ignorable.map((x) => x.file))].join(', ')}`);
-if (fatal.length) {
+// A local build is made WHILE units are being written, so a file caught half-finished must not stop
+// it; it is dropped from this build and reported. A public build has no such excuse: everything it
+// includes has been through the gate, so a parse error there is a real fault and stops the build.
+const broken = new Set(fatal.map((x) => x.file));
+if (fatal.length && DEV) {
+  console.error(`${broken.size} file(s) do not parse and are excluded from this local build (being written?): ${[...broken].join(', ')}`);
+  catalog.includedUnits = catalog.includedUnits.filter((u) => !broken.has(u.rel));
+  for (const part of catalog.tree) {
+    for (const ch of part.chapters) {
+      for (const sec of ch.sections) sec.units = sec.units.filter((u) => !broken.has(u.rel));
+      ch.sections = ch.sections.filter((sec) => sec.units.length);
+    }
+    part.chapters = part.chapters.filter((ch) => ch.sections.length);
+  }
+  catalog.tree = catalog.tree.filter((part) => part.chapters.length);
+} else if (fatal.length) {
   fatal.forEach((x) => console.error(`${x.file}: ${x.msg}`));
   process.exit(1);
 }
@@ -237,6 +252,7 @@ ${catalog.includedUnits.length ? `
   <button class="button" type="button" data-toc="expand">Expand all</button>
   <button class="button" type="button" data-toc="collapse">Collapse all</button>
 </div>
+${DEV ? inProgressPanel() : ''}
 <div class="toc">${tocBody}</div>
 <div class="toc-bar" hidden>
   <span class="toc-bar-count"></span>
@@ -269,6 +285,41 @@ write(
       .join('')}</ol>`,
   }),
 );
+
+// ---- what is in flight (development builds only) ----------------------------------------------
+// The public build shows published units and nothing else, which is the whole point of the gate.
+// A local build is for watching the work, so it also says what is written but not yet through the
+// gate, and what the map still plans. Units being drafted right now have no file at all, so they
+// can only be counted, not listed.
+function inProgressPanel() {
+  const rows = [];
+  let planned = 0;
+  for (const [id, place] of catalog.placements) {
+    if (!catalog.units.has(id)) { planned++; continue; }
+    const st = catalog.status.get(id);
+    if (st === 'verified') continue;
+    const e = catalog.ledger[id];
+    const v = (k) => (e?.hash === catalog.units.get(id).hash && e.verifiers?.[k] ? e.verifiers[k].verdict : '—');
+    rows.push({ id, st, title: catalog.units.get(id).title, chapter: `${place.part.id}/${place.chapter.id}`, a: v('A'), b: v('B'), rounds: e?.rounds ?? 0 });
+  }
+  rows.sort((a, b) => (a.st === b.st ? a.id.localeCompare(b.id) : a.st.localeCompare(b.st)));
+  const n = (st) => rows.filter((r) => r.st === st).length;
+  return `<section class="inflight">
+  <h2 class="small-head">In progress <span class="count">local build &middot; not on the public site</span></h2>
+  <p class="inflight-tiles">
+    <span><b class="ok">${[...catalog.placements.keys()].filter((id) => catalog.status.get(id) === 'verified').length}</b> published</span>
+    <span><b class="work">${n('draft')}</b> under review</span>
+    <span><b class="hold">${n('needs-human')}</b> held for a person</span>
+    <span><b>${planned}</b> planned, not written</span>
+  </p>
+  ${rows.length ? `<table class="inflight-table">
+  <tr><th>Unit</th><th>Chapter</th><th>State</th><th>A</th><th>B</th><th>Rounds</th></tr>
+  ${rows.map((r) => `<tr><td>${e(r.title)}<br><code>${e(r.id)}</code></td><td>${e(r.chapter)}</td><td><span class="status status-${r.st}">${STATUS_LABEL[r.st]}</span></td><td>${e(r.a)}</td><td>${e(r.b)}</td><td>${r.rounds}</td></tr>`).join('')}
+  </table>` : '<p class="sub">Nothing is awaiting review.</p>'}
+  ${broken.size ? `<p class="sub"><b class="hold">${broken.size}</b> file(s) are mid-write and excluded from this build: ${[...broken].map((f) => `<code>${e(f)}</code>`).join(', ')}</p>` : ''}
+  <p class="sub">Units not yet started have no file and so cannot be listed here; they are counted above and named on the to-be-added page.</p>
+</section>`;
+}
 
 // ---- provenance policy page -----------------------------------------------------------------
 const policyFile = join(ROOT, 'docs', 'COPYRIGHT_POLICY.md');

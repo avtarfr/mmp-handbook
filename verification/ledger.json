@@ -18,6 +18,25 @@
     "rounds": 0,
     "hold": false
   },
+  "asym.boundary-layers": {
+    "hash": "55934422128b5e3afdae5c39e0f3b5b11ec655554f798ac368dafb04e668fe2e",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:37:10.815Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:45:39.081Z",
+        "report": "verification/reports/asym.boundary-layers/55934422128b-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "asym.euler-maclaurin": {
     "hash": "39db5924a5fa294c43f7700d100a29f299f21a135f6b75bb8cb92b548a13d645",
     "checks": {
@@ -1478,6 +1497,20 @@
     "rounds": 0,
     "hold": false
   },
+  "fourier.hankel-mellin": {
+    "hash": "f174a68cb5f81b7884f242a7b61bcd90125e69b2b51823335bd358f3b7f42d4b",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:42:14.764Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
   "fourier.heaviside-step": {
     "hash": "c664f3676873d648ff52f23b9bf74c7757b3a6717ee7f58b060c128990de8d7a",
     "checks": {
@@ -1623,18 +1656,29 @@
     "hold": false
   },
   "fourier.sampling-theorem": {
-    "hash": "f108f423ec93f20d726923932c22d8094ea9b63829c85a734792483e62866522",
+    "hash": "ff97d762d90ca9a43f9ea3bf183a03c10c671c805c3963e7b8d6199e0480bceb",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:02:45.251Z"
+      "at": "2026-10-13T11:34:08.113Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:44:34.204Z",
+        "report": "verification/reports/fourier.sampling-theorem/ff97d762d90c-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:45:47.210Z",
+        "report": "verification/reports/fourier.sampling-theorem/ff97d762d90c-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "fourier.smoothness-decay": {
     "hash": "4f2aebaaf022c17e16436ecab02a0811e89edb6cd2bcfb15786a6912586b619e",
@@ -1662,17 +1706,28 @@
     "hold": false
   },
   "fourier.tempered-distributions": {
-    "hash": "2695696c0e4e173a2afe9672e69f2b3e204e9f6839fcbf9e0c8cb766ac209f5e",
+    "hash": "bd1ca3b2e338fc35d4e5a333125e675694eac257fdc091f22a6448f3c43e94c5",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:02:45.251Z"
+      "at": "2026-10-13T11:33:59.406Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:45:15.613Z",
+        "report": "verification/reports/fourier.tempered-distributions/bd1ca3b2e338-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:45:42.840Z",
+        "report": "verification/reports/fourier.tempered-distributions/bd1ca3b2e338-A.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "fourier.uncertainty-principle": {
     "hash": "196ad3fbda85c3eb505d1e912b9fa3e7466affbb65b18715ba7b321ece4c3fc1",
@@ -1697,6 +1752,19 @@
       "B"
     ],
     "rounds": 0,
+    "hold": false
+  },
+  "green.born-approximation": {
+    "hash": "4642f83aaf2c391e4104ecd8d5ce7ec3d5442320ffcc399747cd287afce66f01",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:45:17.699Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "B"
+    ],
+    "rounds": 2,
     "hold": false
   },
   "green.causal-green-functions": {
@@ -2616,7 +2684,32 @@
       "B"
     ],
     "rounds": 0,
-    "hold": true
+    "hold": false
+  },
+  "measure.radon-nikodym": {
+    "hash": "2b637889e03cbf2ef9bff984f5fe044c7acd609aaafa77b130b4c7f17725c1da",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:29:34.189Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:34:45.283Z",
+        "report": "verification/reports/measure.radon-nikodym/2b637889e03c-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:35:54.913Z",
+        "report": "verification/reports/measure.radon-nikodym/2b637889e03c-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
   },
   "measure.sigma-algebras-measures": {
     "hash": "3104ad075dcde376face172005b82c092fe6d987b64c51035a29df308bba4c46",
@@ -3128,6 +3221,25 @@
     "rounds": 0,
     "hold": false
   },
+  "pde.conservation-laws-shocks": {
+    "hash": "6869f65a5b614c4d61c7bbb9f58f1e1eac3cc704a72350e11fa86644bab4ec9d",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:29:03.778Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:37:12.435Z",
+        "report": "verification/reports/pde.conservation-laws-shocks/6869f65a5b61-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "pde.dalembert": {
     "hash": "8ffec6aaedc459f5e00986763fbd384d3874b4559e00a98fa03b686e33090d46",
     "checks": {
@@ -3151,6 +3263,31 @@
       "B"
     ],
     "rounds": 0,
+    "hold": false
+  },
+  "pde.energy-estimates": {
+    "hash": "92e450fdefaabb8811cc0c6aadc4ac743e19564f5af52d00e19b565be92c370d",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:28:06.319Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:38:41.408Z",
+        "report": "verification/reports/pde.energy-estimates/92e450fdefaa-A.md"
+      },
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:43:15.223Z",
+        "report": "verification/reports/pde.energy-estimates/92e450fdefaa-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
     "hold": false
   },
   "pde.first-order-characteristics": {
@@ -3347,6 +3484,31 @@
     "rounds": 0,
     "hold": false
   },
+  "pde.lax-milgram": {
+    "hash": "9f2a4f7f7e615f30358b394590ba8a58327dd53daa46788241ecc5437e9d9144",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:28:06.319Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:38:34.821Z",
+        "report": "verification/reports/pde.lax-milgram/9f2a4f7f7e61-A.md"
+      },
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:42:09.719Z",
+        "report": "verification/reports/pde.lax-milgram/9f2a4f7f7e61-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
   "pde.multipole-expansion": {
     "hash": "360b00bad991f8f570144e1e7ecab95f38abdb72d0ddf84cfc8de2af4ea41691",
     "checks": {
@@ -3372,6 +3534,31 @@
     "rounds": 0,
     "hold": false
   },
+  "pde.operator-semigroups": {
+    "hash": "5106659ed1c694ab82839fc5d753b9a7942651fb795ac70af346d6a89c7ef385",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:29:22.656Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:40:20.766Z",
+        "report": "verification/reports/pde.operator-semigroups/5106659ed1c6-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:47:05.576Z",
+        "report": "verification/reports/pde.operator-semigroups/5106659ed1c6-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "pde.poisson-integral-formula": {
     "hash": "d7372866d62ec50a6aff3feb3a326855fe7f52446fb5df183410f39176de55c2",
     "checks": {
@@ -3388,6 +3575,26 @@
         "verdict": "pass",
         "at": "2026-10-10T16:05:59.948Z",
         "report": "verification/reports/pde.poisson-integral-formula/d7372866d62e-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "pde.radon-transform": {
+    "hash": "d69022676df2d1e39d8552cbb29c09449eef3b72edd2e51c4f5ffbc4524f62b2",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:29:22.656Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:41:12.173Z",
+        "report": "verification/reports/pde.radon-transform/d69022676df2-A.md"
       }
     },
     "requires": [
@@ -3428,13 +3635,24 @@
       "pass": true,
       "at": "2026-10-13T11:09:27.200Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:17:16.456Z",
+        "report": "verification/reports/pde.separation-of-variables/77552508e432-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:23:20.630Z",
+        "report": "verification/reports/pde.separation-of-variables/77552508e432-A.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 7,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "pde.similarity-solutions": {
     "hash": "2646c9ba5c8dabd41fae0ab5a2a0036039b27bc6d21aaa69620639c173880ff0",
@@ -3547,6 +3765,31 @@
       "B"
     ],
     "rounds": 0,
+    "hold": false
+  },
+  "pde.weak-solutions-sobolev": {
+    "hash": "aba52613d78bbedbbe070de1e047a7be9a136daa41cfdab684ea780f705874e3",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:28:06.319Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:38:28.133Z",
+        "report": "verification/reports/pde.weak-solutions-sobolev/aba52613d78b-A.md"
+      },
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:41:14.407Z",
+        "report": "verification/reports/pde.weak-solutions-sobolev/aba52613d78b-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
     "hold": false
   },
   "prob.central-limit-theorem": {
@@ -3669,16 +3912,22 @@
     "hold": false
   },
   "spec.associated-legendre": {
-    "hash": "0cf00d82f89130f8c5f3a3f316bae8b29fe90287b613771c3b5686a074796020",
+    "hash": "b9587466020f622bc16a5de24bbe9093b24b5584b584ca0f89b2d1cebb2c3569",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:12:29.601Z"
+      "at": "2026-10-13T11:17:53.763Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:34:02.154Z",
+        "report": "verification/reports/spec.associated-legendre/b9587466020f-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.bessel-asymptotics": {
@@ -3719,6 +3968,20 @@
     "rounds": 0,
     "hold": false
   },
+  "spec.bessel-integral-representations": {
+    "hash": "688db9cd59e024034ce17f6e07091b87e9c8cecd0131986610571bcaab113337",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:42:26.881Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
   "spec.bessel-orthogonality": {
     "hash": "66072477ddae113f08e0e94128ac49f6dab1c24445a164c56c58544fc350ed55",
     "checks": {
@@ -3739,16 +4002,22 @@
     "hold": false
   },
   "spec.bessel-second-kind-hankel": {
-    "hash": "c3e8430e658a92c9fe9438c1f17fbfae25d1d33b8d125cb87fb3e27c16eae9fd",
+    "hash": "9dff3cff76941e60177b595c0eef37f0550041873b3587a252e5241ef3290e03",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T11:12:29.601Z"
+      "at": "2026-10-13T11:39:39.424Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T11:47:22.222Z",
+        "report": "verification/reports/spec.bessel-second-kind-hankel/9dff3cff7694-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.beta-function": {
@@ -3958,6 +4227,25 @@
       "B"
     ],
     "rounds": 0,
+    "hold": false
+  },
+  "spec.legendre-second-kind": {
+    "hash": "43b94ce21263dbf1320360c0e9c5a4b1396ae57d0ebef42289b783c06ba2d6f6",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T11:38:02.958Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T11:48:09.012Z",
+        "report": "verification/reports/spec.legendre-second-kind/43b94ce21263-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 2,
     "hold": false
   },
   "spec.modified-bessel": {

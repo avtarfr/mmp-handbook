@@ -35,7 +35,7 @@ or in Sturm-Liouville form
 $$
 \frac{\mathrm{d}}{\mathrm{d}x}\Bigl[(1-x^{2})\frac{\mathrm{d}y}{\mathrm{d}x}\Bigr]-\frac{m^{2}}{1-x^{2}}\,y+\ell(\ell+1)\,y=0 ,
 $$
-with $p=1-x^{2}$, $q=-m^{2}/(1-x^{2})$, weight $\rho=1$, eigenvalue $\lambda=\ell(\ell+1)$, natural interval $[-1,1]$. It reduces to Legendre's equation of :ref[]{to=spec.legendre-polynomials} when $m=0$, and it has the same three regular singular points $x=-1,1,\infty$. Only $m^{2}$ appears, so $m$ and $-m$ give the same equation. In applications $m$ is an integer, $x=\cos\theta$, and $-1\le x\le1$.
+with $p=1-x^{2}$, $q=-m^{2}/(1-x^{2})$, weight $\rho=1$, eigenvalue $\lambda=\ell(\ell+1)$, natural interval $[-1,1]$. It reduces to Legendre's equation of :ref[]{to=spec.legendre-polynomials} when $m=0$, and it has the same three regular singular points $x=-1,1,\infty$. Only $m^{2}$ appears, so $m$ and $-m$ give the same equation. In applications $m$ is an integer, $x=\cos\theta$, and $-1\le x\le1$. Throughout this unit $\ell$ is the parameter of the equation, so far unrestricted, while $l$ is reserved for a non-negative integer; part 3 below is the statement that a solution bounded on the whole of $[-1,1]$ forces $\ell$ to be such an integer.
 
 For integers $l\ge0$ and $\lvert m\rvert\le l$, the **associated Legendre function of the first kind** is
 $$
@@ -78,12 +78,12 @@ There is a further, rarer variant in which $P_{l}^{-m}$ is *defined* to equal $P
 Let $l\ge0$ and $m$ be integers with $\lvert m\rvert\le l$.
 
 1. **It solves the equation.** If $u$ solves Legendre's equation with parameter $\ell$, then $(1-x^{2})^{\lvert m\rvert/2}\,\mathrm{d}^{\lvert m\rvert}u/\mathrm{d}x^{\lvert m\rvert}$ solves (AL) with the same $\ell$ and with that $m$. In particular $P_{l}^{m}$ solves (AL) with $\ell=l$, and it is regular at $x=\pm1$.
-2. **Shape.** $P_{l}^{m}(x)=(1-x^{2})^{m/2}\,\mathcal{P}_{l}^{m}(x)$ for $m\ge0$, where $\mathcal{P}_{l}^{m}$ is a polynomial of degree $l-m$. Hence $P_{l}^{m}$ is a polynomial of degree $l$ when $m$ is even, and carries a fractional power of $1-x^{2}$ when $m$ is odd; either way it is regular on $[-1,1]$, and it vanishes at $x=\pm1$ unless $m=0$.
-3. **Integrality is forced.** The Frobenius analysis of (AL) at $x=0$ gives the coefficient recurrence
+2. **Shape.** $P_{l}^{m}(x)=(1-x^{2})^{m/2}\,\mathcal{P}_{l}^{m}(x)$ for $m\ge0$, where $\mathcal{P}_{l}^{m}$ is a polynomial of degree $l-m$. Hence $P_{l}^{m}$ is a polynomial of degree $l$ when $m$ is even, and carries a fractional power of $1-x^{2}$ when $m$ is odd; either way it is regular on $[-1,1]$, and it vanishes at $x=\pm1$ unless $m=0$. Written in terms of these factors, the orthogonality of part 6 reads $\int_{-1}^{1}\mathcal{P}_{l}^{m}\mathcal{P}_{k}^{m}(1-x^{2})^{m}\,\mathrm{d}x=0$ for $l\neq k$, so at fixed $m$ the $\mathcal{P}_{l}^{m}$, $l=m,m+1,\dots$, are up to scale the orthogonal polynomials of the weight $(1-x^{2})^{m}$ on $(-1,1)$; by :ref[]{to=spec.orthogonal-polynomials-general} each of them therefore has exactly $l-m$ zeros, all real, all simple and all interior to $(-1,1)$.
+3. **Integrality is forced.** Seek the factor $\mathcal{P}$ of part 2 as a Frobenius series about $x=0$, $\mathcal{P}(x)=\sum_{j\ge0}a_{j}x^{\,j+k}$ with indicial exponent $k$ and $a_{0}\neq0$. Substituting it into the equation that $\mathcal{P}$ satisfies, namely $(1-x^{2})\mathcal{P}''-2(m+1)x\mathcal{P}'+[\lambda-m(m+1)]\mathcal{P}=0$, which is equation (D) of the proof of part 1 because $(\ell-m)(\ell+m+1)=\lambda-m(m+1)$, gives the recurrence
    $$
-   a_{j+2}=\frac{j^{2}+(2m+1)j-\lambda+m(m+1)}{(j+1)(j+2)}\,a_{j},
+   a_{j+2}=\frac{j^{2}+(2m+1)j-\lambda+m(m+1)}{(j+1)(j+2)}\,a_{j}
    $$
-   for the polynomial factor $\mathcal{P}$, this being the branch belonging to the indicial root $k=0$; the series diverges at $x=\pm1$ unless the numerator vanishes, terminating it. Arfken, Weber and Harris keep the two Frobenius branches apart. For $k=0$ the numerator must vanish at a non-negative **even** $j$, and it does so at $j=l-m$ when $\lambda=l(l+1)$, which requires $l$ to be an integer, at least $m$, and *of the same parity as* $m$. The second indicial root, $k=1$, supplies by the same argument the admissible $l$ of the opposite parity to $m$. Taken together the two branches give: for each $m$ the admissible $l$ run from $m$ upwards, one for every integer; equivalently, for each $l$ the admissible $m$ run from $-l$ to $l$.
+   for its coefficients, this display being the branch belonging to the indicial root $k=0$; the series diverges at $x=\pm1$ unless the numerator vanishes, terminating it. Arfken, Weber and Harris keep the two Frobenius branches apart. For $k=0$ the numerator must vanish at a non-negative **even** $j$, and it does so at $j=l-m$ when $\lambda=l(l+1)$, which requires $l$ to be an integer, at least $m$, and *of the same parity as* $m$. The second indicial root, $k=1$, supplies by the same argument the admissible $l$ of the opposite parity to $m$. Taken together the two branches give: for each $m$ the admissible $l$ run from $m$ upwards, one for every integer; equivalently, for each $l$ the admissible $m$ run from $-l$ to $l$.
 4. **Negative $m$.**
    $$
    P_{l}^{-m}(x)=(-1)^{m}\frac{(l-m)!}{(l+m)!}\,P_{l}^{m}(x).
@@ -147,7 +147,7 @@ $$
 (1-x^{2})v''-2x(m+1)v'+(\ell-m)(\ell+m+1)v=0,
 \qquad v=\frac{\mathrm{d}^{m}u}{\mathrm{d}x^{m}} ,
 $$
-which differs from (AL) only in the first-derivative coefficient and the eigenvalue. The factor $(1-x^{2})^{m/2}$ is exactly the change of dependent variable that repairs both: it trades the extra $-2mxv'$ for the term $-m^{2}y/(1-x^{2})$. That one calculation proves part 1, and parts 2, 3 and 5 are then bookkeeping about degrees and parities.
+which differs from (AL) only in the first-derivative coefficient and the eigenvalue. The factor $(1-x^{2})^{m/2}$ is exactly the change of dependent variable that repairs both: it trades the extra $-2mxv'$ for the term $-m^{2}y/(1-x^{2})$. That one calculation proves part 1, and parts 2 and 5 are then bookkeeping about degrees and parities. Part 3 costs more: it needs the Frobenius series at the origin, which diverges at the endpoints unless its coefficient recurrence terminates, and termination is exactly the condition that $\ell$ be an integer at least $\lvert m\rvert$.
 
 The orthogonality in $l$ (part 6) is again the Sturm-Liouville argument: $p=1-x^{2}$ vanishes at both ends, so the boundary terms die, and the $q$ term is the same for both functions and cancels on subtraction. The orthogonality in $m$ (part 7) is the *same* equation read as an eigenvalue problem in $-m^{2}$ with weight $(1-x^{2})^{-1}$ — one equation, two self-adjoint readings, two orthogonality relations.
 

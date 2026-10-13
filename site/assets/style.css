@@ -197,6 +197,16 @@ th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var
 .tba-units li::before { content: '·'; position: absolute; left: 0; color: var(--rule); }
 .tba-units .kind { margin-left: 0.4rem; }
 
+/* In-progress panel: local builds only */
+.inflight { border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1.5rem 0; }
+.inflight h2 { margin-top: 0; }
+.inflight-tiles { display: flex; flex-wrap: wrap; gap: 1.4rem; margin: 0 0 0.8rem; font: 0.85rem var(--sans); color: var(--muted); }
+.inflight-tiles b { font-size: 1.25rem; display: block; line-height: 1.2; color: var(--fg); }
+.inflight-tiles b.ok { color: var(--original); } .inflight-tiles b.work { color: var(--draft); } .inflight-tiles b.hold { color: var(--hold); }
+.inflight-table { font-size: 0.82rem; }
+.inflight-table code { font-size: 0.75rem; }
+.inflight .sub { color: var(--muted); font: 0.8rem var(--sans); margin: 0.5rem 0 0; }
+
 /* ---- Table of contents (home page) ---------------------------------------------------- */
 .toc-jump { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1.25rem 0; }
 .toc-jump a {

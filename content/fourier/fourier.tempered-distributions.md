@@ -4,7 +4,7 @@ title: Fourier transforms of distributions
 kind: method
 level: core
 summary: Introduces the Schwartz space and the tempered distributions on it, defines the Fourier transform by duality and shows it is a bijection of that space obeying the usual operational rules, gives four routes for computing a transform, and derives the pairs for the delta, constants and powers, the Heaviside step and the principal value of 1/x, ending with a distributional solution of an ordinary differential equation.
-prereqs: [fourier.distributions, fourier.fourier-inversion, measure.fubini-tonelli]
+prereqs: [fourier.distributions, fourier.fourier-transform, fourier.fourier-inversion, fourier.heaviside-step, fourier.delta-identities, measure.fubini-tonelli]
 provenance: adapted
 sources:
   - work: stakgold-holst-2011
@@ -16,9 +16,9 @@ sources:
     pages: "133-138, 318-322"
     role: the seminorm definition of the Schwartz space and its dual, the continuity criterion, the principal value, and the bijectivity theorem
   - work: folland-1999
-    loc: "§9.2, pp. 293–296: the fact that $C_c^\\infty$ is not preserved by the Fourier transform and Proposition 9.9 that $C_c^\\infty$ is dense in $\\mathcal{S}$ (p. 293), the definition of a tempered distribution as a continuous linear functional on $\\mathcal{S}$ and the identification of $\\mathcal{S}'$ with the distributions extending continuously to $\\mathcal{S}$ (p. 293), the examples of tempered and non-tempered functions including $e^{ax}$ and $e^x\\cos e^x$ (pp. 293–294), the characterisation of the multipliers preserving $\\mathcal{S}$ and $\\mathcal{S}'$ as the slowly increasing functions (p. 294), and the duality definition $\\langle\\hat F,\\varphi\\rangle = \\langle F,\\hat\\varphi\\rangle$ with the operational rules carried over from Theorem 8.22 (p. 295)"
-    pages: "293-296"
-    role: why the compactly supported test functions must be enlarged, the slowly increasing multipliers, and the duality definition
+    loc: "§9.2, pp. 293–296: the fact that $C_c^\\infty$ is not preserved by the Fourier transform and Proposition 9.9 that $C_c^\\infty$ is dense in $\\mathcal{S}$ (p. 293), the definition of a tempered distribution as a continuous linear functional on $\\mathcal{S}$ and the identification of $\\mathcal{S}'$ with the distributions extending continuously to $\\mathcal{S}$ (p. 293), the examples of tempered and non-tempered functions including $e^{ax}$ and $e^x\\cos e^x$ (pp. 293–294), the characterisation of the multipliers preserving $\\mathcal{S}$ and $\\mathcal{S}'$ as the slowly increasing functions (p. 294), and the duality definition $\\langle\\hat F,\\varphi\\rangle = \\langle F,\\hat\\varphi\\rangle$ with the operational rules carried over from Theorem 8.22 (p. 295); §9.3, Exercise 19c–e, p. 299: the transform of $\\chi_{(0,\\infty)}$ in his convention, reached through the transform $-\\pi i\\operatorname{sgn}$ of $\\operatorname{PV}(1/x)$ in 19c–d and the splitting $\\chi_{(0,\\infty)} = \\tfrac12\\operatorname{sgn}+\\tfrac12$ in 19e"
+    pages: "293-296, 299"
+    role: why the compactly supported test functions must be enlarged, the slowly increasing multipliers, the duality definition, and the value of $\\hat H$ in the $2\\pi$-in-the-exponent convention that the convention note quotes
 ---
 
 :::definition[The Schwartz space and the tempered distributions]{provenance=adapted src="reed-simon-1980:§V.3, pp. 133–134; stakgold-holst-2011:§2.4, p. 155; folland-1999:§9.2, p. 293"}
@@ -84,7 +84,9 @@ $$
 f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\hat f(k)\, e^{ikx}\, dk ,
 $$
 
-the asymmetric convention with the whole $2\pi$ on the inversion. The cited books differ, and the transforms of $\delta$, $1$ and $H$ differ with them, so the convention must be checked before a formula is copied: Stakgold and Holst use $f^\wedge(u) = \int f(x)e^{+iux}\,dx$ with $1/2\pi$ on the inverse, so their $u$ is our $-k$; Reed and Simon use the symmetric $(2\pi)^{-n/2}\int e^{-i\lambda\cdot x}f(x)\,dx$; Folland uses $\int f(x)e^{-2\pi ix\xi}\,dx$, which carries no $2\pi$ prefactor on the transform or on its inversion; $2\pi$ still appears inside the formulas, as in his $(\partial^\alpha F)^\wedge = (2\pi i\xi)^\alpha\hat F$ and in $\hat H(\xi) = \tfrac12\delta(\xi) - \tfrac{i}{2\pi}\operatorname{pv}(1/\xi)$. :ref[]{to=fourier.fourier-transform} tabulates the conversions. Translating between them is a rescaling of the transform variable, $k = 2\pi\xi$, not a fixed factor, and how much it moves depends on the homogeneity of the answer: $2\pi\delta(k)$ becomes $\delta(\xi)$ and loses its $2\pi$, while $-i\pi\operatorname{sgn}k$ becomes $-i\pi\operatorname{sgn}\xi$ and loses none, so the two terms of $\hat H$ do not scale alike. A complex conjugation exchanges the sign conventions.
+the asymmetric convention with the whole $2\pi$ on the inversion. The cited books differ, and the transforms of $\delta$, $1$ and $H$ differ with them, so the convention must be checked before a formula is copied: Stakgold and Holst use $f^\wedge(u) = \int f(x)e^{+iux}\,dx$ with $1/2\pi$ on the inverse, so their $u$ is our $-k$; Reed and Simon use the symmetric $(2\pi)^{-n/2}\int e^{-i\lambda\cdot x}f(x)\,dx$; Folland uses $\int f(x)e^{-2\pi ix\xi}\,dx$, which carries no $2\pi$ prefactor on the transform or on its inversion; $2\pi$ still appears inside the formulas, as in his $(\partial^\alpha F)^\wedge = (2\pi i\xi)^\alpha\hat F$ and in $\hat H(\xi) = \tfrac12\delta(\xi) - \tfrac{i}{2\pi}\operatorname{pv}(1/\xi)$, which is his :cite[Exercise 19e]{work=folland-1999 loc="§9.3, Exercise 19c–e, p. 299"} rather than a displayed formula. :ref[]{to=fourier.fourier-transform} tabulates the conversions.
+
+Translating to that convention is a rescaling of the transform variable, $k = 2\pi\xi$, not multiplication by a fixed factor, and how much a given entry moves depends on how homogeneous it is. A distribution homogeneous of degree $-1$ acquires a factor $(2\pi)^{-1}$, since $\delta(2\pi\xi) = (2\pi)^{-1}\delta(\xi)$ and $\operatorname{pv}\frac{1}{2\pi\xi} = (2\pi)^{-1}\operatorname{pv}\frac1\xi$; one homogeneous of degree $0$ acquires nothing, since $\operatorname{sgn}(2\pi\xi) = \operatorname{sgn}\xi$. So our $\hat 1 = 2\pi\delta(k)$ becomes $\delta(\xi)$ and loses its $2\pi$, while our $\widehat{\operatorname{pv}(1/x)} = -i\pi\operatorname{sgn}k$ becomes $-i\pi\operatorname{sgn}\xi$ and loses none: no single factor rescales the whole table. Within one entry, however, the scaling can be uniform, and for $\hat H$ it is — both of its terms have degree $-1$, so both are divided by $2\pi$, and $\pi\delta(k) - i\operatorname{pv}(1/k)$ goes over into precisely the $\tfrac12\delta(\xi) - \tfrac{i}{2\pi}\operatorname{pv}(1/\xi)$ quoted above. A complex conjugation exchanges the sign conventions.
 :::
 
 :::definition[The Fourier transform of a tempered distribution]{provenance=adapted src="stakgold-holst-2011:§2.4, Eq. (2.4.30), p. 157; reed-simon-1980:§IX.1, the definition of $\hat T$ and its consistency with the transform on $\mathcal{S}$, p. 322; folland-1999:§9.2, p. 295"}
@@ -172,21 +174,17 @@ $$
 The shift and reflection rules come the same way from $\widehat{\varphi}(x-a)$ and $\hat\varphi(-x)$, and $\hat{\hat F}(x) = 2\pi F(-x)$ from $\hat{\hat\varphi}(x) = 2\pi\varphi(-x)$, which is the inversion theorem rearranged. Iterating gives the powers $n$. $\square$
 :::
 
-:::method[Computing the transform of a tempered distribution]{provenance=adapted src="stakgold-holst-2011:§2.4, Examples 5–8, pp. 159–161"}
-Four routes, in increasing order of effort; Stakgold and Holst use routes 1, 3 and 4 on the Heaviside function alone.
-
-1. **Straight from the definition.** Compute $\langle F,\hat\varphi\rangle$ and recognise the answer as the action of a known distribution on $\varphi$. This is immediate for $\delta$, where $\langle\delta,\hat\varphi\rangle = \hat\varphi(0) = \int\varphi$.
-2. **From a known pair, by the operational rules.** If $F$ is a derivative, a translate, a reflection or a polynomial multiple of something whose transform is known, read the answer off rule (3) of the statement. This is how the transforms of $\delta^{(n)}$, $\delta(x-a)$ and $x^n$ are obtained from those of $\delta$ and $1$.
-3. **Solve an algebraic equation.** Transform a differential relation satisfied by $F$ and solve the resulting equation in $\mathcal{S}'$. The equation is algebraic, but its solution need not be unique, so the homogeneous solutions must be found and then fixed by a further condition on $F$ — a symmetry, a known total integral, or a known value. The lemma below supplies the homogeneous solutions.
-4. **As a weak limit.** Write $F = \lim_{\varepsilon\to0^+}f_\varepsilon$ weakly with each $f_\varepsilon$ an ordinary integrable function, transform classically, and take the weak limit of $\hat f_\varepsilon$. This is legitimate because the transform is weakly continuous, by part (1) of the statement. It is the most useful route in practice, because the limit $\varepsilon\to0^+$ carries the physics: $\varepsilon$ is an adiabatic switching rate, a damping, or a line width.
-:::
-
 :::statement[Distributions killed by multiplication by $k$]{provenance=adapted src="stakgold-holst-2011:§2.4, p. 160, and the cited Exercise 2.5.11(c)"}
 Let $f\in\mathcal{S}'(\mathbb{R})$ satisfy $k\,f = 0$. Then $f = C\delta$ for some constant $C$. Consequently the general solution of $k\,f(k) = g(k)$, $g$ given, is one particular solution plus $C\delta$.
 :::
 
 :::proof[Distributions killed by multiplication by $k$]{provenance=original}
-**Step 1: $f$ annihilates test functions that vanish at the origin.** Let $\psi\in\mathcal{S}$ with $\psi(0)=0$ and set $\theta(k) = \psi(k)/k$ for $k\ne0$, $\theta(0)=\psi'(0)$. Then $\theta(k) = \int_0^1\psi'(tk)\,dt$, which is smooth in $k$; and for $\lvert k\rvert\ge1$ every seminorm of $\theta$ is controlled by one of $\psi$, since $\lvert k^\alpha D^\beta\theta\rvert$ is a finite combination of $\lvert k^{\alpha-1-j}D^{\beta-j}\psi\rvert$. So $\theta\in\mathcal{S}$ and $\psi = k\theta$, whence
+**Step 1: $f$ annihilates test functions that vanish at the origin.** Let $\psi\in\mathcal{S}$ with $\psi(0)=0$ and set $\theta(k) = \psi(k)/k$ for $k\ne0$, $\theta(0)=\psi'(0)$. Then $\theta(k) = \int_0^1\psi'(tk)\,dt$, which is smooth in $k$, and $\psi = k\theta$. For the seminorms, split the line at $\lvert k\rvert=1$.
+
+- On $\lvert k\rvert\le1$ nothing but continuity is needed: $\theta$ and each derivative $D^\beta\theta$, obtained by differentiating $\int_0^1\psi'(tk)\,dt$ under the integral sign, are continuous, hence bounded on that compact interval, and $\lvert k^\alpha\rvert\le1$ there.
+- On $\lvert k\rvert\ge1$ use $\theta=\psi/k$ and the Leibniz rule: $D^\beta\theta = \sum_{j=0}^{\beta}c_{\beta j}\,k^{-1-j}D^{\beta-j}\psi$ with constants $c_{\beta j}$ depending only on $\beta$ and $j$. So $\lvert k^\alpha D^\beta\theta\rvert$ is a finite combination of the quantities $\lvert k^{\alpha-1-j}D^{\beta-j}\psi\rvert$ for $0\le j\le\beta$, and each of those is at most $\lvert k^\alpha D^{\beta-j}\psi\rvert\le\|\psi\|_{\alpha,\beta-j}$, because $\alpha-1-j\le\alpha$ and $\lvert k\rvert\ge1$.
+
+Every seminorm of $\theta$ is therefore finite, so $\theta\in\mathcal{S}$, whence
 
 $$
 \langle f,\psi\rangle = \langle f, k\theta\rangle = \langle kf,\theta\rangle = 0
@@ -207,6 +205,15 @@ $$
 $$
 
 Since $\varphi$ was arbitrary, $f = C\delta$. The constant is independent of $\varphi$; it does depend on the choice of $\chi$ only apparently, because the left-hand side does not. $\square$
+:::
+
+:::method[Computing the transform of a tempered distribution]{provenance=adapted src="stakgold-holst-2011:§2.4, Examples 5–8, pp. 159–161"}
+Four routes, in increasing order of effort; Stakgold and Holst use routes 1, 3 and 4 on the Heaviside function alone.
+
+1. **Straight from the definition.** Compute $\langle F,\hat\varphi\rangle$ and recognise the answer as the action of a known distribution on $\varphi$. This is immediate for $\delta$, where $\langle\delta,\hat\varphi\rangle = \hat\varphi(0) = \int\varphi$.
+2. **From a known pair, by the operational rules.** If $F$ is a derivative, a translate, a reflection or a polynomial multiple of something whose transform is known, read the answer off rule (3) of the statement. This is how the transforms of $\delta^{(n)}$, $\delta(x-a)$ and $x^n$ are obtained from those of $\delta$ and $1$.
+3. **Solve an algebraic equation.** Transform a differential relation satisfied by $F$ and solve the resulting equation in $\mathcal{S}'$. The equation is algebraic, but its solution need not be unique, so the homogeneous solutions must be found and then fixed by a further condition on $F$ — a symmetry, a known total integral, or a known value. The lemma just proved supplies the homogeneous solutions.
+4. **As a weak limit.** Write $F = \lim_{\varepsilon\to0^+}f_\varepsilon$ weakly with each $f_\varepsilon$ an ordinary integrable function, transform classically, and take the weak limit of $\hat f_\varepsilon$. This is legitimate because the transform is weakly continuous, by part (1) of the statement. It is the most useful route in practice, because the limit $\varepsilon\to0^+$ carries the physics: $\varepsilon$ is an adiabatic switching rate, a damping, or a line width.
 :::
 
 :::statement[The basic transform pairs]{provenance=adapted src="stakgold-holst-2011:§2.4, Eqs. (2.4.36)–(2.4.40a), Examples 5–8, pp. 159–161"}
@@ -246,14 +253,25 @@ $$
 = \int_0^{\infty}\frac{dx}{x}\int_{-\infty}^{\infty}\varphi(k)\bigl(e^{-ikx}-e^{ikx}\bigr)\, dk .
 $$
 
-The inner bracket is $-2i\sin kx$. Exchanging the order of integration, which is permitted because $\lvert\sin kx\rvert/x$ is bounded by $\lvert k\rvert$ near $x=0$ and $\varphi$ decays rapidly, and using the Dirichlet integral $\int_0^\infty x^{-1}\sin kx\,dx = \tfrac\pi2\operatorname{sgn} k$,
+The inner bracket is $-2i\sin kx$. The two integrations may *not* simply be exchanged. Over $(0,\infty)\times\mathbb{R}$ the double integral is not absolutely convergent: $\int\lvert\varphi(k)\rvert\,2\lvert\sin kx\rvert\,dk$ does not tend to $0$ as $x\to\infty$ — the oscillation of $\sin kx$ decorrelates from $\varphi$ and the integral tends to $(4/\pi)\lVert\varphi\rVert_1$ — and $\int^{\infty}dx/x$ of a quantity bounded away from $0$ diverges. The singularity at $x=0$, which is the only thing a bound $\lvert\sin kx\rvert/x\le\lvert k\rvert$ settles, is not where the difficulty is.
+
+So truncate first. Over the strip $(0,R)\times\mathbb{R}$ the double integral *is* absolutely convergent, for every finite $R$: on $0<x\le1$ the factor $2\lvert\sin kx\rvert/x$ is at most $2\lvert k\rvert$, so the inner integral is at most $2\int\lvert k\varphi(k)\rvert dk$, finite because $\varphi\in\mathcal{S}$; on $1\le x\le R$ it is at most $2/x\le2$, so the inner integral is at most $2\lVert\varphi\rVert_1$. Fubini's theorem (:ref[]{to=measure.fubini-tonelli}) applies there and gives
 
 $$
-= -2i\int_{-\infty}^{\infty}\varphi(k)\left(\int_0^\infty\frac{\sin kx}{x}\, dx\right) dk
+\int_0^{R}\frac{\hat\varphi(x)-\hat\varphi(-x)}{x}\, dx
+= -2i\int_{-\infty}^{\infty}\varphi(k)\,D_R(k)\, dk ,
+\qquad
+D_R(k) = \int_0^{R}\frac{\sin kx}{x}\, dx .
+$$
+
+Now let $R\to\infty$. The left-hand side tends to the full integral, which converges absolutely because $\hat\varphi\in\mathcal{S}$. On the right, substituting $u=\lvert k\rvert x$ gives $D_R(k) = \operatorname{sgn}(k)\,\operatorname{Si}(\lvert k\rvert R)$ with $\operatorname{Si}(t)=\int_0^{t}u^{-1}\sin u\,du$, and $\operatorname{Si}$ is non-negative on $[0,\infty)$ with its largest value at its first maximum, $\operatorname{Si}(\pi)=1.8519$. So $\lvert\varphi(k)D_R(k)\rvert\le\operatorname{Si}(\pi)\lvert\varphi(k)\rvert$, an integrable bound independent of $R$, while $D_R(k)\to\tfrac\pi2\operatorname{sgn}k$ for every $k$ by the Dirichlet integral $\int_0^\infty x^{-1}\sin kx\,dx = \tfrac\pi2\operatorname{sgn}k$ (and trivially at $k=0$, where both sides vanish). Dominated convergence therefore gives
+
+$$
+\Bigl\langle\widehat{\operatorname{pv}\tfrac1x},\varphi\Bigr\rangle
 = -2i\cdot\frac{\pi}{2}\int_{-\infty}^{\infty}\varphi(k)\operatorname{sgn} k\, dk ,
 $$
 
-which is $\langle -i\pi\operatorname{sgn} k,\varphi\rangle$.
+which is $\langle -i\pi\operatorname{sgn} k,\varphi\rangle$. The conditional convergence of the Dirichlet integral is exactly what the truncation handles: $D_R$ converges pointwise but not absolutely, and it is the uniform bound, not absolute convergence, that licenses the passage to the limit.
 
 **$\widehat{\operatorname{sgn}} = -2i\operatorname{pv}(1/k)$ (route 2).** Transform the previous pair a second time and use $\hat{\hat F}(x) = 2\pi F(-x)$ with $F = \operatorname{pv}(1/x)$, which is odd:
 
