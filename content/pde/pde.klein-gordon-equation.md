@@ -4,7 +4,7 @@ title: The Klein-Gordon equation
 kind: application
 level: core
 summary: Introduces the Klein-Gordon equation as the wave equation with a mass term, derives its dispersion relation and reads the relativistic energy-momentum relation off it, verifies its one-dimensional source function across the light cone and records the three-dimensional one, shows that the massless limit gives back the wave equation and the non-relativistic limit the Schrodinger equation, and computes the conserved density that fails to be positive.
-prereqs: [pde.classification, pde.dalembert, pde.helmholtz-equation, pde.schrodinger-equation, spec.bessel-first-kind, var.several-independent-variables]
+prereqs: [pde.classification, pde.dalembert, pde.helmholtz-equation, pde.schrodinger-equation, spec.bessel-first-kind, var.several-independent-variables, vcalc.dirac-delta-basics, fourier.distributions, fourier.delta-identities]
 provenance: adapted
 sources:
   - work: strauss-2008
@@ -60,7 +60,7 @@ $$
 
 Equation (3) is the **dispersion relation** of the Klein-Gordon equation. Writing $k = \lvert\mathbf{k}\rvert$, it has the following consequences.
 
-1. **Phase and group velocity.**
+1. **Phase and group velocity.** For $k = \lvert\mathbf{k}\rvert > 0$,
    $$
    v_{\text{ph}} = \frac{\omega}{k} = c\sqrt{1 + \frac{\mu^2}{c^2k^2}} \;>\; c ,
    \qquad
@@ -68,7 +68,7 @@ Equation (3) is the **dispersion relation** of the Klein-Gordon equation. Writin
    \qquad
    v_{\text{ph}}\,v_{\text{gr}} = c^2 .
    $$
-   The phase velocity exceeds $c$ and the group velocity falls short of it; their product is exactly $c^2$. For $\mu = 0$ both equal $c$ and the medium is dispersionless.
+   The phase velocity exceeds $c$ and the group velocity falls short of it; their product is exactly $c^2$. At $k = 0$ the phase velocity is undefined, since $\omega/k$ diverges, and the group velocity is $0$, so the product identity needs $k>0$. For $\mu = 0$ both equal $c$ and the medium is dispersionless.
 2. **The relativistic energy-momentum relation.** Substituting $E = \hbar\omega$, $\mathbf{p} = \hbar\mathbf{k}$ and $\mu = Mc^2/\hbar$ turns (3) into
    $$
    E^2 = p^2c^2 + M^2c^4 ,
@@ -98,7 +98,7 @@ $$
 \frac\omega k = \frac{\sqrt{c^2k^2+\mu^2}}{k} = c\sqrt{1+\frac{\mu^2}{c^2k^2}} ,
 $$
 
-which exceeds $c$ for every finite $k$ when $\mu>0$. Differentiating (3) in $k$ gives $2\omega\,d\omega/dk = 2c^2k$, hence $v_{\text{gr}} = c^2k/\omega$, and multiplying the two,
+which exceeds $c$ for every $k>0$ when $\mu>0$. Differentiating (3) in $k$ gives $2\omega\,d\omega/dk = 2c^2k$, hence $v_{\text{gr}} = c^2k/\omega$, and multiplying the two,
 
 $$
 v_{\text{ph}}v_{\text{gr}} = \frac\omega k\cdot\frac{c^2k}{\omega} = c^2 .

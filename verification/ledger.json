@@ -43,11 +43,17 @@
       "pass": true,
       "at": "2026-10-13T10:47:48.058Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:52:08.324Z",
+        "report": "verification/reports/asym.laplace-method/73e361766e92-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "asym.regular-perturbation": {
@@ -75,11 +81,17 @@
       "pass": true,
       "at": "2026-10-13T10:39:10.311Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:49:58.922Z",
+        "report": "verification/reports/asym.stationary-phase/b21e55d25c2a-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "asym.steepest-descent": {
@@ -88,11 +100,17 @@
       "pass": true,
       "at": "2026-10-13T10:39:10.312Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:51:20.963Z",
+        "report": "verification/reports/asym.steepest-descent/54bbf64edab9-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "asym.stirling-formula": {
@@ -2593,23 +2611,12 @@
     "hold": false
   },
   "measure.monotone-convergence-fatou": {
-    "hash": "43851891ecf77b1d2a91981e6da2fa8d1c113084c14d850077952f6ecd189d9b",
+    "hash": "e90fd47d829d07a3c24b3ce8c2dbc4d391fd5efa5c4bd95db2525b06898dadce",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:23:45.948Z"
+      "at": "2026-10-13T10:54:06.326Z"
     },
-    "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:30:40.456Z",
-        "report": "verification/reports/measure.monotone-convergence-fatou/43851891ecf7-A.md"
-      },
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-13T10:32:59.030Z",
-        "report": "verification/reports/measure.monotone-convergence-fatou/43851891ecf7-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "A",
       "B"
@@ -3297,23 +3304,12 @@
     "hold": false
   },
   "pde.klein-gordon-equation": {
-    "hash": "9d530a8b01ff6b510fdbaa383742027958399e15e14439431b46fef322dcfbeb",
+    "hash": "b70367f6181897f074bce6766a8c56984c461c89d62f0f663c413c7f5d8e882a",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:02:16.721Z"
+      "at": "2026-10-13T10:54:06.326Z"
     },
-    "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:14:06.338Z",
-        "report": "verification/reports/pde.klein-gordon-equation/9d530a8b01ff-A.md"
-      },
-      "B": {
-        "verdict": "pass",
-        "at": "2026-10-12T00:14:27.654Z",
-        "report": "verification/reports/pde.klein-gordon-equation/9d530a8b01ff-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "A",
       "B"
@@ -3425,14 +3421,25 @@
     "hash": "78e22a06f092131eb348b02ef7bdf5d7b3afe5f209672029f9e08d6b9d4ad9be",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:44:56.660Z"
+      "at": "2026-10-13T10:52:25.918Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:52:07.670Z",
+        "report": "verification/reports/pde.separation-of-variables/78e22a06f092-B.md"
+      },
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:54:32.099Z",
+        "report": "verification/reports/pde.separation-of-variables/78e22a06f092-A.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 4,
+    "rounds": 5,
     "hold": true
   },
   "pde.similarity-solutions": {
@@ -3671,14 +3678,20 @@
     "hash": "ad9e40010e3c190b5a07f7d2de47b688e7fb6a61e98b8293556a2e451b9e8e3a",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:42:05.364Z"
+      "at": "2026-10-13T10:51:27.574Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:50:23.528Z",
+        "report": "verification/reports/spec.associated-legendre/ad9e40010e3c-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 3,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "spec.bessel-asymptotics": {
     "hash": "e8d5b6ace10c58eb319e17cf941dcc749fa8155369695c4336e8db0b03485b13",
@@ -3741,7 +3754,7 @@
     "hash": "0f08f3db96c2e67eededc2a483498c285619f2ae11f47b80d7f4a7669510ca9a",
     "checks": {
       "pass": true,
-      "at": "2026-10-13T10:42:05.365Z"
+      "at": "2026-10-13T10:51:27.575Z"
     },
     "verifiers": {},
     "requires": [
