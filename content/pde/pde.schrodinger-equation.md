@@ -25,7 +25,7 @@ sources:
     role: the operator-theoretic formulation, the role of self-adjointness, and the identification of stationary states with the point spectrum
 ---
 
-:::definition[The two Schrodinger equations]{provenance=adapted src="hassani-2013:§13.1, Eq. (13.5), p. 396; kreyszig-1978:§11.3, Eqs. (5)–(6), p. 585; rhb-2006:§21.3.2, p. 741"}
+:::definition[The two Schrodinger equations]{provenance=adapted src="hassani-2013:§13.1, Eq. (13.5), p. 396; kreyszig-1978:§11.3, Eqs. (5)–(6), p. 585; rhb-2006:§21.3.2, p. 741; reed-simon-1980:§VIII.11, pp. 303–304"}
 A non-relativistic particle of mass $m$ moving in a potential $V(\mathbf{r})$ is described by a complex-valued **wave function** $\Psi(\mathbf{r},t)$ satisfying the **time-dependent Schrodinger equation**
 
 $$
@@ -78,13 +78,13 @@ The separation itself is the ordinary argument: divide (1) by $\psi T$, note tha
 :::
 
 :::proof{provenance=adapted src="rhb-2006:§21.3.2, p. 741; hassani-2013:§13.1, pp. 396–397"}
-**Step 1 (separate).** Put $\Psi = \psi(\mathbf{r})T(t)$ into (1) and divide by $\psi T$:
+**Step 1 (separate).** Put $\Psi = \psi(\mathbf{r})T(t)$ into (1) and divide by $\psi T$ at the points where neither factor vanishes — $\psi$ may well have interior nodes, as the well's own $\psi_2$ does at $x = L/2$:
 
 $$
 \frac{1}{\psi}\left[-\frac{\hbar^2}{2m}\nabla^2\psi + V\psi\right] = i\hbar\,\frac{T'(t)}{T(t)} .
 $$
 
-The left side depends only on $\mathbf{r}$ and the right only on $t$, so by the separation lemma of :ref[separation of variables]{to=pde.separation-of-variables} both equal a constant, which we call $E$. This gives (3) for $\psi$, and $i\hbar T' = ET$ for $T$.
+The left side depends only on $\mathbf{r}$ and the right only on $t$, so by the separation lemma of :ref[separation of variables]{to=pde.separation-of-variables} both equal a constant, which we call $E$. This gives $-\frac{\hbar^2}{2m}\nabla^2\psi + V\psi = E\psi$ and $i\hbar T' = ET$ wherever the division was legitimate; both sides of each identity are continuous, so each extends to the whole domain, and (3) holds there.
 
 **Step 2 (the time factor).** The equation $T' = -iET/\hbar$ has the general solution $T = Ae^{-iEt/\hbar}$, for any $E\in\mathbb{C}$; absorbing $A$ into $\psi$ gives (4). Now impose the hypothesis that $E$ is real. Then $\lvert T\rvert = 1$, so $\lvert\Psi\rvert^2 = \lvert\psi\rvert^2$ does not depend on $t$ and $\Psi$ is stationary.
 
@@ -195,18 +195,28 @@ Taking $\Omega$ to be a large ball and letting its radius grow, the surface term
 :::
 
 :::remark{provenance=original}
-**Where the hypotheses are used, and what the mathematical theory adds.**
+**Where the hypotheses are used, and what fails without them.**
 
 - *Reality of $V$, in Step 2.* Without it the potential terms do not cancel and (7) acquires a source $\frac{2}{\hbar}\operatorname{Im}(V)\rho$: probability leaks away where $\operatorname{Im}V < 0$. Optical-potential models of nuclear reactions use precisely this to represent absorption.
 - *Reality of the separation constant $E$, in Step 2 of the separation proof.* The constancy of $\lvert\Psi\rvert^2$ for a separable solution is a consequence of self-adjointness and not of the differential equation, and (3) on its own does not deliver it. Take $V\equiv0$ in one dimension and $E = i\varepsilon$ with $\varepsilon>0$ real. Then $\psi = e^{\alpha x}$ with $\alpha^2 = -2mi\varepsilon/\hbar^2$, that is $\alpha = e^{-i\pi/4}\sqrt{2m\varepsilon}/\hbar$, solves (3), and
   $$
   \Psi = e^{\alpha x}e^{-iEt/\hbar} = e^{\alpha x}e^{\varepsilon t/\hbar}
   $$
-  solves (1) with density $\lvert\Psi\rvert^2 = e^{2(\operatorname{Re}\alpha)x}e^{2\varepsilon t/\hbar}$, which grows without bound in $t$. It is a separable solution and it is not stationary. What excludes it is not the equation but the normalization (2): $\operatorname{Re}\alpha = \sqrt{m\varepsilon/\hbar^2}>0$, so $\psi\notin L^2(\mathbb{R})$ and $\psi$ is not an eigenfunction of the self-adjoint $\hat H$ at all. Reed and Simon make this the first of their three mathematical problems: physical reasoning gives a formal expression for $\hat H$ with no domain attached; one must find a domain on which it is essentially self-adjoint, and failing that, survey its self-adjoint extensions and decide which one is to be the observable. Their second problem is the spectral analysis of $\hat H$ — for them its point spectrum is the collection of stationary states, and a system reacts to an outside stimulus by moving between two of them, radiating at a frequency set by the gap between the two energies. Their third is scattering theory, the behaviour as $t\to\infty$.
+  solves (1) with density $\lvert\Psi\rvert^2 = e^{2(\operatorname{Re}\alpha)x}e^{2\varepsilon t/\hbar}$, which grows without bound in $t$. It is a separable solution and it is not stationary. What excludes it is not the equation but the normalization (2): $\operatorname{Re}\alpha = \sqrt{m\varepsilon/\hbar^2}>0$, so $\psi\notin L^2(\mathbb{R})$ and $\psi$ is not an eigenfunction of the self-adjoint $\hat H$ at all. Where a suitable domain is to be found is the first of the three problems recorded in the next remark.
 - *Normalizability as the quantization condition.* Equation (3) is a differential equation with a solution for every $E$; what rules out most $E$ is the demand that the solution be in $L^2$, or satisfy a boundary condition. Kreyszig makes the criterion explicit — a solution counts as physically meaningful only if it stays bounded everywhere and dies away at large distance — and observes that, once a potential field is fixed, (3) possesses such solutions for certain values of $E$ and no others. The three examples below show the three outcomes: a continuous spectrum with no normalizable eigenfunctions at all (free particle), a discrete spectrum from a boundary condition (infinite well), and a discrete spectrum from decay at infinity (oscillator).
 - *Completeness, in Step 3 of the separation proof.* Formula (5) presumes that the eigenfunctions span the space of initial data. For the well and the oscillator this is the completeness of a Fourier sine series and of the Hermite functions respectively; for a potential with both bound and scattering states, the sum must be supplemented by an integral over the continuous spectrum, and (5) as written is incomplete.
 - *The separation of angular variables survives any central potential.* Riley, Hobson and Bence's general remark applies verbatim to (3): if $V = V(r)$, then $\theta$ and $\varphi$ enter only through $\nabla^2$, so the angular factors are spherical harmonics $Y_\ell^m$ and only the radial equation feels the potential. That is why hydrogen, the three-dimensional oscillator and a free particle share their angular wavefunctions, and why the orbital labels $s,p,d,f$ mean the same thing in every atom.
-- *What the time-dependent equation is not.* It is not a wave equation: it is first order in time, so one initial condition determines the evolution, not two, and there is no finite propagation speed. It is not the heat equation either, despite the shape, because the factor $i$ makes the evolution unitary rather than dissipative: $\lvert c_n\rvert$ is constant in (5), where a heat equation would have $e^{-E_nt}$ and lose the high modes. Reed and Simon's formulation makes this structural — the dynamics is a one-parameter group of unitary operators, so it is reversible, and the group is generated by $\hat H$.
+- *What the time-dependent equation is not.* It is not a wave equation: it is first order in time, so one initial condition determines the evolution, not two, and there is no finite propagation speed. It is not the heat equation either, despite the shape, because the factor $i$ makes the evolution unitary rather than dissipative: $\lvert c_n\rvert$ is constant in (5), where a heat equation would have $e^{-E_nt}$ and lose the high modes.
+:::
+
+:::remark[What the operator theory adds: three problems the formal equation leaves open]{provenance=adapted src="reed-simon-1980:§VIII.11, pp. 302–304"}
+Reed and Simon set the model up in Hilbert-space terms: a separable Hilbert space, physical states as unit vectors determined up to a phase, observables as self-adjoint operators whose measurement probabilities come from a projection-valued measure, and the dynamics as a continuous one-parameter group of unitary operators $U(t)$ whose self-adjoint generator $H$ is the Hamiltonian. Written out for $\varphi$ in the domain of $H$, their dynamical law is $\frac{d}{dt}[U(t)\varphi] = iH[U(t)\varphi]$, which is (1) in their units $\hbar = 1$ and with their sign of $i$. Three mathematical problems are then left open, and they are the three this unit keeps running into.
+
+1. *Self-adjointness.* The physics supplies a formal differential expression for $\hat H$ and no domain. One must find a domain on which it is essentially self-adjoint; where there is none, its self-adjoint extensions have to be surveyed and one of them chosen as the observable. The free-particle solution with imaginary $E$ above is the elementary face of this: the differential equation admits a solution that the operator does not.
+2. *Spectral analysis.* The point spectrum of $H$ is where the stationary states sit, and a system disturbed from one of them moves to another, radiating at a frequency set by the gap between the two energies. This is the sense in which (3) is an experiment.
+3. *Scattering theory.* The behaviour of $U(t)\varphi$ for large $\lvert t\rvert$.
+
+Their formulation also makes the reversibility of (1) structural rather than observed: a one-parameter group of *unitary* operators has an inverse at every $t$, and the norm it preserves is exactly the normalization (2).
 :::
 
 :::example[The free particle: a continuous spectrum and no normalizable eigenstates]{provenance=original}
@@ -347,7 +357,27 @@ $$
 (k+2)(k+1)\,a_{k+2} = (2k+1-\Lambda)\,a_k ,
 $$
 
-which couples $a_k$ to $a_{k+2}$ and so splits the solution space into an even and an odd series. A series terminates only when $\Lambda = 2k+1$ for some $k$ of its own parity. If it does not terminate, then $a_{k+2}/a_k \to 2/k$ for large $k$, and $2/k$ is also the ratio of successive non-zero coefficients of $e^{s^2} = \sum_j s^{2j}/j!$ (there $b_{k+2}/b_k = 1/(j+1)$ with $k = 2j$). A series whose tail has the coefficient ratio of $e^{s^2}$ grows like $s^pe^{s^2}$ for some power $p$, so $\tilde\psi = ve^{-s^2/2}$ grows like $s^pe^{s^2/2}$: it is not in $L^2(\mathbb{R})$ and fails Kreyszig's criterion of staying finite and dying away at infinity. Hence an admissible $\Lambda$ must terminate one of the two series, which is $\Lambda = 2n+1$; and at such a $\Lambda$ the series of the other parity still does not terminate, so the admissible solution is the polynomial one alone, up to a constant multiple. Kreyszig sets this growth estimate as his Problem 5, p. 588, rather than proving it; we need it, because the quantization claim rests on it.
+which couples $a_k$ to $a_{k+2}$ and so splits the solution space into an even series $E(s)$ and an odd series $O(s)$, with $v = \alpha E + \beta O$. A series terminates only when $\Lambda = 2k+1$ for some $k$ of its own parity. Two things then have to be shown, and Kreyszig leaves the first of them as his Problem 5, p. 588.
+
+*A non-terminating series grows too fast.* Suppose the even series, say, never terminates, so $2k+1-\Lambda \ne 0$ for every even $k$ and no $a_k$ of that parity vanishes beyond the first. Fix $c$ with $\tfrac12 < c < 1$. Comparing the recursion's ratio with the ratio of successive non-zero coefficients of $\mathrm{e}^{cs^2} = \sum_j c^js^{2j}/j!$, which is $2c/(k+2)$ at $k = 2j$,
+
+$$
+\frac{a_{k+2}}{a_k} = \frac{2k+1-\Lambda}{(k+2)(k+1)} \;\ge\; \frac{2c}{k+2}
+\qquad\Longleftrightarrow\qquad
+2k+1-\Lambda \;\ge\; 2c(k+1) ,
+$$
+
+and since $c<1$ the right-hand inequality holds for all $k$ beyond some $k_0$. From $k_0$ on the ratios are positive, so the coefficients keep one sign, and term by term they dominate a positive multiple of those of $\mathrm{e}^{cs^2}$. Hence for large $s>0$ the series exceeds $C\mathrm{e}^{cs^2}$ minus the finitely many terms below $k_0$, and
+
+$$
+\lvert\tilde\psi(s)\rvert = \lvert v(s)\rvert\,\mathrm{e}^{-s^2/2} \;\gtrsim\; \mathrm{e}^{(c-1/2)s^2} \longrightarrow \infty ,
+$$
+
+because $c > \tfrac12$. Such a $\tilde\psi$ is not in $L^2(\mathbb{R})$ and fails Kreyszig's criterion of staying finite and dying away at infinity.
+
+*The two series cannot rescue each other.* One might hope that a growing even series and a growing odd series could cancel. They cannot, and parity is why: if $\tilde\psi = v\mathrm{e}^{-s^2/2}$ were in $L^2(\mathbb{R})$, then so would be its even and odd parts $\tfrac12[\tilde\psi(s)\pm\tilde\psi(-s)]$, which are exactly $\alpha E(s)\mathrm{e}^{-s^2/2}$ and $\beta O(s)\mathrm{e}^{-s^2/2}$. So each series would have to be admissible on its own, and by the previous paragraph a non-terminating one is not.
+
+Hence an admissible $\Lambda$ must terminate one of the two series, which is $\Lambda = 2n+1$; and at such a $\Lambda$ the series of the other parity still does not terminate, since $2k+1 = \Lambda$ only at $k = n$, so its coefficient must be zero and the admissible solution is the polynomial one alone, up to a constant multiple.
 
 Translating back, $E = \tfrac12\hbar\omega_0\Lambda$ gives
 
@@ -383,7 +413,7 @@ $$
 :::
 
 :::application{provenance=original}
-**Spectroscopy, which is where the energies are read off.** Reed and Simon state the connection plainly: what makes the point spectrum of $\hat H$ worth studying is that its eigenfunctions are the stationary states, between which a disturbed system typically jumps, radiating at a frequency fixed by the energy gap. Every line in an atomic or molecular spectrum is a difference $E_n - E_{n'}$, so the eigenvalue problem (3) is directly measurable. The equally spaced ladder of the oscillator gives the vibrational bands of a diatomic molecule and, through $\hbar\omega_0 = \hbar\sqrt{k/\mu}$, measures the bond stiffness $k$; the $n^2$ ladder of the well gives the absorption edge of a quantum dot, which is why the colour of a cadmium-selenide nanocrystal is set by its diameter.
+**Spectroscopy, which is where the energies are read off.** Problem 2 of the previous remark is what makes (3) an experimental question: every line in an atomic or molecular spectrum is a difference $E_n - E_{n'}$, so the eigenvalues are read straight off a photographic plate or a detector. The equally spaced ladder of the oscillator gives the vibrational bands of a diatomic molecule and, through $\hbar\omega_0 = \hbar\sqrt{k/\mu}$, measures the bond stiffness $k$; the $n^2$ ladder of the well gives the absorption edge of a quantum dot, which is why the colour of a cadmium-selenide nanocrystal is set by its diameter.
 
 **Hydrogen and the periodic table.** Riley, Hobson and Bence's hydrogen equation is (3) with $V = -e^2/4\pi\varepsilon_0r$. Because the potential is central, the general point of step 5 in :ref[separation of variables]{to=pde.separation-of-variables} applies: the angular factors are the spherical harmonics $Y_\ell^m$, so the quantum numbers $\ell$ and $m$ and the $2\ell+1$-fold degeneracy are fixed by the Laplacian alone and are the same for every central potential. Only the radial equation knows about the Coulomb tail, and solving it gives the Laguerre functions and the energies $E_n = -13.6\ \mathrm{eV}/n^2$. Everything in the shell structure of the elements that does not depend on the particular potential — the $s,p,d,f$ labels, the counts $2,6,10,14$ — comes from the separation, not from the physics of the Coulomb force.
 

@@ -24,9 +24,9 @@ sources:
     pages: "559-560, 564-567"
     role: the distinction between \"self-adjoint\" (no boundary terms required) and \"Hermitian\" (boundary terms vanish); the sign convention for the general Sturm-Liouville equation and the footnoted variant; the integrating factor in the form $F=\exp\int(r-p')/p$; the natural interval, read off from $p(a)=p(b)=0$; the table of classical equations in Sturm-Liouville form
   - work: strauss-2008
-    loc: "§5.3, Green's second identity (3), symmetric boundary conditions (4)–(5) and (9), pp. 118–121; §11.4, eqs. (7)–(8) and the list of singular cases, pp. 315–316"
-    pages: "118-121, 315-316"
-    role: the definition of symmetric (hermitian) boundary conditions as the vanishing of the boundary term for every admissible pair; the four standard examples and a non-example; the boundary term with the factor $p$ for variable coefficients; what makes a Sturm-Liouville problem singular
+    loc: "§5.3, Green's second identity (3), symmetric boundary conditions (4)–(5) and (9), pp. 118–121, and Exercise 8, p. 123; §11.4, the standing hypotheses on $p,q,m$, p. 314, eqs. (7)–(8) and the list of singular cases (i)–(iii), pp. 315–316, and Exercise 6, p. 317"
+    pages: "118-123, 314-317"
+    role: the definition of symmetric (hermitian) boundary conditions as the vanishing of the boundary term for every admissible pair; the four standard examples and a non-example; the boundary term with the factor $p$ for variable coefficients; the standing hypotheses on the coefficients and what makes a Sturm-Liouville problem singular
   - work: reed-simon-1980
     loc: "§VIII.2, definitions of symmetric and self-adjoint operators and the paragraph on why the distinction matters, pp. 255–256"
     pages: "255-256"
@@ -129,7 +129,7 @@ Both halves come from moving the derivatives off $u$ and onto $v$, and we do it 
 4. *The criterion for formal self-adjointness.* Two second-order operators agree as operators exactly when their three coefficients agree, because applying them to $1, x, x^2$ recovers the coefficients. Comparing $L^{*}$ with $L$ term by term, the $D^2$ coefficients already agree, the $D$ coefficients agree iff $2a_2' - a_1 = a_1$, that is iff $a_2' = a_1$, and this condition also forces the agreement of the last coefficients, since $a_2' = a_1$ gives $a_2'' - a_1' = 0$. So $L^{*}=L$ iff $a_2'=a_1$. In that case $a_2 u'' + a_1 u' = a_2 u'' + a_2' u' = (a_2 u')'$, and $a_1 - a_2' = 0$ removes the last term of $J$. $\square$
 :::
 
-:::definition[Symmetric boundary conditions and self-adjoint problems]{provenance=adapted src="strauss-2008:§5.3, eqs. (4)–(5) and (9), pp. 119–121, and §11.4, eq. (8) and the singular cases (i)–(iii), pp. 315–316; stakgold-holst-2011:§3.2, pp. 197–198, including Example 4, p. 198; rhb-2006:§17.2, eqs. (17.15)–(17.16), pp. 559–560; hassani-2013:§19.2, the four conditions defining a singular S-L system, p. 572"}
+:::definition[Symmetric boundary conditions and self-adjoint problems]{provenance=adapted src="strauss-2008:§5.3, eqs. (4)–(5) and (9), pp. 119–121, and §11.4, the standing hypotheses on $p,q,m$, p. 314, eq. (8), p. 315, and the singular cases (i)–(iii), p. 316; stakgold-holst-2011:§3.2, pp. 197–198, including Example 4, p. 198; rhb-2006:§17.2, eqs. (17.15)–(17.16), pp. 559–560; hassani-2013:§19.2, the four conditions defining a singular S-L system, p. 572"}
 A differential operator becomes an operator on a space of functions only once boundary conditions are imposed. Take a pair of homogeneous conditions on $[a,b]$ of the general form
 
 $$
@@ -158,15 +158,15 @@ Four standard cases make the boundary term vanish. With $Lu = (pu')' + a_0u$ and
 
 - **Dirichlet**, $u(a)=u(b)=0$: each endpoint term has a factor $u$ or $v$ that vanishes.
 - **Neumann**, $u'(a)=u'(b)=0$: each endpoint term has a factor $u'$ or $v'$ that vanishes.
-- **Separated** (**Robin**, **unmixed**) conditions $\alpha_1 u(a) + \beta_1 u'(a) = 0$ and $\alpha_2 u(b) + \beta_2 u'(b) = 0$, with real $(\alpha_i,\beta_i) \neq (0,0)$: see the proof below. Dirichlet and Neumann are the special cases $\beta_i = 0$ and $\alpha_i = 0$. Stakgold and Holst's Example 4 records that unmixed conditions with a formally self-adjoint $L$ give $\mathcal M^* = \mathcal M$: "a typical self-adjoint BVP".
+- **Separated** (**unmixed**) conditions $\alpha_1 u(a) + \beta_1 u'(a) = 0$ and $\alpha_2 u(b) + \beta_2 u'(b) = 0$, with real $(\alpha_i,\beta_i) \neq (0,0)$: see the proof below. Dirichlet and Neumann are the special cases $\beta_i = 0$ and $\alpha_i = 0$; **Robin** usually names the remaining case, with $\alpha_i$ and $\beta_i$ both nonzero, although Strauss attaches the word to the whole separated family (his Case 4, p. 119). Stakgold and Holst's Example 4 records that unmixed conditions with a formally self-adjoint $L$ give $\mathcal M^* = \mathcal M$: "a typical self-adjoint BVP".
 - **Periodic**, $u(a) = u(b)$ and $u'(a) = u'(b)$, *provided* $p(a) = p(b)$: then the two endpoint contributions are equal and cancel.
 
 A fifth case, important for the classical equations of physics, needs no boundary condition at all: if $p(a) = p(b) = 0$ then the boundary term vanishes for all $u,v$ that stay bounded with bounded derivatives, and $[a,b]$ is called the **natural interval** of the operator :cite[]{work=rhb-2006 loc="§17.4.1, p. 565, and §17.4.2, p. 567"}.
 
-This handbook calls a Sturm-Liouville problem **singular** when at least one of Hassani's four conditions holds :cite[]{work=hassani-2013 loc="§19.2, p. 572"}: the interval stretches to infinity in one or both directions; $p$ or $w$ vanishes at one or both endpoints; $q$ is not continuous on $[a,b]$; or one of $p,q,w$ is singular at $a$ or $b$. Strauss's list is the shorter one of three conditions — $p$ vanishes at an endpoint; one of $p$, $q$, $m$ becomes infinite there (his $m$ is our weight $w$); an endpoint is itself infinite :cite[]{work=strauss-2008 loc="§11.4, p. 316"} — so a bounded jump in $q$ leaves his problem regular while ours is singular. A problem meeting none of the four, with the hypotheses listed in :ref[Sturm-Liouville eigenvalue problems]{to=ode.sturm-liouville-theory}, is **regular**.
+This handbook calls a Sturm-Liouville problem **singular** when at least one of Hassani's four conditions holds :cite[]{work=hassani-2013 loc="§19.2, p. 572"}: the interval stretches to infinity in one or both directions; $p$ or $w$ vanishes at one or both endpoints; $q$ is not continuous on $[a,b]$; or one of $p,q,w$ is singular at $a$ or $b$. Strauss's list is the shorter one of three conditions — $p$ vanishes at an endpoint; one of $p$, $q$, $m$ becomes infinite there (his $m$ is our weight $w$); an endpoint is itself infinite :cite[]{work=strauss-2008 loc="§11.4, p. 316"}. The two lists differ over a $q$ with a bounded jump: that makes the problem singular for us, while Strauss's list does not catch it — but neither does it leave the problem regular in his sense, because his standing hypotheses require $q$ continuous :cite[]{work=strauss-2008 loc="§11.4, p. 314"}, so such an equation falls outside his setup altogether. A problem meeting none of the four, with the hypotheses listed in :ref[Sturm-Liouville eigenvalue problems]{to=ode.sturm-liouville-theory}, is **regular**.
 :::
 
-:::statement[Separated conditions are symmetric]{provenance=adapted src="strauss-2008:§5.3, Case 4 and Exercise 8, pp. 119–120, and §11.4, Exercise 6, p. 317"}
+:::statement[Separated conditions are symmetric]{provenance=adapted src="strauss-2008:§5.3, Case 4, p. 119, and Exercise 8, p. 123, and §11.4, Exercise 6, p. 317"}
 Let $L u = (p u')' + a_0 u$ with $p, a_0$ real, and impose the separated conditions
 
 $$
@@ -222,15 +222,15 @@ A separated condition at an endpoint is one linear equation on the two numbers $
 :::
 
 :::method[Putting a second-order equation into self-adjoint form]{provenance=adapted src="hassani-2013:§14.5, Thm 14.5.4, p. 435, and §19.2, Example 19.2.2(c), p. 571; arfken-2013:§8.2, eqs. (8.14)–(8.19), pp. 385–386; rhb-2006:§17.4.2, eqs. (17.38)–(17.40) and Table 17.1, pp. 566–567"}
-Given
+Write $L = a_2 D^2 + a_1 D + a_0$, as in the first definition, and start from the equation
 
 $$
-a_2(x)\,y'' + a_1(x)\,y' + a_0(x)\,y + \lambda\,\rho(x)\,y = 0
+L y + \lambda\,\rho(x)\,y \;=\; a_2(x)\,y'' + a_1(x)\,y' + a_0(x)\,y + \lambda\,\rho(x)\,y \;=\; 0
 $$
 
-on an interval where $a_2$ does not vanish:
+on an interval where $a_2$ does not vanish. Note the sign: the eigenvalue term is added to $Ly$, as in the convention fixed in the remark above.
 
-1. **Test for self-adjointness.** If $a_2' = a_1$, the operator is already formally self-adjoint; skip to step 4.
+1. **Test for self-adjointness.** If $a_2' = a_1$, the operator is already formally self-adjoint: take $h \equiv 1$ and skip to step 4.
 2. **Build the integrating factor.**
 
    $$
@@ -245,7 +245,7 @@ on an interval where $a_2$ does not vanish:
    p = h\,a_2 , \qquad q = -\,h\,a_0 , \qquad w = h\,\rho .
    $$
 
-   For an eigenvalue problem $Ly = \lambda y$ with no weight in the original equation, take $\rho \equiv 1$, so that $w = h$: the integrating factor *is* the weight, and the inner product consistent with hermiticity is $(f,g)_w = \int_a^b w f \overline g\,\mathrm d x$ :cite[]{work=arfken-2013 loc="§8.2, eq. (8.19), p. 386"}.
+   For an eigenvalue problem with no weight in the original equation — that is, $Ly + \lambda y = 0$, or equivalently $Ly = -\lambda y$ — take $\rho \equiv 1$, so that $w = h$: the integrating factor *is* the weight, and the inner product consistent with hermiticity is $(f,g)_w = \int_a^b w f \overline g\,\mathrm d x$ :cite[]{work=arfken-2013 loc="§8.2, eq. (8.19), p. 386"}. Arfken reaches the same weight from $L\psi = \lambda\psi$; his $\lambda$ is the negative of ours, by the remark above, but the weight is the same expression either way.
 5. **Fix the interval and the boundary conditions.** Check that $p > 0$ and $w > 0$ on the interval, and choose boundary conditions from the symmetric list above. If $p$ vanishes at two points, take those two points as the endpoints of the interval — this is the natural interval — and boundedness of $y$ there replaces the boundary conditions.
 
 Riley-Hobson-Bence's Table 17.1 is the result of running this recipe on the classical equations; they write the weight as $\rho$, and their $q$ is the negative of ours. Legendre gives $p = 1-x^2$, $w=1$ on $[-1,1]$; Chebyshev gives $p=(1-x^2)^{1/2}$, $w=(1-x^2)^{-1/2}$; Laguerre gives $p = xe^{-x}$, $w = e^{-x}$ on $[0,\infty)$; Hermite gives $p = w = e^{-x^2}$ on $\mathbb R$; Bessel gives $p = w = x$ with, in our sign convention, $q = \nu^2/x$ (their table prints $q = -\nu^2/x$; the value $\nu^2/x$ is Hassani's, :cite[]{work=hassani-2013 loc="§19.2, Example 19.2.2(c), p. 571"}, whose convention is ours).

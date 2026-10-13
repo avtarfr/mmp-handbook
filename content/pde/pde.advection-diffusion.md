@@ -77,12 +77,12 @@ $$
 
 is infinitely differentiable for $t>0$, solves $u_t + Vu_x = D u_{xx}$, and tends to $g(x_0)$ as $(x,t)\to(x_0,0)$ with $t>0$. In words: *the profile diffuses exactly as if $V$ were zero, while the whole pattern is carried along at speed $V$.* Three consequences:
 
-1. **Mean and width.** Suppose in addition that $g \ge 0$, that its total mass $M = \int g$ is finite and positive, and that its first two moments are finite, $\int |y|\,g(y)\,dy < \infty$ and $\int y^2 g(y)\,dy < \infty$. Then $\int u(x,t)\,dx = M$ for all $t$, the centre of mass is at $\bar x(t) = \bar x(0) + Vt$, and the variance about it is $\mathrm{var}(t) = \mathrm{var}(0) + 2Dt$. (Both moment hypotheses are needed: a bounded continuous $g \ge 0$ of finite mass, such as $g(y) = (1+y^2)^{-1}$, may have neither a mean nor a variance.)
+1. **Mean and width.** Suppose in addition that $g \ge 0$, that its total mass $M = \int g$ is finite and positive, and that its second moment is finite, $\int y^2 g(y)\,dy < \infty$. Then $\int u(x,t)\,dx = M$ for all $t$, the centre of mass is at $\bar x(t) = \bar x(0) + Vt$, and the variance about it is $\mathrm{var}(t) = \mathrm{var}(0) + 2Dt$. (A finite first moment need not be assumed: Cauchy-Schwarz applied to $|y|\sqrt{g}\cdot\sqrt{g}$ gives $\int |y|\,g \le \bigl(\int y^2 g\bigr)^{1/2}\bigl(\int g\bigr)^{1/2} < \infty$. Some decay hypothesis is needed, and the second moment is the stronger of the two: $g(y) = (1+y^2)^{-1}$ is bounded, continuous and non-negative with finite mass but with neither a mean nor a variance, while $g(y) = (1+|y|^3)^{-1}$ has a finite mass and a finite mean, the integrands there decaying like $|y|^{-3}$ and $|y|^{-2}$, yet $\int y^2 g = \infty$ because there the integrand decays only like $|y|^{-1}$.)
 2. **Relative spread.** Keep the hypotheses of part 1 and let $V > 0$. By the time the cloud has travelled a distance $L$, that is at $t = L/V$, diffusion has added $2DL/V$ to the variance, so the standard deviation is
    $$
    \sqrt{\mathrm{var}(0) + 2DL/V} .
    $$
-   For a release that starts concentrated, $\mathrm{var}(0) = 0$, this is $\sqrt{2DL/V} = L\sqrt{2/\mathrm{Pe}}$ with $\mathrm{Pe} = VL/D$. The cloud therefore stays sharp relative to the distance travelled exactly when $\mathrm{Pe}$ is large and the initial width is small compared with $L$.
+   For a release that starts concentrated, meaning $\mathrm{var}(0)$ negligible beside $2DL/V$, this is close to $\sqrt{2DL/V} = L\sqrt{2/\mathrm{Pe}}$ with $\mathrm{Pe} = VL/D$. (The hypotheses of part 1 force $\mathrm{var}(0) > 0$ strictly, since a continuous $g \ge 0$ of positive mass cannot be concentrated at a point; the limiting value $\mathrm{var}(0)=0$ belongs to the point release of the example below, which the statement does not cover but the kernel itself handles.) The cloud therefore stays sharp relative to the distance travelled exactly when $\mathrm{Pe}$ is large and the initial width is small compared with $L$.
 3. **A linear decay term.** If $u_t + Vu_x = Du_{xx} - r u$ with $r$ constant, then $u = e^{-rt}w$ where $w$ solves the equation without the decay term, so the formula above acquires the factor $e^{-rt}$.
 :::
 
@@ -101,7 +101,7 @@ so $u_t + V u_x = w_t = D w_{yy} = D u_{xx}$: the change of variable converts so
 
 **Step 2 (apply the heat kernel).** Let $w(y,t) = \int S_D(y-z,t)g(z)\,dz$. By :ref[the heat-kernel theorem]{to=pde.heat-kernel}, applied with diffusivity $D$, $w$ is $C^\infty$ for $t>0$, solves $w_t = Dw_{yy}$, and $w(y,t)\to g(y_0)$ as $(y,t)\to(y_0,0)$. Step 1 turns this into the stated $u$, which is therefore $C^\infty$ and solves the equation; and since $(x,t)\to(x_0,0)$ forces $(x-Vt,t)\to(x_0,0)$, the initial condition carries over.
 
-**Step 3 (mass, mean, variance).** Each is a property of $S_D$ transported by Step 1. $\int S_D(\cdot,t) = 1$ gives conservation of mass by Fubini's theorem, the integrand being non-negative. Treating $u(\cdot,t)/M$ as a probability density — legitimate because $M$ is finite and positive by hypothesis — it is the convolution of the two densities $g/M$ and $S_D(\cdot,t)$, translated by $Vt$. The mean and variance of $g/M$ exist precisely because its first two moments were assumed finite, and those of $S_D(\cdot,t)$ are $0$ and $2Dt$ by the definition of $S_D$. Convolution of two densities with finite second moments adds their means and adds their variances, and a translation adds to the mean only. This is part 1. Substituting $t = L/V$ into $\mathrm{var}(t) = \mathrm{var}(0) + 2Dt$ gives part 2, with $2DL/V = L^2\cdot 2D/(VL) = 2L^2/\mathrm{Pe}$, so that the term diffusion contributes to the standard deviation is $L\sqrt{2/\mathrm{Pe}}$.
+**Step 3 (mass, mean, variance).** Each is a property of $S_D$ transported by Step 1. $\int S_D(\cdot,t) = 1$ gives conservation of mass by Tonelli's theorem, the integrand being non-negative. Treating $u(\cdot,t)/M$ as a probability density — legitimate because $M$ is finite and positive by hypothesis — it is the convolution of the two densities $g/M$ and $S_D(\cdot,t)$, translated by $Vt$. The mean and variance of $g/M$ exist because its second moment was assumed finite, which as noted in part 1 also makes its first moment finite, and those of $S_D(\cdot,t)$ are $0$ and $2Dt$ by the definition of $S_D$. Convolution of two densities with finite second moments adds their means and adds their variances, and a translation adds to the mean only. This is part 1. Substituting $t = L/V$ into $\mathrm{var}(t) = \mathrm{var}(0) + 2Dt$ gives part 2, with $2DL/V = L^2\cdot 2D/(VL) = 2L^2/\mathrm{Pe}$, so that the term diffusion contributes to the standard deviation is $L\sqrt{2/\mathrm{Pe}}$.
 
 **Step 4 (decay term).** If $u = e^{-rt}w$ then $u_t + Vu_x - Du_{xx} + ru = e^{-rt}\bigl(w_t - rw + Vw_x - Dw_{xx} + rw\bigr) = e^{-rt}(w_t + Vw_x - Dw_{xx})$, which vanishes precisely when $w$ solves the undecayed equation. $\square$
 :::
@@ -124,18 +124,23 @@ where $f : \mathbb{R}\to\mathbb{R}$ is smooth and, for some point $0 < a < 1$, s
 - (c) $f'(0) < 0$ and $f'(1) < 0$;
 - (d) $\int_0^1 f(z)\,dz > 0$.
 
-A **travelling wave** is a solution of the form $u(x,t) = v(x - \sigma t)$. Substituting, $v$ must satisfy
+A **travelling wave** is a solution of the form $u(x,t) = v(x - \sigma t)$. Substituting into the equation gives the ordinary differential equation
 
 $$
-v'' + \sigma v' + f(v) = 0, \qquad
-\lim_{s\to+\infty}v(s) = 1,\quad \lim_{s\to-\infty}v(s) = 0,\quad \lim_{s\to\pm\infty}v'(s)=0 .
+v'' + \sigma v' + f(v) = 0 ,
 $$
 
-Evans shows by a phase-plane argument that there exists a velocity $\sigma < 0$ for which this problem has a solution, so the equation has a travelling wave interpolating between the two stable states $0$ and $1$; and he states that a more refined analysis shows this velocity is **unique** :cite{work=evans-2010 loc="p. 175"}. Hypothesis (c) is what makes $0$ and $1$ stable as constant solutions, with the intermediate constant $a$ unstable; the front is therefore an invasion of one stable state by the other.
+and to it one *imposes* the conditions that make the wave a front between the two stable states, Evans' (16):
+
+$$
+\lim_{s\to+\infty}v(s) = 1,\qquad \lim_{s\to-\infty}v(s) = 0,\qquad \lim_{s\to\pm\infty}v'(s)=0 .
+$$
+
+These limits do not follow from the substitution; they are part of what is being asked for. Evans shows by a phase-plane argument that there exists a velocity $\sigma < 0$ for which this problem has a solution, so the equation has a travelling wave interpolating between the two stable states $0$ and $1$; and he states that a more refined analysis shows this velocity is **unique** :cite{work=evans-2010 loc="p. 175"}. Hypothesis (c) is what makes $0$ and $1$ stable as constant solutions, with the intermediate constant $a$ unstable; the front is therefore an invasion of one stable state by the other. This is the existence theorem of :ref[travelling waves]{to=pde.travelling-waves}, restated here because the identity below and the examples need its hypotheses in front of them; that unit works Evans' argument through in detail.
 :::
 
 :::note{provenance=adapted src="evans-2010:§4.2.1c, pp. 171–175"}
-This is one of the handbook's few statements given without a complete proof, and the reason is that the source does not give one either: Evans writes that he outlines the phase-plane analysis "without complete proofs" :cite{work=evans-2010 loc="p. 171"}, and the uniqueness of $\sigma$ is asserted rather than demonstrated :cite{work=evans-2010 loc="p. 175"}. His route, which is worth knowing, is this. Writing $w = v'$ turns the second-order equation into the planar system $v' = w$, $w' = -\sigma w - f(v)$, whose stationary points $(0,0)$ and $(1,0)$ are saddles by (c); a travelling wave is precisely a trajectory joining the unstable curve leaving $(0,0)$ to the stable curve entering $(1,0)$. Evans shows that for $\sigma<0$ both curves cross the vertical line through $(a+\varepsilon,0)$, at heights $w_0(\sigma)$ and $w_1(\sigma)$; that $w_0(0) < w_1(0)$ because for $\sigma = 0$ trajectories lie in level sets of $E(v,w) = \tfrac12 w^2 + \int_0^v f$; and that $w_0(\sigma) > w_1(\sigma)$ for $\sigma$ sufficiently negative. Smooth dependence on $\sigma$ then gives a $\sigma<0$ with $w_0(\sigma)=w_1(\sigma)$, which is the connection. For the fully proved statements, see the identity below and the exact front in the second example.
+No proof is given here, for two reasons. The phase-plane route — writing $w = v'$, reading a front as a trajectory joining the saddle at $(0,0)$ to the saddle at $(1,0)$, and moving $\sigma$ until the unstable and stable curves meet — is set out step by step in :ref[travelling waves]{to=pde.travelling-waves}, and repeating it here would duplicate that unit. And the source itself stops short of a complete argument: Evans says he outlines the analysis "without complete proofs" :cite{work=evans-2010 loc="p. 171"}, and the uniqueness of $\sigma$ is asserted rather than demonstrated :cite{work=evans-2010 loc="p. 175"}. What this unit adds is what can be settled in full: the identity below, which fixes the sign of $\sigma$ from $f$ alone, and the exact front in the second example.
 :::
 
 :::statement[The velocity is fixed by the areas]{provenance=adapted src="evans-2010:§4.2.1c, the function $E$ and its derivative, p. 173"}
@@ -155,13 +160,13 @@ $$
 \frac{d}{ds}E\bigl(v(s),v'(s)\bigr) = v'v'' + f(v)\,v' = v'\bigl(v'' + f(v)\bigr) = -\sigma\, v'(s)^2 ,
 $$
 
-the last step by the differential equation. Both sides are integrable on $\mathbb{R}$: the right-hand side because $v'\in L^2$, so the left-hand side has a limit at each end, and
+the last step by the differential equation. The right-hand side is integrable on $\mathbb{R}$ because $v'\in L^2$, so $s \mapsto E(v(s),v'(s))$ is an antiderivative of an integrable function. It is $E$ itself, not its derivative, that has limits at the two ends: $E$ is continuous, and $v\to 0$, $v'\to 0$ as $s\to-\infty$ while $v\to1$, $v'\to0$ as $s\to+\infty$, so $E(v(s),v'(s))\to E(0,0)=0$ and $\to E(1,0)=\int_0^1 f$ respectively. Hence, by the fundamental theorem of calculus,
 
 $$
 \int_{-\infty}^{\infty}\frac{d}{ds}E\,ds = E(1,0) - E(0,0) = \int_0^1 f(z)\,dz ,
 $$
 
-using $v\to1$, $v'\to0$ at $+\infty$ and $v\to0$, $v'\to0$ at $-\infty$, and the continuity of $E$. Equating the two evaluations of the integral gives $\int_0^1 f = -\sigma\int (v')^2$. Since $\int (v')^2 > 0$ (otherwise $v$ is constant and cannot have two different limits), the sign statement follows. $\square$
+the two end values being the limits just identified. Equating this with the integral of $-\sigma (v')^2$ gives $\int_0^1 f = -\sigma\int (v')^2$. Since $\int (v')^2 > 0$ (otherwise $v$ is constant and cannot have two different limits), the sign statement follows. $\square$
 :::
 
 :::remark[Where the hypotheses are used]{provenance=original}
@@ -181,15 +186,15 @@ $$
 u(x,t) = \frac{M}{\sqrt{4\pi D t}}\,\exp\!\Bigl(-\frac{(x-Vt)^2}{4Dt}\Bigr) ,
 $$
 
-solves $u_t + Vu_x = Du_{xx}$ for every $t>0$, carries mass $M$ at every time, and concentrates at $x = 0$ as $t \to 0^+$ — the point-source reading of the kernel described in :ref[the heat kernel]{to=pde.heat-kernel}. It is a Gaussian of mean $Vt$ and variance $2Dt$, so parts 1 and 2 of the statement apply to it with $\mathrm{var}(0) = 0$.
+solves $u_t + Vu_x = Du_{xx}$ for every $t>0$, carries mass $M$ at every time, and concentrates at $x = 0$ as $t \to 0^+$ — the point-source reading of the kernel described in :ref[the heat kernel]{to=pde.heat-kernel}. It is a Gaussian of mean $Vt$ and variance $2Dt$, which is what parts 1 and 2 of the statement would say if $\mathrm{var}(0)=0$ were allowed in them. It is not — those parts need a continuous $g\ge0$, whose variance is positive — so read the point release as the limiting case they approach, and the formulas below as read off the kernel directly rather than quoted from the statement.
 
 Take $L = 1000\,\mathrm{m}$, the distance to a water intake downstream.
 
 1. *Peclet number.* $\mathrm{Pe} = VL/D = (0.5)(1000)/5 = 100$. Advection dominates: the tracer arrives as a recognisable pulse, not a slow seepage.
-2. *Arrival.* The peak passes the intake at $t = L/V = 2000\,\mathrm{s} = 33\,\mathrm{min}$.
-3. *Width.* At that moment the standard deviation of the cloud is $\sqrt{2Dt} = \sqrt{2\cdot5\cdot2000} = 141.4\,\mathrm{m}$, which is $L\sqrt{2/\mathrm{Pe}} = 1000\sqrt{0.02} = 141.4\,\mathrm{m}$, as part 2 of the statement requires.
+2. *Arrival.* The maximum of the travelling profile reaches the intake at $t = L/V = 2000\,\mathrm{s} = 33.3\,\mathrm{min}$. The concentration *measured at the intake* peaks a little earlier, at $t = 1980.1\,\mathrm{s}$: the $t^{-1/2}$ prefactor is still falling while the cloud arrives, and it pulls the maximum about $1\%$ early.
+3. *Width.* At $t = L/V$ the standard deviation of the cloud is $\sqrt{2Dt} = \sqrt{2\cdot5\cdot2000} = 141.4\,\mathrm{m}$, which is $L\sqrt{2/\mathrm{Pe}} = 1000\sqrt{0.02} = 141.4\,\mathrm{m}$: the formula of part 2 in its $\mathrm{var}(0)=0$ limit.
 4. *Peak concentration.* $u_{\max} = M/\sqrt{4\pi D t} = M/354.5$, in units of mass per metre: a release of $10\,\mathrm{kg}$ gives $28.2\,\mathrm{g/m}$ at the peak.
-5. *Duration.* The intake sees concentrations above about $14\%$ of the peak (two standard deviations) for a time $4\sigma/V = 4(141.4)/0.5 = 1131\,\mathrm{s}$, about $19\,\mathrm{min}$.
+5. *Duration.* Two standard deviations either side of the centre the Gaussian factor is $e^{-2} = 0.135$, so the intake sees concentrations above about $14\%$ of the peak for a time $4\sqrt{2Dt}/V = 4(141.4)/0.5 = 1131\,\mathrm{s}$, about $19\,\mathrm{min}$. (The letter $\sigma$ is reserved in this unit for the velocity of a travelling front.)
 6. *What would change at low Peclet number.* Were the channel ten times slower, $\mathrm{Pe} = 10$ and the relative spread $\sqrt{2/\mathrm{Pe}} = 0.45$: the cloud would be nearly as long as its journey, and tracer would have reached the intake long before the peak did, since the Gaussian is positive everywhere: the leading edge of the cloud runs ahead of its centre, downstream of the peak.
 :::
 
@@ -229,7 +234,7 @@ $$
 = \frac{1}{32}\cdot 2\sqrt2 \cdot \frac43 = \frac{\sqrt2}{12} = 0.117851 .
 $$
 
-Then $\sigma\int(v')^2 = (-0.353553)(0.117851) = -0.0416667 = -\int_0^1 f$. The identity is satisfied to every digit, for every $a$.
+Then $\sigma\int(v')^2 = (-0.353553)(0.117851) = -0.0416667 = -\int_0^1 f$. The identity is satisfied to every digit, for every $a$. (The front itself, and the way the guess $v' = b\,v(1-v)$ selects $b$ and $\sigma$, is worked out at more length in :ref[travelling waves]{to=pde.travelling-waves}; what is new here is the check against the area identity.)
 
 *Numbers with dimensions.* For $u_t = D u_{xx} + r\,u(1-u)(u-a)$, scaling $x = \sqrt{D/r}\,\xi$ and $t = \tau/r$ returns the equation above, so the physical speed is $\sqrt{Dr}\,|\sigma|$ and the front thickness is $\sqrt{D/r}$ times the dimensionless one. The profile rises from $0.1$ to $0.9$ over $2\sqrt2\ln 9 = 6.215$ dimensionless units. For a gas-phase front with $D = 0.2\,\mathrm{cm^2/s}$ and $r = 10^4\,\mathrm{s^{-1}}$ and $a = \tfrac14$, the speed is $\sqrt{2000}\cdot0.353553 = 15.8\,\mathrm{cm/s}$ and the front is $6.215\sqrt{2\times10^{-5}} = 0.028\,\mathrm{cm}$ thick: thin and fast, which is what a flame looks like.
 :::
@@ -239,7 +244,7 @@ Then $\sigma\int(v')^2 = (-0.353553)(0.117851) = -0.0416667 = -\int_0^1 f$. The 
 
 **Numerical warning.** When the advection-diffusion equation is discretised, the relevant Peclet number uses the *cell* size: $\mathrm{Pe}_{\text{cell}} = V\Delta x/D$. Centred differences for $Vu_x$ combined with centred differences for $Du_{xx}$ produce a scheme whose coefficients lose their sign once $\mathrm{Pe}_{\text{cell}} > 2$, and the computed solution then oscillates around steep fronts — the same loss of a discrete maximum principle seen in :ref[the maximum principle]{to=pde.heat-maximum-principle}. The classical responses are to refine until $\mathrm{Pe}_{\text{cell}} \le 2$ or to use one-sided (upwind) differences for the advection term; see :ref[finite differences]{to=num.finite-differences}.
 
-**The probabilistic reading.** :cite[Grimmett and Stirzaker]{work=grimmett-stirzaker-2020 loc="Example (10), p. 584"} derive, for a one-dimensional Brownian particle with constant drift rate $m$ and instantaneous variance $\sigma^2$, the forward equation $\partial_t f = -m\,\partial_y f + \tfrac12\sigma^2\partial_{yy} f$ and observe that the corresponding process is $D(t) = \sigma W(t) + mt$. That is precisely the moving-frame theorem, in probabilistic clothing: $V = m$, $D = \tfrac12\sigma^2$, and "carry the diffusing profile along at speed $V$" is "add a deterministic drift $mt$ to a Wiener path". The same correspondence makes the advection-diffusion equation the simplest :ref[Fokker-Planck equation]{to=prob.fokker-planck}.
+**The probabilistic reading.** :cite[Grimmett and Stirzaker]{work=grimmett-stirzaker-2020 loc="Example (10), p. 584"} derive, for a one-dimensional Brownian particle with constant drift rate $m$ and instantaneous variance $\beta^2$, the forward equation $\partial_t f = -m\,\partial_y f + \tfrac12\beta^2\partial_{yy} f$ and observe that the corresponding process is $\beta W(t) + mt$. (They write $\sigma$ for what is called $\beta$ here; in this unit $\sigma$ is the front velocity.) That is precisely the moving-frame theorem, in probabilistic clothing: $V = m$, $D = \tfrac12\beta^2$, and "carry the diffusing profile along at speed $V$" is "add a deterministic drift $mt$ to a Wiener path". The same correspondence makes the advection-diffusion equation the simplest :ref[Fokker-Planck equation]{to=prob.fokker-planck}.
 
 **Fronts.** The bistable front is the mechanism behind a long list of propagating transitions: the nerve impulse in the Nagumo model, where $u$ is a membrane potential and the two stable states are rest and excitation; flame propagation, where $u$ is a scaled temperature and the Arrhenius factor of :cite{work=stakgold-holst-2011 loc="§0.3, Eq. (0.3.1), p. 12"} supplies the nonlinearity; the advance of an advantageous gene through a population; and phase transitions in which one phase invades another. In every case the two numbers the model has to deliver are the ones computed above: the speed, which the area identity ties to $\int_0^1 f$, and the thickness $\sqrt{D/r}$, which says how fine a mesh or how fast a camera is needed to see it. When a reaction is coupled to two diffusing species with different diffusivities, uniform states that are stable without diffusion can become unstable with it — the Turing instability, which :cite[Evans]{work=evans-2010 loc="§4.1, pp. 165–166"} analyses as a condition on the eigenvalues, and which is the standard account of biological pattern formation.
 :::

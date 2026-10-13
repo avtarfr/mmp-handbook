@@ -1,4 +1,55 @@
 {
+  "asym.asymptotic-series": {
+    "hash": "7d954dc1b6953789a9e7547ae1382b4fd3593542634ba0bdae92fa095e6134e6",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:05.294Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:33:12.704Z",
+        "report": "verification/reports/asym.asymptotic-series/7d954dc1b695-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "asym.euler-maclaurin": {
+    "hash": "39db5924a5fa294c43f7700d100a29f299f21a135f6b75bb8cb92b548a13d645",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:05.294Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:34:12.296Z",
+        "report": "verification/reports/asym.euler-maclaurin/39db5924a5fa-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "asym.laplace-method": {
+    "hash": "73e361766e92ba2f145ec97708778a83da8343b74f734f4e6d08a4c203882ae2",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:47:48.058Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "B"
+    ],
+    "rounds": 2,
+    "hold": false
+  },
   "asym.regular-perturbation": {
     "hash": "f97c84e14857dc1d7cfac5e595f1adfa0f5b648f40e40127d33ec376d8411727",
     "checks": {
@@ -10,6 +61,70 @@
         "verdict": "pass",
         "at": "2026-10-11T23:44:43.544Z",
         "report": "verification/reports/asym.regular-perturbation/f97c84e14857-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "asym.stationary-phase": {
+    "hash": "b21e55d25c2a415115a93dfa09e4f44799eadee08d59ae8f7cfaa116f21e7ef5",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:39:10.311Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
+  "asym.steepest-descent": {
+    "hash": "54bbf64edab96320d1a9a2dfcab3fd82d97dd69dbdd5f319841edeb86e3e654b",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:39:10.312Z"
+    },
+    "verifiers": {},
+    "requires": [
+      "B"
+    ],
+    "rounds": 1,
+    "hold": false
+  },
+  "asym.stirling-formula": {
+    "hash": "c1cc8f30cbd5f51d527e3c2a26c733dec8dbe3f587524073d452bb7035b1db32",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:19:16.275Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:34:24.570Z",
+        "report": "verification/reports/asym.stirling-formula/c1cc8f30cbd5-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "asym.watson-lemma": {
+    "hash": "978186bc069a28eac43501f8ae4127a770e1cfa2545f993c3a723a9872ac7aaa",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:05.294Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:35:16.570Z",
+        "report": "verification/reports/asym.watson-lemma/978186bc069a-B.md"
       }
     },
     "requires": [
@@ -375,6 +490,25 @@
     "rounds": 0,
     "hold": false
   },
+  "complex.pole-expansions-products": {
+    "hash": "f8d8fb61a2534aed4e1572f11d7850ad12d67101c49eacaefe8f58d3d7f7e562",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:15:37.871Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:20:27.328Z",
+        "report": "verification/reports/complex.pole-expansions-products/f8d8fb61a253-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "complex.principal-value-integrals": {
     "hash": "8ad2ddddaf58dfcc0a6f8759707fdc62a82d2bd9132fb8bc1a4e2f05fb6d163e",
     "checks": {
@@ -420,6 +554,25 @@
     },
     "requires": [
       "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "complex.riemann-surfaces": {
+    "hash": "f99c69c8986e87ec51929c1035e9f63cb2ebb70345b3277cd47d173101f8cb67",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:39:46.291Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:45:26.026Z",
+        "report": "verification/reports/complex.riemann-surfaces/f99c69c8986e-B.md"
+      }
+    },
+    "requires": [
       "B"
     ],
     "rounds": 0,
@@ -1025,6 +1178,50 @@
     "rounds": 0,
     "hold": false
   },
+  "found.zorn-lemma": {
+    "hash": "4d37d3bcb26954a28e2cfe0bac3acdd97d961312bd42163c66a00af63c6f354e",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:06:05.362Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:10:34.629Z",
+        "report": "verification/reports/found.zorn-lemma/4d37d3bcb269-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.convolution-theorem": {
+    "hash": "80d4f9d42084a8d334acb36894ac80ecc4b468d09b271d3e6c851511c64326fc",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:50.325Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:30:36.326Z",
+        "report": "verification/reports/fourier.convolution-theorem/80d4f9d42084-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:33:34.293Z",
+        "report": "verification/reports/fourier.convolution-theorem/80d4f9d42084-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "fourier.delta-identities": {
     "hash": "a7fa97cc18e7ae5e7e50a1e57df59c2af50c2f4cc049eaa493e699f3650e7fe8",
     "checks": {
@@ -1044,29 +1241,54 @@
     "rounds": 0,
     "hold": false
   },
-  "fourier.dirichlet-convergence": {
-    "hash": "2b69bc2723100f87d506b25dab2a19f26311d6bbdc23c6d56a2164bd64775026",
+  "fourier.dft-fft": {
+    "hash": "998d4381b416df99096fdf8d12848ce2a45abd5324e43d7b87ff8df4680839dc",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:24.134Z"
+      "at": "2026-10-13T10:13:15.443Z"
     },
     "verifiers": {
       "B": {
         "verdict": "pass",
-        "at": "2026-10-12T00:04:12.757Z",
-        "report": "verification/reports/fourier.dirichlet-convergence/2b69bc272310-B.md"
+        "at": "2026-10-13T10:25:42.153Z",
+        "report": "verification/reports/fourier.dft-fft/998d4381b416-B.md"
       },
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:11:07.211Z",
-        "report": "verification/reports/fourier.dirichlet-convergence/2b69bc272310-A.md"
+        "verdict": "pass",
+        "at": "2026-10-13T10:26:33.280Z",
+        "report": "verification/reports/fourier.dft-fft/998d4381b416-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.dirichlet-convergence": {
+    "hash": "8e645d7acc330a84dc2b6eb990f6407ebd1dbd9ebc34656985e8bbc09c3c2728",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:22:29.825Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:31:32.465Z",
+        "report": "verification/reports/fourier.dirichlet-convergence/8e645d7acc33-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:39:29.838Z",
+        "report": "verification/reports/fourier.dirichlet-convergence/8e645d7acc33-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
     "hold": false
   },
   "fourier.distributions": {
@@ -1113,54 +1335,129 @@
     "rounds": 0,
     "hold": false
   },
-  "fourier.fourier-series": {
-    "hash": "90c2aec740010b77e34d762a6e21e8d8519e27a7624a99746df876558c5c7668",
+  "fourier.fourier-inversion": {
+    "hash": "6a63171450ad52d2c1caf37824151fef3e81382f8db547c645db2e1eedd94fa4",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:24.135Z"
+      "at": "2026-10-13T10:23:50.326Z"
     },
     "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:27:30.605Z",
+        "report": "verification/reports/fourier.fourier-inversion/6a63171450ad-A.md"
+      },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-12T00:03:11.501Z",
-        "report": "verification/reports/fourier.fourier-series/90c2aec74001-B.md"
-      },
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:10:22.424Z",
-        "report": "verification/reports/fourier.fourier-series/90c2aec74001-A.md"
+        "at": "2026-10-13T10:32:42.524Z",
+        "report": "verification/reports/fourier.fourier-inversion/6a63171450ad-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.fourier-series": {
+    "hash": "a38a79c007d96a7dd93a0aff3c1c05874307b6338831161803ef2c9483162840",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:22:29.825Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:27:46.451Z",
+        "report": "verification/reports/fourier.fourier-series/a38a79c007d9-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:38:43.616Z",
+        "report": "verification/reports/fourier.fourier-series/a38a79c007d9-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.fourier-transform": {
+    "hash": "17b4aed0729daa2cae089e55505ff81aba391e978dd8110ce20108634e853a24",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:51:38.034Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:54:47.184Z",
+        "report": "verification/reports/fourier.fourier-transform/17b4aed0729d-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:57:44.945Z",
+        "report": "verification/reports/fourier.fourier-transform/17b4aed0729d-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.fourier-transform-rn": {
+    "hash": "241956fd72cf86573298d05330707d7aa4ddb630690b3d7e1fdd1afb62be6a66",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:16:38.082Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:26:38.527Z",
+        "report": "verification/reports/fourier.fourier-transform-rn/241956fd72cf-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:28:23.414Z",
+        "report": "verification/reports/fourier.fourier-transform-rn/241956fd72cf-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
     "hold": false
   },
   "fourier.gibbs-phenomenon": {
-    "hash": "622cfccbe0e7c4acae229f91473bb3871f01a1b7104e3611e3915df2b01b0549",
+    "hash": "189b257f88a67e258f069645542fee5a8717a0cb6642cfc2957eb4dbe13777e0",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:24.135Z"
+      "at": "2026-10-13T09:50:22.035Z"
     },
     "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:05:33.064Z",
-        "report": "verification/reports/fourier.gibbs-phenomenon/622cfccbe0e7-B.md"
-      },
       "A": {
         "verdict": "pass",
-        "at": "2026-10-12T00:11:57.225Z",
-        "report": "verification/reports/fourier.gibbs-phenomenon/622cfccbe0e7-A.md"
+        "at": "2026-10-13T10:03:23.379Z",
+        "report": "verification/reports/fourier.gibbs-phenomenon/189b257f88a6-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:05:27.309Z",
+        "report": "verification/reports/fourier.gibbs-phenomenon/189b257f88a6-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "fourier.heaviside-step": {
@@ -1177,6 +1474,31 @@
       }
     },
     "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.laplace-transform": {
+    "hash": "9587fad923f345a6a56ce2356266bb2a25735f9f1ac82fb12240b2305f3b3644",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:16:38.083Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:27:10.677Z",
+        "report": "verification/reports/fourier.laplace-transform/9587fad923f3-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:18.269Z",
+        "report": "verification/reports/fourier.laplace-transform/9587fad923f3-B.md"
+      }
+    },
+    "requires": [
+      "A",
       "B"
     ],
     "rounds": 0,
@@ -1206,6 +1528,106 @@
     ],
     "rounds": 0,
     "hold": false
+  },
+  "fourier.partial-fractions": {
+    "hash": "f6c31d2a42a650a173be96cc19cc8091063eabafafe5aa7fff175dec7d02a013",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:13:15.443Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:24:51.114Z",
+        "report": "verification/reports/fourier.partial-fractions/f6c31d2a42a6-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:26:02.116Z",
+        "report": "verification/reports/fourier.partial-fractions/f6c31d2a42a6-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.plancherel": {
+    "hash": "8e90cdf6c0395e600f9ad5c895ca616bf2fb1573b282a55461341d2ab71078a1",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:39:10.413Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:45:33.973Z",
+        "report": "verification/reports/fourier.plancherel/8e90cdf6c039-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:46:04.893Z",
+        "report": "verification/reports/fourier.plancherel/8e90cdf6c039-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.poisson-summation": {
+    "hash": "65be90aae5f7266202494c000e9ad87b10c27ebb18e3dfd37af192358d3da23b",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:32:27.579Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:37:06.292Z",
+        "report": "verification/reports/fourier.poisson-summation/65be90aae5f7-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:38:43.232Z",
+        "report": "verification/reports/fourier.poisson-summation/65be90aae5f7-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "fourier.sampling-theorem": {
+    "hash": "608f97ff7b22460dd2bc825a13374894aa59c8329b125e809f5e36ea608c43ac",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:31:33.079Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:40:09.982Z",
+        "report": "verification/reports/fourier.sampling-theorem/608f97ff7b22-A.md"
+      },
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:40:18.473Z",
+        "report": "verification/reports/fourier.sampling-theorem/608f97ff7b22-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 3,
+    "hold": true
   },
   "fourier.smoothness-decay": {
     "hash": "4f2aebaaf022c17e16436ecab02a0811e89edb6cd2bcfb15786a6912586b619e",
@@ -1250,6 +1672,31 @@
     ],
     "rounds": 3,
     "hold": true
+  },
+  "fourier.uncertainty-principle": {
+    "hash": "196ad3fbda85c3eb505d1e912b9fa3e7466affbb65b18715ba7b321ece4c3fc1",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:49:26.401Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:53:23.645Z",
+        "report": "verification/reports/fourier.uncertainty-principle/196ad3fbda85-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:03:04.809Z",
+        "report": "verification/reports/fourier.uncertainty-principle/196ad3fbda85-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
   },
   "green.causal-green-functions": {
     "hash": "2533ff6a07955ebc68e6ad623d85e61f8416dcc4da7b61e7c68e8ca19ab6174e",
@@ -1484,18 +1931,29 @@
     "hold": false
   },
   "green.separable-kernels": {
-    "hash": "922dc450217e22b21b48b89f67423eaff36eb549f530cc506f4697c891499dbc",
+    "hash": "6bf2dc7c98f76a84d276451ef483478ce0ab04aa72948406f179b7c8ea02c157",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:14:21.597Z"
+      "at": "2026-10-13T09:50:22.035Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:03:28.010Z",
+        "report": "verification/reports/green.separable-kernels/6bf2dc7c98f7-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:06:32.118Z",
+        "report": "verification/reports/green.separable-kernels/6bf2dc7c98f7-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 4,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "green.volterra-equations": {
     "hash": "d1046af147d64c848d1e9148b4e245ea9747e75625901259f4ff743eb9297474",
@@ -1658,6 +2116,31 @@
       }
     },
     "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "linalg.jordan-form": {
+    "hash": "821b2ad4a7dfcbf04b432e8ccb1e8716537f1e69bb4e45df348ba0456713e0d4",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:32:27.806Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:37:19.554Z",
+        "report": "verification/reports/linalg.jordan-form/821b2ad4a7df-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:37:29.478Z",
+        "report": "verification/reports/linalg.jordan-form/821b2ad4a7df-B.md"
+      }
+    },
+    "requires": [
+      "A",
       "B"
     ],
     "rounds": 0,
@@ -1934,6 +2417,231 @@
     "rounds": 0,
     "hold": false
   },
+  "measure.dominated-convergence": {
+    "hash": "e21bebbb69de9a63c3f93b64d979bc0d28317c84af49cd60012720efdab63402",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:45.948Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:31:16.519Z",
+        "report": "verification/reports/measure.dominated-convergence/e21bebbb69de-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:33:03.428Z",
+        "report": "verification/reports/measure.dominated-convergence/e21bebbb69de-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.fubini-tonelli": {
+    "hash": "8f2b356843e6bb60d3ff27ccc026d7da0445aed6beded74726d21c95a393c9ec",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:06:47.742Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:13:06.153Z",
+        "report": "verification/reports/measure.fubini-tonelli/8f2b356843e6-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:16:39.443Z",
+        "report": "verification/reports/measure.fubini-tonelli/8f2b356843e6-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.lebesgue-integral": {
+    "hash": "b9461d26dd8fe08a40a8630336959a5e640de5fd30d348f4c10981c6ab652bc1",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:07:06.961Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:16:08.165Z",
+        "report": "verification/reports/measure.lebesgue-integral/b9461d26dd8f-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:17:45.765Z",
+        "report": "verification/reports/measure.lebesgue-integral/b9461d26dd8f-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.lebesgue-measure": {
+    "hash": "998b59d3b17454036b27fcac5e43390ebed2d928c65b29fa2a535e97c10fa381",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:19:39.017Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:12.550Z",
+        "report": "verification/reports/measure.lebesgue-measure/998b59d3b174-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:30:08.136Z",
+        "report": "verification/reports/measure.lebesgue-measure/998b59d3b174-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.lp-spaces": {
+    "hash": "bffa3eb6a1fd894700ec2c0134b20070cbb5165f92f71df516698668a36c589e",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:47:30.015Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:56:51.696Z",
+        "report": "verification/reports/measure.lp-spaces/bffa3eb6a1fd-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:59:27.876Z",
+        "report": "verification/reports/measure.lp-spaces/bffa3eb6a1fd-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.measurable-functions": {
+    "hash": "9e3926be5b28f8fe0c53dcf41ef87fc3bdbefcb2b2f51e9fe5059bf254705920",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:19:39.017Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:48.362Z",
+        "report": "verification/reports/measure.measurable-functions/9e3926be5b28-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:31:06.653Z",
+        "report": "verification/reports/measure.measurable-functions/9e3926be5b28-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.modes-of-convergence": {
+    "hash": "93d5e32f404fa69af908e1f203ee7577aab33712afe2ae4f4f8acb56781da662",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:22:32.654Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:25:59.808Z",
+        "report": "verification/reports/measure.modes-of-convergence/93d5e32f404f-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:19.771Z",
+        "report": "verification/reports/measure.modes-of-convergence/93d5e32f404f-A.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "measure.monotone-convergence-fatou": {
+    "hash": "43851891ecf77b1d2a91981e6da2fa8d1c113084c14d850077952f6ecd189d9b",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:23:45.948Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:30:40.456Z",
+        "report": "verification/reports/measure.monotone-convergence-fatou/43851891ecf7-A.md"
+      },
+      "B": {
+        "verdict": "fail",
+        "at": "2026-10-13T10:32:59.030Z",
+        "report": "verification/reports/measure.monotone-convergence-fatou/43851891ecf7-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 3,
+    "hold": true
+  },
+  "measure.sigma-algebras-measures": {
+    "hash": "3104ad075dcde376face172005b82c092fe6d987b64c51035a29df308bba4c46",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:19:39.017Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:28:39.203Z",
+        "report": "verification/reports/measure.sigma-algebras-measures/3104ad075dcd-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:09.302Z",
+        "report": "verification/reports/measure.sigma-algebras-measures/3104ad075dcd-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "ode.constant-coefficients": {
     "hash": "26b143a7e5ede25deacc270c03c7a0d71316e55612763434ed14786d96b0ba3b",
     "checks": {
@@ -1948,6 +2656,31 @@
       }
     },
     "requires": [
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "ode.continuous-dependence": {
+    "hash": "df6e66adb259bf2a6737eaa056f314e257816852e8a186be8f230d78499ddd49",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:22:05.986Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:26:11.434Z",
+        "report": "verification/reports/ode.continuous-dependence/df6e66adb259-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:29:51.325Z",
+        "report": "verification/reports/ode.continuous-dependence/df6e66adb259-B.md"
+      }
+    },
+    "requires": [
+      "A",
       "B"
     ],
     "rounds": 0,
@@ -2042,6 +2775,25 @@
     },
     "requires": [
       "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
+  "ode.floquet-theory": {
+    "hash": "a141a78e9877871df0dd06ce545a2150fd387d8f05a722544d350eccef446281",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:16:00.755Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:22:31.004Z",
+        "report": "verification/reports/ode.floquet-theory/a141a78e9877-B.md"
+      }
+    },
+    "requires": [
       "B"
     ],
     "rounds": 0,
@@ -2200,28 +2952,28 @@
     "hold": false
   },
   "ode.self-adjoint-operators": {
-    "hash": "288e687121b02ecf563ad9f49e5dd95ded4efded1e36ef79b5be077042742ff4",
+    "hash": "96700b3cb89351b1800409d7fa3f2f24e0423840dc3d12aac24b5966f8be0488",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:58:33.442Z"
+      "at": "2026-10-13T09:44:28.018Z"
     },
     "verifiers": {
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:10:56.719Z",
-        "report": "verification/reports/ode.self-adjoint-operators/288e687121b0-A.md"
+        "verdict": "pass",
+        "at": "2026-10-13T09:49:04.711Z",
+        "report": "verification/reports/ode.self-adjoint-operators/96700b3cb893-A.md"
       },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-10T16:18:49.118Z",
-        "report": "verification/reports/ode.self-adjoint-operators/288e687121b0-B.md"
+        "at": "2026-10-13T09:50:52.719Z",
+        "report": "verification/reports/ode.self-adjoint-operators/96700b3cb893-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "ode.singular-points-infinity": {
@@ -2243,21 +2995,46 @@
     "rounds": 0,
     "hold": false
   },
+  "ode.sturm-comparison": {
+    "hash": "aa529a5d8a604461354d8302122421665b8102a2f5b7adcb396b67fcc71ef365",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T10:26:48.284Z"
+    },
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:35:02.292Z",
+        "report": "verification/reports/ode.sturm-comparison/aa529a5d8a60-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:38:40.668Z",
+        "report": "verification/reports/ode.sturm-comparison/aa529a5d8a60-B.md"
+      }
+    },
+    "requires": [
+      "A",
+      "B"
+    ],
+    "rounds": 0,
+    "hold": false
+  },
   "ode.sturm-liouville-theory": {
     "hash": "05936e3034c4b20b736eefc4d9f9dd8ab16f760e952698ae0c93def371ca1089",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:58:33.442Z"
+      "at": "2026-10-13T09:28:12.649Z"
     },
     "verifiers": {
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:12:31.807Z",
+        "verdict": "pass",
+        "at": "2026-10-13T09:39:25.528Z",
         "report": "verification/reports/ode.sturm-liouville-theory/05936e3034c4-A.md"
       },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-10T16:21:39.080Z",
+        "at": "2026-10-13T09:37:23.863Z",
         "report": "verification/reports/ode.sturm-liouville-theory/05936e3034c4-B.md"
       }
     },
@@ -2265,7 +3042,7 @@
       "A",
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "ode.variation-of-parameters": {
@@ -2288,28 +3065,28 @@
     "hold": false
   },
   "pde.advection-diffusion": {
-    "hash": "339c3870a230450861259d69162063889dc9adfbf98f1f26f55e3757476b7b44",
+    "hash": "926c2e98abaacac7e2319b5d025266460a50176f48cfc1cccb1e86e3e8371944",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:57:13.103Z"
+      "at": "2026-10-13T09:42:06.602Z"
     },
     "verifiers": {
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:12:01.755Z",
-        "report": "verification/reports/pde.advection-diffusion/339c3870a230-A.md"
+        "verdict": "pass",
+        "at": "2026-10-13T09:47:42.214Z",
+        "report": "verification/reports/pde.advection-diffusion/926c2e98abaa-A.md"
       },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-10T16:20:37.160Z",
-        "report": "verification/reports/pde.advection-diffusion/339c3870a230-B.md"
+        "at": "2026-10-13T09:48:03.332Z",
+        "report": "verification/reports/pde.advection-diffusion/926c2e98abaa-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "pde.boundary-condition-types": {
@@ -2395,45 +3172,45 @@
     "hold": false
   },
   "pde.harmonic-functions": {
-    "hash": "735a67f8c783b44a980a18e709ab1c9e88d120c98ff5a6f0cdbc8b2f1ea82abc",
+    "hash": "48e519812bd7ce7e79a1fb7881e1786966516f3112b7ba2d9bee30ddda704291",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:47:49.237Z"
+      "at": "2026-10-13T10:17:40.900Z"
     },
     "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T15:52:45.737Z",
-        "report": "verification/reports/pde.harmonic-functions/735a67f8c783-A.md"
-      },
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-10T15:54:40.280Z",
-        "report": "verification/reports/pde.harmonic-functions/735a67f8c783-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T10:31:43.411Z",
+        "report": "verification/reports/pde.harmonic-functions/48e519812bd7-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:36:37.692Z",
+        "report": "verification/reports/pde.harmonic-functions/48e519812bd7-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "pde.heat-bounded-domains": {
     "hash": "8f8c48b12a0bce30eeed5ef5fe9c843d9f7b0681a6fd62cc0d3d3af73ea8923e",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:57:13.104Z"
+      "at": "2026-10-13T09:28:56.655Z"
     },
     "verifiers": {
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:05:23.834Z",
+        "verdict": "pass",
+        "at": "2026-10-13T09:37:34.776Z",
         "report": "verification/reports/pde.heat-bounded-domains/8f8c48b12a0b-A.md"
       },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-10T16:18:07.396Z",
+        "at": "2026-10-13T09:37:49.475Z",
         "report": "verification/reports/pde.heat-bounded-domains/8f8c48b12a0b-B.md"
       }
     },
@@ -2441,7 +3218,7 @@
       "A",
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "pde.heat-kernel": {
@@ -2570,16 +3347,21 @@
     "hold": false
   },
   "pde.multipole-expansion": {
-    "hash": "0bd9355efc0aae16dc4734ed3d646cd4242d23136acbf888eed519163fd5ea8d",
+    "hash": "360b00bad991f8f570144e1e7ecab95f38abdb72d0ddf84cfc8de2af4ea41691",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:47:49.239Z"
+      "at": "2026-10-13T10:17:40.900Z"
     },
     "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:32:56.090Z",
+        "report": "verification/reports/pde.multipole-expansion/360b00bad991-B.md"
+      },
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:21:16.527Z",
-        "report": "verification/reports/pde.multipole-expansion/0bd9355efc0a-A.md"
+        "verdict": "pass",
+        "at": "2026-10-13T10:37:22.837Z",
+        "report": "verification/reports/pde.multipole-expansion/360b00bad991-A.md"
       }
     },
     "requires": [
@@ -2615,49 +3397,43 @@
     "hold": false
   },
   "pde.schrodinger-equation": {
-    "hash": "5eb63dc7208bd3b3968d50b45a013cf504ecc8c6419c8dff5ae419b95403c09c",
+    "hash": "38a09b13b706aa0df80a210b8a91d3b7bbaaf59d628646ff0af85621a5badc8e",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:02:16.721Z"
+      "at": "2026-10-13T10:17:40.900Z"
     },
     "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T10:35:32.558Z",
+        "report": "verification/reports/pde.schrodinger-equation/38a09b13b706-B.md"
+      },
       "A": {
         "verdict": "pass",
-        "at": "2026-10-12T00:14:55.591Z",
-        "report": "verification/reports/pde.schrodinger-equation/5eb63dc7208b-A.md"
+        "at": "2026-10-13T10:38:52.143Z",
+        "report": "verification/reports/pde.schrodinger-equation/38a09b13b706-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "pde.separation-of-variables": {
-    "hash": "e269b908100df8257d89896765ea680ed19e59cb256a3e5f5e5530111dff9037",
+    "hash": "78e22a06f092131eb348b02ef7bdf5d7b3afe5f209672029f9e08d6b9d4ad9be",
     "checks": {
       "pass": true,
-      "at": "2026-10-10T15:47:49.239Z"
+      "at": "2026-10-13T10:44:56.660Z"
     },
-    "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:10:38.037Z",
-        "report": "verification/reports/pde.separation-of-variables/e269b908100d-A.md"
-      },
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-10T16:14:21.093Z",
-        "report": "verification/reports/pde.separation-of-variables/e269b908100d-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
-    "hold": false
+    "rounds": 4,
+    "hold": true
   },
   "pde.similarity-solutions": {
     "hash": "2646c9ba5c8dabd41fae0ab5a2a0036039b27bc6d21aaa69620639c173880ff0",
@@ -2892,23 +3668,17 @@
     "hold": false
   },
   "spec.associated-legendre": {
-    "hash": "1b89b35e064f8521a3256cad9634f0628349c01635ec60323f5aea74fd91d4b0",
+    "hash": "ad9e40010e3c190b5a07f7d2de47b688e7fb6a61e98b8293556a2e451b9e8e3a",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:51:11.482Z"
+      "at": "2026-10-13T10:42:05.364Z"
     },
-    "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:08:40.032Z",
-        "report": "verification/reports/spec.associated-legendre/1b89b35e064f-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "B"
     ],
-    "rounds": 1,
-    "hold": false
+    "rounds": 3,
+    "hold": true
   },
   "spec.bessel-asymptotics": {
     "hash": "e8d5b6ace10c58eb319e17cf941dcc749fa8155369695c4336e8db0b03485b13",
@@ -2930,61 +3700,55 @@
     "hold": false
   },
   "spec.bessel-first-kind": {
-    "hash": "ef52b46760d450faa3025e19708ddc06fff0dc855a7427038db9f94eab1719c0",
+    "hash": "16b1021b9dd2f93feb4ea100409dbcc3d7a68811a7f298f25ea2cf09db0296a5",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:42.986Z"
+      "at": "2026-10-13T09:22:50.659Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-11T23:59:41.524Z",
-        "report": "verification/reports/spec.bessel-first-kind/ef52b46760d4-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T09:48:47.974Z",
+        "report": "verification/reports/spec.bessel-first-kind/16b1021b9dd2-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.bessel-orthogonality": {
-    "hash": "15417838652cfcd7f932083394342c9cd7089ae9fae9312803c171172f80f03f",
+    "hash": "66072477ddae113f08e0e94128ac49f6dab1c24445a164c56c58544fc350ed55",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:42.986Z"
+      "at": "2026-10-13T09:22:50.659Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:11:20.966Z",
-        "report": "verification/reports/spec.bessel-orthogonality/15417838652c-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T09:52:03.879Z",
+        "report": "verification/reports/spec.bessel-orthogonality/66072477ddae-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.bessel-second-kind-hankel": {
-    "hash": "5a2bc87632c7b389f01614c80f57a78896ee1e11b5aa76169e39d0baf3683724",
+    "hash": "0f08f3db96c2e67eededc2a483498c285619f2ae11f47b80d7f4a7669510ca9a",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:53:42.986Z"
+      "at": "2026-10-13T10:42:05.365Z"
     },
-    "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:05:02.158Z",
-        "report": "verification/reports/spec.bessel-second-kind-hankel/5a2bc87632c7-B.md"
-      }
-    },
+    "verifiers": {},
     "requires": [
       "B"
     ],
-    "rounds": 1,
-    "hold": false
+    "rounds": 3,
+    "hold": true
   },
   "spec.beta-function": {
     "hash": "d5c728901ea0b9e0d503ee2b1ebe45ced123d12aadf4a93b5f473a56547a6ecb",
@@ -3123,13 +3887,19 @@
     "hash": "a42c1ee2d11e7293e0147382163a84551d13e1abaa1c90b3ff774c56a1de637a",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:17:52.650Z"
+      "at": "2026-10-13T09:22:50.659Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:40:14.033Z",
+        "report": "verification/reports/spec.hermite-polynomials/a42c1ee2d11e-B.md"
+      }
+    },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.hypergeometric": {
@@ -3152,35 +3922,41 @@
     "hold": false
   },
   "spec.laguerre-polynomials": {
-    "hash": "8c0a162f7d8b4587a8abd2e1e24132772beb9ecd052c9dcf1cb9b840b564f532",
+    "hash": "abdac1cb16e0ff1760038890cdb6117c07315637a184e0ed2880dcd5ee7e73d7",
     "checks": {
       "pass": true,
-      "at": "2026-10-12T00:17:52.650Z"
-    },
-    "verifiers": {},
-    "requires": [
-      "B"
-    ],
-    "rounds": 1,
-    "hold": false
-  },
-  "spec.legendre-polynomials": {
-    "hash": "881b82cc73f99f12aac67658d1d2f4c01ab3f30ba406e451881e576fa6b8471b",
-    "checks": {
-      "pass": true,
-      "at": "2026-10-11T23:51:11.482Z"
+      "at": "2026-10-13T10:04:54.346Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:02:16.268Z",
-        "report": "verification/reports/spec.legendre-polynomials/881b82cc73f9-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T10:22:48.418Z",
+        "report": "verification/reports/spec.laguerre-polynomials/abdac1cb16e0-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
+    "hold": false
+  },
+  "spec.legendre-polynomials": {
+    "hash": "4c914aadb328b4355114099da3781c304bdb6ac768f2624740151c08ef016413",
+    "checks": {
+      "pass": true,
+      "at": "2026-10-13T09:22:50.659Z"
+    },
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-13T09:27:38.026Z",
+        "report": "verification/reports/spec.legendre-polynomials/4c914aadb328-B.md"
+      }
+    },
+    "requires": [
+      "B"
+    ],
+    "rounds": 0,
     "hold": false
   },
   "spec.modified-bessel": {
@@ -3241,22 +4017,22 @@
     "hold": false
   },
   "spec.spherical-harmonics": {
-    "hash": "cf9a7270617008bf83d07a98c437b734bee0e987253898db307e6ceb432dbb1f",
+    "hash": "a51c21db5ca9a1d3b903798d427f19731988bb979e432a78c033c3e6bc183303",
     "checks": {
       "pass": true,
-      "at": "2026-10-11T23:51:11.482Z"
+      "at": "2026-10-13T09:22:50.659Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-12T00:12:38.020Z",
-        "report": "verification/reports/spec.spherical-harmonics/cf9a72706170-B.md"
+        "verdict": "pass",
+        "at": "2026-10-13T09:36:23.219Z",
+        "report": "verification/reports/spec.spherical-harmonics/a51c21db5ca9-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "spec.zeta-bernoulli": {

@@ -3,7 +3,7 @@ id: spec.bessel-second-kind-hankel
 title: Neumann and Hankel functions
 kind: definition
 level: core
-summary: 'The Neumann function $Y_\nu = (\cos\nu\pi\,J_\nu - J_{-\nu})/\sin\nu\pi$, defined at integer order by its limit, is a second solution of Bessel''s equation with a logarithmic singularity at the origin; the Wronskian $J_\nu Y_\nu'' - J_\nu'' Y_\nu = 2/\pi x$ is independent of $\nu$ and never vanishes, and the combinations $H^{(1,2)}_\nu = J_\nu \pm iY_\nu$ are the cylindrical analogues of $e^{\pm ix}$, carrying energy outward and inward.'
+summary: 'The Neumann function $Y_\nu = (\cos\nu\pi\,J_\nu - J_{-\nu})/\sin\nu\pi$, defined at integer order by its limit, is a second solution of Bessel''s equation, unbounded at the origin — like $x^{-\nu}$ for $\nu > 0$, like $\ln x$ at $\nu = 0$; the Wronskian $J_\nu Y_\nu'' - J_\nu'' Y_\nu = 2/\pi x$ is independent of $\nu$ and never vanishes, and the combinations $H^{(1,2)}_\nu = J_\nu \pm iY_\nu$ are the cylindrical analogues of $e^{\pm ix}$, carrying energy outward and inward.'
 prereqs: [spec.bessel-first-kind, ode.reduction-of-order, ode.self-adjoint-operators, spec.digamma-polygamma, spec.gamma-function]
 provenance: adapted
 sources:
@@ -80,7 +80,7 @@ $$
 
 So $Y_\nu$ is unbounded at the origin for every $\nu \ge 0$: algebraically for $\nu > 0$, logarithmically for $\nu = 0$. Consequently
 
-- $Y_\nu$ cannot be a multiple of $J_\nu$, which is bounded there for $\nu \ge 0$; so $\{J_\nu, Y_\nu\}$ is a basis of solutions of Bessel's equation **for every** $\nu$, integer or not, and the general solution is $c_1J_\nu + c_2Y_\nu$;
+- for $\nu \ge 0$, $Y_\nu$ cannot be a multiple of $J_\nu$, which is bounded at the origin, so $\{J_\nu, Y_\nu\}$ is a basis of solutions of Bessel's equation and the general solution is $c_1J_\nu + c_2Y_\nu$. For $\nu < 0$ this particular argument separates nothing, since $J_\nu$ is then unbounded at the origin as well; the conclusion nevertheless holds **for every** $\nu$, integer or not, because the Wronskian $W[J_\nu, Y_\nu] = 2/\pi x$ of the next block never vanishes (:cite{work=rhb-2006 loc="§18.5.2, p. 607"});
 - in a problem whose domain contains the axis $x = 0$ and whose solution must be bounded there, $c_2 = 0$ and only $J_\nu$ survives (:cite{work=rhb-2006 loc="§18.5.3, p. 608"}). $Y_\nu$ earns its place when the axis is *excluded* — an annulus, a coaxial line, the exterior of a cylinder — or when the singular behaviour is physically wanted, as at a line source.
 
 Since $Y_\nu$ is a fixed linear combination of $J_{\pm\nu}$ with coefficients independent of $x$, it satisfies the same recurrence relations as $J_\nu$ (:cite{work=rhb-2006 loc="§18.5.3, p. 612"}; :cite{work=arfken-2013 loc="§14.3, p. 669"}):
@@ -184,7 +184,7 @@ $$
 W[J_n,Y_n](x) = \frac{2}{\pi x} \ne 0 ,
 $$
 
-so $Y_n$ exists as a genuine second solution and is independent of $J_n$. (This is an alternative to reading the independence off the logarithm in the series, and it does not require the series at all.)
+so $Y_n$ exists as a genuine second solution and is independent of $J_n$. (This is an alternative to reading the independence off the logarithmic term in the series: the series is used only for its convergence, never for the shape of the singularity it exhibits.)
 
 **Step 5: the Hankel pair.** For constants $a,b,c,d$ the bilinearity and antisymmetry of $W$ give $W[aU+bV,\;cU+dV] = (ad-bc)\,W[U,V]$, because the $W[U,U]$ and $W[V,V]$ terms vanish. With $U = J_\nu$, $V = Y_\nu$ and $(a,b,c,d) = (1,i,1,-i)$ we have $ad-bc = -i-i = -2i$, so
 
@@ -204,7 +204,7 @@ H^{(1)}_\nu(x) = J_\nu(x) + i\,Y_\nu(x) ,
 H^{(2)}_\nu(x) = J_\nu(x) - i\,Y_\nu(x) .
 $$
 
-They stand to $J_\nu, Y_\nu$ exactly as $e^{\pm i\theta}$ stands to $\cos\theta, \sin\theta$ (:cite{work=arfken-2013 loc="§14.4, Eq. (14.78), p. 675"}), and the analogy is not merely formal: it is reproduced in their large-argument behaviour. For real $x$ and real $\nu$ they are complex conjugates of one another. Being constant-coefficient combinations of $J_\nu$ and $Y_\nu$ they satisfy the same recurrence relations,
+They stand to $J_\nu, Y_\nu$ exactly as $e^{\pm i\theta}$ stands to $\cos\theta, \sin\theta$ (:cite{work=arfken-2013 loc="§14.4, Eq. (14.78), p. 675"}), and the analogy is not merely formal: it is reproduced in their large-argument behaviour. For real $x$ and real $\nu$ they are complex conjugates of one another. The recurrences of the statement above transfer to them unchanged, because each is linear in the function with coefficients that do not depend on which solution is substituted, and $\pm i$ does not depend on $x$; so
 
 $$
 H_{\nu-1}+H_{\nu+1} = \frac{2\nu}{x}H_\nu , \qquad H_{\nu-1}-H_{\nu+1} = 2H_\nu' ,
@@ -258,10 +258,10 @@ Given a radial equation that reduces to Bessel's equation of order $\nu$ in the 
 2. **Is the domain an annulus $a \le \rho \le b$, or the exterior of a cylinder, with a condition at each end?** Use $c_1J_\nu(k\rho) + c_2Y_\nu(k\rho)$. Imposing the two homogeneous boundary conditions gives a $2\times2$ homogeneous system; a non-trivial solution requires its determinant to vanish, which is the transcendental equation that quantises $k$. The ratio $c_2/c_1$ then comes from either row.
 3. **Does the domain extend to infinity with radiation outwards and no incoming wave?** Fix the time convention; with $e^{-i\omega t}$, take $c\,H^{(1)}_\nu(k\rho)$ and discard $H^{(2)}_\nu$. If the source is on the axis, the resulting singularity at $\rho = 0$ is the source, not an error.
 4. **Is the problem a decaying one rather than an oscillatory one** (the equation has $-k^{2}\rho^{2}$ where Bessel's has $+x^{2}$)? Then the relevant pair is $I_\nu, K_\nu$: see :ref[]{to=spec.modified-bessel}.
-5. **To evaluate $Y_\nu$,** use the series above for small $x$, the recurrences to move in $\nu$ (downwards, for the same stability reason as for $J_\nu$), and :ref[]{to=spec.bessel-asymptotics} for large $x$. The Wronskian $J_\nu Y_\nu' - J_\nu'Y_\nu = 2/\pi x$ is a cheap and very sharp check on any table or routine.
+5. **To evaluate $Y_\nu$,** use the series above for small $x$, the recurrences to move in $\nu$ — **upwards**, which is the opposite direction to $J_\nu$ and for the same reason — and :ref[]{to=spec.bessel-asymptotics} for large $x$. Of the two solutions of $f_{\nu+1} = (2\nu/x)f_\nu - f_{\nu-1}$, $J_\nu$ is the one that decays as $\nu$ grows past $x$ and $Y_\nu$ the one that grows; a three-term recurrence is stable only in the direction in which the wanted solution is the growing one. So $J_\nu$ must be recurred downwards (:ref[]{to=spec.bessel-first-kind}) and $Y_\nu$ upwards: climbing from $Y_0,Y_1$, the rounding error picked up at each step is a small multiple of $J_\nu$ and shrinks against $Y_\nu$, whereas descending from large $\nu$ that same error component grows like $J_\nu$ and swamps the answer. The failure is not marginal — in double precision at $x=1$, descending from exact $Y_{19},Y_{20}$ returns $-1.8\times10^{18}$ for $Y_{10}$ (true value $-1.216\times10^{8}$) and $-5.3\times10^{27}$ for $Y_0$ (true value $0.08826$), while ascending from exact $Y_0,Y_1$ reproduces $Y_{20}$ to a relative error of $2\times10^{-16}$. (These figures are ours; none of the sources cited here discusses the stability of the recurrence.) The Wronskian $J_\nu Y_\nu' - J_\nu'Y_\nu = 2/\pi x$ is a cheap and very sharp check on any table or routine.
 :::
 
-:::example[Three checks and a waveguide]{provenance=original}
+:::example[Two numerical checks]{provenance=original}
 **(a) Half-integer order: the asymptotic form made exact.** Take $\nu = \tfrac12$. From the definition, $\cos(\pi/2) = 0$ and $\sin(\pi/2) = 1$, so
 
 $$
@@ -274,7 +274,7 @@ $$
 H^{(1)}_{1/2}(x) = J_{1/2}+iY_{1/2} = \sqrt{\frac{2}{\pi x}}\bigl(\sin x - i\cos x\bigr) = -i\sqrt{\frac{2}{\pi x}}\;e^{\,ix} ,
 $$
 
-using $\sin x - i\cos x = -i(\cos x + i\sin x)$. Compare the asymptotic formula at $\nu = \tfrac12$: the phase is $x - \pi/4 - \pi/4 = x - \pi/2$, and $e^{\,i(x-\pi/2)} = -ie^{\,ix}$. The two agree *exactly*, with no error term — the promised termination of the asymptotic series at half-integer order. Numerically at $x = 3$: $J_{1/2}(3) = 0.0650082$, $Y_{1/2}(3) = -0.4606589 \times (-0.9899925) = 0.4560489$, and $-i(0.4606589)e^{3i} = 0.0650082 + 0.4560489\,i$. The real and imaginary parts match to seven figures.
+using $\sin x - i\cos x = -i(\cos x + i\sin x)$. Compare the asymptotic formula at $\nu = \tfrac12$: the phase is $x - \pi/4 - \pi/4 = x - \pi/2$, and $e^{\,i(x-\pi/2)} = -ie^{\,ix}$. The two agree *exactly*, with no error term — the promised termination of the asymptotic series at half-integer order. Numerically at $x = 3$, with $\sqrt{2/3\pi} = 0.4606589$ and $\cos 3 = -0.9899925$: $J_{1/2}(3) = 0.0650082$ and $Y_{1/2}(3) = 0.4560488$, while $-i\sqrt{2/3\pi}\,e^{3i} = 0.0650082 + 0.4560488\,i$. The real and imaginary parts match to seven figures.
 
 **(b) The Wronskian as a numerical check.** At $x = 2$, tables give $J_0(2) = 0.2238908$, $J_1(2) = 0.5767248$, $Y_0(2) = 0.5103757$, $Y_1(2) = -0.1070324$. Using $J_0' = -J_1$ and $Y_0' = -Y_1$,
 
@@ -285,7 +285,12 @@ $$
 
 while $2/(2\pi) = 1/\pi = 0.3183099$. Four tabulated numbers, one exact identity, agreement to seven figures: this is how a Bessel routine is validated.
 
-**(c) The cutoff of a coaxial line.** A coaxial line has inner conductor of radius $a = 1.0$ cm and outer conductor of radius $b = 2.5$ cm. For the lowest transverse-magnetic mode with no azimuthal variation ($\nu = 0$), the axial electric field is $E_z(\rho) = c_1J_0(\gamma\rho) + c_2Y_0(\gamma\rho)$, and the perfect-conductor condition $E_z = 0$ at $\rho = a$ and $\rho = b$ gives
+:::
+
+:::example[The cutoff of a coaxial line]{provenance=adapted src="arfken-2013:§14.3, Example 14.3.1 and Eqs. (14.74)-(14.75), pp. 671-672, and Exercise 14.3.10, p. 673"}
+The set-up is Arfken, Weber and Harris's Example 14.3.1 — a coaxial guide, $E_z = c_1J_m + c_2Y_m$, the two perfect-conductor conditions and the vanishing determinant that quantises the cutoff — and their Exercise 14.3.10 sets the same condition for $b/a = 2$, written as the vanishing of $J_0(2x)/Y_0(2x) - J_0(x)/Y_0(x)$, which differs from our determinant at $b/a = 2$ only by the nonvanishing factor $-Y_0(2x)Y_0(x)$. The radii, the numerical work and the mode shape are ours: we take $b/a = 2.5$ and carry the calculation through to a frequency.
+
+A coaxial line has inner conductor of radius $a = 1.0$ cm and outer conductor of radius $b = 2.5$ cm. For the lowest transverse-magnetic mode with no azimuthal variation ($\nu = 0$), the axial electric field is $E_z(\rho) = c_1J_0(\gamma\rho) + c_2Y_0(\gamma\rho)$, and the perfect-conductor condition $E_z = 0$ at $\rho = a$ and $\rho = b$ gives
 
 $$
 \begin{pmatrix} J_0(\gamma a) & Y_0(\gamma a) \\ J_0(\gamma b) & Y_0(\gamma b)\end{pmatrix}

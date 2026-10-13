@@ -4,7 +4,7 @@ title: Associated Legendre functions
 kind: definition
 level: core
 summary: "The regular solutions of the associated Legendre equation, built from the Legendre polynomials by m-fold differentiation and a factor (1-x^2)^{m/2}, with their two orthogonality relations, their behaviour under m -> -m, and an explicit account of the Condon-Shortley sign convention that divides the textbooks."
-prereqs: [spec.legendre-polynomials, spec.orthogonal-polynomials-general, ode.sturm-liouville-theory]
+prereqs: [spec.legendre-polynomials, spec.orthogonal-polynomials-general, ode.sturm-liouville-theory, funcan.orthonormal-bases]
 provenance: adapted
 sources:
   - work: arfken-2013
@@ -16,9 +16,9 @@ sources:
     pages: "587-593"
     role: the equation in the form with m^2/(1-x^2); the proof that (1-x^2)^{|m|/2} d^{|m|}u/dx^{|m|} solves it whenever u solves Legendre's equation; the definition without the (-1)^m phase and the footnote recording the rival convention; the negative-m relation proved from Leibniz; the two orthogonality relations with both normalisation constants; the generating function and four recurrences
   - work: strauss-2008
-    loc: "§10.6 (Legendre functions), ASSOCIATED LEGENDRE FUNCTIONS: eq. (10), the definition (11) with the proof that it solves (10), and the normalising constants (12), pp. 292–293; §10.3, the separated orthogonality relations in theta and the normalisation (23), p. 275"
-    pages: "275, 292-293"
-    role: a third, independent statement of the equation, the definition without the phase factor, the two-line proof via the m-times-differentiated Legendre equation, and the normalisation constant; also the form in which the relation is used after separating variables in a ball
+    loc: "§10.6 (Legendre functions), ASSOCIATED LEGENDRE FUNCTIONS: eq. (10), the definition (11) with the proof that it solves (10), and the normalising constants (12), pp. 292–293, and Exercise 8 (the solid cone), pp. 293–294; §10.3, the separated orthogonality relations in theta and the normalisation (23), and the spherical harmonics Y_lm = P_l^{|m|}(cos theta) e^{i m phi}, p. 275"
+    pages: "275, 292-294"
+    role: a third, independent statement of the equation, the definition without the phase factor, the two-line proof via the m-times-differentiated Legendre equation, and the normalisation constant; the phase-free, unnormalised spherical harmonic with the |m| variant, which is why Strauss is the exception among our sources; the cone exercise whose hint leads to non-integer order; also the form in which the relation is used after separating variables in a ball
   - work: hassani-2013
     loc: "§13.4 (Eigenvectors of L²: Spherical Harmonics), the ladder-operator construction, eqs. (13.25)–(13.33), pp. 406–408, the definition of P_l^m in terms of the normalised theta functions and eq. (13.35) in Box 13.4.2, pp. 408–409, and the negative-m relation (13.38), p. 410"
     pages: "406-410"
@@ -56,16 +56,25 @@ $$
 or, with $x=\cos\theta$ so that $(1-x^{2})^{1/2}=\sin\theta$: $P_{1}^{1}=-\sin\theta$, $P_{2}^{2}=3\sin^{2}\theta$, $P_{3}^{3}=-15\sin^{3}\theta$.
 :::
 
-:::remark[The sign convention, stated before anything is proved]{provenance=adapted src="arfken-2013:§15.4, eq. (15.78) with footnote 3, p. 743, and §15.5, p. 758; rhb-2006:§18.2.1, eq. (18.32) with its footnote, p. 588, and §18.3, eq. (18.45), p. 593; strauss-2008:§10.6, eq. (11), p. 293; hassani-2013:§13.4, Box 13.4.2, eqs. (13.34)–(13.35), p. 409"}
+:::remark[The sign convention, stated before anything is proved]{provenance=adapted src="arfken-2013:§15.4, eq. (15.78) with footnote 3, p. 743, eqs. (15.87)–(15.88), p. 744, and §15.5, p. 758; rhb-2006:§18.2.1, eq. (18.32) with its footnote, p. 588, §18.2.2, eqs. (18.41)–(18.42), p. 592, and §18.3, eq. (18.45), p. 593; strauss-2008:§10.6, eq. (11), p. 293, and §10.3, p. 275; hassani-2013:§13.4, Box 13.4.2, eqs. (13.34)–(13.35), p. 409"}
 Two incompatible definitions of $P_{l}^{m}$ are in circulation, and a formula copied from one book into another is a common source of sign errors.
 
 - **With the phase** (the convention used here): $P_{l}^{m}=(-1)^{m}(1-x^{2})^{m/2}\mathrm{d}^{m}P_{l}/\mathrm{d}x^{m}$. Arfken, Weber and Harris insert the factor $(-1)^{m}$ to agree with *Handbook of Mathematical Functions* (AMS-55), which they call the most widely accepted standard, and they note in a footnote that Jackson's *Classical Electrodynamics* omits it. The factor is the **Condon-Shortley phase**, which carries the names of E. U. Condon and G. H. Shortley because their book on atomic spectroscopy fixed it as the standard; Arfken, Weber and Harris remark that one of its effects is to alternate the sign with $m$ among the positive-$m$ *spherical harmonics*, and that it was introduced so that the spherical harmonics come out with the usual phase.
-- **Without the phase:** $P_{l}^{m}=(1-x^{2})^{m/2}\mathrm{d}^{m}P_{l}/\mathrm{d}x^{m}$. This is Riley, Hobson and Bence's eq. (18.32), Strauss's eq. (11) and Hassani's eq. (13.35): Hassani's function is $(-1)^{m}$ times ours, so where we have $P_{1}^{1}=-\sin\theta$ he has $P_{1}^{1}=+\sin\theta$. All three books then put the $(-1)^{m}$ back into the definition of the spherical harmonic — Riley, Hobson and Bence in eq. (18.45), Hassani in eq. (13.34) of Box 13.4.2 — so their $Y_{l}^{m}$ agrees with Arfken, Weber and Harris's; see :ref[]{to=spec.spherical-harmonics}.
+- **Without the phase:** $P_{l}^{m}=(1-x^{2})^{m/2}\mathrm{d}^{m}P_{l}/\mathrm{d}x^{m}$. This is Riley, Hobson and Bence's eq. (18.32), Strauss's eq. (11) and Hassani's eq. (13.35): Hassani's function is $(-1)^{m}$ times ours, so where we have $P_{1}^{1}=-\sin\theta$ he has $P_{1}^{1}=+\sin\theta$. Two of the three then put the $(-1)^{m}$ back into the definition of the spherical harmonic — Riley, Hobson and Bence in eq. (18.45), Hassani in eq. (13.34) of Box 13.4.2 — so their $Y_{l}^{m}$ agrees with Arfken, Weber and Harris's. Strauss does not: his spherical harmonic is $Y_{lm}(\theta,\varphi)=P_{l}^{\lvert m\rvert}(\cos\theta)\,\mathrm{e}^{\mathrm{i}m\varphi}$ (§10.3, p. 275), carrying neither the phase nor any normalising constant, so for odd $m>0$ his $Y_{lm}$ differs from the Condon-Shortley one in sign as well as in scale. See :ref[]{to=spec.spherical-harmonics}.
 
-So the two conventions differ by $(-1)^{m}$ in $P_{l}^{m}$ and agree in $Y_{l}^{m}$. Everything that is quadratic in $P_{l}^{m}$ — both orthogonality relations and both normalisation constants — is the same in either convention, and so is the equation (AL). What *does* change sign is every table entry with odd $m$, every recurrence with an odd number of $P^{m}$'s of odd $m$, and the negative-$m$ relation if one is not careful. There is a further, rarer variant in which $P_{l}^{-m}$ is *defined* to equal $P_{l}^{m}$, which Riley, Hobson and Bence flag; with that choice $m$ must be replaced by $\lvert m\rvert$ throughout, as Strauss does in his definition of the spherical harmonics. We do not use it.
+So the two conventions differ by $(-1)^{m}$ in $P_{l}^{m}$ and, Strauss aside, agree in $Y_{l}^{m}$. Everything that is quadratic in $P_{l}^{m}$ — both orthogonality relations and both normalisation constants — is the same in either convention, and so is the equation (AL).
+
+For anything *linear* in the $P_{l}^{m}$ there is a one-line rule. Write $\tilde P_{l}^{m}$ for the phase-free function, so that $P_{l}^{m}=(-1)^{m}\tilde P_{l}^{m}$ — for negative $m$ as well, since $(-1)^{-m}=(-1)^{m}$ and both conventions use the same negative-$m$ relation. Substituting this into an identity multiplies the term carrying upper index $m$ by $(-1)^{m}$, and that factor can be divided out of the whole identity exactly when it is the same in every term. **A linear identity in the $P_{l}^{m}$ therefore keeps its written form in both conventions precisely when all the upper indices occurring in it have the same parity, and changes otherwise.** The cases worth having in mind:
+
+- A table entry is a single function: it changes sign for odd $m$ and not for even $m$.
+- The **step-in-$l$ recurrence** of part 8 carries the one upper index $m$ in all three terms, so it is *the same in both conventions*; Arfken, Weber and Harris print it as (15.88) and Riley, Hobson and Bence as (18.42) in the identical form, which is the form given in part 8.
+- The **negative-$m$ relation** of part 4 involves only $-m$ and $m$, of the same parity, so it too is *the same in both conventions*; Arfken, Weber and Harris (15.81), Riley, Hobson and Bence (18.33) and Hassani (13.38) all print the same formula.
+- The **step-in-$m$ recurrence** of part 8 mixes the upper indices $m+1$, $m$ and $m-1$, so it *changes for every $m\neq0$*: in the phase-free convention the middle term reverses sign, which is why Riley, Hobson and Bence's (18.41) differs from Arfken, Weber and Harris's (15.87) — the form used in part 8 — in the sign of the $2mx$ term. (At $m=0$ that term is absent and the two remaining indices $\pm1$ have the same parity, so there alone the two forms agree.) Among the identities collected in this unit it is the only one whose written form depends on the convention; the other convention-sensitive items are the individual values in the table of the definition, by the first bullet.
+
+There is a further, rarer variant in which $P_{l}^{-m}$ is *defined* to equal $P_{l}^{m}$, which Riley, Hobson and Bence flag; with that choice $m$ must be replaced by $\lvert m\rvert$ throughout, as Strauss does in his definition of the spherical harmonics. We do not use it.
 :::
 
-:::statement[Properties of $P_{l}^{m}$]{provenance=adapted src="rhb-2006:§18.2, eqs. (18.29) and (18.33), pp. 587–589, and §18.2.2, eqs. (18.36)–(18.44), pp. 590–593; arfken-2013:§15.4, eqs. (15.74), (15.81), (15.84), (15.88), (15.93), (15.95)–(15.96) and (15.104)–(15.107), pp. 742–748; strauss-2008:§10.6, eqs. (11)–(12), pp. 292–293"}
+:::statement[Properties of $P_{l}^{m}$]{provenance=adapted src="rhb-2006:§18.2, eqs. (18.29) and (18.33), pp. 587–589, and §18.2.2, eqs. (18.36)–(18.44), pp. 590–593; arfken-2013:§15.4, eqs. (15.74), (15.81), (15.82), (15.84), (15.87)–(15.88), (15.93), (15.95)–(15.96) and (15.104)–(15.107), pp. 742–748; strauss-2008:§10.6, eqs. (11)–(12), pp. 292–293"}
 Let $l\ge0$ and $m$ be integers with $\lvert m\rvert\le l$.
 
 1. **It solves the equation.** If $u$ solves Legendre's equation with parameter $\ell$, then $(1-x^{2})^{\lvert m\rvert/2}\,\mathrm{d}^{\lvert m\rvert}u/\mathrm{d}x^{\lvert m\rvert}$ solves (AL) with the same $\ell$ and with that $m$. In particular $P_{l}^{m}$ solves (AL) with $\ell=l$, and it is regular at $x=\pm1$.
@@ -104,11 +113,13 @@ Let $l\ge0$ and $m$ be integers with $\lvert m\rvert\le l$.
    \int_{0}^{\pi}P_{l}^{m}(\cos\theta)P_{k}^{m}(\cos\theta)\sin\theta\,\mathrm{d}\theta
    =\frac{2}{2l+1}\frac{(l+m)!}{(l-m)!}\,\delta_{lk}.
    $$
-   Consequently any $f$ on $(-1,1)$ expands, at fixed $m\ge0$, as $f=\sum_{k\ge0}a_{m+k}P_{m+k}^{m}$ with
+   Consequently, at fixed $m\ge0$, the normalised functions $\sqrt{\tfrac{2l+1}{2}\tfrac{(l-m)!}{(l+m)!}}\,P_{l}^{m}$ with $l\ge m$ are orthonormal in $L^{2}(-1,1)$. They are moreover *total* there — a separate fact, which orthogonality alone does not give, proved in its own short block below — so every $f\in L^{2}(-1,1)$ has
    $$
-   a_{l}=\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}\int_{-1}^{1}f(x)P_{l}^{m}(x)\,\mathrm{d}x .
+   f=\sum_{l\ge m}a_{l}P_{l}^{m},
+   \qquad
+   a_{l}=\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}\int_{-1}^{1}f(x)P_{l}^{m}(x)\,\mathrm{d}x ,
    $$
-   The sum starts at $l=m$ because $P_{l}^{m}=0$ below that.
+   the series converging in $L^{2}$. The sum starts at $l=m$ because $P_{l}^{m}=0$ below that. Riley, Hobson and Bence state this expansion, their eq. (18.38), for any "reasonable" function (:cite{work=rhb-2006 loc="§18.2.2, eq. (18.38), p. 591"}) rather than for a class defined in advance; square integrability is the hypothesis under which the orthonormal-expansion theorem of :ref[]{to=funcan.orthonormal-bases} applies, and it is the one we use.
 7. **Orthogonality in $m$ at fixed $l$, with weight $(1-x^{2})^{-1}$.**
    $$
    \int_{-1}^{1}P_{l}^{m}(x)P_{l}^{k}(x)\,\frac{\mathrm{d}x}{1-x^{2}}
@@ -120,14 +131,14 @@ Let $l\ge0$ and $m$ be integers with $\lvert m\rvert\le l$.
    $$
    \frac{(2m)!\,(1-x^{2})^{m/2}}{2^{m}m!\,(1-2hx+h^{2})^{m+1/2}}=\sum_{n=0}^{\infty}\tilde P_{n+m}^{m}(x)\,h^{n},
    $$
-   where $\tilde P$ denotes the phase-free functions of Riley, Hobson and Bence (so $\tilde P_{l}^{m}=(-1)^{m}P_{l}^{m}$). The two most useful recurrences are
+   where $\tilde P$ denotes the phase-free functions of Riley, Hobson and Bence (so $\tilde P_{l}^{m}=(-1)^{m}P_{l}^{m}$); this is their eq. (18.40) (:cite{work=rhb-2006 loc="§18.2.2, eq. (18.40), p. 592"}). Arfken, Weber and Harris's generating function (:cite{work=arfken-2013 loc="§15.4, eq. (15.82), p. 743"}) looks different because it generates the *polynomial* factors $\mathcal{P}_{l}^{m}=P_{l}^{m}/(1-x^{2})^{m/2}$ of part 2 rather than the functions themselves: their left-hand side carries $(-1)^{m}(2m-1)!!$ in place of our $(2m)!(1-x^{2})^{m/2}/2^{m}m!$, and $(2m-1)!!=(2m)!/2^{m}m!$, so the two agree once the common factor $(1-x^{2})^{m/2}$ and the phase are accounted for. The two most useful recurrences are
    $$
    (2l+1)x\,P_{l}^{m}=(l+m)P_{l-1}^{m}+(l-m+1)P_{l+1}^{m},
    $$
    $$
    P_{l}^{m+1}+\frac{2mx}{(1-x^{2})^{1/2}}P_{l}^{m}+(l+m)(l-m+1)P_{l}^{m-1}=0 ,
    $$
-   the first stepping in $l$ at fixed $m$, the second in $m$ at fixed $l$. Both are valid for negative as well as non-negative $m$ with the definition adopted here.
+   the first stepping in $l$ at fixed $m$ (:cite{work=arfken-2013 loc="§15.4, eq. (15.88), p. 744"}; :cite{work=rhb-2006 loc="§18.2.2, eq. (18.42), p. 592"}), the second in $m$ at fixed $l$ (:cite{work=arfken-2013 loc="§15.4, eq. (15.87), p. 744"}; the phase-free form is Riley, Hobson and Bence's (18.41), which differs in the sign of the middle term — see the remark on the sign convention). Both are valid for negative as well as non-negative $m$ with the definition adopted here.
 :::
 
 :::idea{provenance=original}
@@ -236,7 +247,11 @@ $$
 I_{l}^{m}=\int_{-1}^{1}\bigl(P_{l}^{m}\bigr)^{2}\mathrm{d}x
 =\frac{1}{2^{2l}(l!)^{2}}\int_{-1}^{1}(1-x^{2})^{m}\Bigl[\frac{\mathrm{d}^{l+m}R^{l}}{\mathrm{d}x^{l+m}}\Bigr]^{2}\mathrm{d}x ,
 $$
-the two factors $(-1)^{m}$ having squared away. Integrate by parts $l+m$ times, differentiating $(1-x^{2})^{m}\mathrm{d}^{l+m}R^{l}/\mathrm{d}x^{l+m}$ and integrating the other factor. Each boundary term retains at least one undifferentiated factor $R$ and so vanishes at $x=\pm1$. Thus
+the two factors $(-1)^{m}$ having squared away. Integrate by parts $l+m$ times, differentiating $(1-x^{2})^{m}\mathrm{d}^{l+m}R^{l}/\mathrm{d}x^{l+m}$ and integrating the other factor. The boundary term produced by the $(i+1)$st of these integrations, $i=0,\dots,l+m-1$, is
+$$
+\Bigl[\frac{\mathrm{d}^{i}}{\mathrm{d}x^{i}}\Bigl((1-x^{2})^{m}\frac{\mathrm{d}^{l+m}R^{l}}{\mathrm{d}x^{l+m}}\Bigr)\cdot\frac{\mathrm{d}^{\,l+m-1-i}R^{l}}{\mathrm{d}x^{\,l+m-1-i}}\Bigr]_{-1}^{1},
+$$
+and it vanishes for either of two reasons according to the size of $i$. For $i\le m-1$: expanding the first factor by Leibniz, every term differentiates $(1-x^{2})^{m}=(-R)^{m}$ at most $i\le m-1$ times and so still carries a positive power of $1-x^{2}$. For $i\ge m$: the second factor differentiates $R^{l}=(x-1)^{l}(x+1)^{l}$ only $l+m-1-i\le l-1$ times, which leaves at least one undifferentiated factor $x-1$ and one $x+1$. Either way the product is $0$ at $x=\pm1$. Thus
 $$
 I_{l}^{m}=\frac{(-1)^{l+m}}{2^{2l}(l!)^{2}}\int_{-1}^{1}R^{l}\,\frac{\mathrm{d}^{l+m}}{\mathrm{d}x^{l+m}}\Bigl[(1-x^{2})^{m}\frac{\mathrm{d}^{l+m}R^{l}}{\mathrm{d}x^{l+m}}\Bigr]\mathrm{d}x .
 $$
@@ -258,6 +273,8 @@ I_{l}^{m}=\frac{(2l)!}{2^{2l}(l!)^{2}}\cdot\frac{2^{2l+1}(l!)^{2}}{(2l+1)!}\cdot
 $$
 At $m=0$ this is the Legendre value $2/(2l+1)$, as it must be. The $\theta$-form follows from $x=\cos\theta$, $\mathrm{d}x=-\sin\theta\,\mathrm{d}\theta$.
 
+**Totality is not part of this argument.** What the Sturm-Liouville computation gives is orthogonality and a norm, and no amount of either implies that the $P_{l}^{m}$ span. That step is done separately below.
+
 **Part 7, orthogonality in $m$.** Read (AL) the other way: for fixed $l$, the family $\{P_{l}^{m}\}_{m}$ consists of eigenfunctions of
 $$
 \frac{\mathrm{d}}{\mathrm{d}x}\Bigl[(1-x^{2})\frac{\mathrm{d}y}{\mathrm{d}x}\Bigr]+l(l+1)y=-m^{2}\,\frac{1}{1-x^{2}}\,y ,
@@ -267,12 +284,22 @@ a Sturm-Liouville problem with $p=1-x^{2}$, $q=l(l+1)$, eigenvalue $-m^{2}$ and 
 The restriction to $m,k\ge1$ in part 7 belongs to the *constant*, not to the vanishing. The value $(l+m)!/[m(l-m)!]$, which Arfken, Weber and Harris and Riley, Hobson and Bence both record, blows up as $m\to0$, and rightly so: at $m=0$ the integral itself diverges, because $P_{l}^{0}(\pm1)=(\pm1)^{l}\neq0$ leaves the integrand $P_{l}^{2}/(1-x^{2})$ behaving like $[2(1-x)]^{-1}$ at the upper end. For $m\ge1$ the factor $(1-x^{2})^{m}$ in $(P_{l}^{m})^{2}$ more than cancels the weight and the integral converges. Both books add that the relation is not used in practice. $\square$
 :::
 
+:::proof[Part 6: totality of $\{P_{l}^{m}\}_{l\ge m}$ at fixed $m$]{provenance=original label="Lemma"}
+Fix an integer $m\ge0$ and suppose $f\in L^{2}(-1,1)$ satisfies $\int_{-1}^{1}fP_{l}^{m}\,\mathrm{d}x=0$ for every $l\ge m$. We show $f=0$ almost everywhere; by :ref[]{to=funcan.orthonormal-bases} that is exactly the totality of the orthonormal system of part 6, and the expansion and the coefficient formula follow from it.
+
+**Step 1: strip the fractional factor.** By part 2, $P_{l}^{m}=(1-x^{2})^{m/2}\mathcal{P}_{l}^{m}$ with $\deg\mathcal{P}_{l}^{m}=l-m$, and the leading coefficient is nonzero because $\mathrm{d}^{m}P_{l}/\mathrm{d}x^{m}$ has degree exactly $l-m$. As $l$ runs over $m,m+1,m+2,\dots$ the degrees $l-m$ run over $0,1,2,\dots$, one of each, so $\operatorname{span}\{\mathcal{P}_{l}^{m}:l\ge m\}$ is the whole space of polynomials. Put $g=(1-x^{2})^{m/2}f$. The hypothesis says $\int_{-1}^{1}g\,\mathcal{P}_{l}^{m}\,\mathrm{d}x=0$ for every $l\ge m$, hence $\int_{-1}^{1}g\,q\,\mathrm{d}x=0$ for every polynomial $q$.
+
+**Step 2: use the Legendre case.** The factor $(1-x^{2})^{m/2}$ is bounded by $1$ on $(-1,1)$, so $g\in L^{2}(-1,1)$ with $\lVert g\rVert\le\lVert f\rVert$. Taking $q=P_{k}$ for each $k\ge0$, $g$ is orthogonal to every Legendre polynomial, and that system is total in $L^{2}[-1,1]$ (:ref[]{to=spec.legendre-polynomials}, part 4, where it is proved from the Weierstrass approximation theorem). Therefore $g=0$ almost everywhere.
+
+**Step 3: return to $f$.** $(1-x^{2})^{m/2}>0$ at every point of the open interval $(-1,1)$, so $g=0$ a.e. forces $f=0$ a.e. there. $\square$
+:::
+
 :::remark[Where the hypotheses are used]{provenance=original}
 **$\lvert m\rvert\le l$ and $l$ an integer.** These are not conventions but the only way to get a solution bounded on $[-1,1]$, by part 3. Arfken, Weber and Harris note in a footnote the natural hope that the prefactor $(1-x^{2})^{m/2}$, which vanishes at the ends, might tame a divergent series $\mathcal{P}$; they state that it does not. For $\lvert m\rvert>l$ the function $P_{l}^{m}$ is not a small solution but identically zero, which is why the expansion in part 6 starts at $l=m$.
 
 **The same $m$ in both factors of part 6.** The $q$-term $-m^{2}/(1-x^{2})$ cancels on subtraction only if it is identical in the two equations. With different $m$'s there is a leftover $(k^{2}-m^{2})\int P_{l}^{m}P_{l'}^{k}(1-x^{2})^{-1}$ and the relation fails; what survives instead is part 7, with its different weight. Riley, Hobson and Bence are explicit that $m$ must match.
 
-**Vanishing of $p=1-x^{2}$ at both ends.** This is what kills the boundary terms in part 6 and in the normalisation integral, and it is why no boundary condition has to be imposed by hand. The step is delicate for $m\ge1$: $\mathrm{d}P_{l}^{m}/\mathrm{d}x$ is *unbounded* at $x=\pm1$ when $m=1$ (it behaves like $(1-x^{2})^{-1/2}$), and what vanishes is the product $(1-x^{2})P_{k}^{m}(P_{l}^{m})'$, in which $P_{k}^{m}$ supplies another factor $(1-x^{2})^{m/2}$. On a spherical cap $\theta\in[0,\theta_{0}]$ with $\theta_{0}<\pi$ the boundary term at $\theta_{0}$ does not vanish and the $P_{l}^{m}$ are *not* orthogonal; the correct eigenfunctions there solve (AL) with non-integer $\ell$, which is Strauss's hint for the cone problem.
+**Vanishing of $p=1-x^{2}$ at both ends.** This is what kills the boundary terms in part 6 and in the normalisation integral, and it is why no boundary condition has to be imposed by hand. The step is delicate for $m\ge1$: $\mathrm{d}P_{l}^{m}/\mathrm{d}x$ is *unbounded* at $x=\pm1$ when $m=1$ (it behaves like $(1-x^{2})^{-1/2}$), and what vanishes is the product $(1-x^{2})P_{k}^{m}(P_{l}^{m})'$, in which $P_{k}^{m}$ supplies another factor $(1-x^{2})^{m/2}$. On a spherical cap $\theta\in[0,\theta_{0}]$ with $\theta_{0}<\pi$ the boundary term at $\theta_{0}$ does not vanish and the $P_{l}^{m}$ are *not* orthogonal; the correct eigenfunctions there solve (AL) with non-integer $\ell$. Strauss sets the diffusion equation in the solid cone $\{r<a,\ \theta<\alpha\}$ as Exercise 8 of §10.6 (:cite{work=strauss-2008 loc="§10.6, Exercise 8, pp. 293–294"}); his hint asks the reader to separate variables, check that the polar factor $p(\cos\theta)$ satisfies the associated Legendre equation, expand $p$ in powers of $s-1$, and write down the equations that determine the eigenvalues. It stops there and does not say what those eigenvalues are; the condition $p(\cos\alpha)=0$ is what pushes $\ell$ off the integers for a general half-angle $\alpha$.
 
 **The Condon-Shortley phase.** It is used nowhere in any proof: it is a constant and (AL) is linear and homogeneous. It cancels identically out of parts 6 and 7, which are quadratic. It matters only in parts 4, 5 and 8, and in any table. Compare Arfken, Weber and Harris's $P_{1}^{1}=-\sin\theta$ with Riley, Hobson and Bence's $P_{1}^{1}=+\sin\theta$: both books are internally consistent, and both produce the same $Y_{1}^{1}$.
 

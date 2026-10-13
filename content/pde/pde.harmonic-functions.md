@@ -4,7 +4,7 @@ title: Harmonic functions
 kind: theorem
 level: core
 summary: Shows that a harmonic function equals its average over every sphere and every ball lying in its domain, that the converse holds for $C^2$ functions, that consequently it attains its maximum and minimum only on the boundary unless it is constant, and that the Dirichlet problem for Poisson's equation therefore has at most one solution, which depends continuously on its data.
-prereqs: [vcalc.green-identities, vcalc.divergence-theorem]
+prereqs: [vcalc.green-identities]
 provenance: adapted
 sources:
   - work: evans-2010
@@ -97,7 +97,7 @@ $$
 
 The derivative of the spherical average is the average of the normal derivative.
 
-**Step 3 (use Green's identity).** The ball $B(x,r)$ has a smooth boundary and $u \in C^2$ on its closure, so part 2 of :ref[Green's identities]{to=vcalc.green-identities} — the case $v \equiv 1$ — applies and turns (2) into
+**Step 3 (use Green's identity).** The ball $B(x,r)$ has a smooth boundary and $u \in C^2$ on its closure, so part 2 of :ref[Green's identities]{to=vcalc.green-identities} — the case $v \equiv 1$ — applies. That unit displays its identities for a bounded region of $\mathbb{R}^3$; what we need here is the $n$-dimensional version, which is the form recorded in the closing paragraph of the same statement block (Evans's hypotheses: $U \subset \mathbb{R}^n$ bounded and open with $C^1$ boundary, $u \in C^2(\overline U)$), and the ball $B(x,r)$ with $\overline{B(x,r)} \subseteq U$ meets them. It turns (2) into
 
 $$
 \phi'(r) \;=\; \frac{1}{n\alpha(n)r^{n-1}}\int_{B(x,r)} \nabla^2 u\; dV
@@ -128,14 +128,19 @@ $$
 Suppose $\nabla^2u(x_0) \ne 0$ for some $x_0 \in U$; replacing $u$ by $-u$ if necessary, assume $\nabla^2 u(x_0) > 0$. Since $\nabla^2 u$ is continuous, it stays above $\tfrac12\nabla^2u(x_0) > 0$ on some ball $B(x_0,\rho) \subseteq U$, whose integral is then strictly positive. That contradicts the display. Hence $\nabla^2 u \equiv 0$ on $U$. $\square$
 :::
 
-:::remark{provenance=original}
-Ahlfors reaches the plane case of (MV) by a route with no divergence theorem in it. His Theorem 19 says that $\int_\gamma (u_1\,{*}du_2 - u_2\,{*}du_1) = 0$ for harmonic $u_1, u_2$ and any cycle $\gamma$ homologous to zero, where ${*}du = -u_y\,dx + u_x\,dy$ is the conjugate differential; it is proved by reducing to a rectangle, where single-valued conjugate functions exist and Cauchy's theorem applies. Taking $u_1 = \log r$ and $u_2 = u$ on a punctured disc, with $\gamma$ the difference of two concentric circles, shows that
+:::remark{provenance=adapted src="ahlfors-1979:§4.6.1, Thm 19 and Eq. (60), p. 164, and §4.6.2, pp. 164–165"}
+Ahlfors reaches the plane case of (MV) by a route with no divergence theorem in it. Write ${*}du = -u_y\,dx + u_x\,dy$ for the conjugate differential. His Theorem 19 (Eq. (60), p. 164) is that $\int_\gamma (u_1\,{*}du_2 - u_2\,{*}du_1) = 0$ whenever $u_1$ and $u_2$ are harmonic in a region $\Omega$ and the cycle $\gamma$ is homologous to zero in $\Omega$. He proves it by reducing the claim to the boundary of a rectangle, where single-valued conjugate functions exist and the integrand is the imaginary part of an analytic differential, so Cauchy's theorem applies.
 
-$$
-\int_{\lvert z\rvert = r} u \; d\theta - \log r \int_{\lvert z\rvert = r} r\,\frac{\partial u}{\partial r}\; d\theta
-$$
+Two specialisations give the plane mean value property for a $u$ harmonic on the disc $\lvert z\rvert < \rho$. On a circle $\lvert z\rvert = r$ one has ${*}du = r(\partial u/\partial r)\,d\theta$.
 
-is independent of $r$, and taking $u_1 = 1$ shows that the second integral vanishes on its own. So the first integral alone is independent of $r$, which is the mean value property. The conclusion is the same as Step 5's; the hypotheses differ in that Ahlfors's argument is about a region in the plane and is sensitive to the topology of $\gamma$, whereas the argument above is dimension-free.
+- With $\Omega$ the punctured disc $0 < \lvert z\rvert < \rho$, $u_1 = \log r$, $u_2 = u$, and $\gamma$ the difference of two concentric circles — a cycle homologous to zero there — Theorem 19 gives the same value on both circles for
+  $$
+  \int_{\lvert z\rvert = r} u \; d\theta - \log r \int_{\lvert z\rvert = r} r\,\frac{\partial u}{\partial r}\; d\theta ,
+  $$
+  so this combination is independent of $r$. Harmonicity in the annulus between the two circles is all that is used.
+- With $u_1 = 1$ and $u_2 = u$, Theorem 19 collapses to his earlier Eq. (58), $\int_\gamma {*}du = 0$. On the punctured disc that only repeats that $\int_{\lvert z\rvert = r} r(\partial u/\partial r)\,d\theta$ is independent of $r$; a single circle is not homologous to zero there. To get the stronger conclusion that this integral *vanishes*, one needs $u$ harmonic on the whole disc, for then the circle $\lvert z\rvert = r$ is by itself homologous to zero and (58) applies to it alone.
+
+Subtracting the second from the first leaves $\int_{\lvert z\rvert = r} u\,d\theta$ independent of $r$, which is the mean value property; in the annulus, where only the first bullet is available, Ahlfors gets instead a circular mean of the form $a\log r + \beta$ (his Theorem 20, Eq. (61), p. 165). The conclusion is the same as Step 5's; the hypotheses differ in that Ahlfors's argument is about a region in the plane and is sensitive to the topology of $\gamma$, whereas the argument above is dimension-free.
 :::
 
 :::statement[Weak and strong maximum principle]{provenance=adapted src="evans-2010:§2.2.3a, Thm 4, p. 26; strauss-2008:§6.1, pp. 154–155; stakgold-holst-2011:§1.3, p. 73 and §8.3, pp. 495–496; ahlfors-1979:§4.6.2, Thm 21, p. 166"}
@@ -356,7 +361,7 @@ whose supremum over the closed disc is attained where $2(1-x^2-y^2)+3x$ is large
 
 **Steady flow and steady temperature.** For an incompressible irrotational flow, Strauss's second example, the velocity potential is harmonic, and the maximum principle says the extremes of the potential sit on the boundary. For steady heat conduction with no sources the temperature is harmonic, and the weak maximum principle says that the hottest and coldest points of a body in steady state are on its surface: a result that is obvious physically and would be hard to prove without it. The comparison principle is the formal version of the statement that raising the temperature anywhere on the boundary, or adding heat anywhere inside, raises the temperature everywhere.
 
-**Error control for numerical solvers.** Part 3 of the uniqueness statement is what makes a discretized Poisson solver trustworthy. Five-point finite-difference and piecewise-linear finite-element discretizations of $-\nabla^2$ satisfy a discrete maximum principle, and the discrete analogue of the barrier estimate — with $\lVert v\rVert_\infty = \tfrac14$ on the unit disc, as computed above — converts a bound on the residual $f$ into a bound on the error in the computed solution, in the supremum norm and with no reference to derivatives of the exact solution. The mean value property is the statement that the exact solution is the fixed point of the averaging operator, which is precisely what the five-point stencil discretizes; Strauss's fourth example makes the probabilistic version of this explicit, with $u$ the probability that a Brownian particle started at a point leaves the region through a chosen piece of its boundary, and that interpretation is the basis of Monte Carlo (walk-on-spheres) solvers for the Dirichlet problem.
+**Error control for numerical solvers.** Part 3 of the uniqueness statement is what makes a discretized Poisson solver trustworthy. Suitable discretizations of $-\nabla^2$ satisfy a discrete maximum principle — the five-point finite-difference stencil on a uniform grid, and piecewise-linear finite elements on a triangulation with no obtuse angle, the condition that keeps the off-diagonal stiffness entries non-positive — and the discrete analogue of the barrier estimate — with $\lVert v\rVert_\infty = \tfrac14$ on the unit disc, as computed above — converts a bound on the residual $f$ into a bound on the error in the computed solution, in the supremum norm and with no reference to derivatives of the exact solution. The mean value property is the statement that the exact solution is the fixed point of the averaging operator, which is precisely what the five-point stencil on a uniform grid discretizes, each value being replaced by the average of its four neighbours; Strauss's fourth example makes the probabilistic version of this explicit, with $u$ the probability that a Brownian particle started at a point leaves the region through a chosen piece of its boundary, and that interpretation is the basis of Monte Carlo (walk-on-spheres) solvers for the Dirichlet problem.
 
 **Harmonic functions as the real parts of analytic functions.** In the plane, Strauss's and Ahlfors's third setting, an analytic function splits into a harmonic real part and a harmonic imaginary part, so the maximum principle for harmonic functions and the maximum modulus principle for analytic functions are the same theorem seen twice. Ahlfors notes the direction that is less often used: the maximum principle for an analytic $f$ with no zeros follows from the harmonic one applied to $\log\lvert f\rvert$.
 :::

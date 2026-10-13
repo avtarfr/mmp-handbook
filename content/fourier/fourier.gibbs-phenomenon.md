@@ -3,7 +3,7 @@ id: fourier.gibbs-phenomenon
 title: The Gibbs phenomenon
 kind: example
 level: core
-summary: "Computes exactly what a truncated Fourier series does next to a jump: the partial sum of the square wave reaches 2Si(pi)/pi = 1.17898 times the half-jump at a point half a wavelength of the highest retained harmonic away from the discontinuity, so it overshoots each one-sided value by 8.95 percent of the jump, and the spike narrows without shrinking as more terms are taken."
+summary: "Computes exactly what a truncated Fourier series does next to a jump: the partial sum of the square wave reaches 2Si(pi)/pi = 1.17898 times the half-jump at a point just under half a wavelength of the highest retained harmonic away from the discontinuity, so it overshoots each one-sided value by 8.95 percent of the jump, and the spike narrows without shrinking as more terms are taken."
 prereqs: [fourier.dirichlet-convergence]
 provenance: adapted
 sources:
@@ -20,8 +20,8 @@ sources:
     pages: "142-144"
     role: the formulation that the width of the overshoot vanishes while its height does not, the figure of $9$ percent of the jump, and the change of variables and explicit bounds used to take the limit of the partial sum at the first maximum
   - work: folland-1999
-    loc: "§8.5, the function $\\phi(x)=\\tfrac12-x-[x]$ of (8.46) with its unit jumps, the sine series for it, the description of the spikes as tending to zero in width but not in height, the first-maximum value $0.5895$ described as about $18\\%$ greater than $\\phi(0+)=\\tfrac12$, and Figure 8.1, pp. 268–269; the reduction of a general jump to $\\phi$ by subtracting $[f(a+)-f(a-)]\\phi(x-a)$ and the conclusion about uniform convergence away from the jumps, pp. 268–269; Exercise 37, giving $(\\mathrm{d}/\\mathrm{d}x)\\Delta_m=D_m$, the first maximum at $x=(2m+1)^{-1}$ with limit $\\tfrac1\\pi\\int_0^\\pi t^{-1}\\sin t\\,\\mathrm{d}t-\\tfrac12\\approx0.0895$, and the $j$th critical point at $j/(2m+1)$ with its limit, p. 270"
-    pages: "268-270"
+    loc: "§8.5, the function $\\phi(x)=\\tfrac12-x-[x]$ of (8.46) with its unit jumps, the sine series for it, the description of the spikes as tending to zero in width but not in height, the first-maximum value $0.5895$ described as about $18\\%$ greater than $\\phi(0+)=\\tfrac12$, and Figure 8.1, pp. 268–269; the reduction of a general jump to $\\phi$ by subtracting $[f(a+)-f(a-)]\\phi(x-a)$ and the conclusion about uniform convergence away from the jumps, pp. 268–269; Exercise 37, giving $(\\mathrm{d}/\\mathrm{d}x)\\Delta_m=D_m$, the first maximum at $x=(2m+1)^{-1}$ with limit $\\tfrac1\\pi\\int_0^\\pi t^{-1}\\sin t\\,\\mathrm{d}t-\\tfrac12\\approx0.0895$, and the $j$th critical point at $j/(2m+1)$ with its limit, p. 270; the closed form (8.40) for $D_m$ with the remark that $\\lVert D_m\\rVert_1\\to\\infty$ and that the Fourier series of a continuous function need not converge pointwise, p. 264"
+    pages: "264, 268-270"
     role: the differentiation identity that makes the critical points of the error exactly the zeros of the Dirichlet kernel, the full ladder of critical values $\\tfrac1\\pi\\mathrm{Si}(j\\pi)-\\tfrac12$ with their alternating signs, the value $0.0895$ of the overshoot for a unit jump, and the subtraction argument that transfers the result from one model jump to an arbitrary one
   - work: hassani-2013
     loc: "§9.1.1 (The Gibbs Phenomenon), the partial sum as an integral against $\\sin[(N+\\frac12)\\phi]/\\sin(\\frac12\\phi)$ (9.13), the localisation of the jump in the partial sum to a small interval around the discontinuity, the conclusion that the maximum overshoot occurs at $\\pi/(N+\\frac12)$ to the right of the discontinuity, eq. (9.14) giving $(\\Delta f_N)_{\\max}\\approx1.179\\,\\Delta f$, and Box 9.1.5, pp. 273–275"
@@ -38,7 +38,7 @@ J = f(a+)-f(a-)\neq0,
 m=\frac{f(a+)+f(a-)}{2} .
 $$
 
-By :ref[]{to=fourier.dirichlet-convergence} the partial sums $S_Nf$ converge at every point: to $f(x)$ at each point of continuity, and to the midpoint of the jump at each of the finitely many points where $f$ jumps, so to $m$ at $a$. Pointwise, then, nothing is amiss. The **Gibbs phenomenon** is what happens to the *graphs*: for every large $N$ the graph of $S_Nf$ carries a spike beside $x=a$ that rises above $f(a+)$ and dips below $f(a-)$ by amounts that do not shrink as $N$ grows, although the spike itself narrows. Equivalently, $S_Nf\to f$ is not uniform on any interval containing $a$ — which it cannot be, since a uniform limit of continuous functions would be continuous — and the failure is of a definite, computable size.
+By :ref[]{to=fourier.dirichlet-convergence} the partial sums $S_Nf$ converge at every point: to $f(x)$ at each point of continuity, and to the midpoint of the jump at each of the finitely many points where $f$ jumps, so to $m$ at $a$. Pointwise, then, nothing is amiss. The **Gibbs phenomenon** is what happens to the *graphs*: for every large $N$ the graph of $S_Nf$ carries a spike beside $x=a$ that overruns both one-sided values — rising above the higher of $f(a\pm)$ and dipping below the lower — by amounts that do not shrink as $N$ grows, although the spike itself narrows. Equivalently, $S_Nf\to f$ is not uniform on any interval containing $a$ — which it cannot be, since a uniform limit of continuous functions would be continuous — and the failure is of a definite, computable size.
 
 The size is always quoted through the same number,
 
@@ -50,11 +50,11 @@ $$
 
 but divided by three different things, which is why the literature reports $9\%$ and $18\%$ for the same effect. Writing $P=\tfrac2\pi\operatorname{Si}(\pi)$:
 
-- **Per side, relative to the jump.** $\max S_Nf$ tends to $m+\tfrac12 JP$, so it exceeds $f(a+)$ by $\tfrac12 J(P-1)=0.0894899\,J$: about $9\%$ of the jump, which is how Stakgold and Holst and Strauss state it. There is an equal dip below $f(a-)$.
-- **Per side, relative to the half-jump.** The same excess is $(P-1)=17.898\%$ of the half-jump $\tfrac12 J$, the distance from the midpoint to either level. Folland's $0.5895$ for a unit jump is "about $18\%$ greater than $\phi(0+)=\tfrac12$" in this sense, and Arfken, Weber and Harris's "some $18\%$" is the factor $P$ applied to their amplitude $h/2$.
-- **Across the jump.** The spike spans $JP$ in total instead of $J$, so the *jump of the partial sum* is $1.179$ times the jump of the function. This is Hassani's eq. (9.14) and his Box 9.1.5.
+- **Per side, relative to the jump.** Beside $a$ the extreme values of $S_Nf$ tend to $m\pm\tfrac12\lvert J\rvert P$, so the upper one exceeds the higher of $f(a\pm)$ by $\tfrac12\lvert J\rvert(P-1)=0.0894899\,\lvert J\rvert$: about $9\%$ of the jump, which is how Stakgold and Holst and Strauss state it. There is an equal dip below the lower of the two. (Nothing here depends on the sign of $J$. The absolute value is carried rather than assumed away because for a downward jump, $J<0$, it is $f(a-)$ that is the higher level and $f(a+)$ the lower, so the two roles are exchanged while the sizes are not.)
+- **Per side, relative to the half-jump.** The same excess is $(P-1)=17.898\%$ of the half-jump $\tfrac12\lvert J\rvert$, the distance from the midpoint to either level. Folland's $0.5895$ for a unit jump is "about $18\%$ greater than $\phi(0+)=\tfrac12$" in this sense, and Arfken, Weber and Harris's "some $18\%$" is the factor $P$ applied to their amplitude $h/2$.
+- **Across the jump.** The spike spans $\lvert J\rvert P$ in total instead of $\lvert J\rvert$, so the *jump of the partial sum* is $1.179$ times the jump of the function. This is Hassani's eq. (9.14) and his Box 9.1.5.
 
-All three are the one statement $\max S_Nf\to m+\tfrac12 JP$. **We quote the first**: the overshoot beyond each one-sided value is $0.0895\,J$, about nine per cent of the jump, and we say so explicitly whenever a percentage appears.
+All three are the one statement that the extremes of $S_Nf$ beside $a$ tend to $m\pm\tfrac12\lvert J\rvert P$. **We quote the first**: the overshoot beyond each one-sided value is $0.0895\,\lvert J\rvert$, about nine per cent of the jump, and we say so explicitly whenever a percentage appears.
 :::
 
 :::statement[The limiting shape of the spike for the square wave, and for any jump]{provenance=adapted src="arfken-2013:§19.3, eqs. (19.32)–(19.38) and (19.43), pp. 958–960; stakgold-holst-2011:§2.3, the sine series of $\\operatorname{sgn} x$ and the reduction to $\\mathrm{Si}$, pp. 135–136; folland-1999:§8.5, Exercise 37, p. 270, and the subtraction argument, pp. 268–269; hassani-2013:§9.1.1, eq. (9.14), p. 275"}
@@ -67,7 +67,7 @@ $$
 and we write $S_n$ for the partial sum retaining the terms $k=0,\dots,n$, whose highest harmonic is therefore $2n+1$. Put $M=2n+2$. Then:
 
 1. $\displaystyle S_n(x)=\frac{2}{\pi}\int_0^x\frac{\sin(Mt)}{\sin t}\,\mathrm{d}t$ for all $x$.
-2. On $(0,\pi)$ the critical points of $S_n$ are exactly $x_j=j\pi/M$ for $j=1,\dots,M-1$; they alternate between maxima (odd $j$) and minima (even $j$), and $S_n$ attains its **global** maximum on $[0,\pi]$ at $x_1=\pi/M$. (By the symmetry of $S_n$ about $\pi/2$ established in Step 4 of the proof, the same value is attained at $x_{M-1}=\pi-\pi/M$ and at no other point; when we speak of *the* maximum below we mean the first of the two.)
+2. On $(0,\pi)$ the critical points of $S_n$ are exactly $x_j=j\pi/M$ for $j=1,\dots,M-1$; they alternate between maxima (odd $j$) and minima (even $j$), and $S_n$ attains its **global** maximum on $[0,\pi]$ at $x_1=\pi/M$. (By the symmetry of $S_n$ about $\pi/2$ established in Step 4 of the proof, the same value is attained at $x_{M-1}=\pi-\pi/M$ and at no other point. For $n\ge1$ that is a second, distinct point, and when we speak of *the* maximum below we mean the first of the two; for $n=0$ the two coincide at $\pi/2$.)
 3. For each fixed $j\ge1$,
    $$
    \lim_{n\to\infty}S_n\!\left(\frac{j\pi}{M}\right)=\frac{2}{\pi}\operatorname{Si}(j\pi).
@@ -109,10 +109,10 @@ Everything follows from differentiating the partial sum instead of the function.
 
 Rescaling $t$ by $M$ is what makes the limit exist. The integrand becomes $\sin u / [M\sin(u/M)]$, and since $M\sin(u/M)\to u$, the integral tends to $\int_0^{j\pi}u^{-1}\sin u\,\mathrm{d}u$ — a fixed number, independent of $n$. The rescaling is also the reason the effect never goes away: $n$ has been absorbed entirely into the *width* of the picture, so increasing $n$ shrinks the spike horizontally and does nothing to it vertically.
 
-The step from one jump to all jumps is pure bookkeeping. Subtract a multiple of the square wave to cancel each jump; what is left is continuous and piecewise smooth, so its coefficients fall like $n^{-2}$, its series converges uniformly, and it can contribute no overshoot. Only the square-wave pieces can, and part 1 says exactly how much each one does.
+The step from one jump to all jumps is pure bookkeeping. Subtract a multiple of the square wave to cancel the jump; what is left is continuous near that point and has a bounded derivative off finitely many others, hence is absolutely continuous there, and absolute continuity is exactly the hypothesis under which partial sums are known to converge uniformly on compact sets. So the remainder contributes no overshoot. Only the square-wave pieces can, and part 1 says exactly how much each one does.
 :::
 
-:::proof{provenance=adapted src="arfken-2013:§19.3, eqs. (19.32)–(19.43), pp. 958–960; folland-1999:§8.5, Exercise 37(a)–(c), p. 270; stakgold-holst-2011:§2.3, the reduction of $S_{2n+1}$ to the sine integral and the decomposition of a function in $D$, pp. 135–136, and Thm 2.3.2, p. 131; strauss-2008:§5.5, the change of variables and the bounds taken in the limit, pp. 143–144"}
+:::proof{provenance=adapted src="arfken-2013:§19.3, eqs. (19.32)–(19.43), pp. 958–960; folland-1999:§8.5, Exercise 37(a)–(c), p. 270; stakgold-holst-2011:§2.3, the reduction of $S_{2n+1}$ to the sine integral and the decomposition of a function in $D$, pp. 135–136; strauss-2008:§5.5, the change of variables and the bounds taken in the limit, pp. 143–144"}
 **Step 1: the series of the square wave.** The function is odd, so by part 3 of the statement in :ref[]{to=fourier.fourier-series} only sine terms appear, and
 
 $$
@@ -160,7 +160,7 @@ $$
 S_n\!\left(\frac{j\pi}{M}\right)=\frac{2}{\pi}\int_0^{j\pi}\frac{\sin u}{M\sin(u/M)}\,\mathrm{d}u .
 $$
 
-We compare the integrand with $\sin u/u$ uniformly on $[0,j\pi]$, which is the estimate Arfken, Weber and Harris and Hassani both take for granted when they replace $\sin(u/M)$ by $u/M$. Two elementary bounds do it, for $M\ge 2j$ so that $u/M\le\pi/2$ throughout:
+We compare the integrand with $\sin u/u$ uniformly on $[0,j\pi]$, which is the estimate Arfken, Weber and Harris and Hassani both take for granted when they replace $\sin(u/M)$ by $u/M$. Two elementary bounds do it, for $M\ge 2j$ — that is, for $n\ge j-1$ — so that $u/M\le\pi/2$ throughout:
 
 - $\bigl\lvert M\sin(u/M)-u\bigr\rvert\le u^3/(6M^2)$, from the alternating Taylor series of $\sin$;
 - $M\sin(u/M)\ge 2u/\pi$, from Jordan's inequality $\sin v\ge 2v/\pi$ on $[0,\pi/2]$.
@@ -183,7 +183,7 @@ $$
 =\frac{\pi^{2}j^{2}}{6M^{2}}\longrightarrow0 ,
 $$
 
-which is item 3, with the explicit rate $O(n^{-2})$.
+valid for every $n\ge j-1$. Since $j$ is fixed and $n\to\infty$, all but finitely many $n$ satisfy that, which is item 3, with the explicit rate $O(n^{-2})$.
 
 **Step 5b: the rescaled limit (part 1, item 4).** Let $N\ge1$, $n=\lfloor(N-1)/2\rfloor$ and $M=2n+2$, so that $M=N+1$ for odd $N$ and $M=N$ for even $N$; in either case $M/N\to1$. Item 1 and the substitution $u=Mt$ give, for $c>0$,
 
