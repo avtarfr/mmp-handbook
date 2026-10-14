@@ -293,6 +293,7 @@
   let quiet = false; // set while Escape hands focus back, so the list stays closed
   input.addEventListener('focus', () => {
     loadDefs();
+    pagefind().catch(() => {}); // start fetching the full-text engine before the first keystroke
     if (!quiet && input.value.trim() && panel.innerHTML) open(true);
     quiet = false;
   });
