@@ -152,11 +152,12 @@ for (const { part, chapters } of catalog.tree) {
       </li>`).join('')}</ul>
     </li>`)
       .join('');
-    // Sections are <details> so a long chapter can be folded down to its headings while reading.
-    // They open by default: the page must read straight through for anyone arriving at an anchor,
-    // and basket.js reopens whichever one holds the target of a link.
+    // Sections are <details>, folded by default so a chapter opens as a list of its sections; the
+    // reader unfolds the one they want. A link to a unit inside a folded section still lands:
+    // basket.js opens whatever holds the target of the address (and browsers do the same for
+    // fragment navigation when scripting is off).
     const sectionsHtml = c.sections
-      .map((s) => `<details class="chapter-section" id="s-${e(s.section.id)}" open>
+      .map((s) => `<details class="chapter-section" id="s-${e(s.section.id)}">
 <summary><h2>${e(s.section.title)}</h2><span class="count">${s.units.length}</span></summary>
 ${s.units.map(unitArticle).join('\n')}
 </details>`)
@@ -164,8 +165,8 @@ ${s.units.map(unitArticle).join('\n')}
     const body = `<nav class="crumbs"><a href="${BASE}">Contents</a> › ${e(part.title)}</nav>
 <h1>${e(c.chapter.title)}</h1>
 ${c.chapter.summary ? `<p class="lede">${e(c.chapter.summary)}</p>` : ''}
-<p class="chapter-actions">${pdfLink}<button class="button" type="button" data-basket-add="${e(ids.join(' '))}">Add whole chapter to PDF basket</button><button class="button" type="button" data-sections="collapse">Collapse all sections</button></p>
-<details class="chapter-toc" open><summary>In this chapter <span class="count">${ids.length}</span></summary><p class="sub">Tick a unit to add it to your PDF basket.</p><ol>${toc}</ol></details>
+<p class="chapter-actions">${pdfLink}<button class="button" type="button" data-basket-add="${e(ids.join(' '))}">Add whole chapter to PDF basket</button><button class="button" type="button" data-sections="expand">Expand all sections</button></p>
+<details class="chapter-toc"><summary>In this chapter <span class="count">${ids.length}</span></summary><p class="sub">Tick a unit to add it to your PDF basket.</p><ol>${toc}</ol></details>
 <div data-pagefind-body>
 ${sectionsHtml}
 </div>`;
@@ -282,7 +283,7 @@ const tocBody = catalog.tree
             return `<div class="toc-section">${heading}<ul class="toc-units">${s.units.map((u) => unitRow(part, c.chapter, u)).join('')}</ul></div>`;
           })
           .join('');
-        return `<details class="toc-chapter" open>
+        return `<details class="toc-chapter">
   <summary>
     <label class="toc-check"><input type="checkbox" data-basket-group="${e(chapterUnits.map((u) => u.id).join(' '))}" aria-label="Add chapter ${e(c.chapter.title)}"></label>
     <span class="toc-fold" aria-hidden="true"></span>

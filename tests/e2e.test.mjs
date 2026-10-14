@@ -41,13 +41,18 @@ test('chapter page renders units, badges and math, and the basket works', async 
 
   // The contents box at the top of the chapter ticks units too, and both boxes for a unit track
   // the one basket: ticking in the contents box must tick the one in the unit's own header.
+  // Everything collapsible starts folded: the contents box and every section.
+  assert.equal(await page.locator('details.chapter-toc[open], details.chapter-section[open]').count(), 0);
+  await page.locator('.chapter-toc > summary').click();
   const inToc = page.locator('.chapter-toc input[data-basket="fixtures.parseval-identity"]');
   const inUnit = page.locator('article.unit input[data-basket="fixtures.parseval-identity"]');
   await inToc.check();
   assert.equal(await inUnit.isChecked(), true);
   assert.equal(await page.locator('.basket-count').first().textContent(), '1');
 
-  // Sections fold away while reading, and a link into a folded one still opens it.
+  // Sections unfold together and fold together, and a link into a folded one still opens it.
+  await page.getByRole('button', { name: 'Expand all sections' }).click();
+  assert.equal(await page.locator('details.chapter-section:not([open])').count(), 0);
   await page.getByRole('button', { name: 'Collapse all sections' }).click();
   assert.equal(await page.locator('details.chapter-section[open]').count(), 0);
   await page.locator('.chapter-toc a[href="#u-fixtures_parseval-identity"]').click();
@@ -56,7 +61,9 @@ test('chapter page renders units, badges and math, and the basket works', async 
   await page.goto(`${URL0}basket/`);
   // Parseval's prerequisites are offered in reading order, every unit after the ones it needs;
   // adding them leaves nothing missing.
-  await page.locator('.prereq-panel[data-missing]').waitFor();
+  await page.locator('.prereq-panel[data-missing]').waitFor({ state: 'attached' });
+  assert.equal(await page.locator('.prereq-panel[open]').count(), 0); // folded by default, like everything
+  await page.locator('.prereq-panel > summary').click();
   const order = await page.locator('.reading-order li a').allTextContents();
   const at = (prefix) => order.findIndex((t) => t.startsWith(prefix));
   assert.ok(at("Bessel's inequality") >= 0 && at("Bessel's inequality") < at("Parseval's identity"), `reading order: ${order.join(' | ')}`);
@@ -73,7 +80,11 @@ test('a chapter title opens the chapter; the fold arrow and checkbox do not', as
   await page.goto(URL0);
   const ch = page.locator('details.toc-chapter').first();
 
-  // The arrow folds and nothing else: a click on it must not follow the title's link.
+  // Chapters start folded. The arrow unfolds and folds, and nothing else: a click on it must not
+  // follow the title's link.
+  assert.equal(await ch.evaluate((d) => d.open), false);
+  await ch.locator('summary .toc-fold').click();
+  assert.equal(await ch.evaluate((d) => d.open), true);
   await ch.locator('summary .toc-fold').click();
   assert.equal(await ch.evaluate((d) => d.open), false);
   assert.equal(new URL(page.url()).pathname, new URL(URL0).pathname);

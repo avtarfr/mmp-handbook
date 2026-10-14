@@ -156,10 +156,10 @@ ${groups
 <p class="cited-by">The print view lays out pages in your browser. Use your browser's Print command and choose “Save as PDF”.</p>
 </div>
 <aside class="basket-side">${prereqPanel(ids, missing, allMissing)}</aside></div>`;
-    // Open by default where there is room beside the list, or when something is missing; folded on a
-    // phone when nothing needs doing. A reader's own choice survives re-rendering.
+    // Folded by default, like every other collapsible on the site; its summary still says how many
+    // prerequisites are missing. A reader's own choice survives re-rendering.
     const panel = app.querySelector('.prereq-panel');
-    panel.open = wasOpen ?? (missing.length > 0 || matchMedia('(min-width: 1000px)').matches);
+    panel.open = wasOpen ?? false;
 
     app.querySelector('#add-missing')?.addEventListener('click', () => window.mmpBasket.add(missing, 'missing prerequisites'));
     app.querySelector('#prereq-deep')?.addEventListener('change', (ev) => { deep = ev.target.checked; render(); });

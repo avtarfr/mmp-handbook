@@ -150,6 +150,8 @@
   };
   let lastWidth = innerWidth;
   markWide();
+  // Inside a folded section everything measures zero, so measure again whenever one opens.
+  document.addEventListener('toggle', (ev) => { if (ev.target.open) markWide(); }, true);
   window.addEventListener('resize', () => {
     if (innerWidth !== lastWidth) {
       lastWidth = innerWidth;
