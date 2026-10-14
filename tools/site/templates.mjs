@@ -77,7 +77,9 @@ ${body}
 <footer class="site-foot">
   <p>Every block is labelled <span class="badge badge-original">Original</span>, <span class="badge badge-adapted">Adapted</span> (our wording, following the cited work) or <span class="badge badge-quoted">Quoted</span> (short verbatim excerpt). See <a href="${base}provenance/">provenance</a>.</p>
   <p>Text licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>, except Quoted blocks, which remain under their original copyright.</p>
+  <p>Reviewed, not guaranteed: if you find a mistake, <a href="${base}about/#corrections">please report it</a>.</p>
   <p class="foot-links"><a href="${base}about/">About</a> &middot; <a href="${base}provenance/">Provenance</a> &middot; <a href="${base}privacy/">Privacy</a> &middot; <a href="${base}bibliography/">Sources</a></p>
+  <p class="foot-author">Maintained by <a href="https://avtarfr.github.io/">Sumangalam Avtar Sharma</a></p>
 </footer>
 <script src="${base}assets/basket.js" defer></script>
 </body>

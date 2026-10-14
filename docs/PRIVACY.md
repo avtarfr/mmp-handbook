@@ -72,7 +72,7 @@ fine.
 
 ## Links out
 
-Citations link to publishers, to Creative Commons and to GitHub. Following one puts you on their
+Citations link to publishers; the site also links to Creative Commons, to GitHub and to its maintainer's own site. Following one puts you on their
 site under their terms; we cannot speak for any of them.
 
 ## Changes

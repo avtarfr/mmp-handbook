@@ -441,10 +441,20 @@ separately, because a handbook that silently corrects its sources cannot be chec
 <p>So the handbook is deliberately complete rather than provisionally complete: every unit the
 topic map plans has been written and has passed the gate. Nothing is shown here that has not.</p>
 
-<h2>Corrections</h2>
-<p>If something here is wrong, it is worth telling us: the point of the citations is that any claim
-can be traced to a page and checked. Contact details are on the
-<a href="${BASE}provenance/">provenance page</a>.</p>
+<h2 id="corrections">Accuracy and corrections</h2>
+<p>Review catches errors; it does not catch all of them. Every unit here has passed independent
+review, and some will still contain mistakes &mdash; a wrong sign, a missing hypothesis, a page
+cited wrongly. Use the handbook as you would any reference: for anything that matters, check it
+against the cited page. That is what the citations are for.</p>
+<p>Corrections are welcome. Open an issue on <a href="https://github.com/avtarfr/mmp-handbook/issues">GitHub</a>,
+or write to the address on the <a href="${BASE}provenance/">provenance page</a>. A corrected unit goes
+back through the same review before it is published again.</p>
+<p>The text is provided as it is, without warranty of any kind, as its licence states (CC BY-SA 4.0,
+section 5).</p>
+
+<h2>Who maintains it</h2>
+<p>The handbook is maintained by <a href="https://avtarfr.github.io/">Sumangalam Avtar Sharma</a>,
+a mathematics student at IISER Pune.</p>
 
 <h2>Licence</h2>
 <p>The text is licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>
