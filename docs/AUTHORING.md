@@ -47,7 +47,7 @@ sources:
 
 Rules (checked by `npm run check`):
 
-- The body is made only of `:::block` directives. Allowed blocks: `definition`, `statement`, `idea`, `proof`, `method`, `example`, `application`, `remark`, `note`, `quote`. There are no exercises. The handbook is written in phases; the first writes only definitions, statements, methods, notes and remarks (`docs/contributing/phase-concepts.md`).
+- The body is made only of `:::block` directives. Allowed blocks: `definition`, `statement`, `idea`, `proof`, `method`, `example`, `application`, `remark`, `note`, `quote`. There are no exercises. The role-specific briefs for writing and reviewing a unit are in `docs/contributing/`.
 - Every block has `provenance=original|adapted|quoted`.
 - `adapted` and `quoted` blocks have `src="work-id:locator"` (several separated by `;`), and each work is also listed in the frontmatter `sources`.
 - Verbatim text appears only in `:::quote{provenance=quoted ...}` blocks of at most 60 words.
