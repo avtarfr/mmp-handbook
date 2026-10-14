@@ -17,6 +17,9 @@ import { loadCatalog } from '../lib/catalog.mjs';
 import { renderUnitBody, renderInlineText, escapeHtml as e, BADGE, KIND_LABEL } from '../lib/render.mjs';
 import { citedWorks, workSegments, sourceLocator } from '../lib/bib.mjs';
 import { layout as baseLayout, provenanceLegend, SITE_TITLE, STATUS_LABEL } from './templates.mjs';
+import { fromHtml } from 'hast-util-from-html';
+import { toHtml } from 'hast-util-to-html';
+import { toText } from 'hast-util-to-text';
 
 const args = process.argv.slice(2);
 const opt = (name, dflt) => (args.includes(name) ? args[args.indexOf(name) + 1] : dflt);
@@ -110,7 +113,7 @@ function unitArticle(u) {
   return `<article class="unit${u.level === 'advanced' ? ' unit-advanced' : ''}" id="${unitAnchor(u.id)}" data-unit="${e(u.id)}">
 <header class="unit-head">
   <p class="unit-kind">${e(KIND_LABEL[u.kind])}${u.level === 'advanced' ? ' · advanced' : ''}</p>
-  <h3><a href="#${unitAnchor(u.id)}">${e(u.title)}</a></h3>
+  <h3 id="${unitAnchor(u.id)}-t"><a href="#${unitAnchor(u.id)}">${e(u.title)}</a></h3>
   <p class="unit-badges"><span class="badge badge-${u.provenance}">${BADGE[u.provenance]}</span>${DEV ? ` <span class="status status-${status}">${STATUS_LABEL[status]}</span>` : ''}</p>
   <label class="basket-toggle"><input type="checkbox" data-basket="${e(u.id)}"> Add to PDF</label>
 </header>
@@ -202,6 +205,53 @@ const catalogJson = {
 write('data/catalog.json', JSON.stringify(catalogJson));
 for (const u of catalog.includedUnits) write(`fragments/${u.id}.html`, unitArticle(u));
 
+// ---- definition previews for the search box ----------------------------------------------------
+// A unit's full HTML runs to hundreds of kilobytes (KaTeX output is verbose), far too much to fetch
+// while someone types. So each Definition block gets a small file of its own -- its opening, cut at a
+// paragraph boundary -- and an index of their titles, so that "residue" finds Definition (Residue)
+// inside the residue theorem, not only units with the word in their title. The text is the block's
+// own; nothing is written for the purpose.
+const PREVIEW_CHARS = 420;
+const cls = (n) => (n.type === 'element' && n.properties?.className) || [];
+const defIndex = [];
+for (const u of catalog.includedUnits) {
+  let n = 0;
+  const visit = (node) => {
+    if (node.type === 'element' && node.tagName === 'section' && cls(node).includes('block-definition')) {
+      const head = node.children.find((c) => c.type === 'element' && c.tagName === 'header');
+      const titleNode = head && (function find(x) { return cls(x).includes('block-title') ? x : (x.children || []).map(find).find(Boolean); })(head);
+      // Matching uses the title's words with any formula left out (KaTeX keeps three copies of each
+      // formula, which would read as noise); display uses the rendered title, formula included.
+      const noMath = (x) => (x.type === 'text' ? x.value : cls(x).includes('katex') ? ' ' : (x.children || []).map(noMath).join(''));
+      const blockTitle = titleNode ? noMath(titleNode).replace(/\s+/g, ' ').trim().replace(/^\(\s*|\s*\)$/g, '') : '';
+      let titleHtml = '';
+      if (titleNode && JSON.stringify(titleNode).includes('"katex"')) {
+        const kids = structuredClone(titleNode.children);
+        const first = kids[0], last = kids.at(-1);
+        if (first?.type === 'text') first.value = first.value.replace(/^\(/, '');
+        if (last?.type === 'text') last.value = last.value.replace(/\)$/, '');
+        titleHtml = toHtml({ type: 'root', children: kids });
+      }
+      const body = node.children.filter((c) => c.type === 'element' && c.tagName !== 'header');
+      const picked = [];
+      let chars = 0;
+      for (const el of body) {
+        picked.push(el);
+        chars += toText(el).length;
+        if (chars >= PREVIEW_CHARS || picked.length >= 3) break;
+      }
+      n += 1;
+      const file = `defs/${u.id}-${n}.html`;
+      write(`data/${file}`, toHtml({ type: 'root', children: picked }));
+      defIndex.push({ u: u.id, t: blockTitle, ...(titleHtml ? { h: titleHtml } : {}), f: file, more: picked.length < body.length });
+      return;
+    }
+    (node.children || []).forEach(visit);
+  };
+  visit(fromHtml(rendered.get(u.id), { fragment: true }));
+}
+write('data/definitions.json', JSON.stringify(defIndex));
+
 // ---- contents: the whole handbook as one checkable outline ---------------------------------
 // Readers choose what goes in their PDF here, without opening a chapter: every unit is a row with
 // a checkbox, and parts, chapters and sections have one that ticks everything beneath them.
@@ -263,21 +313,20 @@ write(
     title: SITE_TITLE, path: '',
     page: 'home',
     dev: DEV,
-    head: `<link rel="stylesheet" href="${BASE}pagefind/pagefind-ui.css"><script src="${BASE}pagefind/pagefind-ui.js" defer></script>`,
+    head: `<script src="${BASE}assets/search.js" defer></script>`,
     body: `<h1>${SITE_TITLE}</h1>
 <p class="lede">The mathematics physicists and applied scientists use, in small units you can read on their own. Tick what you need anywhere in this table of contents and the site assembles it into a PDF, with only the books those units cite in its reference list.</p>
 ${catalog.includedUnits.length ? `
-<div class="toc-controls">
-  <label class="toc-filter-label" for="toc-filter">Find a unit</label>
-  <input type="search" id="toc-filter" placeholder="a title or topic — try “residue”, “gram schmidt”" aria-describedby="toc-filter-help">
-  <span class="toc-filter-count" hidden></span>
-</div>
-<p id="toc-filter-help" class="sub">Matches the titles and summaries of all ${catalog.includedUnits.length} units and narrows the contents below. Word order does not matter and small misspellings are forgiven.</p>` : ''}
-<section class="find">
-  <h2 class="small-head">Search the full text</h2>
-  <p class="sub">Every word of every unit &mdash; definitions, statements, proofs and worked examples. Slower than the box above, and finds things no title mentions. Runs in your browser; nothing is sent anywhere.</p>
-  <div id="search"></div>
-</section>
+<div class="search" role="search">
+  <label class="search-label" for="q">Search the handbook</label>
+  <div class="search-box">
+    <input type="search" id="q" role="combobox" aria-expanded="false" aria-controls="q-results" aria-autocomplete="list" autocomplete="off" spellcheck="false"
+      placeholder="A topic, a title or any phrase — try “bessel”, “gram schmidt”">
+    <kbd class="search-key" aria-hidden="true">/</kbd>
+    <div id="q-results" class="search-results" role="listbox" aria-label="Search results" hidden></div>
+  </div>
+  <p class="sub">Definitions first, then units by title and summary, then every place the words occur in the text. Misspellings and word order are forgiven; it all runs in your browser.</p>
+</div>` : ''}
 ${catalog.includedUnits.length ? `
 <h2 class="small-head" id="contents">Contents</h2>
 <p class="sub">All ${catalog.includedUnits.length} units. Tick any of them to build a PDF of exactly those.</p>
@@ -287,12 +336,7 @@ ${catalog.includedUnits.length ? `
   <button class="button" type="button" data-toc="collapse">Collapse all</button>
 </p>
 ${DEV ? inProgressPanel() : ''}
-<div class="toc">${tocBody}</div>
-<div class="toc-bar" hidden>
-  <span class="toc-bar-count"></span>
-  <a class="button primary" href="${BASE}basket/">Review and build PDF</a>
-  <button class="button" type="button" data-basket-clear>Clear</button>
-</div>` : '<p>No units have been published yet.</p>'}
+<div class="toc">${tocBody}</div>` : '<p>No units have been published yet.</p>'}
 <h2 class="small-head">How to read the labels</h2>
 ${provenanceLegend()}`,
   }),

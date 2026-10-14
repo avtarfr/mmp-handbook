@@ -54,10 +54,15 @@ test('chapter page renders units, badges and math, and the basket works', async 
   await page.locator('#u-fixtures_parseval-identity').waitFor({ state: 'visible' });
   assert.ok((await page.locator('details.chapter-section[open]').count()) > 0);
   await page.goto(`${URL0}basket/`);
-  // Parseval's prerequisites are suggested; adding them leaves nothing missing.
-  await page.getByText(/prerequisite units? (is|are) not in your basket/).waitFor();
-  await page.getByRole('button', { name: 'Add them' }).click();
-  await page.getByRole('button', { name: 'Add them' }).waitFor({ state: 'detached' });
+  // Parseval's prerequisites are offered in reading order, every unit after the ones it needs;
+  // adding them leaves nothing missing.
+  await page.locator('.prereq-panel[data-missing]').waitFor();
+  const order = await page.locator('.reading-order li a').allTextContents();
+  const at = (prefix) => order.findIndex((t) => t.startsWith(prefix));
+  assert.ok(at("Bessel's inequality") >= 0 && at("Bessel's inequality") < at("Parseval's identity"), `reading order: ${order.join(' | ')}`);
+  await page.locator('#add-missing').click();
+  await page.locator('.prereq-panel[data-missing]').waitFor({ state: 'detached' });
+  assert.equal(await page.locator('.ro-missing').count(), 0);
   assert.ok((await page.locator('.basket-list li').count()) >= 2);
   assert.ok(await page.locator('.basket-list a', { hasText: "Bessel's inequality" }).count());
   await page.close();

@@ -9,12 +9,15 @@
       return [];
     }
   };
-  const write = (ids) => {
+  const write = (ids, why) => {
+    const before = read();
+    const after = [...new Set(ids)];
     try {
-      localStorage.setItem(KEY, JSON.stringify([...new Set(ids)]));
+      localStorage.setItem(KEY, JSON.stringify(after));
     } catch {}
     sync();
     document.dispatchEvent(new CustomEvent('basketchange'));
+    if (why !== false) announce(before, after, why);
   };
 
   const groupIds = (box) => box.dataset.basketGroup.split(' ').filter(Boolean);
@@ -36,39 +39,39 @@
       el.textContent = ids.size;
       el.hidden = ids.size === 0;
     });
-    const bar = document.querySelector('.toc-bar');
-    if (bar) {
-      bar.hidden = ids.size === 0;
-      const n = bar.querySelector('.toc-bar-count');
-      if (n) n.textContent = `${ids.size} unit${ids.size === 1 ? '' : 's'} selected`;
-    }
+    renderCart(ids);
   }
 
   window.mmpBasket = {
     get: read,
-    set: write,
-    add: (more) => write([...read(), ...more]),
-    remove: (id) => write(read().filter((x) => x !== id)),
+    set: (ids, why) => write(ids, why),
+    add: (more, why) => write([...read(), ...more], why),
+    remove: (id, why) => write(read().filter((x) => x !== id), why),
+    refresh: () => sync(),
   };
+
+  // What a checkbox stands for, in words, from its accessible name: "Add chapter Fourier series"
+  // becomes "Fourier series".
+  const nameOf = (el) => (el.getAttribute('aria-label') || '').replace(/^Add (part|chapter|section) /, '').replace(/^Add /, '').replace(/ to PDF$/, '');
 
   document.addEventListener('change', (ev) => {
     const box = ev.target.closest?.('input[data-basket]');
     if (box) {
       const id = box.dataset.basket;
-      if (box.checked) window.mmpBasket.add([id]);
-      else window.mmpBasket.remove(id);
+      if (box.checked) window.mmpBasket.add([id], nameOf(box));
+      else window.mmpBasket.remove(id, nameOf(box));
       return;
     }
     const group = ev.target.closest?.('input[data-basket-group]');
     if (group) {
       const ids = groupIds(group);
-      if (group.checked) window.mmpBasket.add(ids);
-      else window.mmpBasket.set(read().filter((id) => !ids.includes(id)));
+      if (group.checked) window.mmpBasket.add(ids, nameOf(group));
+      else window.mmpBasket.set(read().filter((id) => !ids.includes(id)), nameOf(group));
     }
   });
   document.addEventListener('click', (ev) => {
     const add = ev.target.closest?.('[data-basket-add]');
-    if (add) window.mmpBasket.add(add.dataset.basketAdd.split(' ').filter(Boolean));
+    if (add) window.mmpBasket.add(add.dataset.basketAdd.split(' ').filter(Boolean), document.querySelector('main h1')?.textContent.trim());
     if (ev.target.closest?.('[data-basket-clear]')) window.mmpBasket.set([]);
     const toc = ev.target.closest?.('[data-toc]');
     if (toc) document.querySelectorAll('details.toc-chapter').forEach((d) => (d.open = toc.dataset.toc === 'expand'));
@@ -114,105 +117,6 @@
   document.querySelectorAll('summary .toc-check, summary a').forEach((el) => {
     el.addEventListener('click', (ev) => ev.stopPropagation());
   });
-
-  // Filter the table of contents as you type.
-  //
-  // Plain substring matching was too brittle for a list of 360 mathematical titles: it wants the
-  // words in the right order and every letter right, so "schmidt gram" and "orthoganal" both found
-  // nothing. This matcher splits the query into words, requires every one of them to match
-  // somewhere in the row, and lets a word match either as a substring or within a small edit
-  // distance of one of the row's words -- one edit for a short word, two for a long one, none at
-  // all for a word of three letters or fewer, where every typo is also some other real word.
-  const words = (s) => s.toLowerCase().split(/[^a-z0-9]+/i).filter(Boolean);
-  const slack = (n) => (n <= 3 ? 0 : n <= 7 ? 1 : 2);
-
-  // Edit distance, abandoned as soon as it cannot come in under `max`. Two rows of the matrix are
-  // enough, and the length check rejects most candidates before any work happens. Swapping two
-  // adjacent letters counts as one edit, not two: "lapalce" for "laplace" is the typo people
-  // actually make, and plain Levenshtein scores it the same as two unrelated mistakes.
-  function within(a, b, max) {
-    if (Math.abs(a.length - b.length) > max) return false;
-    let prev2 = null;
-    let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
-    for (let i = 1; i <= a.length; i++) {
-      const row = [i];
-      let best = i;
-      for (let j = 1; j <= b.length; j++) {
-        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-        row[j] = Math.min(row[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
-        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
-          row[j] = Math.min(row[j], prev2[j - 2] + 1);
-        }
-        if (row[j] < best) best = row[j];
-      }
-      if (best > max) return false; // no path through this row can still finish within budget
-      prev2 = prev;
-      prev = row;
-    }
-    return prev[b.length] <= max;
-  }
-
-  const matches = (text, rowWords, terms) =>
-    terms.every((t) => text.includes(t) || rowWords.some((w) => within(t, w, slack(t.length))));
-
-  const filter = document.getElementById('toc-filter');
-  if (filter) {
-    // Which chapters the reader had open before filtering, so clearing the box puts the list back
-    // as they left it rather than leaving everything the search happened to touch hanging open.
-    let restore = null;
-    const apply = () => {
-      const terms = words(filter.value);
-      const units = document.querySelectorAll('.toc-unit');
-      if (!terms.length && restore) {
-        document.querySelectorAll('details.toc-chapter').forEach((ch, i) => (ch.open = restore[i]));
-        restore = null;
-      } else if (terms.length && !restore) {
-        restore = [...document.querySelectorAll('details.toc-chapter')].map((ch) => ch.open);
-        // The box sits above the full-text search, so on a long page the contents it filters may
-        // be off screen when the first letter is typed. Bring them up once, at the start of a
-        // search, and never again while it is being edited -- scrolling on every keystroke would
-        // fight whatever the reader does next.
-        const toc = document.querySelector('.toc');
-        if (toc && toc.getBoundingClientRect().top > innerHeight * 0.75) {
-          toc.scrollIntoView({ block: 'start', behavior: 'smooth' });
-        }
-      }
-      let shown = 0;
-      units.forEach((li) => {
-        if (!li._words) li._words = words(li.dataset.text);
-        const hit = !terms.length || matches(li.dataset.text, li._words, terms);
-        li.hidden = !hit;
-        if (hit) shown++;
-      });
-      document.querySelectorAll('.toc-section').forEach((sec) => {
-        sec.hidden = ![...sec.querySelectorAll('.toc-unit')].some((li) => !li.hidden);
-      });
-      document.querySelectorAll('details.toc-chapter').forEach((ch) => {
-        const any = [...ch.querySelectorAll('.toc-unit')].some((li) => !li.hidden);
-        ch.hidden = !any;
-        if (terms.length && any) ch.open = true;
-      });
-      document.querySelectorAll('.toc-part').forEach((pt) => {
-        pt.hidden = ![...pt.querySelectorAll('.toc-unit')].some((li) => !li.hidden);
-      });
-      const count = document.querySelector('.toc-filter-count');
-      if (count) {
-        count.hidden = !terms.length;
-        count.textContent = shown ? `${shown} of ${units.length}` : 'nothing matches';
-        count.classList.toggle('empty', terms.length > 0 && shown === 0);
-      }
-    };
-    filter.addEventListener('input', apply);
-    // Escape clears the box rather than only blurring it, which is what the key does in every
-    // other search field and what a reader who has filtered down to nothing will reach for.
-    filter.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Escape' && filter.value) {
-        filter.value = '';
-        apply();
-        ev.preventDefault();
-      }
-    });
-  }
 
   // A link into a collapsed section would otherwise scroll to nothing. Open whatever holds the
   // anchor, on load and on every later hash change.
@@ -267,32 +171,110 @@
     printed.splice(0).forEach((d) => (d.open = false));
   });
 
-  // Pagefind's default wording ("Search", "3 results for X") says nothing about what is being
-  // searched or what a result is, which on a page that also has a contents filter is the whole
-  // question. These strings answer it.
-  const PAGEFIND = {
-    element: '#search',
-    showSubResults: true,
-    showImages: false,
-    excerptLength: 25,
-    translations: {
-      placeholder: 'Search inside every unit…',
-      clear_search: 'Clear',
-      load_more: 'Show more chapters',
-      search_label: 'Search the full text of the handbook',
-      filters_label: 'Filters',
-      zero_results: 'No unit contains [SEARCH_TERM]. Try fewer words, or the contents filter below for titles.',
-      many_results: '[COUNT] chapters contain [SEARCH_TERM]',
-      one_result: 'One chapter contains [SEARCH_TERM]',
-      alt_search: 'No unit contains [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead.',
-      search_suggestion: 'No unit contains [SEARCH_TERM]. Try one of these instead:',
-      searching: 'Searching for [SEARCH_TERM]…',
-    },
+
+  // ---- toast and floating basket --------------------------------------------------------------------
+  // Ticking a chapter quietly ticks every unit in it; without feedback that is easy to miss. Each
+  // change raises a short toast saying what happened, with Undo, and while the basket is not empty a
+  // small floating basket shows how many units it holds and opens into a list of them.
+  const onBasketPage = document.body.classList.contains('page-basket');
+  let toastTimer;
+  let undo = null;
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.hidden = true;
+  document.body.appendChild(toast);
+  const showToast = (html, prev) => {
+    undo = prev;
+    toast.innerHTML = `<span class="toast-text">${html}</span>${prev ? '<button type="button" class="toast-undo">Undo</button>' : ''}${onBasketPage ? '' : `<a class="toast-view" href="${document.body.dataset.base}basket/">View basket</a>`}`;
+    toast.hidden = false;
+    requestAnimationFrame(() => toast.classList.add('on'));
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 4500);
   };
-  const startSearch = () => {
-    if (window.PagefindUI && document.getElementById('search')) new PagefindUI(PAGEFIND);
+  const hideToast = () => {
+    toast.classList.remove('on');
+    setTimeout(() => { if (!toast.classList.contains('on')) toast.hidden = true; }, 250);
   };
-  if (window.PagefindUI) startSearch();
-  else window.addEventListener('DOMContentLoaded', startSearch);
+  toast.addEventListener('mouseenter', () => clearTimeout(toastTimer));
+  toast.addEventListener('mouseleave', () => { toastTimer = setTimeout(hideToast, 2500); });
+  toast.addEventListener('click', (ev) => {
+    if (ev.target.closest('.toast-undo') && undo) {
+      write(undo, false);
+      undo = null;
+      hideToast();
+    }
+  });
+  const escHtml = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  function announce(before, after, why) {
+    const b = new Set(before);
+    const a = new Set(after);
+    const added = after.filter((id) => !b.has(id)).length;
+    const removed = before.filter((id) => !a.has(id)).length;
+    if (!added && !removed) return;
+    const name = why ? ` <em>${escHtml(why)}</em>` : '';
+    const n = (k) => `${k} unit${k === 1 ? '' : 's'}`;
+    let msg;
+    if (!after.length) msg = 'Basket emptied';
+    else if (added && !removed) msg = added === 1 && why ? `Added${name} to your PDF` : `Added ${n(added)}${why ? ` from${name}` : ''} to your PDF`;
+    else if (removed && !added) msg = removed === 1 && why ? `Removed${name}` : `Removed ${n(removed)}${why ? ` of${name}` : ''}`;
+    else msg = `Basket updated: +${added}, −${removed}`;
+    showToast(`${msg} · <strong>${after.length}</strong> in basket`, before);
+  }
+
+  // The floating basket. Titles come from the catalogue, fetched the first time it is opened.
+  let catalog = null;
+  const loadCatalog = () => (catalog ??= fetch(`${document.body.dataset.base}data/catalog.json`).then((r) => r.json()).catch(() => ({ units: [] })));
+  const cart = document.createElement('div');
+  cart.className = 'cart';
+  cart.hidden = true;
+  cart.innerHTML = `<button type="button" class="cart-button" aria-expanded="false" aria-controls="cart-panel"><span class="cart-icon" aria-hidden="true"></span><span class="cart-label">PDF basket</span><span class="cart-n">0</span></button>
+    <div class="cart-panel" id="cart-panel" hidden></div>`;
+  if (!onBasketPage && !document.body.classList.contains('page-print')) document.body.appendChild(cart);
+  const cartButton = cart.querySelector('.cart-button');
+  const cartPanel = cart.querySelector('.cart-panel');
+  async function fillCart() {
+    const ids = read();
+    const data = await loadCatalog();
+    const byId = new Map((data.units || []).map((u) => [u.id, u]));
+    const list = ids.map((id) => byId.get(id)).filter(Boolean).sort((x, y) => x.order - y.order);
+    const groups = [];
+    for (const u of list) {
+      if (groups.at(-1)?.title !== u.chapterTitle) groups.push({ title: u.chapterTitle, units: [] });
+      groups.at(-1).units.push(u);
+    }
+    const SHOW = 12;
+    let shown = 0;
+    cartPanel.innerHTML = `<p class="cart-head"><strong>${list.length}</strong> unit${list.length === 1 ? '' : 's'} in your PDF</p>
+      <div class="cart-list">${groups.map((g) => {
+        const rows = g.units.filter(() => shown++ < SHOW);
+        return rows.length ? `<p class="cart-chapter">${escHtml(g.title)}</p><ul>${rows.map((u) => `<li><a href="${u.url}">${escHtml(u.title)}</a><button type="button" data-cart-remove="${escHtml(u.id)}" aria-label="Remove ${escHtml(u.title)}">×</button></li>`).join('')}</ul>` : '';
+      }).join('')}${list.length > SHOW ? `<p class="cart-more">and ${list.length - SHOW} more</p>` : ''}</div>
+      <p class="cart-actions"><a class="button primary" href="${document.body.dataset.base}basket/">Review and build PDF</a><button type="button" class="button" data-basket-clear>Empty</button></p>`;
+  }
+  const setCart = (on) => {
+    if (on) hideToast(); // the open basket already shows what the toast would say
+    cartPanel.hidden = !on;
+    cartButton.setAttribute('aria-expanded', String(on));
+    if (on) fillCart();
+  };
+  cartButton.addEventListener('click', () => setCart(cartPanel.hidden));
+  cartPanel.addEventListener('click', (ev) => {
+    const rm = ev.target.closest('[data-cart-remove]');
+    if (rm) window.mmpBasket.remove(rm.dataset.cartRemove, rm.getAttribute('aria-label').replace(/^Remove /, ''));
+  });
+  document.addEventListener('click', (ev) => { if (!cartPanel.hidden && !ev.target.closest('.cart')) setCart(false); });
+  document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && !cartPanel.hidden) { setCart(false); cartButton.focus(); } });
+  function renderCart(ids) {
+    const n = ids.size;
+    const wasHidden = cart.hidden;
+    cart.hidden = n === 0;
+    cart.querySelector('.cart-n').textContent = n;
+    if (n === 0) setCart(false);
+    else if (!cartPanel.hidden) fillCart();
+    if (wasHidden && n) { cart.classList.remove('pop'); requestAnimationFrame(() => cart.classList.add('pop')); }
+  }
+
   sync();
 })();
