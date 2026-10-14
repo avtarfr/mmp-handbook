@@ -152,6 +152,14 @@
         restore = null;
       } else if (terms.length && !restore) {
         restore = [...document.querySelectorAll('details.toc-chapter')].map((ch) => ch.open);
+        // The box sits above the full-text search, so on a long page the contents it filters may
+        // be off screen when the first letter is typed. Bring them up once, at the start of a
+        // search, and never again while it is being edited -- scrolling on every keystroke would
+        // fight whatever the reader does next.
+        const toc = document.querySelector('.toc');
+        if (toc && toc.getBoundingClientRect().top > innerHeight * 0.75) {
+          toc.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
       }
       let shown = 0;
       units.forEach((li) => {

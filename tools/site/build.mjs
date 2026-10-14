@@ -263,23 +263,26 @@ write(
     head: `<link rel="stylesheet" href="${BASE}pagefind/pagefind-ui.css"><script src="${BASE}pagefind/pagefind-ui.js" defer></script>`,
     body: `<h1>${SITE_TITLE}</h1>
 <p class="lede">The mathematics physicists and applied scientists use, in small units you can read on their own. Tick what you need anywhere in this table of contents and the site assembles it into a PDF, with only the books those units cite in its reference list.</p>
+${catalog.includedUnits.length ? `
+<div class="toc-controls">
+  <label class="toc-filter-label" for="toc-filter">Find a unit</label>
+  <input type="search" id="toc-filter" placeholder="a title or topic — try “residue”, “gram schmidt”" aria-describedby="toc-filter-help">
+  <span class="toc-filter-count" hidden></span>
+</div>
+<p id="toc-filter-help" class="sub">Matches the titles and summaries of all ${catalog.includedUnits.length} units and narrows the contents below. Word order does not matter and small misspellings are forgiven.</p>` : ''}
 <section class="find">
   <h2 class="small-head">Search the full text</h2>
-  <p class="sub">Every word of every unit &mdash; definitions, statements, proofs and worked examples. Runs in your browser; nothing is sent anywhere.</p>
+  <p class="sub">Every word of every unit &mdash; definitions, statements, proofs and worked examples. Slower than the box above, and finds things no title mentions. Runs in your browser; nothing is sent anywhere.</p>
   <div id="search"></div>
 </section>
 ${catalog.includedUnits.length ? `
 <h2 class="small-head" id="contents">Contents</h2>
 <p class="sub">All ${catalog.includedUnits.length} units. Tick any of them to build a PDF of exactly those.</p>
 <nav class="toc-jump">${partNav}</nav>
-<div class="toc-controls">
-  <label class="toc-filter-label" for="toc-filter">Narrow this list</label>
-  <input type="search" id="toc-filter" placeholder="a title or topic — try “residue”, “gram schmidt”, “stiff ode”" aria-describedby="toc-filter-help">
-  <span class="toc-filter-count" hidden></span>
+<p class="toc-buttons">
   <button class="button" type="button" data-toc="expand">Expand all</button>
   <button class="button" type="button" data-toc="collapse">Collapse all</button>
-  <p id="toc-filter-help" class="sub">Matches unit titles and summaries. Word order does not matter and small misspellings are forgiven; to search inside the units themselves, use the box above.</p>
-</div>
+</p>
 ${DEV ? inProgressPanel() : ''}
 <div class="toc">${tocBody}</div>
 <div class="toc-bar" hidden>
