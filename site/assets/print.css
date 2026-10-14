@@ -1,83 +1,131 @@
-/* Print view, paginated by Paged.js. Light palette only: this is paper. */
+/* Print view, paginated by Paged.js and typeset to read like a LaTeX document.
+ *
+ * Body text is set in KaTeX_Main, which is Computer Modern, the typeface of LaTeX itself, so prose
+ * and mathematics share one face. Paper only: black on white, no colour, no badges. Theorem-like
+ * blocks follow the three amsthm styles (print.js tags each block with one):
+ *   plain       Theorem, Proposition, Lemma, Corollary   bold head, italic statement
+ *   definition  Definition, Method, Example, ...         bold head, upright text
+ *   remark      Proof, Idea of the proof, Note, Remark   italic head, upright text, unnumbered
+ */
 :root {
-  --fg: #1d1f21;
-  --muted: #5f6368;
-  --rule: #d9d6d0;
-  --original: #1a7f4b;
-  --adapted: #2457a6;
-  --quoted: #a65e00;
-  --serif: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fg: #000;
+  --muted: #444;
+  --rule: #000;
+  --serif: KaTeX_Main, 'Latin Modern Roman', 'CMU Serif', 'Computer Modern', 'Times New Roman', serif;
+  --sans: var(--serif);
 }
 
 @page {
   size: A4;
-  margin: 22mm 20mm 24mm;
-  @top-left { content: string(chapter); font: 8.5pt var(--sans); color: #5f6368; }
-  @bottom-center { content: counter(page); font: 9pt var(--sans); color: #5f6368; }
+  margin: 27mm 27mm 30mm;
+  @top-left { content: string(chapter); font: italic 9pt var(--serif); font-variant: small-caps; color: #000; }
+  @top-right { content: counter(page); font: 9pt var(--serif); color: #000; }
 }
 @page :first {
   @top-left { content: none; }
-  @bottom-center { content: none; }
+  @top-right { content: none; }
 }
 
-body { margin: 0; color: var(--fg); font: 10.5pt/1.5 var(--serif); background: #fff; }
-h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.25; break-after: avoid; }
+html { -webkit-font-smoothing: antialiased; }
+/* Paged.js marks each element it splits across pages with text-align-last: justify, so a split
+   paragraph's last line on the first page stays justified. The document wrapper is split across
+   every page, and the property inherits, which stretched every last line and pushed one-line
+   displays to the left. Setting it on every element stops the inheritance; Paged.js's own, more
+   specific rule still reaches the paragraphs it really splits. */
+* { text-align-last: auto; }
+body {
+  margin: 0; color: var(--fg); background: #fff;
+  font: 10.5pt/1.38 var(--serif); font-kerning: normal; font-variant-ligatures: common-ligatures;
+  text-align: justify; hyphens: auto; -webkit-hyphens: auto; orphans: 2; widows: 2;
+}
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.2; text-align: left; hyphens: manual; break-after: avoid; }
 a { color: inherit; text-decoration: none; }
-.katex { font-size: 1.05em; }
-.katex-display { margin: 0.6em 0; }
+p { margin: 0; }
+.katex { font-size: 1.04em; }
+.katex-display { margin: 0.55em 0; }
+ul, ol { margin: 0.3em 0; padding-left: 1.6em; }
+li { margin: 0.1em 0; }
+strong, b { font-weight: 700; }
 
-.cover { break-after: page; padding-top: 55mm; }
-.cover-kicker { font: 600 9pt var(--sans); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.cover-title { font-size: 26pt; margin: 0.2em 0 0.4em; }
-.cover-meta { color: var(--muted); font-family: var(--sans); font-size: 10pt; }
-.cover-legend { margin-top: 60mm; font-size: 9.5pt; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 4mm; }
+/* ---- Title page ---- */
+.cover { break-after: page; text-align: center; padding-top: 62mm; }
+.cover-series { font-size: 11pt; font-variant: small-caps; letter-spacing: 0.06em; }
+.cover-title { font-size: 24pt; font-weight: 400; margin: 7mm 0 9mm; text-align: center; line-height: 1.25; }
+.cover-meta, .cover-date { font-size: 11pt; margin: 1.5mm 0; }
+.cover-legend { margin: 78mm auto 0; max-width: 118mm; font-size: 8.5pt; line-height: 1.4; text-align: justify; }
+.cover-legend p + p { margin-top: 0.6em; }
 
+/* ---- Contents, with dot leaders ---- */
 .toc { break-after: page; }
-.toc h2 { font-size: 16pt; }
-.toc ol { list-style: none; padding-left: 0; }
-.toc ol ol { padding-left: 1.2em; margin-bottom: 0.6em; }
-.toc-chapter > a { font-family: var(--sans); font-weight: 600; }
-.toc li { overflow: hidden; }
-.toc a::after { content: target-counter(attr(href), page); float: right; color: var(--muted); }
+.toc h2 { font-size: 17pt; margin: 0 0 6mm; }
+.toc ol { list-style: none; padding-left: 0; margin: 0; }
+.toc li { margin: 0; }
+.toc a { display: flex; align-items: baseline; gap: 0; }
+.toc .toc-num { flex: none; min-width: 2.6em; }
+.toc .toc-text { flex: 0 1 auto; text-align: left; }
+.toc .toc-dots { flex: 1; margin: 0 0.4em; border-bottom: 1px dotted #000; transform: translateY(-0.28em); min-width: 1.5em; }
+.toc a::after { content: target-counter(attr(href), page); flex: none; min-width: 1.6em; text-align: right; }
+.toc-chapter { margin-top: 0.75em !important; }
+.toc-chapter > a { font-weight: 700; }
+.toc-chapter > ol > li > a { padding-left: 2.6em; }
+.toc-chapter > ol > li .toc-num { min-width: 3.2em; }
 
+/* ---- Chapters, sections, units ---- */
 .print-chapter, .references { break-before: page; }
-.chapter-title { font-size: 18pt; string-set: chapter content(text); margin-top: 0; }
-.section-title { font-size: 13pt; margin-top: 1.4em; border-bottom: 1px solid var(--rule); padding-bottom: 0.2em; }
+.chapter-kicker { font-size: 13pt; margin: 18mm 0 3mm; text-align: left; }
+.chapter-title { font-size: 21pt; margin: 0 0 11mm; string-set: chapter content(text); }
+.section-title { font-size: 13pt; margin: 1.6em 0 0.6em; }
+.num { margin-right: 0.85em; }
 
-.unit { margin: 1.2em 0 1.6em; }
+.unit { margin: 1.3em 0 1.5em; }
 .unit-head { break-after: avoid; }
-.unit-kind { margin: 0; font: 600 7.5pt var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.unit-head h3 { margin: 0.1em 0; font-size: 12.5pt; display: inline; }
-.unit-badges { display: inline; margin-left: 0.5em; }
-.unit-summary { color: var(--muted); font-style: italic; margin: 0.3em 0; }
-.unit-prereqs { font: 8.5pt var(--sans); color: var(--muted); margin: 0.2em 0; }
+.unit-head h3 { font-size: 11pt; margin: 0 0 0.45em; }
+.unit-summary { font-style: italic; margin: 0 2.2em 0.5em; font-size: 9.5pt; text-align: justify; }
+.unit-prereqs { font-size: 8.5pt; margin: 0 0 0.6em; text-align: left; }
 
-.badge { display: inline-block; font: 600 6.5pt/1.5 var(--sans); letter-spacing: 0.04em; text-transform: uppercase; border: 0.6pt solid currentColor; border-radius: 2pt; padding: 0 0.3em; vertical-align: 0.15em; }
-.badge-original { color: var(--original); }
-.badge-adapted { color: var(--adapted); }
-.badge-quoted { color: var(--quoted); }
+/* ---- Theorem-like blocks, run in ---- */
+.block { margin: 0.75em 0; padding: 0; border: 0; }
+.block-head, .block-head + p { display: inline; }
+.block-head + p::after { content: ''; display: block; } /* close the run-in paragraph */
+.block-head { margin-right: 0.35em; }
+.block-label { font-weight: 700; }
+.block-label::after { content: ''; }
+.block-title { font-weight: 400; margin-left: 0.3em; }
+.block-head::after { content: '.'; font-weight: 700; }
+.thm-remark .block-label { font-weight: 400; font-style: italic; }
+.thm-remark .block-head::after { font-weight: 400; font-style: italic; }
+.thm-plain > :not(.block-head):not(.block-src) { font-style: italic; }
+.thm-plain .block-head + p { font-style: italic; }
+.block p + p, .block .katex-display + p, .block ul + p, .block ol + p { text-indent: 1.5em; }
+.block p.cont { text-indent: 0; }
+/* Attribution lines are short; splitting one across pages strands a fragment (a page holding only
+   "490"). */
+.block-src, .unit-sources, .unit-prereqs, .unit-summary { break-inside: avoid; }
+.block-head, .unit-head, .section-title, .chapter-title { break-after: avoid; }
+.math-glue { display: inline-block; white-space: nowrap; text-indent: 0; }
+.block-src { display: block; margin-top: 0.3em; font-size: 8.5pt; font-style: italic; text-align: right; }
+.block-src a { font-style: italic; }
+blockquote.block { margin: 0.8em 2em; }
+.block-quote { font-style: normal; }
 
-.block { margin: 0.7em 0; padding: 0.05em 0 0.05em 0.8em; border-left: 1.6pt solid var(--rule); }
-.block.prov-original { border-left-color: var(--original); }
-.block.prov-adapted { border-left-color: var(--adapted); }
-.block.prov-quoted { border-left-color: var(--quoted); font-style: italic; }
-.block-head { break-after: avoid; }
-.block-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1em 0.4em; font-family: var(--sans); font-size: 9.5pt; }
-.block-label { font-weight: 650; }
-.block-title { color: var(--muted); }
-.block-src { flex-basis: 100%; font-size: 8pt; color: var(--muted); }
-.block p { margin: 0.35em 0; }
-blockquote.block { margin-left: 0; margin-right: 0; }
-.unit-sources { font: 8pt/1.4 var(--sans); color: var(--muted); margin-top: 0.6em; }
-.unit-sources h4 { display: inline; font-size: 8pt; margin: 0; }
+.unit-sources { font-size: 8.5pt; margin-top: 0.7em; text-align: left; }
+.unit-sources h4 { display: inline; font-size: 8.5pt; font-weight: 400; font-style: italic; margin: 0; }
+.unit-sources h4::after { content: ':'; }
 .unit-sources ul { display: inline; padding: 0; margin: 0; list-style: none; }
 .unit-sources li { display: inline; }
 .unit-sources li + li::before { content: '; '; }
 
-.references ol { padding-left: 1.4em; }
-.references li { margin: 0.5em 0; }
+table { border-collapse: collapse; margin: 0.6em auto; font-size: 9.5pt; }
+th, td { padding: 0.2em 0.6em; text-align: left; }
+thead th { border-top: 1.2pt solid #000; border-bottom: 0.6pt solid #000; }
+tbody tr:last-child td { border-bottom: 1.2pt solid #000; }
+
+/* ---- References ---- */
+.references h1 { margin-top: 18mm; }
+.references ol { padding-left: 0; list-style: none; counter-reset: ref; }
+.references li { counter-increment: ref; padding-left: 2.4em; text-indent: -2.4em; margin: 0.45em 0; text-align: left; }
+.references li::before { content: '[' counter(ref) ']'; display: inline-block; width: 2.4em; text-indent: 0; }
 
 /* Screen chrome around the paginated preview lives in print.js: Paged.js applies @media print rules
    unconditionally, so it cannot be expressed here. */
-#print-status { font: 1rem var(--sans); padding: 2rem 16px; }
+#print-status { font: 1rem system-ui, sans-serif; padding: 2rem 16px; }

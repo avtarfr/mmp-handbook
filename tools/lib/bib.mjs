@@ -6,7 +6,8 @@ const joinAuthors = (a) => (a.length <= 2 ? a.join(' and ') : `${a.slice(0, -1).
 export function workSegments(w) {
   const segs = [{ text: `${joinAuthors(w.authors)} (${w.year}). ` }, { text: w.title, italic: true }, { text: '. ' }];
   const tail = [w.series, w.edition, `${w.place ? `${w.place}: ` : ''}${w.publisher}`, w.isbn ? `ISBN ${w.isbn}` : null].filter(Boolean);
-  segs.push({ text: `${tail.join('. ')}.` });
+  // Join with full stops, but never double one: an edition is written "3rd ed." already.
+  segs.push({ text: tail.reduce((acc, part) => (acc ? `${acc}${acc.endsWith('.') ? '' : '.'} ${part}` : part), '').replace(/([^.])$/, '$1.') });
   if (w.note) segs.push({ text: ` Note: ${w.note.trim()}` });
   return segs;
 }
