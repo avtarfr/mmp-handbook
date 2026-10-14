@@ -4,13 +4,42 @@ import { escapeHtml as e } from '../lib/render.mjs';
 
 export const SITE_TITLE = 'Mathematical Methods Handbook';
 
-export function layout({ base, title, body, page = '', dev = false, head = '', preview = false }) {
+// What a shared link shows. `siteUrl` is the absolute address of the deployed site (the build's
+// --site-url); without it the tags that must be absolute -- og:url, og:image -- are left out rather
+// than emitted wrong, and the rest still work.
+function shareTags({ base, title, description, path, siteUrl }) {
+  const full = title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`;
+  const tags = [
+    `<meta name="description" content="${e(description)}">`,
+    `<meta property="og:type" content="website">`,
+    `<meta property="og:site_name" content="${e(SITE_TITLE)}">`,
+    `<meta property="og:title" content="${e(full)}">`,
+    `<meta property="og:description" content="${e(description)}">`,
+  ];
+  if (siteUrl) {
+    tags.push(`<meta property="og:url" content="${e(siteUrl + (path || ''))}">`);
+    tags.push(`<meta property="og:image" content="${e(siteUrl)}assets/share.png">`);
+    tags.push(`<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">`);
+    tags.push(`<meta property="og:image:alt" content="${e(SITE_TITLE)}">`);
+    tags.push(`<meta name="twitter:card" content="summary_large_image">`);
+  } else {
+    tags.push(`<meta name="twitter:card" content="summary">`);
+  }
+  tags.push(`<link rel="icon" href="${base}assets/icon.svg" type="image/svg+xml">`);
+  tags.push(`<link rel="apple-touch-icon" href="${base}assets/icon-180.png">`);
+  tags.push(`<meta name="theme-color" content="#fcfbf7" media="(prefers-color-scheme: light)">`);
+  tags.push(`<meta name="theme-color" content="#16171a" media="(prefers-color-scheme: dark)">`);
+  return tags.join('\n');
+}
+
+export function layout({ base, title, body, page = '', dev = false, head = '', preview = false, description = '', path = '', siteUrl = '' }) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${e(title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`)}</title>
+${shareTags({ base, title, description, path, siteUrl })}
 <link rel="stylesheet" href="${base}assets/katex/katex.min.css">
 <link rel="stylesheet" href="${base}assets/style.css">
 <meta name="referrer" content="strict-origin-when-cross-origin">

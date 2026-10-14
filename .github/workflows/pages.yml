@@ -51,9 +51,14 @@ jobs:
       # A project site is served from https://<user>.github.io/<repo>/, so every absolute path the
       # builder emits must carry that prefix. Getting this wrong is why a Pages site loads as
       # unstyled HTML: the stylesheet 404s against the domain root.
+      # --site-url makes the link-preview tags absolute, which chat apps and social sites require.
+      # Pages hostnames are lowercase whatever the account name's case.
       - name: Build site
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
         run: |
-          node tools/site/build.mjs --public --base "/${{ github.event.repository.name }}/"
+          node tools/site/build.mjs --public --base "/${REPO}/" --site-url "https://${OWNER,,}.github.io/${REPO}/"
           ./node_modules/.bin/pagefind --site dist/site
           touch dist/site/.nojekyll
 

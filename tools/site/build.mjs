@@ -25,8 +25,11 @@ const BASE = opt('--base', '/');
 const catalog = loadCatalog({ fixtures: args.includes('--fixtures'), publicOnly: args.includes('--public') });
 const DEV = !catalog.publicOnly;
 const PREVIEW = args.includes('--preview');
+// Absolute address of the deployed site, for the link-preview tags that must be absolute.
+const SITE_URL = (() => { const u = opt('--site-url', ''); return u && !u.endsWith('/') ? `${u}/` : u; })();
 // Every page gets the preview banner from one place, so no call site can forget it.
-const layout = (opts) => baseLayout({ preview: PREVIEW, ...opts });
+const DESCRIPTION = `The mathematics physicists and applied scientists use, in ${catalog.includedUnits.length} short units: every theorem proved, every unit with a worked example and sources cited to the page. Tick the units you need and build a PDF of exactly those.`;
+const layout = (opts) => baseLayout({ preview: PREVIEW, siteUrl: SITE_URL, ...opts, description: opts.description || DESCRIPTION });
 
 // A file that does not parse cannot be published, but it must not stop the units that do. Only
 // errors in files this build includes are fatal; the rest are warnings.
@@ -163,7 +166,7 @@ ${c.chapter.summary ? `<p class="lede">${e(c.chapter.summary)}</p>` : ''}
 <div data-pagefind-body>
 ${sectionsHtml}
 </div>`;
-    write(`${path}index.html`, layout({ base: BASE, title: c.chapter.title, body, page: 'chapter', dev: DEV }));
+    write(`${path}index.html`, layout({ base: BASE, title: c.chapter.title, body, page: 'chapter', dev: DEV, path, description: c.chapter.summary ? `${c.chapter.summary} ${ids.length} units, each with a worked example and sources cited to the page.` : '' }));
   }
 }
 
@@ -257,7 +260,7 @@ write(
   'index.html',
   layout({
     base: BASE,
-    title: SITE_TITLE,
+    title: SITE_TITLE, path: '',
     page: 'home',
     dev: DEV,
     head: `<link rel="stylesheet" href="${BASE}pagefind/pagefind-ui.css"><script src="${BASE}pagefind/pagefind-ui.js" defer></script>`,
@@ -303,7 +306,7 @@ write(
   'bibliography/index.html',
   layout({
     base: BASE,
-    title: 'Sources',
+    title: 'Sources', path: 'bibliography/',
     page: 'bibliography',
     dev: DEV,
     body: `<h1>Sources</h1>
@@ -389,7 +392,7 @@ ${provCounts.quoted === 0
    closely in order. A unit failing either check cannot reach this page.</p>
 ${figureBlocks === 0 ? '<p>It contains no figures.</p>' : ''}`;
 
-write('provenance/index.html', layout({ base: BASE, title: 'Provenance and copyright', page: 'prose', dev: DEV, body: `${provenanceLegend()}\n${policyHtml}\n${provenanceAudit}` }));
+write('provenance/index.html', layout({ base: BASE, title: 'Provenance and copyright', page: 'prose', dev: DEV, path: 'provenance/', description: 'How every block is labelled Original, Adapted or Quoted, the copyright rules each unit is checked against before it can be published, and a count of what this build contains.', body: `${provenanceLegend()}\n${policyHtml}\n${provenanceAudit}` }));
 
 // ---- Privacy ---------------------------------------------------------------------------------
 // Generated from docs/PRIVACY.md, like the copyright policy, so the page and the repository cannot
@@ -398,12 +401,12 @@ const privacyFile = join(ROOT, 'docs', 'PRIVACY.md');
 const privacyHtml = existsSync(privacyFile)
   ? String(unified().use(remarkParse).use(remarkGfm).use(remarkRehype).use(rehypeStringify).processSync(readFileSync(privacyFile, 'utf8')))
   : '<h1>Privacy</h1>';
-write('privacy/index.html', layout({ base: BASE, title: 'Privacy', page: 'prose', dev: DEV, body: privacyHtml }));
+write('privacy/index.html', layout({ base: BASE, title: 'Privacy', page: 'prose', dev: DEV, path: 'privacy/', description: 'No analytics, no cookies and no third-party scripts: what the site keeps in your browser, and what it never sends anywhere.', body: privacyHtml }));
 
 // ---- About -----------------------------------------------------------------------------------
 write('about/index.html', layout({
   base: BASE,
-  title: 'About',
+  title: 'About', path: 'about/',
   page: 'prose',
   dev: DEV,
   body: `<h1>About this handbook</h1>
@@ -449,12 +452,28 @@ can be traced to a page and checked. Contact details are on the
 not covered. The software that builds and checks the handbook is MIT.</p>`,
 }));
 
+// ---- 404 ------------------------------------------------------------------------------------
+// GitHub Pages serves this for any missing path under the site, at that path, so every link in it
+// must be absolute -- which the layout's are. Unit anchors moved by a renamed chapter are the likely
+// cause, so it offers the unit finder rather than a bare apology.
+write('404.html', layout({
+  base: BASE,
+  title: 'Page not found',
+  page: 'prose',
+  dev: DEV,
+  description: DESCRIPTION,
+  body: `<h1>Page not found</h1>
+<p class="lede">Nothing lives at this address. If you followed a link to a unit, the unit is almost
+certainly still here under a different chapter.</p>
+<p><a class="button primary" href="${BASE}#contents">Find it in the contents</a> <a class="button" href="${BASE}">Go to the home page</a></p>`,
+}));
+
 // ---- basket and print view ------------------------------------------------------------------
 write(
   'basket/index.html',
   layout({
     base: BASE,
-    title: 'PDF basket',
+    title: 'PDF basket', path: 'basket/',
     page: 'basket',
     dev: DEV,
     body: `<h1>PDF basket</h1>
