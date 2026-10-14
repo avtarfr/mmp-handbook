@@ -93,8 +93,10 @@
   // A checkbox inside <summary> would otherwise fold the chapter as well as tick the box. The
   // event has to be stopped before it reaches the summary, so this listener sits on the label
   // itself; a delegated one on document would fire too late.
-  document.querySelectorAll('summary .toc-check').forEach((label) => {
-    label.addEventListener('click', (ev) => ev.stopPropagation());
+  // Same for a link inside a <summary>: the chapter title and the "read" link both open the
+  // chapter, and without this the click folds the chapter on the way out.
+  document.querySelectorAll('summary .toc-check, summary a').forEach((el) => {
+    el.addEventListener('click', (ev) => ev.stopPropagation());
   });
 
   // Filter the table of contents as you type.

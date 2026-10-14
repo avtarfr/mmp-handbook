@@ -63,6 +63,24 @@ test('chapter page renders units, badges and math, and the basket works', async 
   await page.close();
 });
 
+test('a chapter title opens the chapter; the fold arrow and checkbox do not', async () => {
+  const page = await browser.newPage();
+  await page.goto(URL0);
+  const ch = page.locator('details.toc-chapter').first();
+
+  // The arrow folds and nothing else: a click on it must not follow the title's link.
+  await ch.locator('summary .toc-fold').click();
+  assert.equal(await ch.evaluate((d) => d.open), false);
+  assert.equal(new URL(page.url()).pathname, new URL(URL0).pathname);
+
+  // The whole chapter title is the link, not just the small "read" at the end of the row.
+  const href = await ch.locator('.toc-chapter-title').getAttribute('href');
+  await ch.locator('.toc-chapter-title').click();
+  await page.waitForLoadState();
+  assert.equal(new URL(page.url()).pathname, href);
+  await page.close();
+});
+
 test('print view paginates, resolves contents page numbers, filters layers and references', async () => {
   const page = await browser.newPage();
   const ids = 'fixtures.geometric-series,fixtures.bessel-inequality,fixtures.parseval-identity';

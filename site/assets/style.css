@@ -242,9 +242,12 @@ details.toc-chapter > summary {
   font: 600 1rem var(--sans); padding: 0.25rem 0;
 }
 details.toc-chapter > summary::-webkit-details-marker { display: none; }
-.toc-chapter-title { flex: 1; }
-.toc-chapter-title::before { content: '▸'; color: var(--muted); margin-right: 0.4rem; font-size: 0.8em; }
-details[open] > summary .toc-chapter-title::before { content: '▾'; }
+/* The fold arrow sits OUTSIDE the title: the title is a link to the chapter, and a click on the
+   arrow must still fold rather than navigate. */
+.toc-fold::before { content: '▸'; color: var(--muted); margin-right: 0.4rem; font-size: 0.8em; }
+details[open] > summary .toc-fold::before { content: '▾'; }
+.toc-chapter-title { flex: 1; color: inherit; text-decoration: none; }
+.toc-chapter-title:hover, .toc-chapter-title:focus-visible { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .toc-open { font: 0.78rem var(--sans); color: var(--muted); text-decoration: none; }
 .toc-open:hover { color: var(--link); }
 .toc-chapter-summary { margin: 0 0 0.4rem 1.6rem; color: var(--muted); font: 0.88rem/1.45 var(--sans); }

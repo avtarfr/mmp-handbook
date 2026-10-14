@@ -232,9 +232,10 @@ const tocBody = catalog.tree
         return `<details class="toc-chapter" open>
   <summary>
     <label class="toc-check"><input type="checkbox" data-basket-group="${e(chapterUnits.map((u) => u.id).join(' '))}" aria-label="Add chapter ${e(c.chapter.title)}"></label>
-    <span class="toc-chapter-title">${e(c.chapter.title)}</span>
+    <span class="toc-fold" aria-hidden="true"></span>
+    <a class="toc-chapter-title" href="${BASE}${chapterPath(part, c.chapter)}">${e(c.chapter.title)}</a>
     <span class="count">${chapterUnits.length}</span>
-    <a class="toc-open" href="${BASE}${chapterPath(part, c.chapter)}">read</a>
+    <a class="toc-open" href="${BASE}${chapterPath(part, c.chapter)}" tabindex="-1" aria-hidden="true">read</a>
   </summary>
   ${c.chapter.summary ? `<p class="toc-chapter-summary">${e(c.chapter.summary)}</p>` : ''}
   ${sectionHtml}
