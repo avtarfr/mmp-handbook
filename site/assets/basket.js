@@ -81,14 +81,30 @@
     }
     if (ev.target.closest?.('.theme-toggle')) {
       const root = document.documentElement;
-      const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-      root.dataset.theme = dark ? 'light' : 'dark';
+      root.dataset.theme = isDark() ? 'light' : 'dark';
       try {
         localStorage.setItem('mmp-theme', root.dataset.theme);
       } catch {}
+      labelTheme();
     }
   });
   window.addEventListener('storage', (ev) => ev.key === KEY && sync());
+
+  // The theme button names the theme it switches to, as on the author's site.
+  function isDark() {
+    const t = document.documentElement.dataset.theme;
+    return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function labelTheme() {
+    const target = isDark() ? 'Light' : 'Dark';
+    document.querySelectorAll('.theme-toggle').forEach((b) => {
+      const l = b.querySelector('.theme-toggle-label');
+      if (l) l.textContent = target;
+      b.setAttribute('aria-label', `Switch to ${target.toLowerCase()} theme`);
+    });
+  }
+  labelTheme();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', labelTheme);
 
   // A checkbox inside <summary> would otherwise fold the chapter as well as tick the box. The
   // event has to be stopped before it reaches the summary, so this listener sits on the label

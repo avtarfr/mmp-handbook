@@ -1,75 +1,86 @@
+/* Theme: the palette and type of the author's site (avtarfr.github.io) -- Deep Kombu, Warm Bone
+   and Moss, set in Plus Jakarta Sans. The font is served from this site, not from Google, so the
+   privacy page's "nothing loaded from anyone else" stays true. Licence: fonts/OFL.txt. */
+@font-face {
+  font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('fonts/plus-jakarta-sans-latin-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
-  --bg: #fcfbf7;
-  --fg: #1a1c1e;
-  --muted: #6b6f74;
-  --rule: #e8e5de;
-  --hair: #f0ede6;
-  --panel: #f5f3ed;
-  --link: #1f5fbf;
-  --original: #1a7f4b;
-  --adapted: #2457a6;
-  --quoted: #a65e00;
-  --draft: #8a6d00;
-  --hold: #b3261e;
-  --serif: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bg: #f5f3ef;
+  --surface: #ffffff;
+  --panel: #ece8e1;
+  --raised: #f0ebe3;
+  --fg: #35402b;
+  --fg-bright: #1f2617;
+  --muted: #5d6e4e;
+  --rule: #d8d0c3;
+  --hair: #e4ded4;
+  --link: #495b2d;
+  --accent: #5e733b;
+  --accent-hover: #405027;
+  --accent-contrast: #ffffff;
+  --original: #4e6330;
+  --adapted: #36627c;
+  --quoted: #8a5716;
+  --draft: #75610f;
+  --hold: #a13a2b;
+  --head-bg: rgb(245 243 239 / 0.92);
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --serif: var(--sans);
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --measure: 46rem;
+  --head-h: 3.4rem;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #16171a;
-    --fg: #e8e5df;
-    --muted: #9ea2a8;
-    --rule: #2e3034;
-    --hair: #26282b;
-    --panel: #1d1f22;
-    --link: #8ab4f8;
-    --original: #5cc28e;
-    --adapted: #7fa8ea;
-    --quoted: #e0a050;
-    --draft: #d6b64a;
-    --hold: #f28b82;
+    --bg: #151913; --surface: #21281e; --panel: #1c2219; --raised: #2a3326;
+    --fg: #e0d8ce; --fg-bright: #f5efeb; --muted: #9cad86; --rule: #364231; --hair: #262e22;
+    --link: #b8cc8f; --accent: #88a059; --accent-hover: #a5bc74; --accent-contrast: #11160c;
+    --original: #b8cc8f; --adapted: #93bcd3; --quoted: #d9ac67; --draft: #d2bb5f; --hold: #e99383;
+    --head-bg: rgb(21 25 19 / 0.92);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --bg: #16171a;
-  --fg: #e8e5df;
-  --muted: #9ea2a8;
-  --rule: #2e3034;
-  --hair: #26282b;
-  --panel: #1d1f22;
-  --link: #8ab4f8;
-  --original: #5cc28e;
-  --adapted: #7fa8ea;
-  --quoted: #e0a050;
-  --draft: #d6b64a;
-  --hold: #f28b82;
+  --bg: #151913; --surface: #21281e; --panel: #1c2219; --raised: #2a3326;
+  --fg: #e0d8ce; --fg-bright: #f5efeb; --muted: #9cad86; --rule: #364231; --hair: #262e22;
+  --link: #b8cc8f; --accent: #88a059; --accent-hover: #a5bc74; --accent-contrast: #11160c;
+  --original: #b8cc8f; --adapted: #93bcd3; --quoted: #d9ac67; --draft: #d2bb5f; --hold: #e99383;
+  --head-bg: rgb(21 25 19 / 0.92);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--head-h) + 0.5rem); }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font: 1.0625rem/1.72 var(--serif);
-  text-rendering: optimizeLegibility;
+  font: 1rem/1.72 var(--sans);
+  -webkit-font-smoothing: antialiased;
   font-kerning: normal;
+  transition: background-color .2s ease, color .2s ease;
 }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px;
     text-decoration-color: color-mix(in oklab, currentColor 35%, transparent); }
 a:hover { text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
-::selection { background: color-mix(in oklab, var(--link) 18%, transparent); }
+::selection { background: var(--accent); color: var(--accent-contrast); }
+code, kbd { font-family: var(--mono); font-size: 0.88em; }
 main { max-width: var(--measure); margin: 0 auto; padding: 2rem 16px 5rem; }
-h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.22; letter-spacing: -0.012em; }
-h1 { font-size: 2.05rem; margin: 0.6rem 0 0.8rem; font-weight: 680; }
+h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.22; letter-spacing: -0.015em; color: var(--fg-bright); font-weight: 700; }
+h1 { font-size: 2.1rem; margin: 0.6rem 0 0.8rem; }
 h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 .small-head { font-size: 1rem; margin-top: 1.5rem; }
-.lede { font-size: 1.15rem; color: var(--muted); }
+.lede { font-size: 1.08rem; font-weight: 500; line-height: 1.6; color: var(--muted); }
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
 
 /* Private-preview banner (only on builds made with --preview) */
@@ -83,28 +94,47 @@ h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 
 /* Header and footer */
 .site-head {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem;
-  padding: 0.8rem 16px; border-bottom: 1px solid var(--hair); font-family: var(--sans); font-size: 0.92rem;
+  position: sticky; top: 0; z-index: 10; min-height: var(--head-h);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.4rem;
+  padding: 0.6rem max(16px, calc((100% - 1080px) / 2)); font-family: var(--sans);
+  background: var(--head-bg); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
 }
-.site-name { font-weight: 650; color: var(--fg); text-decoration: none; }
-.site-head nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin-left: auto; align-items: center; }
-.site-head nav a { color: var(--muted); text-decoration: none; }
-.site-head nav a:hover { color: var(--fg); }
-.basket-count { background: var(--adapted); color: var(--bg); border-radius: 1rem; padding: 0 0.45rem; font-size: 0.8rem; }
-.theme-toggle { background: none; border: 1px solid var(--rule); color: var(--muted); border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.site-name { font-weight: 700; font-size: 1.02rem; color: var(--fg-bright); text-decoration: none; white-space: nowrap; }
+.site-head nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.4rem; margin-left: auto; align-items: center; }
+.site-head nav a { font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .15s ease; }
+.site-head nav a:hover { color: var(--fg-bright); }
+.basket-count { background: var(--accent); color: var(--accent-contrast); border-radius: 4px; padding: 0 0.4rem; font-size: 0.75rem; font-weight: 700; }
+/* The header is sticky only where it fits on one line (measured: it wraps below 760px with the
+   widest nav). A wrapped sticky header would cover the top of every unit a link jumps to, so on
+   narrower screens it scrolls away and reserves no space. */
+@media (max-width: 799px) {
+  :root { --head-h: 0rem; }
+  .site-head { position: static; }
+}
+/* A labelled button, as on the author's site: it names the theme it switches to. */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 3.4rem; padding: 5px 12px;
+  background: var(--raised); border: 1px solid var(--rule); color: var(--fg-bright); border-radius: 6px;
+  font: 600 0.75rem/1.2 var(--sans); cursor: pointer; transition: border-color .15s ease;
+}
+.theme-toggle:hover { border-color: var(--accent); }
 .dev-flag { font: 600 0.7rem var(--sans); text-transform: uppercase; color: var(--draft); border: 1px solid var(--draft); border-radius: 3px; padding: 0 0.3rem; }
-.site-foot { max-width: var(--measure); margin: 0 auto; padding: 1rem 16px 3rem; border-top: 1px solid var(--rule); color: var(--muted); font: 0.875rem/1.5 var(--sans); }
+.site-foot { max-width: var(--measure); margin: 0 auto; padding: 1.5rem 16px 3rem; border-top: 1px solid var(--rule); color: var(--muted); font: 0.86rem/1.6 var(--sans); }
+.site-foot a { color: var(--muted); }
+.site-foot a:hover { color: var(--fg-bright); }
 
 /* Badges */
 .badge {
-  display: inline-block; font: 600 0.66rem/1.6 var(--sans); letter-spacing: 0.06em; text-transform: uppercase;
-  border-radius: 999px; padding: 0.05rem 0.5rem; vertical-align: 0.08em;
-  background: color-mix(in oklab, currentColor 11%, transparent);
+  display: inline-block; font: 600 0.7rem/1.5 var(--sans); letter-spacing: 0.01em;
+  border-radius: 4px; padding: 0.05rem 0.45rem; vertical-align: 0.08em;
+  background: color-mix(in oklab, currentColor 12%, transparent);
+  border: 1px solid color-mix(in oklab, currentColor 45%, transparent);
 }
 .badge-original { color: var(--original); }
 .badge-adapted { color: var(--adapted); }
 .badge-quoted { color: var(--quoted); }
-.status { font: 600 0.66rem/1.6 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.05rem 0.5rem; border-radius: 999px; background: color-mix(in oklab, currentColor 11%, transparent); }
+.status { font: 600 0.7rem/1.5 var(--sans); padding: 0.05rem 0.45rem; border-radius: 4px; background: color-mix(in oklab, currentColor 12%, transparent); border: 1px solid color-mix(in oklab, currentColor 45%, transparent); }
 .status-verified { color: var(--original); }
 .status-draft { color: var(--draft); }
 .status-needs-human { color: var(--hold); }
@@ -133,13 +163,14 @@ h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 .crumbs { font: 0.875rem var(--sans); color: var(--muted); }
 .chapter-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .button {
-  display: inline-block; font: 0.875rem var(--sans); padding: 0.4rem 0.85rem; border-radius: 6px;
-  border: 1px solid var(--rule); background: transparent; color: var(--fg); text-decoration: none; cursor: pointer;
-  transition: border-color .12s ease, background .12s ease;
+  display: inline-flex; align-items: center; gap: 6px; font: 600 0.86rem/1.25 var(--sans); padding: 0.5rem 1rem; border-radius: 6px;
+  border: 1px solid var(--rule); background: transparent; color: var(--fg-bright); text-decoration: none; cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
 }
-.button:hover { border-color: var(--muted); background: var(--panel); }
-.button.primary { background: var(--adapted); border-color: var(--adapted); color: var(--bg); }
-.chapter-toc { border: 1px solid var(--hair); border-radius: 8px; padding: 0.7rem 1.1rem; font: 0.92rem var(--sans); margin: 1.5rem 0; }
+.button:hover { border-color: var(--accent); background: var(--raised); color: var(--fg-bright); }
+.button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.button.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.chapter-toc { border: 1px solid var(--rule); border-radius: 6px; padding: 0.8rem 1.15rem; font: 0.92rem var(--sans); margin: 1.5rem 0; background: var(--surface); }
 .chapter-toc ol, .chapter-toc ul { list-style: none; padding-left: 0; }
 .chapter-toc ul { padding-left: 1rem; }
 .chapter-toc li { margin: 0.22rem 0; }
@@ -166,13 +197,25 @@ h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 .chapter-section > summary:hover h2 { color: var(--link); }
 
 /* Units */
-.unit { margin: 3rem 0 3.25rem; scroll-margin-top: 1rem; }
+.unit { margin: 3rem 0 3.25rem; }
 .unit-head { display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; align-items: baseline; border-bottom: 1px solid var(--hair); padding-bottom: 0.55rem; }
 .unit-kind { grid-column: 1 / -1; margin: 0 0 0.1rem; font: 600 0.7rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.09em; }
 .unit-head h3 { margin: 0.1rem 0; font-size: 1.32rem; font-weight: 660; }
 .unit-head h3 a { color: inherit; text-decoration: none; }
 .unit-badges { margin: 0; }
-.basket-toggle { grid-column: 1 / -1; font: 0.85rem var(--sans); color: var(--muted); cursor: pointer; }
+/* Still a real checkbox (keyboard, screen readers and the basket all use it), drawn as a small
+   toggle under the provenance badge so it reads as an action on the unit, not a stray form field. */
+.basket-toggle {
+  grid-column: 2; justify-self: end; display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem;
+  font: 500 0.76rem var(--sans); color: var(--muted); cursor: pointer; white-space: nowrap;
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.12rem 0.6rem 0.12rem 0.45rem;
+  transition: color .12s ease, border-color .12s ease, background .12s ease;
+}
+.basket-toggle:hover { color: var(--fg); border-color: var(--muted); }
+.basket-toggle input { margin: 0; width: 0.85rem; height: 0.85rem; accent-color: var(--accent); cursor: pointer; }
+.basket-toggle:has(input:checked) { color: var(--link); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.basket-toggle:has(input:focus-visible) { outline: 2px solid var(--link); outline-offset: 2px; }
+
 .unit-summary { color: var(--muted); font-style: italic; }
 .unit-prereqs { font: 0.9rem var(--sans); color: var(--muted); }
 .xref-missing { color: var(--muted); border-bottom: 1px dotted var(--muted); }
@@ -206,9 +249,9 @@ th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var
 .basket-list li { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.3rem 0; border-bottom: 1px solid var(--rule); }
 .basket-list li span { flex: 1; }
 .basket-list button { font: 0.8rem var(--sans); background: none; border: none; color: var(--hold); cursor: pointer; }
-.panel { background: var(--panel); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; font-family: var(--sans); font-size: 0.95rem; }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; font-family: var(--sans); font-size: 0.95rem; }
 .panel label { display: block; margin: 0.25rem 0; }
-.panel input[type='text'] { width: 100%; font: inherit; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg); color: var(--fg); }
+.panel input[type='text'] { width: 100%; font: inherit; padding: 0.4rem 0.55rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--fg); }
 
 /* In-progress panel: local builds only */
 .inflight { border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1.5rem 0; }
@@ -223,19 +266,21 @@ th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var
 /* ---- Table of contents (home page) ---------------------------------------------------- */
 .toc-jump { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1.25rem 0; }
 .toc-jump a {
-  font: 0.82rem var(--sans); text-decoration: none; color: var(--muted);
-  border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.7rem; background: transparent;
-  transition: color .12s ease, border-color .12s ease;
+  font: 500 0.8rem var(--sans); text-decoration: none; color: var(--muted);
+  border: 1px solid var(--rule); border-radius: 6px; padding: 0.22rem 0.65rem; background: var(--surface);
+  transition: color .15s ease, border-color .15s ease;
 }
-.toc-jump a:hover { border-color: var(--link); color: var(--link); }
+.toc-jump a:hover { border-color: var(--accent); color: var(--fg-bright); }
 
-.toc-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0 0.5rem; position: sticky; top: 0; background: var(--bg); padding: 0.5rem 0; z-index: 2; }
-#toc-filter { flex: 1 1 16rem; font: 0.95rem var(--sans); padding: 0.5rem 0.75rem; border: 1px solid var(--rule); border-radius: 8px; background: transparent; color: var(--fg); }
+/* Pinned just below the sticky site header, so neither covers the other. */
+.toc-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0 0.5rem; position: sticky; top: var(--head-h); background: var(--bg); padding: 0.5rem 0; z-index: 2; }
+#toc-filter { flex: 1 1 16rem; font: 0.95rem var(--sans); padding: 0.55rem 0.8rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--fg); transition: border-color .15s ease; }
+#toc-filter:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent); }
 .toc-filter-count { font: 0.8rem var(--sans); color: var(--muted); }
 
 .toc-part > h2 { display: flex; align-items: center; gap: 0.5rem; margin-top: 2rem; }
 .toc-check { display: inline-flex; align-items: center; cursor: pointer; }
-.toc-check input { width: 1.05rem; height: 1.05rem; accent-color: var(--adapted); cursor: pointer; margin: 0; }
+.toc-check input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); cursor: pointer; margin: 0; }
 
 details.toc-chapter { border-left: 1px solid var(--rule); margin: 0.5rem 0 0.5rem 0.5rem; padding-left: 0.9rem; }
 details.toc-chapter > summary {
@@ -257,12 +302,12 @@ details[open] > summary .toc-fold::before { content: '▾'; }
 .toc-section-head h4 { margin: 0; font: 600 0.84rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .toc-units { list-style: none; margin: 0 0 0.3rem; padding-left: 1.6rem; }
 .toc-unit { display: grid; grid-template-columns: auto 1fr auto; gap: 0.1rem 0.5rem; align-items: baseline; padding: 0.34rem 0.4rem 0.34rem 0; border-radius: 5px; border-bottom: 1px solid var(--hair); }
-.toc-unit:hover { background: color-mix(in oklab, var(--panel) 70%, transparent); }
+.toc-unit:hover { background: var(--panel); }
 .toc-title { font: 0.95rem var(--sans); color: var(--fg); text-decoration: none; }
 .toc-title:hover { color: var(--link); text-decoration: underline; }
 .toc-tags { display: flex; gap: 0.3rem; align-items: baseline; }
 .toc-summary { grid-column: 2 / -1; margin: 0; color: var(--muted); font: 0.82rem/1.4 var(--sans); }
-.kind { font: 600 0.62rem/1.6 var(--sans); text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); border-radius: 999px; padding: 0.05rem 0.5rem; white-space: nowrap; background: color-mix(in oklab, currentColor 11%, transparent); }
+.kind { font: 600 0.68rem/1.5 var(--sans); text-transform: capitalize; color: var(--muted); border-radius: 4px; padding: 0.02rem 0.42rem; white-space: nowrap; background: color-mix(in oklab, currentColor 12%, transparent); border: 1px solid color-mix(in oklab, currentColor 40%, transparent); }
 .kind-theorem { color: var(--adapted); }
 .kind-definition { color: var(--original); }
 .kind-method, .kind-table { color: var(--quoted); }
@@ -270,8 +315,8 @@ details[open] > summary .toc-fold::before { content: '▾'; }
 
 .toc-bar {
   position: sticky; bottom: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
-  margin-top: 1.5rem; padding: 0.7rem 1rem; border-radius: 10px;
-  background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
+  margin-top: 1.5rem; padding: 0.7rem 1rem; border-radius: 6px;
+  background: var(--head-bg); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border: 1px solid var(--rule); font: 0.9rem var(--sans);
   box-shadow: 0 1px 14px rgb(0 0 0 / 7%);
 }
@@ -282,6 +327,8 @@ details[open] > summary .toc-fold::before { content: '▾'; }
   .toc-tags { grid-column: 2; }
   .toc-summary { grid-column: 2; }
   .toc-units, .toc-section-head { padding-left: 0.6rem; margin-left: 0.6rem; }
+  /* Under the badge there is no room on a phone beside a long title; give the toggle its own row. */
+  .basket-toggle { grid-column: 1 / -1; justify-self: start; }
 }
 
 /* An inline formula is one unbreakable box, so one carrying a long \text{} phrase can be wider
@@ -294,3 +341,11 @@ details[open] > summary .toc-fold::before { content: '▾'; }
 
 /* An explicit `display` beats the browser default for [hidden], so the filter needs this. */
 .toc-unit[hidden], .toc-section[hidden], .toc-part[hidden], details.toc-chapter[hidden], .toc-bar[hidden] { display: none; }
+
+/* Pagefind's search widget, in the same palette. */
+#search {
+  --pagefind-ui-scale: 0.9; --pagefind-ui-font: var(--sans);
+  --pagefind-ui-primary: var(--accent); --pagefind-ui-text: var(--fg);
+  --pagefind-ui-background: var(--surface); --pagefind-ui-border: var(--rule);
+  --pagefind-ui-tag: var(--panel); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 6px;
+}

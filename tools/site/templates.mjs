@@ -27,8 +27,8 @@ function shareTags({ base, title, description, path, siteUrl }) {
   }
   tags.push(`<link rel="icon" href="${base}assets/icon.svg" type="image/svg+xml">`);
   tags.push(`<link rel="apple-touch-icon" href="${base}assets/icon-180.png">`);
-  tags.push(`<meta name="theme-color" content="#fcfbf7" media="(prefers-color-scheme: light)">`);
-  tags.push(`<meta name="theme-color" content="#16171a" media="(prefers-color-scheme: dark)">`);
+  tags.push(`<meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme: light)">`);
+  tags.push(`<meta name="theme-color" content="#151913" media="(prefers-color-scheme: dark)">`);
   return tags.join('\n');
 }
 
@@ -49,7 +49,7 @@ ${shareTags({ base, title, description, path, siteUrl })}
      therefore shows nothing to overlay. The noscript rule restores the page for readers with
      scripting off, who cannot be clickjacked into a click this way in the first place. -->
 <style id="framed">html{display:none}</style>
-<noscript><style>html{display:block}</style></noscript>
+<noscript><style>html{display:block}.theme-toggle{display:none}</style></noscript>
 <script>
 if (self === top) { const s = document.getElementById('framed'); if (s) s.remove(); }
 else { try { top.location = self.location } catch { document.documentElement.style.display = 'none' } }
@@ -68,7 +68,7 @@ ${preview ? '<p class="preview-note">Private preview &mdash; not published. Plea
     <a href="${base}provenance/">Provenance</a>
     ${dev ? `<a href="${base}status/">Status</a>` : ''}
     <a class="basket-link" href="${base}basket/">PDF basket <span class="basket-count" hidden></span></a>
-    <button class="theme-toggle" type="button" aria-label="Toggle dark mode">◐</button>
+    <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-label">Theme</span></button>
   </nav>
 </header>
 <main>
