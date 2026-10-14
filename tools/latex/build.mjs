@@ -12,7 +12,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROOT } from '../lib/works.mjs';
 import { loadCatalog } from '../lib/catalog.mjs';
-import { citedWorks, workSegments } from '../lib/bib.mjs';
+import { citedWorks, workSegments, sourceLocator } from '../lib/bib.mjs';
 import { BADGE, KIND_LABEL } from '../lib/render.mjs';
 import { serialize, escapeTex, texId } from './serialize.mjs';
 
@@ -30,7 +30,7 @@ function unitTex(unit, ctx) {
   out += serialize(unit.tree, ctx, unit);
   if (unit.sources.length) {
     out += `{\\footnotesize\\textbf{Sources.} ${unit.sources
-      .map((s) => `\\hyperlink{bib:${texId(s.work)}}{${escapeTex(ctx.works.get(s.work)?.short ?? s.work)}}, ${escapeTex(s.loc)} (${escapeTex(s.role)})`)
+      .map((s) => `\\hyperlink{bib:${texId(s.work)}}{${escapeTex(ctx.works.get(s.work)?.short ?? s.work)}}, ${escapeTex(sourceLocator(s))}`)
       .join('; ')}.\\par}\n`;
   }
   return out + '\n';

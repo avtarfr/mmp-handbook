@@ -15,7 +15,7 @@ import rehypeStringify from 'rehype-stringify';
 import { ROOT } from '../lib/works.mjs';
 import { loadCatalog } from '../lib/catalog.mjs';
 import { renderUnitBody, renderInlineText, escapeHtml as e, BADGE, KIND_LABEL } from '../lib/render.mjs';
-import { citedWorks, workSegments } from '../lib/bib.mjs';
+import { citedWorks, workSegments, sourceLocator } from '../lib/bib.mjs';
 import { layout as baseLayout, provenanceLegend, SITE_TITLE, STATUS_LABEL } from './templates.mjs';
 
 const args = process.argv.slice(2);
@@ -101,7 +101,7 @@ function unitArticle(u) {
     : '';
   const sources = u.sources.length
     ? `<footer class="unit-sources"><h4>Sources</h4><ul>${u.sources
-        .map((s) => `<li><a href="${ctx.bibUrl(s.work)}">${e(catalog.works.get(s.work)?.short ?? s.work)}</a>, ${e(s.loc)} <span class="role">(${e(s.role)})</span></li>`)
+        .map((s) => `<li><a href="${ctx.bibUrl(s.work)}">${e(catalog.works.get(s.work)?.short ?? s.work)}</a>, ${e(sourceLocator(s))}</li>`)
         .join('')}</ul></footer>`
     : '';
   return `<article class="unit${u.level === 'advanced' ? ' unit-advanced' : ''}" id="${unitAnchor(u.id)}" data-unit="${e(u.id)}">

@@ -20,3 +20,27 @@ export function citedWorks(units, works) {
     .filter(Boolean)
     .sort((a, b) => a.short.localeCompare(b.short));
 }
+
+// The locator a reader sees for one of a unit's sources: section numbers and pages, nothing else.
+//
+// A source entry also carries `loc` and `role`, free-text notes on what was taken from where. They
+// exist for the verifiers, who must check a unit against exactly the passages it draws on, and
+// they are deliberately thorough -- some walk through a book section by section. That is the right
+// record for review and the wrong thing to publish: a reader needs a citation, and a detailed
+// précis of a book's sections is the book's structure in other words. So the notes stay in the
+// unit file and only this is rendered.
+//
+// Section numbers are read out of `loc` (it is the only place they are recorded); pages come from
+// the structured `pages` field, which every source has.
+export function sourceLocator(s) {
+  const secs = [];
+  for (const m of String(s.loc || '').matchAll(/§\s?\d+(?:\.\d+)*(?:\s?[-–]\s?\d+(?:\.\d+)*)?|\b(?:Ch\.|Chapter)\s?\d+|\bAppendix\s[A-Z]\b/g)) {
+    const ref = m[0].replace(/^Chapter\s?/, 'Ch. ').replace(/\s?[-–]\s?/, '–').replace(/^§\s/, '§');
+    if (!secs.includes(ref)) secs.push(ref);
+  }
+  const pages = String(s.pages ?? '').trim().replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+  const parts = [];
+  if (secs.length) parts.push(secs.length > 6 ? `${secs.slice(0, 6).join(', ')} and others` : secs.join(', '));
+  if (pages) parts.push(`${/[–,]/.test(pages) ? 'pp.' : 'p.'} ${pages}`);
+  return parts.join(', ');
+}

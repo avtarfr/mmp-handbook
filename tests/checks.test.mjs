@@ -11,6 +11,7 @@ import { checkOverlap } from '../tools/check/overlap.mjs';
 import { checkGraph } from '../tools/check/graph.mjs';
 import { recordChecks, recordVerdict, releaseHold, unitStatus, MAX_ROUNDS } from '../tools/lib/ledger.mjs';
 import { CORPUS } from '../tools/lib/works.mjs';
+import { sourceLocator } from '../tools/lib/bib.mjs';
 
 const dir = mkdtempSync(join(tmpdir(), 'mmp-units-'));
 let n = 0;
@@ -169,4 +170,17 @@ test('inline quotations: caught only when the words are really in a book', async
   await t.test('scare quotes that are in no book pass', () => {
     assert.deepEqual(msgs(unit('original', 'We call this a "suitably nice function" at times, loosely speaking.')), []);
   });
+});
+
+test('a source is cited by section and page; its reviewer notes are never part of the citation', () => {
+  const note = 'the statement that there are four common ways limit cycles are created or destroyed';
+  const s = { work: 'w', pages: '260-265', role: 'the classification of global bifurcations', loc: `§8.4 Global bifurcations of cycles, pp. 260-265: ${note}; §8.5, p. 266` };
+  const cited = sourceLocator(s);
+  assert.equal(cited, '§8.4, §8.5, pp. 260–265');
+  assert.ok(!cited.includes('four common ways') && !cited.includes('classification'), 'notes must not leak into the citation');
+
+  assert.equal(sourceLocator({ pages: '370' }), 'p. 370');                        // one page, no section
+  assert.equal(sourceLocator({ pages: '456, 490', loc: 'Problem 14.24' }), 'pp. 456, 490');
+  assert.equal(sourceLocator({ pages: '12', loc: 'Chapter 3 and Appendix B' }), 'Ch. 3, Appendix B, p. 12');
+  assert.equal(sourceLocator({ pages: '1', loc: '§1.1 §1.2 §1.3 §1.4 §1.5 §1.6 §1.7' }), '§1.1, §1.2, §1.3, §1.4, §1.5, §1.6 and others, p. 1');
 });
