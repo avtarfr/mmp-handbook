@@ -284,5 +284,13 @@ details[open] > summary .toc-fold::before { content: '▾'; }
   .toc-units, .toc-section-head { padding-left: 0.6rem; margin-left: 0.6rem; }
 }
 
+/* An inline formula is one unbreakable box, so one carrying a long \text{} phrase can be wider
+   than a phone. basket.js marks the few paragraphs where that happens, and only those scroll
+   sideways, as display maths already does, instead of the whole page. It cannot be every
+   paragraph: a scroll container clips vertically too, and tall inline maths (fractions, sums)
+   reaches past its line box. The padding gives that maths room inside the container; the
+   negative margin keeps the paragraph where it was. */
+.math-wide { overflow-x: auto; overflow-y: hidden; padding-block: 0.6em; margin-block: -0.6em; }
+
 /* An explicit `display` beats the browser default for [hidden], so the filter needs this. */
 .toc-unit[hidden], .toc-section[hidden], .toc-part[hidden], details.toc-chapter[hidden], .toc-bar[hidden] { display: none; }

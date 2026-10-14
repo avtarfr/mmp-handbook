@@ -215,6 +215,28 @@
   window.addEventListener('hashchange', revealHash);
   revealHash();
 
+  // Mark the paragraphs whose inline maths would push the page past the window (see .math-wide
+  // in the stylesheet). Measured, not guessed. A formula that only overhangs the text column into
+  // the empty margin is left alone: on a wide screen it is fully visible as it is, and a
+  // scrollbar there would be a regression. Re-measured when the width changes, so rotating a
+  // phone is handled.
+  const markWide = () => {
+    document.querySelectorAll('.math-wide').forEach((el) => el.classList.remove('math-wide'));
+    const edge = document.documentElement.clientWidth;
+    document.querySelectorAll('.unit p, .unit li, .unit td, .toc-summary').forEach((el) => {
+      if (el.scrollWidth <= el.clientWidth + 1 || !el.querySelector('.katex')) return;
+      if (el.getBoundingClientRect().left + el.scrollWidth > edge - 8) el.classList.add('math-wide');
+    });
+  };
+  let lastWidth = innerWidth;
+  markWide();
+  window.addEventListener('resize', () => {
+    if (innerWidth !== lastWidth) {
+      lastWidth = innerWidth;
+      markWide();
+    }
+  });
+
   // Printing a chapter page from the browser must print all of it, whatever is folded on screen.
   const printed = [];
   window.addEventListener('beforeprint', () => {
