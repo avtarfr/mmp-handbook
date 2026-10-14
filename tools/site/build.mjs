@@ -133,16 +133,35 @@ for (const { part, chapters } of catalog.tree) {
     const pdfLink = hasPdfs && existsSync(join(OUT, pdfRel)) ? `<a class="button" href="${BASE}${pdfRel}">Chapter PDF</a>` : '';
     const ids = c.sections.flatMap((s) => s.units.map((u) => u.id));
     chapterList.push({ part: part.id, chapter: c.chapter.id, title: c.chapter.title, url: `${BASE}${path}`, pdf: pdfLink ? `${BASE}${pdfRel}` : null });
+    // The contents box at the top of a chapter is the one list a reader actually has in front of
+    // them while reading, so it carries the same checkboxes as the main table of contents: a unit
+    // can go in the basket from here without scrolling to it. Section rows tick everything beneath.
     const toc = c.sections
-      .map((s) => `<li><a href="#s-${e(s.section.id)}">${e(s.section.title)}</a><ul>${s.units.map((u) => `<li><a href="#${unitAnchor(u.id)}">${e(u.title)}</a></li>`).join('')}</ul></li>`)
+      .map((s) => `<li class="ctoc-section">
+      <label class="toc-check"><input type="checkbox" data-basket-group="${e(s.units.map((u) => u.id).join(' '))}" aria-label="Add section ${e(s.section.title)} to PDF"></label>
+      <a href="#s-${e(s.section.id)}">${e(s.section.title)}</a>
+      <ul>${s.units.map((u) => `<li class="ctoc-unit">
+        <label class="toc-check"><input type="checkbox" data-basket="${e(u.id)}" aria-label="Add ${e(u.title)} to PDF"></label>
+        <a href="#${unitAnchor(u.id)}">${e(u.title)}</a>
+      </li>`).join('')}</ul>
+    </li>`)
       .join('');
+    // Sections are <details> so a long chapter can be folded down to its headings while reading.
+    // They open by default: the page must read straight through for anyone arriving at an anchor,
+    // and basket.js reopens whichever one holds the target of a link.
+    const sectionsHtml = c.sections
+      .map((s) => `<details class="chapter-section" id="s-${e(s.section.id)}" open>
+<summary><h2>${e(s.section.title)}</h2><span class="count">${s.units.length}</span></summary>
+${s.units.map(unitArticle).join('\n')}
+</details>`)
+      .join('\n');
     const body = `<nav class="crumbs"><a href="${BASE}">Contents</a> › ${e(part.title)}</nav>
 <h1>${e(c.chapter.title)}</h1>
 ${c.chapter.summary ? `<p class="lede">${e(c.chapter.summary)}</p>` : ''}
-<p class="chapter-actions">${pdfLink}<button class="button" type="button" data-basket-add="${e(ids.join(' '))}">Add whole chapter to PDF basket</button></p>
-<details class="chapter-toc" open><summary>In this chapter</summary><ol>${toc}</ol></details>
+<p class="chapter-actions">${pdfLink}<button class="button" type="button" data-basket-add="${e(ids.join(' '))}">Add whole chapter to PDF basket</button><button class="button" type="button" data-sections="collapse">Collapse all sections</button></p>
+<details class="chapter-toc" open><summary>In this chapter <span class="count">${ids.length}</span></summary><p class="sub">Tick a unit to add it to your PDF basket.</p><ol>${toc}</ol></details>
 <div data-pagefind-body>
-${c.sections.map((s) => `<section class="chapter-section" id="s-${e(s.section.id)}"><h2>${e(s.section.title)}</h2>\n${s.units.map(unitArticle).join('\n')}</section>`).join('\n')}
+${sectionsHtml}
 </div>`;
     write(`${path}index.html`, layout({ base: BASE, title: c.chapter.title, body, page: 'chapter', dev: DEV }));
   }
@@ -243,14 +262,22 @@ write(
     head: `<link rel="stylesheet" href="${BASE}pagefind/pagefind-ui.css"><script src="${BASE}pagefind/pagefind-ui.js" defer></script>`,
     body: `<h1>${SITE_TITLE}</h1>
 <p class="lede">The mathematics physicists and applied scientists use, in small units you can read on their own. Tick what you need anywhere in this table of contents and the site assembles it into a PDF, with only the books those units cite in its reference list.</p>
-<div id="search"></div>
+<section class="find">
+  <h2 class="small-head">Search the full text</h2>
+  <p class="sub">Every word of every unit &mdash; definitions, statements, proofs and worked examples. Runs in your browser; nothing is sent anywhere.</p>
+  <div id="search"></div>
+</section>
 ${catalog.includedUnits.length ? `
+<h2 class="small-head" id="contents">Contents</h2>
+<p class="sub">All ${catalog.includedUnits.length} units. Tick any of them to build a PDF of exactly those.</p>
 <nav class="toc-jump">${partNav}</nav>
 <div class="toc-controls">
-  <input type="search" id="toc-filter" placeholder="Filter ${catalog.includedUnits.length} units by title or summary…" aria-label="Filter units">
+  <label class="toc-filter-label" for="toc-filter">Narrow this list</label>
+  <input type="search" id="toc-filter" placeholder="a title or topic — try “residue”, “gram schmidt”, “stiff ode”" aria-describedby="toc-filter-help">
   <span class="toc-filter-count" hidden></span>
   <button class="button" type="button" data-toc="expand">Expand all</button>
   <button class="button" type="button" data-toc="collapse">Collapse all</button>
+  <p id="toc-filter-help" class="sub">Matches unit titles and summaries. Word order does not matter and small misspellings are forgiven; to search inside the units themselves, use the box above.</p>
 </div>
 ${DEV ? inProgressPanel() : ''}
 <div class="toc">${tocBody}</div>
@@ -317,7 +344,7 @@ function inProgressPanel() {
   ${rows.map((r) => `<tr><td>${e(r.title)}<br><code>${e(r.id)}</code></td><td>${e(r.chapter)}</td><td><span class="status status-${r.st}">${STATUS_LABEL[r.st]}</span></td><td>${e(r.a)}</td><td>${e(r.b)}</td><td>${r.rounds}</td></tr>`).join('')}
   </table>` : '<p class="sub">Nothing is awaiting review.</p>'}
   ${broken.size ? `<p class="sub"><b class="hold">${broken.size}</b> file(s) are mid-write and excluded from this build: ${[...broken].map((f) => `<code>${e(f)}</code>`).join(', ')}</p>` : ''}
-  <p class="sub">Units not yet started have no file and so cannot be listed here; they are counted above and named on the to-be-added page.</p>
+  <p class="sub">Units not yet started have no file and so cannot be listed here; they are only counted above.</p>
 </section>`;
 }
 
@@ -360,42 +387,14 @@ ${figureBlocks === 0 ? '<p>It contains no figures.</p>' : ''}`;
 
 write('provenance/index.html', layout({ base: BASE, title: 'Provenance and copyright', page: 'prose', dev: DEV, body: `${provenanceLegend()}\n${policyHtml}\n${provenanceAudit}` }));
 
-// ---- "To be added": what the map plans but this build does not yet carry ---------------------
-// Published units are only part of the plan, and a reader who cannot see the rest has no way to
-// tell a gap from an omission. This page is generated from content/map.yaml, so it cannot drift.
-const planned = [];
-for (const part of catalog.map.parts || []) {
-  const chapters = [];
-  for (const ch of part.chapters || []) {
-    const units = (ch.sections || [])
-      .flatMap((sec) => (sec.units || []).map((u) => (typeof u === 'string' ? { id: u } : u)))
-      .filter((u) => !catalog.units.has(u.id) || catalog.status.get(u.id) !== 'verified');
-    if (units.length) chapters.push({ ch, units });
-  }
-  if (chapters.length) planned.push({ part, chapters });
-}
-const plannedCount = planned.reduce((a, p) => a + p.chapters.reduce((b, c) => b + c.units.length, 0), 0);
-const liveCount = catalog.includedUnits.length;
-const advancedCount = planned.reduce(
-  (a, p) => a + p.chapters.reduce((b, c) => b + c.units.filter((u) => u.level === 'advanced').length, 0), 0);
-
-write('to-be-added/index.html', layout({
-  base: BASE,
-  title: 'To be added',
-  page: 'prose',
-  dev: DEV,
-  body: `<h1>To be added</h1>
-<p class="lede">The handbook is being written unit by unit, and a unit appears here only after it has
-passed review. These ${plannedCount} are planned and not yet published; ${liveCount} are.
-Of those still to come, ${advancedCount} are marked advanced and come last by design.</p>
-<p>This list is generated from the topic map at build time, so it is exactly what is missing, not a
-wish list. Nothing here is a gap in the plan &mdash; only in the writing so far.</p>
-${planned.map((p) => `<section class="tba-part">
-  <h2>${e(p.part.title)} <span class="count">${p.chapters.reduce((b, c) => b + c.units.length, 0)} to come</span></h2>
-  ${p.chapters.map((c) => `<h3 class="small-head">${e(c.ch.title)}</h3>
-  <ul class="tba-units">${c.units.map((u) => `<li>${e(u.title || u.id)}${u.level === 'advanced' ? ' <span class="kind kind-advanced">advanced</span>' : ''}</li>`).join('')}</ul>`).join('')}
-</section>`).join('')}`,
-}));
+// ---- Privacy ---------------------------------------------------------------------------------
+// Generated from docs/PRIVACY.md, like the copyright policy, so the page and the repository cannot
+// disagree about what the site stores.
+const privacyFile = join(ROOT, 'docs', 'PRIVACY.md');
+const privacyHtml = existsSync(privacyFile)
+  ? String(unified().use(remarkParse).use(remarkGfm).use(remarkRehype).use(rehypeStringify).processSync(readFileSync(privacyFile, 'utf8')))
+  : '<h1>Privacy</h1>';
+write('privacy/index.html', layout({ base: BASE, title: 'Privacy', page: 'prose', dev: DEV, body: privacyHtml }));
 
 // ---- About -----------------------------------------------------------------------------------
 write('about/index.html', layout({
@@ -432,8 +431,8 @@ and confirm every citation against the page it names. Theorem-heavy chapters get
 the rest get one. A unit that fails goes back and returns through the whole gate. Where a reviewer
 disagrees with a cited book rather than with us, the book stands and the disagreement is recorded
 separately, because a handbook that silently corrects its sources cannot be checked against them.</p>
-<p>So the handbook is deliberately incomplete rather than provisionally complete. What is
-<a href="${BASE}to-be-added/">still to come</a> is listed in full.</p>
+<p>So the handbook is deliberately complete rather than provisionally complete: every unit the
+topic map plans has been written and has passed the gate. Nothing is shown here that has not.</p>
 
 <h2>Corrections</h2>
 <p>If something here is wrong, it is worth telling us: the point of the citations is that any claim

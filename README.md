@@ -43,7 +43,7 @@ npm test                       # safeguard tests and end-to-end browser test
 | `tools/latex/` | Markdown to LaTeX: chapter and part PDFs |
 | `tools/site/`, `site/assets/` | Static site generator, PDF basket, Paged.js print view |
 | `tools/ledger.mjs`, `verification/` | The publication gate's ledger and verifier reports |
-| `docs/` | Copyright policy, style guide and authoring guide |
+| `docs/` | Copyright policy, privacy policy, style guide and authoring guide |
 | `content/map.yaml`, `tools/map.mjs` | Topic map with unit specs; validation, candidate source pages, per-chapter specs |
 
 ## Licence

@@ -39,8 +39,20 @@ test('chapter page renders units, badges and math, and the basket works', async 
   // Adapted blocks name their source.
   assert.equal(await page.locator('.block.prov-adapted .block-src a.cite').count(), await page.locator('.block.prov-adapted').count());
 
-  await page.locator('input[data-basket="fixtures.parseval-identity"]').check();
+  // The contents box at the top of the chapter ticks units too, and both boxes for a unit track
+  // the one basket: ticking in the contents box must tick the one in the unit's own header.
+  const inToc = page.locator('.chapter-toc input[data-basket="fixtures.parseval-identity"]');
+  const inUnit = page.locator('article.unit input[data-basket="fixtures.parseval-identity"]');
+  await inToc.check();
+  assert.equal(await inUnit.isChecked(), true);
   assert.equal(await page.locator('.basket-count').first().textContent(), '1');
+
+  // Sections fold away while reading, and a link into a folded one still opens it.
+  await page.getByRole('button', { name: 'Collapse all sections' }).click();
+  assert.equal(await page.locator('details.chapter-section[open]').count(), 0);
+  await page.locator('.chapter-toc a[href="#u-fixtures_parseval-identity"]').click();
+  await page.locator('#u-fixtures_parseval-identity').waitFor({ state: 'visible' });
+  assert.ok((await page.locator('details.chapter-section[open]').count()) > 0);
   await page.goto(`${URL0}basket/`);
   // Parseval's prerequisites are suggested; adding them leaves nothing missing.
   await page.getByText(/prerequisite units? (is|are) not in your basket/).waitFor();

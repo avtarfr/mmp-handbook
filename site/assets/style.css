@@ -118,7 +118,15 @@ h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 .chapters a { font-family: var(--sans); font-weight: 600; }
 .chapters p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
 .count { color: var(--muted); font: 0.8rem var(--sans); }
-#search { margin: 1.5rem 0; }
+#search { margin: 0.75rem 0 0; }
+.find { margin: 2rem 0 2.5rem; }
+.find .small-head { margin-top: 0; }
+.sub { color: var(--muted); font: 0.85rem/1.5 var(--sans); margin: 0.3rem 0 0; }
+.toc-filter-label { font: 600 0.8rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+#toc-filter-help { flex: 1 0 100%; margin: 0; }
+.toc-filter-count.empty { color: var(--hold); }
+.foot-links { margin-top: 0.75rem; }
+.foot-links a { color: var(--muted); }
 
 /* Chapter page */
 .crumbs { font: 0.875rem var(--sans); color: var(--muted); }
@@ -134,11 +142,27 @@ h2 { font-size: 1.35rem; margin-top: 2.5rem; }
 .chapter-toc ol, .chapter-toc ul { list-style: none; padding-left: 0; }
 .chapter-toc ul { padding-left: 1rem; }
 .chapter-toc li { margin: 0.22rem 0; }
+.chapter-toc .ctoc-section, .chapter-toc .ctoc-unit { display: grid; grid-template-columns: 1.3rem 1fr; align-items: baseline; }
+.chapter-toc .ctoc-section > ul { grid-column: 1 / -1; }
+.chapter-toc .ctoc-section > a { font-weight: 600; }
+.chapter-toc .toc-check { align-self: center; }
+.chapter-toc .sub { margin: 0.3rem 0 0.5rem; }
 .chapter-toc a { color: var(--fg); text-decoration: none; }
 .chapter-toc a:hover { text-decoration: underline; text-underline-offset: 2px; }
 .chapter-toc summary { cursor: pointer; font-weight: 600; color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.07em; }
 .chapter-toc ul { margin: 0.2rem 0 0.4rem; }
-.chapter-section > h2 { margin-top: 3rem; }
+.chapter-section > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 0.6rem; margin-top: 3rem; border-bottom: 1px solid var(--hair); }
+.chapter-section > summary::-webkit-details-marker { display: none; }
+.chapter-section > summary h2 { margin: 0 0 0.3rem; flex: 1; }
+/* A disclosure arrow drawn in text so it inherits colour and needs no asset. */
+.chapter-section > summary::before {
+  content: '\25be'; color: var(--muted); font: 0.8rem var(--sans); line-height: 1;
+  transition: transform .15s ease; transform-origin: center;
+}
+.chapter-section:not([open]) > summary::before { transform: rotate(-90deg); }
+.chapter-section:not([open]) > summary { opacity: 0.75; }
+.chapter-section > summary:hover { opacity: 1; }
+.chapter-section > summary:hover h2 { color: var(--link); }
 
 /* Units */
 .unit { margin: 3rem 0 3.25rem; scroll-margin-top: 1rem; }
@@ -184,18 +208,6 @@ th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var
 .panel { background: var(--panel); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; font-family: var(--sans); font-size: 0.95rem; }
 .panel label { display: block; margin: 0.25rem 0; }
 .panel input[type='text'] { width: 100%; font: inherit; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg); color: var(--fg); }
-
-/* "To be added" */
-.tba-part { margin: 2.5rem 0; }
-.tba-part h2 { display: flex; align-items: baseline; gap: 0.6rem; border-bottom: 1px solid var(--hair); padding-bottom: 0.3rem; }
-/* A grid rather than CSS columns: short lists then fill one row instead of leaving an empty
-   second column, and a trailing badge stays on its item. */
-.tba-units { list-style: none; padding: 0; margin: 0.3rem 0 1.2rem;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: 0.1rem 2rem;
-  font: 0.92rem/1.7 var(--sans); color: var(--muted); }
-.tba-units li { padding-left: 0.9rem; position: relative; }
-.tba-units li::before { content: '·'; position: absolute; left: 0; color: var(--rule); }
-.tba-units .kind { margin-left: 0.4rem; }
 
 /* In-progress panel: local builds only */
 .inflight { border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1.5rem 0; }
