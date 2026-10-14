@@ -2481,21 +2481,21 @@
     "hold": false
   },
   "funcan.riesz-representation": {
-    "hash": "c268e8df94d2e6318c449197b2ba51025147a1afa0cf16fe13c2c3a546eeb4be",
+    "hash": "39c9349385fd8eb801b6ee902b72cea26e0a69ba13ff579fbbfb7816786f6764",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:25:08.365Z"
+      "at": "2026-10-14T20:12:28.531Z"
     },
     "verifiers": {
       "A": {
         "verdict": "pass",
-        "at": "2026-10-14T07:30:21.505Z",
-        "report": "verification/reports/funcan.riesz-representation/c268e8df94d2-A.md"
+        "at": "2026-10-14T20:16:29.909Z",
+        "report": "verification/reports/funcan.riesz-representation/39c9349385fd-A.md"
       },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-14T07:34:55.230Z",
-        "report": "verification/reports/funcan.riesz-representation/c268e8df94d2-B.md"
+        "at": "2026-10-14T20:16:53.207Z",
+        "report": "verification/reports/funcan.riesz-representation/39c9349385fd-B.md"
       }
     },
     "requires": [
@@ -7342,16 +7342,21 @@
     "hold": false
   },
   "stats.sampling-distributions": {
-    "hash": "30a2ef52fd13269597ddec07112879383e48882f7fcd31d0707b000d9a456dcb",
+    "hash": "afbe76fba235bcc0c0253e3c48b26e9cde7cf6ba505b93a4f76c0058723b7099",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:24:33.593Z"
+      "at": "2026-10-14T20:12:28.531Z"
     },
     "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T20:16:21.784Z",
+        "report": "verification/reports/stats.sampling-distributions/afbe76fba235-A.md"
+      },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-14T07:59:40.481Z",
-        "report": "verification/reports/stats.sampling-distributions/30a2ef52fd13-B.md"
+        "at": "2026-10-14T20:16:45.467Z",
+        "report": "verification/reports/stats.sampling-distributions/afbe76fba235-B.md"
       }
     },
     "requires": [

@@ -8,15 +8,15 @@ prereqs: [prob.multivariate-normal, prob.expectation-variance, prob.joint-distri
 provenance: adapted
 sources:
   - work: grimmett-stirzaker-2020
-    loc: "§4.10 Distributions arising from the normal distribution, pp. 135-137: the sample mean $\\overline X$ and the sample variance $S^2 = (n-1)^{-1}\\sum(X_i-\\overline X)^2$ with the footnote recording the rival convention, Theorem (4.10.1) (for independent $N(\\mu,\\sigma^2)$ variables $\\overline X$ and $S^2$ are independent, $\\overline X$ is $N(\\mu,\\sigma^2/n)$ and $(n-1)S^2/\\sigma^2$ is $\\chi^2(n-1)$) with its orthogonal-rotation proof (2)-(4), the variables $U$ and $V$ free of $\\sigma$, the definition of $T = V/\\sqrt{U/(n-1)}$ and the derivation of the $t(r)$ density by the change of variables $s=u$, $t=v\\sqrt{r/u}$, the definition of $F = (U/r)/(V/s)$ with the properties $F^{-1}\\sim F(s,r)$ and $T^2 \\sim F(1,r)$, and the $F(r,s)$ density; §4.4, Example (4.4.6), p. 108: the gamma density $\\Gamma(\\lambda,t)$ and the chi-squared distribution $\\chi^2(d)$ as the case $\\lambda=\\tfrac12$, $t=\\tfrac12 d$; Example (4.4.8), p. 108: the beta function; Exercise (4.10.1), p. 137: additivity of chi-squared; Exercise (4.10.2), p. 137: the mean of $t(r)$ and of $F(r,s)$; Exercise (4.10.3), p. 137: $t(1)$ is the Cauchy distribution"
-    pages: "108, 135-138"
+    loc: "§4.10 Distributions arising from the normal distribution, pp. 135-137: the sample mean $\\overline X$ and the sample variance $S^2 = (n-1)^{-1}\\sum(X_i-\\overline X)^2$ with the footnote recording the rival convention, Theorem (4.10.1) (for independent $N(\\mu,\\sigma^2)$ variables $\\overline X$ and $S^2$ are independent, $\\overline X$ is $N(\\mu,\\sigma^2/n)$ and $(n-1)S^2/\\sigma^2$ is $\\chi^2(n-1)$) with its orthogonal-rotation proof (2)-(4), the variables $U$ and $V$ free of $\\sigma$, the definition of $T = V/\\sqrt{U/(n-1)}$ and the derivation of the $t(r)$ density by the change of variables $s=u$, $t=v\\sqrt{r/u}$, the definition of $F = (U/r)/(V/s)$ with the properties $F^{-1}\\sim F(s,r)$ and $T^2 \\sim F(1,r)$, and the $F(r,s)$ density; §4.4, Example (4.4.6), p. 108: the gamma density $\\Gamma(\\lambda,t)$ and the chi-squared distribution $\\chi^2(d)$ as the case $\\lambda=\\tfrac12$, $t=\\tfrac12 d$; Example (4.4.8), p. 108: the beta function; §4.7, Example (4.7.1), p. 122: the square of an $N(0,1)$ variable is $\\Gamma(\\tfrac12,\\tfrac12)$, that is $\\chi^2(1)$; Exercise (4.10.1), p. 137: additivity of chi-squared; Exercise (4.10.2), p. 137: the mean of $t(r)$ and of $F(r,s)$; Exercise (4.10.3), p. 137: $t(1)$ is the Cauchy distribution"
+    pages: "108, 122, 135-138"
     role: the whole mathematical core of this unit - the definitions of $\\chi^2$, $t$ and $F$, the joint theorem on $\\overline X$ and $S^2$, the rotation proof, and the two density calculations; also the $(n-1)$ convention for the sample variance followed here
   - work: rhb-2006
     loc: "§31.2.2, eqs. (31.6)-(31.8), pp. 1224-1225: the sample variance defined with $1/N$ and the computing form $s^2 = \\overline{x^2} - \\bar x^2$; §31.3, pp. 1229-1230: the population $P(x|a)$, the estimator $\\hat a(x)$ as a function of the sample, the sampling distribution defined by $P(\\hat a|a)\\,d\\hat a = P(x|a)\\,d^N x$, and the worked sampling distribution of $\\bar x$ for a Gaussian population; §31.3.6, eqs. (31.34)-(31.35), pp. 1239-1240: the geometric derivation of the joint sampling distribution of $\\bar x$ and $s$ by intersecting a hyperplane with a hypersphere, giving $dV = As^{N-2}\\,ds\\,d\\bar x$ and the factorisation $P(\\bar x, s|\\mu,\\sigma) = P(\\bar x|\\mu,\\sigma)P(s|\\sigma)$ with the normalising constants $C_1$ and $C_2$; §31.4.1, eq. (31.40), p. 1245: $E[\\bar x] = \\mu$, $V[\\bar x] = \\sigma^2/N$ for any parent population of finite variance; §30.9.4, eqs. (30.122)-(30.123), p. 1193: $\\chi_n^2 = \\sum (X_i-\\mu_i)^2/\\sigma_i^2$ as a $\\gamma(\\tfrac12,\\tfrac12 n)$ variate with mean $n$ and variance $2n$, and the reduction of the order by one for each linear constraint; §31.7.5, eqs. (31.113), (31.115), (31.118), pp. 1285-1286: Student's statistic $t = (\\bar x - \\mu_0)/(s/\\sqrt{N-1})$, its equivalent form $(\\bar x-\\mu_0)/(\\hat\\sigma/\\sqrt N)$, and the $t$ density with $N-1$ degrees of freedom; §31.7.6, eqs. (31.121)-(31.126), pp. 1292-1294: $u = Ns^2/\\sigma_0^2 \\sim \\chi^2_{N-1}$, the variance ratio $F$, and the $F$ density written through the beta function"
     pages: "1193, 1224-1225, 1229-1230, 1239-1240, 1245, 1285-1286, 1292-1294"
     role: the physicists' vocabulary (population, estimator, sampling distribution) and the $1/N$ convention for the sample variance, recorded here because it differs from the one we follow; the alternative geometric derivation of the joint law of $\\bar x$ and $s$; the chi-squared distribution with its moments and the constraint-counting rule; the physicists' form of the $t$ statistic and the variance-ratio form of $F$
   - work: arfken-2013
-    loc: "§23.7, eqs. (23.93)-(23.95), p. 1168: the second-order argument that $\\overline{e^2} = s^2(1-1/n)$ and the resulting formula $s = [\\sum_j (x_j-\\bar x)^2/(n-1)]^{1/2}$, named there Bessel's correction, together with the remark that the formula is undefined at $n=1$"
+    loc: "§23.7, eqs. (23.93)-(23.95), p. 1168: the second-order argument that $\\overline{e^2} = s^2(1-1/n)$ and the resulting formula $s = [\\sum_j (x_j-\\bar x)^2/(n-1)]^{1/2}$, whose $n-1$ is said there to allow for the probable error in $\\bar x$ and is named Bessel's correction, together with the remark that the formula is undefined at $n=1$"
     pages: "1168"
     role: the name and the elementary justification of the divisor $n-1$
 ---
@@ -57,7 +57,7 @@ s^{2} \;=\; \frac{1}{n}\sum_{i=1}^{n}\bigl(X_i - \overline X\bigr)^{2}
 \qquad\text{(Riley, Hobson and Bence)} .
 $$
 
-**This unit uses $S^{2}$, with the divisor $n-1$.** Grimmett and Stirzaker choose it because it makes $\mathbb{E}(S^{2}) = \sigma^{2}$ exactly, and they record the rival convention in a footnote; Arfken, Weber and Harris reach the same divisor from the observation that the deviations $e_j = x_j - \bar x$ satisfy $\overline{e^{2}} = \sigma^{2}(1 - 1/n)$ to first order, because one degree of freedom has been spent estimating the mean, and they call the replacement of $n$ by $n-1$ **Bessel's correction**. Note that $S^{2}$ is undefined at $n = 1$, as it should be: one reading says nothing about spread. Both multiply out to the same sum of squared deviations, so the conversion between them is
+**This unit uses $S^{2}$, with the divisor $n-1$.** Grimmett and Stirzaker leave the reasons for this choice to statistics texts, note that with it $\mathbb{E}(S^{2}) = \sigma^{2}$ exactly, and record the rival convention in a footnote. Arfken, Weber and Harris reach the same divisor by a first-order argument: estimating the variance of $\bar x$ by $S^{2}/n$, the deviations $e_j = x_j - \bar x$ satisfy $\overline{e^{2}} = S^{2}(1 - 1/n)$ (their sample standard deviation $s$ is our $S$). The $n-1$ that results, they say, allows for the probable error in $\bar x$, and they call it **Bessel's correction**. In the language of the proof below, one degree of freedom has been spent on estimating the mean. Note that $S^{2}$ is undefined at $n = 1$, as it should be: one reading says nothing about spread. Both multiply out to the same sum of squared deviations, so the conversion between them is
 
 $$
 (n-1)\,S^{2} \;=\; n\,s^{2} \;=\; \sum_{i=1}^{n}\bigl(X_i-\overline X\bigr)^{2} ,
@@ -75,7 +75,7 @@ $$
 Everything else below needs normality.
 :::
 
-:::definition[The chi-squared, $t$ and $F$ distributions]{provenance=adapted src="grimmett-stirzaker-2020:§4.4, Examples (4.4.6) and (4.4.8), p. 108, and §4.10, the definitions of $t(r)$ and $F(r,s)$ with their densities, pp. 136-137; rhb-2006:§30.9.4, eqs. (30.122)-(30.123) and the moments, p. 1193"}
+:::definition[The chi-squared, $t$ and $F$ distributions]{provenance=adapted src="grimmett-stirzaker-2020:§4.4, Examples (4.4.6) and (4.4.8), p. 108, §4.7, Example (4.7.1), p. 122, and §4.10, the definitions of $t(r)$ and $F(r,s)$ with their densities, pp. 136-137; rhb-2006:§30.9.4, eqs. (30.122)-(30.123) and the moments, p. 1193"}
 Let $d, r, s$ be positive integers.
 
 **Chi-squared.** $X$ has the **chi-squared distribution with $d$ degrees of freedom**, written $\chi^{2}(d)$, if it is a gamma variate with parameters $\lambda = \tfrac12$ and $t = \tfrac12 d$, that is if it has density
@@ -85,7 +85,7 @@ f(x) \;=\; \frac{1}{2^{d/2}\,\Gamma(d/2)}\, x^{d/2 - 1} e^{-x/2} ,
 \qquad x > 0 ,
 $$
 
-with $\Gamma$ the gamma function of :ref[]{to=spec.gamma-function}. Its mean is $d$ and its variance $2d$. Equivalently, and this is the form used throughout statistics, $\chi^{2}(d)$ is the law of $Z_1^{2} + \cdots + Z_d^{2}$ for independent standard normal $Z_i$: the gamma moment generating function is multiplicative in the shape parameter, so a sum of independent $\chi^{2}(d_1)$ and $\chi^{2}(d_2)$ variates is $\chi^{2}(d_1+d_2)$, and one standard normal square is $\chi^{2}(1)$. Riley, Hobson and Bence write the same object as $\chi_n^{2} = \sum_i (X_i - \mu_i)^{2}/\sigma_i^{2}$ for independent $X_i \sim N(\mu_i, \sigma_i^{2})$, and state that if the $X_i$ are subject to $m$ independent linear constraints then the order drops to $n - m$. The theorem below is the leading instance of that rule.
+with $\Gamma$ the gamma function of :ref[]{to=spec.gamma-function}. Its mean is $d$ and its variance $2d$. Equivalently, and this is the form used throughout statistics, $\chi^{2}(d)$ is the law of $Z_1^{2} + \cdots + Z_d^{2}$ for independent standard normal $Z_i$: the gamma moment generating function is multiplicative in the shape parameter, so a sum of independent $\chi^{2}(d_1)$ and $\chi^{2}(d_2)$ variates is $\chi^{2}(d_1+d_2)$, and one standard normal square is $\chi^{2}(1)$: for $y > 0$, $\Pr(Z^{2} \le y) = \Pr(-\sqrt y \le Z \le \sqrt y)$, whose derivative is $(2\pi y)^{-1/2}e^{-y/2}$, the density above with $d = 1$ (Grimmett and Stirzaker, Example (4.7.1), p. 122). Riley, Hobson and Bence write the same object as $\chi_n^{2} = \sum_i (X_i - \mu_i)^{2}/\sigma_i^{2}$ for independent $X_i \sim N(\mu_i, \sigma_i^{2})$, and state that if the $X_i$ are subject to $m$ independent linear constraints then the order drops to $n - m$. The theorem below is the leading instance of that rule.
 
 **Student's $t$.** If $V \sim N(0,1)$ and $U \sim \chi^{2}(r)$ are **independent**, then
 
@@ -209,15 +209,15 @@ f(u,v) \;=\; \frac{(\tfrac12)^{r/2}}{\Gamma(\tfrac12 r)}\,u^{\frac12 r - 1}e^{-u
 \qquad u > 0 .
 $$
 
-Change variables to $(s,t)$ with $s = u$ and $t = v\sqrt{r/u}$, so $v = t\sqrt{s/r}$ and, at fixed $s$, $dv = \sqrt{s/r}\,dt$. The Jacobian is therefore $\sqrt{s/r}$ and
+Change variables to $(w,t)$ with $w = u$ and $t = v\sqrt{r/u}$, so $v = t\sqrt{w/r}$ and, at fixed $w$, $dv = \sqrt{w/r}\,dt$. The Jacobian is therefore $\sqrt{w/r}$ and
 
 $$
-f_{U,T}(s,t) \;=\; \sqrt{s/r}\; f\bigl(s,\, t\sqrt{s/r}\bigr)
+f_{U,T}(w,t) \;=\; \sqrt{w/r}\; f\bigl(w,\, t\sqrt{w/r}\bigr)
 \;=\; \frac{(\tfrac12)^{r/2}}{\Gamma(\tfrac12 r)\sqrt{2\pi r}}\;
-s^{\frac12(r-1)}\exp\Bigl[-\frac{s}{2}\Bigl(1+\frac{t^{2}}{r}\Bigr)\Bigr] .
+w^{\frac12(r-1)}\exp\Bigl[-\frac{w}{2}\Bigl(1+\frac{t^{2}}{r}\Bigr)\Bigr] .
 $$
 
-Integrate out $s$ over $(0,\infty)$. Substituting $\xi = \tfrac{s}{2}(1+t^{2}/r)$ turns the integral into $\Gamma\bigl(\tfrac12(r+1)\bigr)$ times $\bigl[\tfrac12(1+t^{2}/r)\bigr]^{-\frac12(r+1)}$, by the definition of the gamma function. Collecting the powers of $\tfrac12$, which cancel, leaves
+Integrate out $w$ over $(0,\infty)$. Substituting $\xi = \tfrac{w}{2}(1+t^{2}/r)$ turns the integral into $\Gamma\bigl(\tfrac12(r+1)\bigr)$ times $\bigl[\tfrac12(1+t^{2}/r)\bigr]^{-\frac12(r+1)}$, by the definition of the gamma function. The powers of $\tfrac12$ do not quite cancel: $(\tfrac12)^{r/2}\,(\tfrac12)^{-\frac12(r+1)} = \sqrt2$, and this factor turns $\sqrt{2\pi r}$ into $\sqrt{\pi r}$, leaving
 
 $$
 f_T(t) \;=\; \frac{\Gamma\bigl(\tfrac12(r+1)\bigr)}{\sqrt{\pi r}\,\Gamma\bigl(\tfrac12 r\bigr)}\Bigl(1+\frac{t^{2}}{r}\Bigr)^{-\frac12(r+1)} ,
@@ -237,9 +237,9 @@ Applying this with $U = (m-1)S_Y^{2}/\sigma^{2}$ and $V = (n-1)S^{2}/\sigma^{2}$
 :::
 
 :::remark[Where the hypotheses are used]{provenance=original}
-**Normality.** Used once, in Step 2, and it is what the whole theorem rests on. Rotation invariance of the joint density is equivalent to the coordinates being independent and normal with a common variance; for any other parent law, $\overline X$ and $S^{2}$ are in general *dependent*. A two-point example makes this concrete: let $n=2$ and let each $X_i$ be $\pm 1$ with probability $\tfrac12$. Then $\overline X \in \{-1,0,1\}$ and $S^{2} = (X_1-X_2)^{2}/2 \in \{0,2\}$, and $S^{2} = 0$ holds exactly when $\overline X = \pm 1$. Knowing one determines the other, so they are as far from independent as possible, although $\mathbb{E}(S^{2}) = \sigma^{2} = 1$ still holds.
+**Normality.** Used once, in Step 2, and it is what the whole theorem rests on. Rotation invariance alone does not give independent coordinates (the uniform law on a disc is rotation-invariant, yet its two coordinates are dependent); the fact Step 2 rests on is narrower. A vector of independent standard normals has a rotation-invariant density, and among laws on $\mathbb{R}^{n}$ with independent, identically distributed coordinates and a density, only a centred normal has one. For any other parent law, $\overline X$ and $S^{2}$ are in general *dependent*. A two-point example makes this concrete: let $n=2$ and let each $X_i$ be $\pm 1$ with probability $\tfrac12$. Then $\overline X \in \{-1,0,1\}$ and $S^{2} = (X_1-X_2)^{2}/2 \in \{0,2\}$, and $S^{2} = 0$ holds exactly when $\overline X = \pm 1$. Knowing one determines the other, so they are as far from independent as possible, although $\mathbb{E}(S^{2}) = \sigma^{2} = 1$ still holds.
 
-**Independence of the $X_i$.** Used in Step 1 to write the joint density as a product. Without it there is no rotation-invariant density to exploit. Correlated normal data can be brought back into the scheme by whitening - multiply by $V^{-1/2}$, as in :ref[]{to=prob.multivariate-normal} - but then the statistic being computed is not the ordinary $S^{2}$.
+**Independence of the $X_i$.** Used in Step 1 to write the joint density as a product. Without it there is no rotation-invariant density to exploit. Correlated normal data can be brought back into the scheme by whitening - multiply by $\Sigma^{-1/2}$, with $\Sigma$ the covariance matrix, as in :ref[]{to=prob.multivariate-normal} - but then the statistic being computed is not the ordinary $S^{2}$.
 
 **Common variance $\sigma^{2}$ for both samples**, in the $F$ statement. If the two populations had variances $\sigma_1^{2} \ne \sigma_2^{2}$, the ratio $S_Y^{2}/S^{2}$ would be $(\sigma_2^{2}/\sigma_1^{2})$ times an $F(m-1,n-1)$ variable, so its distribution would involve the unknown ratio and could not be used without further assumption. This is precisely why the ratio is informative about that ratio.
 
@@ -257,12 +257,12 @@ Given a sample $x_1,\dots,x_n$ believed to come from a normal population:
 2. **If $\sigma$ is known**, use $\sqrt n\,(\bar x - \mu)/\sigma \sim N(0,1)$.
 3. **If $\sigma$ is unknown**, use $t = (\bar x - \mu)/(S/\sqrt n) \sim t(n-1)$. This is the only change: the standard normal is replaced by $t$ with $n-1$ degrees of freedom, whose tails are heavier, the price of not knowing $\sigma$.
 4. **For a statement about $\sigma^{2}$ itself**, use $U = (n-1)S^{2}/\sigma^{2} \sim \chi^{2}(n-1)$.
-5. **To compare the spreads of two independent normal samples**, use $F = S_2^{2}/S_1^{2} \sim F(n_2-1,\,n_1-1)$ under the hypothesis of equal variances. Since $F^{-1} \sim F(s,r)$, it is conventional to put the larger sample variance on top and make a one-tailed statement.
+5. **To compare the spreads of two independent normal samples**, of sizes $n_1$ and $n_2$, use $F = S_2^{2}/S_1^{2} \sim F(n_2-1,\,n_1-1)$ under the hypothesis of equal variances. Since $F^{-1} \sim F(n_1-1,\,n_2-1)$, the ratio may be taken either way up, but the orientation must be fixed before the data are seen. For a one-sided question ("is sample 2 the noisier?") read the single tail on that side. For a two-sided question ("do the spreads differ?") the tail probability is twice the smaller of $\Pr(F > f)$ and $\Pr(F < f)$ at the observed value $f$. Putting whichever sample variance happens to be larger on top and then reading one upper tail undoubled roughly halves this figure, because the orientation has been chosen from the data.
 6. Convert the resulting tail probability into an interval or a test with :ref[]{to=stats.confidence-intervals} or :ref[]{to=stats.hypothesis-testing}; this unit supplies the distributions, not the decisions.
 :::
 
 :::example[A calibration run: mean, variance and a variance ratio]{provenance=original}
-A platinum resistance thermometer is held in a stirred ice-water-free reference bath and read eight times. The readings, in degrees Celsius, are
+A platinum resistance thermometer is held in a stirred water reference bath and read eight times. The readings, in degrees Celsius, are
 
 $$
 20.12,\quad 19.87,\quad 20.31,\quad 20.05,\quad 19.76,\quad 20.44,\quad 19.95,\quad 20.18 .
@@ -314,15 +314,15 @@ $$
 20.31,\quad 19.62,\quad 20.55,\quad 19.88,\quad 20.44,\quad 19.70 ,
 $$
 
-with $\bar y = 120.50/6 = 20.0833$ and $\sum_j (y_j-\bar y)^{2} = 0.79933$, hence $S_Y^{2} = 0.79933/5 = 0.159867$. Putting the larger variance on top,
+with $\bar y = 120.50/6 = 20.0833$ and $\sum_j (y_j-\bar y)^{2} = 0.79933$, hence $S_Y^{2} = 0.79933/5 = 0.159867$. The question is two-sided - did the spread change between the days? - and we fix the orientation as day 2 over day 1:
 
 $$
 F = \frac{S_Y^{2}}{S^{2}} = \frac{0.159867}{0.051171} = 3.1241 ,
 $$
 
-a draw from $F(5,7)$ if the two days share one $\sigma$. The upper tail is $\Pr\bigl(F(5,7) > 3.1241\bigr) = 0.0848$, and the $95\%$ point of $F(5,7)$ is $3.9715$. The second day is noisier, but not by more than the ratio of two sample variances of these sizes routinely produces.
+a draw from $F(5,7)$ if the two days share one $\sigma$. The upper tail is $\Pr\bigl(F(5,7) > 3.1241\bigr) = 0.0848$ and the lower tail is $0.9152$, so by step 5 the two-sided tail probability is $2 \times 0.0848 = 0.1696$; for a two-sided test at the $5\%$ level the ratio would have to exceed the $97.5\%$ point of $F(5,7)$, which is $5.2852$. The second day is noisier, but not by more than the ratio of two sample variances of these sizes routinely produces. The single tail $0.0848$ would be the right figure only for the one-sided question "did re-seating make the probe noisier?", posed before the second day's readings were taken.
 
-Every number above was computed to the digits shown; the three tail probabilities are $0.3232$, $0.5715$ and $0.0848$.
+Every number above was computed to the digits shown; the three tail probabilities are $0.3232$, $0.5715$ and $0.1696$.
 :::
 
 :::application[Error bars, instrument qualification, and the analysis of variance]{provenance=original}
