@@ -174,7 +174,7 @@ $$
 \qquad\text{equivalently}\qquad
 \Lambda^{-1}=\eta\,\Lambda^{\mathsf{T}}\eta ,
 $$
-and sandwiching the second form, $\Lambda\cdot(\Lambda^{-1}=\eta\Lambda^{\mathsf{T}}\eta)\cdot\eta$, gives $\Lambda\eta\Lambda^{\mathsf{T}}=\eta$. Its $(0,0)$ entry is the second relation. These are :cite[Hassani's Eqs. (29.39)–(29.40)]{work=hassani-2013 loc="pp. 940–941"}. Both force $a_{00}^{2}\ge1$.
+and substituting that second form into the identity $\Lambda\,\Lambda^{-1}\eta=\eta$, with $\eta^{2}=I$ once more, gives $\Lambda\eta\Lambda^{\mathsf{T}}=\eta$. Its $(0,0)$ entry is the second relation. These are :cite[Hassani's Eqs. (29.39)–(29.40)]{work=hassani-2013 loc="pp. 940–941"}. Both force $a_{00}^{2}\ge1$.
 
 **Step 3: orthochronicity is multiplicative.** Let $\Lambda,\Lambda'$ be orthochronous, $a=\Lambda^{0}{}_{0}\ge1$ and $b=\Lambda'^{0}{}_{0}\ge1$. Put $u_i=\Lambda^{0}{}_{i}$ and $v_i=\Lambda'^{i}{}_{0}$, so that by step 2, $|\mathbf{u}|^{2}=a^{2}-1$ and $|\mathbf{v}|^{2}=b^{2}-1$. Then
 $$

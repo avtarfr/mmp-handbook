@@ -36,6 +36,9 @@ Let $\lambda > 0$. A **Poisson process with intensity** (or **rate**) $\lambda$ 
    1 - \lambda h + o(h) , & m = 0 ;
    \end{cases}
    $$
+   with the $o(h)$ terms **uniform in the base time $t$** — which is what
+   time-homogeneity is meant to encode, and what lets the proof below re-read the relation at a shifted
+   base point rather than only pointwise in $t$.
 3. whenever $s < t$, the count $N(t) - N(s)$ of arrivals falling in $(s,t]$ is independent of everything the process did on $[0,s]$, the instants of those earlier arrivals included.
 
 The three clauses are, in order: the process counts; it counts one at a time, at a rate that does not vary; and it has no memory. We call $N(t)$ the number of **arrivals** (or events, or counts) by time $t$. The **arrival times** and **interarrival times** are
@@ -217,14 +220,14 @@ the exponential factors cancelling because the $\Lambda(A_i)$ add up to $\Lambda
 
 *Step 3: a classical input.* What remains is to pass from the partition probabilities of step 1 to the law of the whole configuration, and generating a $\sigma$-field is by itself not enough for that: two probability measures can agree on a generating family and differ on the $\sigma$-field it generates. The standard repair is to work with a family closed under finite intersections.
 
-**Quoted classical input: Dynkin's $\pi$-$\lambda$ theorem.** Call a family $\mathcal{C}$ of events a **$\pi$-system** if $E, F \in \mathcal{C}$ implies $E \cap F \in \mathcal{C}$. Then (i) two probability measures that agree on a $\pi$-system agree on the $\sigma$-field it generates, and (ii) if $\mathcal{C}_1, \dots, \mathcal{C}_k$ are $\pi$-systems with $\mathbb{P}(E_1 \cap \cdots \cap E_k) = \prod_i \mathbb{P}(E_i)$ for every choice of $E_i \in \mathcal{C}_i$, then the $\sigma$-fields $\sigma(\mathcal{C}_1), \dots, \sigma(\mathcal{C}_k)$ are independent. This theorem is proved in no unit of this handbook and is not in the sources followed here; it is used, in both parts, as a quoted classical result, in the way the $\sigma$-field machinery of :ref[]{to=measure.sigma-algebras-measures} is used generally.
+**Quoted classical input: Dynkin's $\pi$-$\lambda$ theorem.** Call a family $\mathcal{C}$ of events a **$\pi$-system** if $E, F \in \mathcal{C}$ implies $E \cap F \in \mathcal{C}$. Then (i) two probability measures that agree on a $\pi$-system agree on the $\sigma$-field it generates, and (ii) if $\mathcal{C}_1, \dots, \mathcal{C}_k$ are $\pi$-systems, **each containing $\Omega$**, with $\mathbb{P}(E_1 \cap \cdots \cap E_k) = \prod_i \mathbb{P}(E_i)$ for every choice of $E_i \in \mathcal{C}_i$, then the $\sigma$-fields $\sigma(\mathcal{C}_1), \dots, \sigma(\mathcal{C}_k)$ are independent. The condition $\Omega \in \mathcal{C}_i$ is not decoration. Without it the single full-intersection identity does not give independence once $k \ge 3$: on $\Omega = \{1,\dots,8\}$ with the uniform measure, the one-element families $\mathcal{C}_1 = \{A\}$, $\mathcal{C}_2 = \{B\}$, $\mathcal{C}_3 = \{C\}$ with $A = \{1,2,3,4\}$, $B = \{1,2,3,5\}$, $C = \{1,5,6,7\}$ are $\pi$-systems satisfying $\mathbb{P}(A \cap B \cap C) = \tfrac18 = \mathbb{P}(A)\mathbb{P}(B)\mathbb{P}(C)$, yet $\mathbb{P}(A \cap B) = \tfrac38 \neq \tfrac14$, so the three $\sigma$-fields are not independent. With $\Omega$ available, the identity for any subcollection follows from the full one by padding the missing slots with $\Omega$, and that is what the proof of independence needs. This theorem is proved in no unit of this handbook and is not in the sources followed here; it is used, in both parts, as a quoted classical result, in the way the $\sigma$-field machinery of :ref[]{to=measure.sigma-algebras-measures} is used generally.
 
 *Step 4: a $\pi$-system of count events.* For a Borel set $A$ write
 $$
 \mathcal{C}(A) \;=\; \Bigl\{\, \{N(B_1) = m_1\} \cap \cdots \cap \{N(B_r) = m_r\} \;:\; r \ge 1,\ B_1,\dots,B_r \subseteq A \text{ Borel},\ m_j \ge 0 \,\Bigr\} .
 $$
 
-(a) *It is a $\pi$-system*, by construction: an intersection of two finite intersections of events $\{N(B) = m\}$ is again a finite intersection of such events, and so is again in $\mathcal{C}(A)$ — including when it is empty, as for $\{N(B)=0\}\cap\{N(B)=1\}$.
+(a) *It is a $\pi$-system*, by construction: an intersection of two finite intersections of events $\{N(B) = m\}$ is again a finite intersection of such events, and so is again in $\mathcal{C}(A)$ — including when it is empty, as for $\{N(B)=0\}\cap\{N(B)=1\}$. It also contains $\Omega$, as the case $r = 1$, $B_1 = \emptyset$, $m_1 = 0$, since $N(\emptyset) = 0$ identically; this is the hypothesis part (ii) above needs.
 
 Arbitrary Borel sets are used here, and not the cells of one partition, for a definite reason. The *cylinders* of step 1 — events $\{N(B_1)=n_1,\dots,N(B_r)=n_r\}$ in which $B_1,\dots,B_r$ are the cells of a single finite partition of $A$ — are the natural family to try, and it is tempting to argue that they are closed under intersection because two partitions have a common refinement. **That argument is wrong.** Take two partitions $\{B_1,B_2\}$ and $\{B_1',B_2'\}$ of $A$ in general position, so that all four refinement cells $B_j \cap B_k'$ carry positive mean measure. Then
 $$

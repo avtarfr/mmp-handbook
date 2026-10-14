@@ -201,7 +201,7 @@ so AB2 has order $2$ with the error constant $5/12$. $\square$
 :::
 
 :::remark[RK4, and why its order is asserted rather than derived here]{provenance=adapted src="rhb-2006:§27.6, Eq. (27.80), p. 1028; strogatz-1994:§2.8, pp. 33-34"}
-Matching the Taylor expansion through $h^{4}$ for a general $f$ imposes eight conditions on the coefficients of a four-stage Runge-Kutta method, and verifying them by hand is several pages of bookkeeping with no idea in it. Riley, Hobson and Bence print the scheme "without derivation" for the same reason, and Strogatz calls the four numbers cunningly chosen and leaves their choice to an exercise. We follow them in stating the order rather than deriving it, and verify it in two independent ways instead.
+Matching the Taylor expansion through $h^{4}$ imposes the eight order conditions through order $4$ on the coefficients of a four-stage Runge-Kutta method, and verifying them by hand is several pages of bookkeeping with no idea in it. Riley, Hobson and Bence print the scheme "without derivation" for the same reason, and Strogatz calls the four numbers cunningly chosen and leaves their choice to an exercise. We follow them in stating the order rather than deriving it, and verify it in two independent ways instead.
 
 *Symbolically.* Expanding $y_{n+1}$ and the exact solution in powers of $h$ with computer algebra, for the non-autonomous field
 $$
@@ -233,7 +233,7 @@ at $(x,y) = (\tfrac12, \tfrac13)$, the two series agree through $h^{4}$ and firs
 4. **Choose the method by the cost of $F$.** Count evaluations per step: $1$ for Euler and AB2, $2$ for Heun and midpoint, $4$ for RK4. When $F$ is expensive and the solution is smooth, the higher order wins easily, because reaching a tolerance $\eta$ needs $h \sim (\eta)^{1/p}$ and so $\sim \eta^{-1/p}$ steps.
 5. **Start a multistep method with a one-step method** of at least the same order. AB2 needs $y_1$ as well as $y_0$; take it from one RK4 step, whose $O(h^{5})$ error cannot pollute an $O(h^{2})$ computation. Riley, Hobson and Bence note the same need for the central-difference and Adams schemes and suggest a Taylor expansion; a Runge-Kutta step is the modern answer and needs no derivatives of $f$.
 6. **Measure the order, do not assume it.** Run at $h$, $h/2$, $h/4$ and tabulate the differences of the answers. Successive differences falling by $2^{p}$ confirm the order and simultaneously confirm that the solution is smooth enough for it.
-7. **Control the step by step doubling.** Take one step of size $h$ and two of size $h/2$ from the same point. For a method of order $p$ the difference of the two answers is about $(2^{p}-1)/2^{p}$ times the error of the finer one, which gives an error estimate for free; accept the step if it is below tolerance, and set the next step to $h\,(\eta/\text{estimate})^{1/(p+1)}$ with a safety factor of about $0.9$. Richardson extrapolation can also be used to improve the answer, at the price of losing the error estimate.
+7. **Control the step by step doubling.** Take one step of size $h$ and two of size $h/2$ from the same point. For a method of order $p$ the difference $\Delta$ of the two answers is about $2^{p}-1$ times the error of the finer one — equivalently $(2^{p}-1)/2^{p}$ times the error of the coarser one — so the finer answer carries an error of about $\Delta/(2^{p}-1)$, which is $\Delta/15$ for RK4; that is an error estimate for free; accept the step if it is below tolerance, and set the next step to $h\,(\eta/\text{estimate})^{1/(p+1)}$ with a safety factor of about $0.9$. Richardson extrapolation can also be used to improve the answer, at the price of losing the error estimate.
 8. **Predict and correct, if the method is implicit.** Riley, Hobson and Bence's pattern — predict $y_{n+1}$ with an explicit formula, evaluate $f$ there, then recompute $y_{n+1}$ with the better formula — is the cheap way to use an implicit formula without solving an equation. Iterating the correction converges only when $h$ times the Lipschitz constant is small, which is precisely what fails for the stiff problems of :ref[]{to=num.stiffness}; there the corrector must be solved properly, by Newton's method (:ref[]{to=num.root-finding}).
 9. **Check a conserved quantity** if the problem has one. A drift in the energy of a mechanical system is the clearest diagnostic there is, and for long integrations it is a reason to change the class of method entirely (:ref[]{to=num.symplectic-integrators}).
 :::
@@ -259,13 +259,13 @@ $$
 $$
 in the ratio $1 : 6.49\times10^{-2} : 5.91\times10^{-5}$ — already the $h^{2}$, $h^{3}$, $h^{5}$ hierarchy of local errors at a single step size.
 
-**Global errors at $x = \tfrac12$.** Each column gives the error $y_N - y(\tfrac12)$ and, beneath, the factor by which it shrinks when $h$ is halved.
+**Global errors at $x = \tfrac12$.** Each column gives the error $y_N - y(\tfrac12)$ and, beneath, the factor by which it shrinks when $h$ is halved. AB2 was started with one RK4 step, as step 5 of the method recommends; the column depends on that choice, and a cruder start changes its leading digits.
 
 | $h$ | Euler | Heun | midpoint | AB2 | RK4 |
 |---|---|---|---|---|---|
 | $0.1$ | $-1.56455\times10^{-1}$ | $-1.43004\times10^{-2}$ | $-1.51474\times10^{-2}$ | $-3.18433\times10^{-2}$ | $-2.57489\times10^{-5}$ |
 | $0.05$ | $-8.88446\times10^{-2}$ | $-3.88394\times10^{-3}$ | $-4.24395\times10^{-3}$ | $-1.05151\times10^{-2}$ | $-1.70535\times10^{-6}$ |
-| $0.025$ | $-4.77691\times10^{-2}$ | $-1.00876\times10^{-3}$ | $-1.12144\times10^{-3}$ | $-2.97218\times10^{-3}$ | $-1.09365\times10^{-7}$ |
+| $0.025$ | $-4.77691\times10^{-2}$ | $-1.00876\times10^{-3}$ | $-1.12144\times10^{-3}$ | $-2.97218\times10^{-3}$ | $-1.09364\times10^{-7}$ |
 | $0.0125$ | $-2.48381\times10^{-2}$ | $-2.56773\times10^{-4}$ | $-2.88046\times10^{-4}$ | $-7.85310\times10^{-4}$ | $-6.91714\times10^{-9}$ |
 | $0.00625$ | $-1.26747\times10^{-2}$ | $-6.47541\times10^{-5}$ | $-7.29769\times10^{-5}$ | $-2.01464\times10^{-4}$ | $-4.34786\times10^{-10}$ |
 | $0.003125$ | $-6.40362\times10^{-3}$ | $-1.62578\times10^{-5}$ | $-1.83651\times10^{-5}$ | $-5.09951\times10^{-5}$ | $-2.72496\times10^{-11}$ |
@@ -283,7 +283,7 @@ The five columns converge to the factors $2$, $4$, $4$, $4$ and $16$, confirming
 
 So RK4 costs about $3660$ times fewer evaluations than Euler here and about $15$ times fewer than Heun, and both advantages grow without limit as the tolerance tightens: the evaluation count scales as $\eta^{-1}$ for Euler, $\eta^{-1/2}$ for Heun and $\eta^{-1/4}$ for RK4.
 
-**The convergence bound, checked.** Take the region $R = [0,\tfrac12]\times[0,2]$, which contains both the exact solution and every Euler iterate computed above (the largest is $1.7645$). On $R$, $|\partial f/\partial y| = |2y\cos x| \le 4$, so $L = 4$ serves for Euler, whose $\Phi$ is $f$. The local error constant is $C = \tfrac12\max|y''|$, and $y'' = 2y^{3}\cos^{2}x - y^{2}\sin x$ increases on $[0,\tfrac12]$ from $2$ to $9.149247$, so $C = 4.574624$. Part 1 then predicts
+**The convergence bound, checked.** Take the region $R = [0,\tfrac12]\times[0,2]$, which contains both the exact solution and every Euler iterate computed above (the largest over all six runs is $1.9146$, at the finest step; at $h=0.1$ it is $1.7645$). On $R$, $|\partial f/\partial y| = |2y\cos x| \le 4$, so $L = 4$ serves for Euler, whose $\Phi$ is $f$. The local error constant is $C = \tfrac12\max|y''|$, and $y'' = 2y^{3}\cos^{2}x - y^{2}\sin x$ increases on $[0,\tfrac12]$ from $2$ to $9.149247$, so $C = 4.574624$. Part 1 then predicts
 $$
 |y(\tfrac12) - y_N| \;\le\; \frac{C}{L}\bigl(e^{L/2} - 1\bigr)h \;=\; \frac{4.574624}{4}\bigl(e^{2}-1\bigr)h \;=\; 7.30688\,h .
 $$

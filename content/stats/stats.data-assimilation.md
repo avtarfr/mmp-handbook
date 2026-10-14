@@ -4,7 +4,7 @@ title: Optimal interpolation and variational data assimilation
 kind: method
 level: advanced
 summary: Derives the best linear unbiased analysis $x_a = x_b + K(y-Hx_b)$ with $K = BH^{\mathsf T}(HBH^{\mathsf T}+R)^{-1}$ by completing the square in the gain, proves that it also minimises the 3D-Var cost function and that the two routes agree exactly when $B$ is invertible, and interpolates a temperature analysis from two stations, obtaining weights $0.740445$ and $-0.135366$, an analysis of $1.9490\,\mathrm{K}$ and an analysis error variance $0.425475\,\mathrm{K^2}$ against a background variance of $1$.
-prereqs: [stats.kalman-filter, stats.least-squares-regression, prob.multivariate-normal, stats.bayesian-inference, linalg.quadratic-forms, linalg.linear-systems, stats.error-propagation]
+prereqs: [stats.kalman-filter, stats.least-squares-regression, prob.multivariate-normal, prob.stationary-processes, stats.bayesian-inference, linalg.quadratic-forms, linalg.linear-systems, stats.error-propagation]
 provenance: adapted
 sources:
   - work: rhb-2006
@@ -22,7 +22,7 @@ A weather forecast starts from a state of the atmosphere: wind, temperature and 
 
 Two formulations are in use, and they look quite different. **Optimal interpolation** writes the correction as a matrix times the observed discrepancies and chooses the matrix to minimise the error variance. **Three-dimensional variational assimilation** (3D-Var) writes down a cost function measuring disagreement with the guess and with the observations, and minimises it. This unit derives the first, derives the second, and shows that under the stated hypotheses they produce the same analysis and the same error covariance. The difference is computational, not statistical: one inverts a matrix of the size of the observation vector, the other descends a function of the size of the state vector, and in operational practice the sizes differ by several orders of magnitude.
 
-The update step of :ref[]{to=stats.kalman-filter} is the same calculation. There the prior covariance was the forecast covariance $P_k^{f}$ produced by the filter's own recursion; here it is a prescribed **background** covariance $B$, because a state of dimension $10^{8}$ makes the recursion impossible to run.
+The update step of :ref[]{to=stats.kalman-filter} is the same calculation. There the prior covariance was the forecast covariance $P_k^{f}$ produced by the filter's own recursion; here it is a prescribed **background** covariance $B$, because a state of dimension $10^{8}$-$10^{9}$, depending on the model resolution, makes the recursion impossible to run.
 :::
 
 :::definition[Background, observations and the analysis]{provenance=original}
@@ -125,7 +125,7 @@ Three short arguments, one for each part.
 
 *Optimality.* $A(K)$ is a quadratic function of the matrix $K$ with positive-definite "second derivative" $S$. Completing the square in $K$ — exactly as one minimises $aK^2+bK+c$ — exhibits $A(K)$ as a constant matrix plus $(K-K_\ast)S(K-K_\ast)^{\mathsf T}$, and the second term is positive semi-definite and vanishes only at $K_\ast$. Because the comparison is between whole matrices, this gives optimality for every linear functional of the state at once, not merely for the trace.
 
-*Equivalence.* Setting the gradient of $J$ to zero gives $(B^{-1}+H^{\mathsf T}R^{-1}H)x = B^{-1}x_b + H^{\mathsf T}R^{-1}y$. One algebraic identity, verified by multiplying out, says that the matrix on the left is $A^{-1}$ and that $AH^{\mathsf T}R^{-1} = K_\ast$; with it the solution rearranges into $x_b + K_\ast d$ in two lines. The same identity shows why $J$ is Riley, Hobson and Bence's weighted $\chi^2$ for the design matrix that stacks the background on top of the observations.
+*Equivalence.* Setting the gradient of $J$ to zero gives $(B^{-1}+H^{\mathsf T}R^{-1}H)x = B^{-1}x_b + H^{\mathsf T}R^{-1}y$. One algebraic identity, verified by multiplying out, says that the matrix on the left is $A^{-1}$ and that $AH^{\mathsf T}R^{-1} = K_\ast$; with it the solution rearranges into $x_b + K_\ast d$ in two lines. The same identity shows why $2J$ is Riley, Hobson and Bence's weighted $\chi^2$ for the design matrix that stacks the background on top of the observations: the factor $\tfrac12$ is a convention of the variational literature, and it is the same factor that turns their $\tfrac12\,\partial^2\chi^2/\partial a_i\partial a_j$ into our $\nabla^2 J$.
 :::
 
 :::proof[Unbiasedness, optimality, the identity, and 3D-Var]{provenance=adapted src="rhb-2006:§31.8, Exercise 31.6, p. 1299; rhb-2006:§31.6.1, eqs. (31.92)-(31.99), pp. 1272-1274"}
@@ -186,7 +186,7 @@ $$
 = KS - BH^{\mathsf T} ,
 $$
 
-using $\mathbb{E}[e_b\varepsilon^{\mathsf T}]=0$ twice. This vanishes precisely when $K = BH^{\mathsf T}S^{-1} = K_\ast$. Geometrically this is the Projection theorem (7.9.14) of Grimmett and Stirzaker: the optimal estimate is the orthogonal projection of $x$ onto the space of linear functions of the data, so the residual is orthogonal to every such function, and $d$ spans the new information.
+using $\mathbb{E}[e_b\varepsilon^{\mathsf T}]=0$ twice. This vanishes precisely when $K = BH^{\mathsf T}S^{-1} = K_\ast$. Geometrically this is the Projection theorem (7.9.14) of Grimmett and Stirzaker, applied not to $x$ itself — which is a fixed vector, not a member of any $L^2$ space — but to the random part of the problem: the correction $Kd$ is the orthogonal projection of the background error $-e_b$ onto the span of the components of $d$, since $x_a - x = (x_b - x) + Kd = e_b + Kd$ is exactly minus the residual $(-e_b) - Kd$ of that projection. Vanishing of the display above is, up to sign, the orthogonality condition $\mathbb{E}\bigl[\bigl((-e_b) - Kd\bigr)d^{\mathsf T}\bigr] = 0$ of that theorem, and it says that the analysis error is uncorrelated with every linear function of the data: $d$ carries all the information the data hold about $e_b$.
 
 **(v) The information identity.** Assume $B$ invertible. First note
 
@@ -255,12 +255,24 @@ $$
 $$
 and $K_\ast^{C} = -\mathbb{E}[e_bd^{\mathsf T}]\operatorname{Cov}[d]^{-1}$ exactly as in the uncorrelated case; writing a plus in the denominator would not even give a covariance. A scalar check, $H = 1$, $B = 2$, $R = 0.5$, $C = 0.6$: the analysis variance is $A(K) = 2(1-K)^2 + \tfrac12 K^2 + 1.2\,K(1-K)$, minimised at $K = \tfrac{14}{13} = 1.076923$ with $A = \tfrac{32}{65} = 0.492308$, and the formula above returns $1.4/1.3 = \tfrac{14}{13}$ exactly. The plus-sign version would give $K = 2.6/3.7 = 0.702703$, where $A = 0.674361$ — worse by $37\%$.
 
-Using the uncorrelated $K_\ast$ anyway leaves the analysis unbiased, but its true error no longer matches the reported $A$. For positive correlation — $C$ positive definite, which is the radiosonde case, where the shared observation has pushed background and observation errors the same way — the true error *exceeds* the reported $A$ and the system is overconfident, which is worse than being wrong. For negative correlation the reported $A$ errs the other way and is merely pessimistic.
+Using the uncorrelated $K_\ast$ anyway leaves the analysis unbiased, but its true error no longer matches the reported $A$. The cross terms above give the discrepancy exactly:
+$$
+A_{\text{true}} - A \;=\; (I-K_\ast H)\,C\,K_\ast^{\mathsf T} + K_\ast C^{\mathsf T}(I-K_\ast H)^{\mathsf T} .
+$$
+A matrix of this form is in general **indefinite**, whatever the sign of $C$, so the reported covariance can err in either direction, and in different directions in different components. Take $n = p = 2$, $H = I$ and
+$$
+B = \begin{pmatrix}5&4\\4&5\end{pmatrix} , \qquad
+R = \begin{pmatrix}4&-3\\-3&5\end{pmatrix} , \qquad
+C = \begin{pmatrix}2&\tfrac12\\\tfrac12&\tfrac14\end{pmatrix} ,
+$$
+all three positive definite, and the joint error covariance $\left(\begin{smallmatrix}B&C\\C^{\mathsf T}&R\end{smallmatrix}\right)$ positive definite as well (its eigenvalues are $0.108328$, $1.938988$, $7.323769$, $9.628915$). Then $S = \left(\begin{smallmatrix}9&1\\1&10\end{smallmatrix}\right)$, the reported variances are $\operatorname{diag}A = (91/89,\,100/89) = (1.022472,\,1.123596)$ and the true ones are $(1.948933,\,0.660144)$: the first component is understated, the second overstated, although $C$ is positive definite. Replacing $C$ by $-C$ keeps the joint covariance positive definite — it is congruent to the original by $\operatorname{diag}(I,-I)$ — and simply exchanges the two directions of error.
+
+Only in the scalar case is there a clean rule, and only for $H > 0$. There $0 < K_\ast H < 1$, the discrepancy is $2(1-K_\ast H)K_\ast C$, and it carries the sign of $C$: positive correlation — the radiosonde case, where the shared observation has pushed background and observation errors the same way — makes the true error *exceed* the reported $A$, so that the system is overconfident, which is worse than being wrong, while negative correlation leaves the reported $A$ merely pessimistic. The check above, $H=1$, $B=2$, $R=\tfrac12$, $C=0.6$, is of this kind: the reported $A = (1-K_\ast)B = 0.4$ against a true $0.592$. Even here the sign of $H$ matters: $H = -1$, $B = 2$, $R = \tfrac12$, $C = 0.4$ gives $K_\ast = -0.8$, a reported $A = 0.4$ and a true $0.272$. Overconfidence is the danger to watch for, but which way the error goes has to be computed, not inferred from the sign of $C$.
 - **Unbiased errors.** Part (i) needs $\mathbb{E}[e_b] = 0$. A systematic model bias $\beta = \mathbb{E}[e_b] \ne 0$ propagates straight through: the analysis inherits the bias $(I-KH)\beta$, and no choice of gain removes it, because the derivation of (i) then yields $\mathbb{E}[x_a-x] = (I-KH)\beta$ for every admissible $K$. Bias must be estimated and removed separately; this is why operational systems carry a bias-correction stage ahead of the analysis.
-- **$R$ positive definite** is used only to invert $S$. $B$ may be singular — a background known exactly along some direction is allowed — and parts (i)-(iv) survive. Part (v) and the whole of 3D-Var need $B^{-1}$, so the variational form is strictly less general than optimal interpolation. This matters: ensemble-based background covariances have rank below $n$ and are singular, which is why they are used through the gain formula, or regularised before $B^{-1}$ is formed.
+- **$R$ positive definite** is used to invert $S$ in parts (iii)-(iv), and again as $R^{-1}$ itself from part (v) onwards, in the cost function and throughout (vi). $B$ may be singular — a background known exactly along some direction is allowed — and parts (i)-(iv) survive. Part (v) and the whole of 3D-Var need $B^{-1}$, so the variational form is strictly less general than optimal interpolation. This matters: ensemble-based background covariances have rank below $n$ and are singular, which is why they are used through the gain formula, or regularised before $B^{-1}$ is formed.
 - **Linearity of $H$.** With a non-linear observation operator $h$ the cost function $J(x) = \tfrac12(x-x_b)^{\mathsf T}B^{-1}(x-x_b)+\tfrac12(y-h(x))^{\mathsf T}R^{-1}(y-h(x))$ is still minimised numerically, but it need not be convex and the minimiser is no longer a linear function of $y$. Linearising $h$ about the background and iterating (incremental 3D-Var) recovers a sequence of problems of the kind treated here; it converges to a stationary point of $J$, not necessarily the global one.
 - **No normality is needed** for the BLUE statement, exactly as in the Gauss-Markov theorem of :ref[]{to=stats.least-squares-regression}: only the first two moments enter. Normality buys one extra thing, stated in the last line of the 3D-Var statement, namely that $x_a$ is the conditional mean and therefore the best estimate of *any* form, linear or not.
-- **Which costs less.** Optimal interpolation inverts $S$, of size $p\times p$; 3D-Var minimises over $\mathbb{R}^{n}$, usually by a conjugate-gradient method whose cost per iteration is one multiplication by $B$ and one by $H$. For a modern forecasting system $n \sim 10^{9}$ and $p\sim 10^{7}$, so neither matrix can be formed and both routes are run in a reduced space; the variational form is preferred because $B$ can be applied as a sequence of filters without ever being stored.
+- **Which costs less.** Optimal interpolation inverts $S$, of size $p\times p$; 3D-Var minimises over $\mathbb{R}^{n}$, usually by a conjugate-gradient method whose cost per iteration is one multiplication by $B$ and one by $H$. For a modern forecasting system $n \sim 10^{8}$-$10^{9}$ and $p \sim 10^{7}$, so neither matrix can be formed and both routes are run in a reduced space; the variational form is preferred because $B$ can be applied as a sequence of filters without ever being stored.
 :::
 
 :::method[Optimal interpolation at a point]{provenance=original}
@@ -316,7 +328,7 @@ $$
 **Step 3: the analysis.** The innovations are $d_1 = 2.30-1.00 = 1.30\,\mathrm{K}$ and $d_2 = 1.10-1.00 = 0.10\,\mathrm{K}$, so
 
 $$
-x_a(P) = 1.00 + (0.740445)(1.30) + (-0.135366)(0.10) = 1.00 + 0.9625785 - 0.0135366 = 1.9490419 = 1.949042\,\mathrm{K} .
+x_a(P) = 1.00 + (0.740445)(1.30) + (-0.135366)(0.10) = 1.00 + 0.9625785 - 0.0135366 = 1.949042\,\mathrm{K} .
 $$
 
 **Step 4: the error bar.** By step 6 of the method,

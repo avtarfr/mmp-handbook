@@ -823,28 +823,28 @@
     "hold": false
   },
   "dyn.global-bifurcations": {
-    "hash": "37c594e0fe7f33a3ba5a40b0d3efc966342bff42f00bd95878839f4a82d5b61f",
+    "hash": "ca2aecbc819e9f89be02708fb8765ecc40a889c5d42b511b8274ff398f25434a",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T08:03:03.870Z"
+      "at": "2026-10-14T11:07:18.561Z"
     },
     "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:17:04.755Z",
-        "report": "verification/reports/dyn.global-bifurcations/37c594e0fe7f-B.md"
-      },
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:26:22.730Z",
-        "report": "verification/reports/dyn.global-bifurcations/37c594e0fe7f-A.md"
+        "verdict": "pass",
+        "at": "2026-10-14T11:17:24.047Z",
+        "report": "verification/reports/dyn.global-bifurcations/ca2aecbc819e-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T11:23:38.267Z",
+        "report": "verification/reports/dyn.global-bifurcations/ca2aecbc819e-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "dyn.henon-map": {
@@ -872,12 +872,23 @@
       "pass": true,
       "at": "2026-10-14T08:28:21.644Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:48:58.139Z",
+        "report": "verification/reports/dyn.hopf-bifurcation/00ffd9bebfcc-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:50:00.370Z",
+        "report": "verification/reports/dyn.hopf-bifurcation/00ffd9bebfcc-A.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "dyn.index-theory": {
@@ -1120,28 +1131,28 @@
     "hold": false
   },
   "dyn.relaxation-averaging": {
-    "hash": "466b431d8f303a9a18d57c4a3e05dc7646b0647c4858d1431c1e4e69290ae9b1",
+    "hash": "61fb8cfdcf179967e0e17e4eceae6732bec488d90b7a6e17de455bec45270fba",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T08:03:03.870Z"
+      "at": "2026-10-14T08:48:47.741Z"
     },
     "verifiers": {
-      "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:15:42.454Z",
-        "report": "verification/reports/dyn.relaxation-averaging/466b431d8f30-B.md"
-      },
       "A": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:25:15.881Z",
-        "report": "verification/reports/dyn.relaxation-averaging/466b431d8f30-A.md"
+        "verdict": "pass",
+        "at": "2026-10-14T09:01:16.789Z",
+        "report": "verification/reports/dyn.relaxation-averaging/61fb8cfdcf17-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T09:23:07.891Z",
+        "report": "verification/reports/dyn.relaxation-averaging/61fb8cfdcf17-B.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "found.absolute-convergence": {
@@ -2400,12 +2411,23 @@
       "pass": true,
       "at": "2026-10-14T08:28:21.644Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:34:06.652Z",
+        "report": "verification/reports/funcan.orthonormal-bases/bf46448f35b3-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:39:23.531Z",
+        "report": "verification/reports/funcan.orthonormal-bases/bf46448f35b3-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "funcan.projection-theorem": {
@@ -2484,17 +2506,28 @@
     "hold": false
   },
   "funcan.spectral-theorem-general": {
-    "hash": "56ee7eccc9b0cfa498cc957e3475340560e78097f0bede9ced72818af7d6029c",
+    "hash": "b183360a9c3cce56d7c9775e7aaf4d9d815e404b036a91bf4927874210ac1073",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T08:28:21.644Z"
+      "at": "2026-10-14T10:46:34.979Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T10:54:47.248Z",
+        "report": "verification/reports/funcan.spectral-theorem-general/b183360a9c3c-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T10:51:30.109Z",
+        "report": "verification/reports/funcan.spectral-theorem-general/b183360a9c3c-A.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "funcan.spectrum": {
@@ -2672,12 +2705,23 @@
       "pass": true,
       "at": "2026-10-14T08:28:21.644Z"
     },
-    "verifiers": {},
+    "verifiers": {
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:42:48.123Z",
+        "report": "verification/reports/geom.differential-forms/2d488866e15a-A.md"
+      },
+      "B": {
+        "verdict": "pass",
+        "at": "2026-10-14T08:45:14.499Z",
+        "report": "verification/reports/geom.differential-forms/2d488866e15a-B.md"
+      }
+    },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "geom.exponential-map": {
@@ -2883,34 +2927,22 @@
     "hold": false
   },
   "geom.partition-of-unity": {
-    "hash": "bc7dd3381c10c364479ce2afd41fe0eb45ece550a879e1021c1b6e4cba6b1a1c",
+    "hash": "ab507f12c1df47f199899421286bb39f8f9746e8267f7c29444dd48822e69601",
     "checks": {
-      "pass": false,
-      "at": "2026-10-14T07:24:33.593Z",
-      "failures": [
-        "schema: :::definition src: unknown work \"Ch. 2, p. 43\" (line 24)",
-        "schema: :::definition src \"Ch. 2, p. 43\" needs a locator, e.g. Ch. 2, p. 43:pp. 79-80 (line 24)",
-        "schema: :::statement src: unknown work \"Prop. 2.25, p. 44\" (line 40)",
-        "schema: :::statement src \"Prop. 2.25, p. 44\" needs a locator, e.g. Prop. 2.25, p. 44:pp. 79-80 (line 40)",
-        "schema: :::statement src: unknown work \"Lemma 2.26, pp. 44-45\" (line 40)",
-        "schema: :::statement src \"Lemma 2.26, pp. 44-45\" needs a locator, e.g. Lemma 2.26, pp. 44-45:pp. 79-80 (line 40)",
-        "schema: :::remark src: unknown work \"Ch. 16, eq. (16.2) and Prop. 16.5, pp. 405-406\" (line 94)",
-        "schema: :::remark src \"Ch. 16, eq. (16.2) and Prop. 16.5, pp. 405-406\" needs a locator, e.g. Ch. 16, eq. (16.2) and Prop. 16.5, pp. 405-406:pp. 79-80 (line 94)",
-        "overlap: geom.partition-of-unity :::statement (line 40): 8-word run also in lee-2013 p. 19: \"let be smooth manifold and let be any\"",
-        "overlap: geom.partition-of-unity :::statement (line 40): 14-word run also in lee-2013 p. 43: \"any indexed open cover of then there exists smooth partition of unity subordinate to\""
-      ]
+      "pass": true,
+      "at": "2026-10-14T08:33:33.855Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:29:04.327Z",
-        "report": "verification/reports/geom.partition-of-unity/bc7dd3381c10-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T08:43:35.584Z",
+        "report": "verification/reports/geom.partition-of-unity/ab507f12c1df-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "geom.poincare-lemma": {
@@ -3015,26 +3047,22 @@
     "hold": false
   },
   "geom.smooth-manifolds": {
-    "hash": "dd01522200562a266b25a6a9ceb54cf371245fecf2a5080af33737c21e045691",
+    "hash": "4260e6ae743ce701c1acb66bcfed77a929ab48971ee74560123fbe4dc56cde5a",
     "checks": {
-      "pass": false,
-      "at": "2026-10-14T07:24:33.593Z",
-      "failures": [
-        "overlap: geom.smooth-manifolds :::statement (line 70): 12-word run also in lee-2013 p. 105: \"level set theorem let and be smooth manifolds and let be smooth\"",
-        "overlap: geom.smooth-manifolds :::statement (line 70): 13-word run also in lee-2013 p. 105: \"regular value of if every point of the level set is regular point\""
-      ]
+      "pass": true,
+      "at": "2026-10-14T08:33:33.856Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:30:38.881Z",
-        "report": "verification/reports/geom.smooth-manifolds/dd0152220056-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T08:37:06.532Z",
+        "report": "verification/reports/geom.smooth-manifolds/4260e6ae743c-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "geom.stokes-forms": {
@@ -3120,26 +3148,22 @@
     "hold": false
   },
   "geom.tangent-vectors": {
-    "hash": "cd9f30a510982004813f63d1fba31c741bf71450d46a697e40bede88a4bd2d04",
+    "hash": "9f4dbadca4ae9e807fc76d695abe9b5a31ddfae5e43f5c3e03807f8b4606b9b2",
     "checks": {
-      "pass": false,
-      "at": "2026-10-14T07:24:33.593Z",
-      "failures": [
-        "schema: :::proof src: unknown work \"Prop. 3.15, p. 61\" (line 67)",
-        "schema: :::proof src \"Prop. 3.15, p. 61\" needs a locator, e.g. Prop. 3.15, p. 61:pp. 79-80 (line 67)"
-      ]
+      "pass": true,
+      "at": "2026-10-14T08:33:33.856Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:32:25.510Z",
-        "report": "verification/reports/geom.tangent-vectors/cd9f30a51098-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T08:39:36.408Z",
+        "report": "verification/reports/geom.tangent-vectors/9f4dbadca4ae-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "geom.tensor-operators-general-coordinates": {
@@ -3754,22 +3778,22 @@
     "hold": false
   },
   "group.lorentz-group": {
-    "hash": "fa53c7fe69f2938d62e73c543dddc56eaf96b5f5e79ff6afdfafde7d9b51c84a",
+    "hash": "e5b95af844b1732a29c9cc9e835ca5a5177f36118d567541141e03e4628eeedd",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T08:12:31.088Z"
+      "at": "2026-10-14T08:33:08.744Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:23:17.747Z",
-        "report": "verification/reports/group.lorentz-group/fa53c7fe69f2-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T08:44:22.022Z",
+        "report": "verification/reports/group.lorentz-group/e5b95af844b1-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 2,
+    "rounds": 0,
     "hold": false
   },
   "group.matrix-group-catalogue": {
@@ -3987,25 +4011,22 @@
     "hold": false
   },
   "group.wigner-d-matrices": {
-    "hash": "b4ddfc5019f192329f21fc2da2c73062b80eda268f76cd17bc17e55495dd254f",
+    "hash": "b0e2f3d1ac6744a3f5a1592cd05fa24fb48f025b432e643d6511530bb99ddfa0",
     "checks": {
-      "pass": false,
-      "at": "2026-10-14T07:24:33.593Z",
-      "failures": [
-        "schema: :cite \"rhb-2006\" must also be listed in frontmatter sources (line 194)"
-      ]
+      "pass": true,
+      "at": "2026-10-14T09:23:32.120Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:36:39.908Z",
-        "report": "verification/reports/group.wigner-d-matrices/b4ddfc5019f1-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T09:31:13.446Z",
+        "report": "verification/reports/group.wigner-d-matrices/b0e2f3d1ac67-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "group.wigner-eckart": {
@@ -4791,22 +4812,22 @@
     "hold": false
   },
   "num.linear-systems-numerics": {
-    "hash": "5ddfc0c163f8298fb5ad9f8e65316b6947a25a2c8aa0f05d8683a764486c0472",
+    "hash": "12d932af97dfbb199ed8647918c94993d5fa9a1ebf35d1bdb658e4adb0dd78cb",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:24:33.593Z"
+      "at": "2026-10-14T08:33:33.856Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:43:44.093Z",
-        "report": "verification/reports/num.linear-systems-numerics/5ddfc0c163f8-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T08:52:56.613Z",
+        "report": "verification/reports/num.linear-systems-numerics/12d932af97df-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "num.monte-carlo": {
@@ -4829,22 +4850,22 @@
     "hold": false
   },
   "num.ode-integrators": {
-    "hash": "53b84acf8721333826b8331a31d3401eff279466f2cfa9acea50ed04fadf10a1",
+    "hash": "f9ab09786a05657f8920d0667b81d9b4c929f44267aa6a77c6ef6d4aae772386",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:24:33.593Z"
+      "at": "2026-10-14T09:13:04.668Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:46:57.704Z",
-        "report": "verification/reports/num.ode-integrators/53b84acf8721-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T09:30:44.724Z",
+        "report": "verification/reports/num.ode-integrators/f9ab09786a05-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "num.quadrature": {
@@ -4924,22 +4945,22 @@
     "hold": false
   },
   "num.stiffness": {
-    "hash": "1f58cdf9f029a354a068daaa551b7ec7eb355cabe5535486a2ed98c99e3a79bb",
+    "hash": "039610c1a03f66c391fb3631391d3438a496fdfeffb7551756d4895d7c3867dd",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:24:33.593Z"
+      "at": "2026-10-14T09:18:51.440Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T07:49:59.075Z",
-        "report": "verification/reports/num.stiffness/1f58cdf9f029-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T09:23:49.917Z",
+        "report": "verification/reports/num.stiffness/039610c1a03f-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "num.symplectic-integrators": {
@@ -6431,29 +6452,29 @@
     "hold": false
   },
   "prob.poisson-process": {
-    "hash": "dc8dcb78054ee119fc632b3c820cb8180a342065165d8602df7b1c13fad701f9",
+    "hash": "5268294ae9f68620fdcec7e87a75e306f9df02fb7e78b7ec4779fe3f9d3fd05a",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T08:19:08.954Z"
+      "at": "2026-10-14T08:58:25.073Z"
     },
     "verifiers": {
-      "A": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:24:50.064Z",
-        "report": "verification/reports/prob.poisson-process/dc8dcb78054e-A.md"
-      },
       "B": {
         "verdict": "pass",
-        "at": "2026-10-14T08:26:25.558Z",
-        "report": "verification/reports/prob.poisson-process/dc8dcb78054e-B.md"
+        "at": "2026-10-14T09:05:33.824Z",
+        "report": "verification/reports/prob.poisson-process/5268294ae9f6-B.md"
+      },
+      "A": {
+        "verdict": "pass",
+        "at": "2026-10-14T09:07:19.999Z",
+        "report": "verification/reports/prob.poisson-process/5268294ae9f6-A.md"
       }
     },
     "requires": [
       "A",
       "B"
     ],
-    "rounds": 8,
-    "hold": true
+    "rounds": 0,
+    "hold": false
   },
   "prob.probability-inequalities": {
     "hash": "53cd9983dd5a8d71525389962c0e5ca2a2c57f9cfc19bd4350c986e61f7eeb41",
@@ -7113,22 +7134,22 @@
     "hold": false
   },
   "stats.data-assimilation": {
-    "hash": "969cac4d876829361350df4db63e92e69934f5f1aafbcb0a1c6d0f7c06660f0c",
+    "hash": "c8d5bfc018c1e00b715c42b1234a2ad2784d0b26ae141ee064a6e9836280906b",
     "checks": {
       "pass": true,
-      "at": "2026-10-14T07:24:33.593Z"
+      "at": "2026-10-14T09:12:19.918Z"
     },
     "verifiers": {
       "B": {
-        "verdict": "fail",
-        "at": "2026-10-14T08:11:55.479Z",
-        "report": "verification/reports/stats.data-assimilation/969cac4d8768-B.md"
+        "verdict": "pass",
+        "at": "2026-10-14T09:18:53.985Z",
+        "report": "verification/reports/stats.data-assimilation/c8d5bfc018c1-B.md"
       }
     },
     "requires": [
       "B"
     ],
-    "rounds": 1,
+    "rounds": 0,
     "hold": false
   },
   "stats.eof-pca": {

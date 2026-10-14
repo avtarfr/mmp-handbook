@@ -71,9 +71,9 @@ Impose on the coefficients of (L) the following five conditions.
 4. $f$ is an even function: $f(-x) = f(x)$ at every $x$.
 5. The antiderivative $F(x) = \int_0^x f(u)\,du$, which conditions 1 and 4 make odd and continuously differentiable, vanishes at exactly one point $a$ of the positive axis; it takes negative values throughout $0 < x < a$; on $x > a$ it is positive and never decreasing; and $F(x)$ is unbounded above as $x$ grows.
 
-Under conditions 1-5 the planar system (L) has exactly one closed orbit. That orbit encloses the origin, and it is a stable limit cycle.
+Under conditions 1-5 the planar system (L) possesses exactly one limit cycle. That cycle encircles the origin, and it is stable.
 
-No proof is given here. Strogatz states the theorem and points to the monograph literature for the argument; we follow him in that, and use the conclusion only as a licence to write *the* cycle rather than *a* cycle. In the van der Pol case conditions 1-4 need no checking, and $F(x) = \tfrac{\mu}{3}x(x^2-3)$ satisfies condition 5 with $a = \sqrt3$; so every $\mu > 0$ gives a system with exactly one cycle, and that cycle attracts.
+This is Strogatz's conclusion, and it is weaker than it may look: *limit cycle* means isolated closed orbit, so what is asserted is that exactly one closed orbit is isolated, not that there is exactly one closed orbit of any kind. We do not strengthen it. No proof is given here; Strogatz states the theorem and points to the monograph literature for the argument, and we follow him in that, using the conclusion only as a licence to write *the* cycle rather than *a* cycle. In the van der Pol case conditions 1-4 need no checking, and $F(x) = \tfrac{\mu}{3}x(x^2-3)$ satisfies condition 5 with $a = \sqrt3$; so every $\mu > 0$ gives a system with a unique stable limit cycle.
 
 A sharper statement is available in the single case $\mu = 1$. Hirsch, Smale and Devaney prove, for (L$'$) with $\varphi(x) = x^3 - x$, that there is exactly one nontrivial periodic solution and that every solution other than the equilibrium tends to it.
 :::
@@ -88,7 +88,7 @@ $$
 and assume
 
 - $f$ is even and continuously differentiable, with $f(0) < 0$;
-- $f$ has a smallest positive zero $x_B$, with $f < 0$ on $(0,x_B)$ and $f > 0$ on $(x_B,\infty)$;
+- $f$ has a positive zero $x_B$, with $f < 0$ on $(0,x_B)$ and $f > 0$ on $(x_B,\infty)$, so that $x_B$ is its only positive zero;
 - $F(x) = \int_0^x f \to \infty$ as $x \to \infty$.
 
 Then $F$ is odd, has its only positive minimum at $x_B$ with $F(x_B) < 0$, and there is a unique $x_A > x_B$ with $F(x_A) = -F(x_B)$. As $\mu \to \infty$ the period of the limit cycle satisfies
@@ -173,7 +173,15 @@ $$
 
 This is the form (L$'$) of the definition up to the factors of $\mu$, which are what carry the limit.
 
-**Step 2: everywhere off the curve $y = F(x)$ the motion is horizontal.** Suppose $\lvert y - F(x)\rvert$ and $\lvert x \rvert$ are both of order $1$. Then ($\ast$) gives $\lvert \dot x\rvert \sim \mu$ and $\lvert \dot y \rvert \sim 1/\mu$, so the velocity vector is longer horizontally than vertically by a factor $\mu^2$. The trajectory is therefore horizontal to within $O(\mu^{-2})$, and its direction is set by the sign of $y - F(x)$: rightward above the curve, leftward below it, so in both cases towards the curve. Crossing a horizontal distance of order $1$ at speed $\mu$ takes a time of order $\mu^{-1}$: this is the jump.
+**Step 2: everywhere off the curve $y = F(x)$ the motion is horizontal.** Suppose $\lvert y - F(x)\rvert$ and $\lvert x \rvert$ are both of order $1$. Then ($\ast$) gives $\lvert \dot x\rvert \sim \mu$ and $\lvert \dot y \rvert \sim 1/\mu$, so the velocity vector is longer horizontally than vertically by a factor $\mu^2$. The trajectory is therefore horizontal to within $O(\mu^{-2})$, and its direction is set by the sign of $y - F(x)$: rightward above the curve, leftward below it.
+
+Whether that horizontal run closes the gap depends on the branch it is heading for, and here the sign of $f$ decides. Differentiating the gap along the flow and using ($\ast$),
+
+$$
+\frac{d}{dt}\bigl(y - F(x)\bigr) \;=\; \dot y - f(x)\,\dot x \;=\; -\frac{x}{\mu} \;-\; \mu\,f(x)\,\bigl(y - F(x)\bigr) ,
+$$
+
+whose dominant term shrinks the gap at rate $\mu f(x)$ where $f > 0$ and grows it at rate $\mu\lvert f(x)\rvert$ where $f < 0$. So the jump ends on one of the two outer branches of the curve, $\lvert x\rvert > x_B$, where $f > 0$; the middle branch $\lvert x \rvert < x_B$ repels horizontally and is never followed. (Strogatz argues the half of this that he needs, the approach to the outer branch from above; the sign test is what the statement here needs in the extra generality of a general even $f$.) Crossing a horizontal distance of order $1$ at speed $\mu$ takes a time of order $\mu^{-1}$: this is the jump.
 
 **Step 3: on the curve the motion is slow and one-dimensional.** The trajectory cannot stay off the curve, and it cannot cross it transversally at speed $\mu$, so it must settle into the region where $y - F(x)$ is small enough for the two components of ($\ast$) to be comparable, namely $y - F(x) = O(\mu^{-2})$. To leading order the trajectory then follows $y = F(x)$. Differentiating that relation along the trajectory and using the second equation of ($\ast$),
 
@@ -306,7 +314,7 @@ Given $\ddot x + f(x)\dot x + g(x) = 0$, or any planar system suspected of oscil
 *Relaxation limit ($\mu \gg 1$, equation $\ddot x + \mu f(x)\dot x + x = 0$):*
 
 3. Form $F(x) = \int_0^x f$ and pass to the Lienard plane $\dot x = \mu[y - F(x)]$, $\dot y = -x/\mu$.
-4. Locate the knee $x_B$, the smallest positive zero of $f$, and the landing point $x_A > x_B$, the unique solution of $F(x_A) = -F(x_B)$.
+4. Locate the knee $x_B$, the positive zero of $f$ (there is only one, by the hypothesis on the sign of $f$), and the landing point $x_A > x_B$, the unique solution of $F(x_A) = -F(x_B)$.
 5. Evaluate $T \approx 2\mu\int_{x_B}^{x_A} f(x)\,dx/x$. Expect a relative error of order $\mu^{-4/3}$.
 
 *Weakly nonlinear limit ($0 < \epsilon \ll 1$, equation $\ddot x + x + \epsilon h(x,\dot x) = 0$):*
@@ -332,7 +340,7 @@ $$
 
 whose only positive zero is $a = 5^{1/4} \approx 1.49535$; $F < 0$ on $(0,a)$; $F' = f > 0$ for $x > 1$, so $F$ is increasing, hence positive and nondecreasing, on $(a,\infty)$; and $F \to \infty$. So there is a unique stable limit cycle.
 
-**The knee and the landing point.** The smallest positive zero of $f$ is $x_B = 1$, and $F(1) = \tfrac15 - 1 = -\tfrac45$. We need $x_A > 1$ with $F(x_A) = \tfrac45$, that is
+**The knee and the landing point.** The positive zero of $f$ is $x_B = 1$, and $F(1) = \tfrac15 - 1 = -\tfrac45$. We need $x_A > 1$ with $F(x_A) = \tfrac45$, that is
 
 $$
 \frac{x^5}{5} - x = \frac45
@@ -342,7 +350,7 @@ x^5 - 5x - 4 = 0
 (x+1)\bigl(x^4 - x^3 + x^2 - x - 4\bigr) = 0 .
 $$
 
-The quartic factor is negative at $x=1$ (value $-4$) and positive at $x=2$ (value $+2$), and its derivative $4x^3-3x^2+2x-1$ is positive for $x \ge 1$, so it has exactly one root there. Newton's method from $x=1.7$ gives
+The quartic factor is negative at $x=1$ (value $-4$) and positive at $x=2$ (value $16-8+4-2-4 = +6$), and its derivative $4x^3-3x^2+2x-1$ is positive for $x \ge 1$, so it has exactly one root there. Newton's method from $x=1.7$ gives
 
 $$
 x_A \;=\; 1.6506291914\ldots
@@ -356,7 +364,7 @@ $$
 \;=\; \frac{x_A^4}{4} - \ln x_A - \frac14 .
 $$
 
-Numerically $x_A^4 = 7.4233184$, so $x_A^4/4 = 1.8558296$ and $\ln x_A = 0.5011569$, giving the integral $1.1046727$ and
+Numerically $x_A^4 = 7.4233183$, so $x_A^4/4 = 1.855830$ and $\ln x_A = 0.501157$, giving the integral $1.104673$ and
 
 $$
 \boxed{\;T \;=\; 2.209346\,\mu + o(\mu)\;}

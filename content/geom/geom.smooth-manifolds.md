@@ -74,7 +74,7 @@ $$
 D\widehat\Phi(\varphi(p)) = \Bigl( \frac{\partial \widehat\Phi^{\,a}}{\partial x^i}(\varphi(p)) \Bigr)_{a = 1,\dots,k;\ i = 1,\dots,m}
 $$
 
-of the coordinate representation. Its rank is unambiguous: by the chain rule, changing either chart multiplies this matrix left and right by the invertible Jacobians of transition maps, which cannot alter rank. We call $p$ a **regular point** when that rank attains $k$, the largest a $k \times m$ matrix can have.
+of the coordinate representation. Its rank is unambiguous: by the chain rule, changing either chart multiplies this matrix left and right by the invertible Jacobians of transition maps, which cannot alter rank. We call $p$ a **regular point** when that rank attains $k$. That is the largest value a $k \times m$ matrix can have, and reaching it requires $k \le m$; when $k > m$ there are no regular points at all, so every level set that meets $M$ is excluded and the theorem below says nothing.
 
 The values we can handle are those at which the rank nowhere drops. So declare $c \in N$ **regular** when each $p$ with $\Phi(p) = c$ is a regular point. For $c$ outside the image of $\Phi$ there is no such $p$ at all, so the requirement is empty and $c$ is regular by default.
 
