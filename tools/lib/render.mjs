@@ -21,11 +21,30 @@ export const KIND_LABEL = {
 
 // Plain text that may contain inline $math$ (frontmatter summaries, which are not Markdown).
 // Rendered here so a summary reads as mathematics in the contents list, not as TeX source.
+// Unit sources write a parenthetical dash as `--`, the plain-text convention; LaTeX turns it into a
+// dash by itself, HTML does not. Only a dash standing between spaces is touched, and never inside
+// code or mathematics, so `x--y`, a command-line flag and every formula are left exactly as written.
+const DASH = /(\s)---?(?=\s)/g;
+const typesetDashes = (s) => s.replace(DASH, '$1\u2014');
+const SKIP_TAGS = new Set(['code', 'pre', 'math', 'annotation', 'script', 'style']);
+function rehypeDashes() {
+  const walk = (node) => {
+    if (node.type === 'element') {
+      if (SKIP_TAGS.has(node.tagName)) return;
+      const cls = node.properties?.className || [];
+      if (cls.some((c) => String(c).startsWith('katex'))) return;
+    }
+    if (node.type === 'text') node.value = typesetDashes(node.value);
+    (node.children || []).forEach(walk);
+  };
+  return walk;
+}
+
 export function renderInlineText(text) {
   const out = [];
   let i = 0;
   for (const m of String(text).matchAll(/\$([^$]+)\$/g)) {
-    out.push(escapeHtml(String(text).slice(i, m.index)));
+    out.push(escapeHtml(typesetDashes(String(text).slice(i, m.index))));
     try {
       out.push(katex.renderToString(m[1], { throwOnError: false, strict: 'ignore', output: 'htmlAndMathml' }));
     } catch {
@@ -33,7 +52,7 @@ export function renderInlineText(text) {
     }
     i = m.index + m[0].length;
   }
-  out.push(escapeHtml(String(text).slice(i)));
+  out.push(escapeHtml(typesetDashes(String(text).slice(i))));
   return out.join('');
 }
 
@@ -108,6 +127,7 @@ const processor = (ctx, unit) =>
     .use(handbookPlugin, ctx, unit)
     .use(remarkRehype)
     .use(rehypeKatex, { throwOnError: false, strict: 'ignore', output: 'htmlAndMathml' })
+    .use(rehypeDashes)
     .use(rehypeStringify);
 
 // Render a unit body. Returns { html, errors }.

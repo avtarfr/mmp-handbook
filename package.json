@@ -14,7 +14,7 @@
     "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "katex": "^0.19.0",
+    "katex": "^0.16.47",
     "mdast-util-to-string": "^4.0.0",
     "pagedjs": "^0.4.3",
     "rehype-katex": "^7.0.1",
